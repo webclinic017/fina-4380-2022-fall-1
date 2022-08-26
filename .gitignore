@@ -1,0 +1,20 @@
+/Canvas
+/Data
+/DataCamp
+/Grades
+/Notebooks/Scratch
+/Office\ Hours
+/Projects
+/Quizzes
+/Roster
+/Scripts
+/Syllabus
+/Teammates
+/Zoom
+.~*.ipynb
+*checkpoint.ipynb
+*checkpoint.py
+*.pdf
+*.pkl
+*.py
+*.sqlite
