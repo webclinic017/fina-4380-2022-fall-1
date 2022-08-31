@@ -1,0 +1,814 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Lewinson Chapter 2 - Technical Analysis in Python &#8212; FINA 4380 for Fall 2022</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lewinson Chapter 4 - Multi-Factor Models" href="lewinson-04.html" />
+    <link rel="prev" title="Lewinson Chapter 1 - Financial Data and Preprocessing" href="lewinson-01.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">FINA 4380 for Fall 2022</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction.html">
+                    <no title>
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  McKinney
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../McKinney/mckinney-02.html">
+   McKinney Chapter 2 - Python Language Basics, IPython, and Jupyter Notebooks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../McKinney/mckinney-03.html">
+   McKinney Chapter 3 - Built-in Data Structures, Functions, and Files
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../McKinney/mckinney-04.html">
+   McKinney Chapter 4 - NumPy Basics: Arrays and Vectorized Computation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../McKinney/mckinney-05.html">
+   McKinney Chapter 5 - Getting Started with pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../McKinney/mckinney-08.html">
+   McKinney Chapter 8 - Data Wrangling: Join, Combine, and Reshape
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../McKinney/mckinney-10.html">
+   McKinney Chapter 10 - Data Aggregation and Group Operations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../McKinney/mckinney-11.html">
+   McKinney Chapter 11 - Time Series
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lewinson
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="lewinson-01.html">
+   Lewinson Chapter 1 - Financial Data and Preprocessing
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Lewinson Chapter 2 - Technical Analysis in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lewinson-04.html">
+   Lewinson Chapter 4 - Multi-Factor Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lewinson-06.html">
+   Lewinson Chapter 6: Monte Carlo Simulations in Finance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lewinson-07.html">
+   Lewinson Chapter 7 - Asset Allocation in Python
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/Lewinson/lewinson-02.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/Lewinson/lewinson-02.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#backtesting-a-strategy-based-on-simple-moving-average">
+   Backtesting a Strategy Based on Simple Moving Average
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculating-bollinger-bands-and-testing-a-buy-sell-strategy">
+   Calculating Bollinger Bands and testing a buy/sell strategy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculating-the-relative-strength-index-and-testing-a-long-short-strategy">
+   Calculating the relative strength index and testing a long/short strategy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#practice">
+   Practice
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Lewinson Chapter 2 - Technical Analysis in Python</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#backtesting-a-strategy-based-on-simple-moving-average">
+   Backtesting a Strategy Based on Simple Moving Average
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculating-bollinger-bands-and-testing-a-buy-sell-strategy">
+   Calculating Bollinger Bands and testing a buy/sell strategy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculating-the-relative-strength-index-and-testing-a-long-short-strategy">
+   Calculating the relative strength index and testing a long/short strategy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#practice">
+   Practice
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="lewinson-chapter-2-technical-analysis-in-python">
+<h1>Lewinson Chapter 2 - Technical Analysis in Python<a class="headerlink" href="#lewinson-chapter-2-technical-analysis-in-python" title="Permalink to this headline">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
+<p>Chapter 2 of Eryk Lewinson’s <a class="reference external" href="https://www.packtpub.com/product/python-for-finance-cookbook/9781789618518"><em>Python for Finance Cookbook</em></a> discusses a handful of trading strategies based on technical analysis.</p>
+<p>We will focus on implementing and evaluating a trading strategy based on past prices and returns.</p>
+<p><em><strong>Note:</strong></em> Indented block quotes are from Lewinson, and section numbers differ from Lewinson because we will not discuss every topic.</p>
+<p>I will simplify and streamline his code, where possible.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">150</span>
+<span class="o">%</span><span class="k">precision</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
+<span class="kn">import</span> <span class="nn">requests_cache</span>
+<span class="n">session</span> <span class="o">=</span> <span class="n">requests_cache</span><span class="o">.</span><span class="n">CachedSession</span><span class="p">(</span><span class="n">expire_after</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="backtesting-a-strategy-based-on-simple-moving-average">
+<h2>Backtesting a Strategy Based on Simple Moving Average<a class="headerlink" href="#backtesting-a-strategy-based-on-simple-moving-average" title="Permalink to this headline">#</a></h2>
+<p>Lewinson uses the backtrader package to implement his technical trading strategies.
+However, there are no recent code commits to <a class="reference external" href="https://github.com/mementum/backtrader">backtrader’s GitHub repository</a>, so it may be abandoned.
+So we manually implement these stategies and learn a lot in the process!</p>
+<p>The first strategy is a simple moving average (SMA) stategy that:</p>
+<blockquote>
+<div><p>For this recipe, we consider a basic strategy based on the SMA. The key points of the strategy are as follows:</p>
+<ul class="simple">
+<li><p>When the close price becomes higher than the 20-day SMA, buy one share.</p></li>
+<li><p>When the close price becomes lower than the 20-day SMA and we have a share, sell it.</p></li>
+<li><p>We can only have a maximum of one share at any given time.</p></li>
+<li><p>No short selling is allowed.</p></li>
+</ul>
+</div></blockquote>
+<p>We do these calculations in <em>dollar</em> terms instead of <em>share</em> terms.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aapl</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;AAPL&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Second, we calculate daily returns and add SMA(20) for the adjusted close.
+We use the adjust close because we do not want to misinterpret splits and dividends as price changes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aapl</span><span class="p">[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">aapl</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
+<span class="n">aapl</span><span class="p">[</span><span class="s1">&#39;SMA20&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">aapl</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Third, we add a <code class="docutils literal notranslate"><span class="pre">Position</span></code> column based on AAPL’s adjusted close and SMA(20) columns.
+<code class="docutils literal notranslate"><span class="pre">Position</span></code> takes one of two values: <code class="docutils literal notranslate"><span class="pre">1</span></code> if we are long AAPL and <code class="docutils literal notranslate"><span class="pre">0</span></code> if we are neutral AAPL.
+<code class="docutils literal notranslate"><span class="pre">np.select()</span></code> avoids nested <code class="docutils literal notranslate"><span class="pre">np.where()</span></code> and accepts a default.
+We <code class="docutils literal notranslate"><span class="pre">.shift()</span></code> inputs one day because we do not know closing prices and SMA(20) until the end of the day.
+Therefore, we cannot update <code class="docutils literal notranslate"><span class="pre">Position</span></code> until the next trading day.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aapl</span><span class="p">[</span><span class="s1">&#39;Position&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+    <span class="n">condlist</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">aapl</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">aapl</span><span class="p">[</span><span class="s1">&#39;SMA20&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(),</span> <span class="c1"># .shift() to use lagged values to prevent look-ahead bias</span>
+        <span class="n">aapl</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">aapl</span><span class="p">[</span><span class="s1">&#39;SMA20&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">()</span>
+    <span class="p">],</span> 
+    <span class="n">choicelist</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="n">default</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>I find the following two steps helpful.
+First, plot the adjusted close, SMA(20), and position for a short window.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aapl</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;1981-01&#39;</span><span class="p">:</span><span class="s1">&#39;1981-02&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">,</span> <span class="s1">&#39;SMA20&#39;</span><span class="p">,</span> <span class="s1">&#39;Position&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">secondary_y</span><span class="o">=</span><span class="s1">&#39;Position&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;AAPL SMA(20) Strategy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/lewinson-02_13_0.png" src="../_images/lewinson-02_13_0.png" />
+</div>
+</div>
+<p>Second, copy-and-paste these data to Excel!
+Excel is an excellent place to check your work!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># aapl.loc[:&#39;1981-02&#39;].to_clipboard()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we create a <code class="docutils literal notranslate"><span class="pre">Strategy</span></code> column that provides the return on the strategy.
+We will assume that we earn a cash return of 0% when we are neutral AAPL.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aapl</span><span class="p">[</span><span class="s1">&#39;Strategy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">aapl</span><span class="p">[</span><span class="s1">&#39;Position&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">aapl</span><span class="p">[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can plot the cumulative return on 1 dollar invested in this SMA(20) strategy.
+We drop missing values to make an apples-to-apples comparison between the buy-and-hold and SMA(20) strategies.
+There may be missing values for both strategies because:</p>
+<ol class="simple">
+<li><p>We need 2 days to calculate 1 daily return</p></li>
+<li><p>We need 20 days to calculate the first SMA(20)</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+	<span class="n">aapl</span>
+	<span class="p">[[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">,</span> <span class="s1">&#39;Strategy&#39;</span><span class="p">]]</span>
+	<span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+	<span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+	<span class="o">.</span><span class="n">cumprod</span><span class="p">()</span>
+	<span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Strategy&#39;</span><span class="p">:</span> <span class="s1">&#39;SMA(20)&#39;</span><span class="p">})</span>
+	<span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">buy_date</span> <span class="o">=</span> <span class="p">(</span>
+	<span class="n">aapl</span>
+	<span class="p">[[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">,</span> <span class="s1">&#39;Strategy&#39;</span><span class="p">]]</span>
+	<span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+	<span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> 
+	<span class="n">pd</span><span class="o">.</span><span class="n">offsets</span><span class="o">.</span><span class="n">BDay</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Value ($)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
+	<span class="s1">&#39;Value of $1 Invested</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>
+	<span class="s1">&#39;at Close Price on &#39;</span> <span class="o">+</span> <span class="n">buy_date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%B </span><span class="si">%d</span><span class="s1">, %Y&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/lewinson-02_19_0.png" src="../_images/lewinson-02_19_0.png" />
+</div>
+</div>
+</section>
+<section id="calculating-bollinger-bands-and-testing-a-buy-sell-strategy">
+<h2>Calculating Bollinger Bands and testing a buy/sell strategy<a class="headerlink" href="#calculating-bollinger-bands-and-testing-a-buy-sell-strategy" title="Permalink to this headline">#</a></h2>
+<p>John Bollinger developed Bollinger Bands in the early 1980s.
+He describes Bollinger Bands as follows:</p>
+<blockquote>
+<div><p>So what are Bollinger Bands? They are curves drawn in and around the price structure usually consisting of a moving average (the middle band), an upper band, and a lower band that answer the question as to whether prices are high or low on a relative basis. Bollinger Bands work best when the middle band is chosen to reflect the intermediate-term trend, so that trend information is combined with relative price level data.</p>
+</div></blockquote>
+<p>More <a class="reference external" href="https://www.bollingerbands.com/bollinger-bands">here</a>.
+John Bollinger provides a list of rules <a class="reference external" href="https://www.bollingerbands.com/bollinger-band-rules">here</a>.
+In short, Bollinger Bands are bands around a trend (typically <span class="math notranslate nohighlight">\(\mu_{price} \pm 2\sigma_{price}\)</span> using 20 trading days).
+Technical analysts use these bands to signal high and low prices.</p>
+<p>Lewinson builds Bollinger Bands with the backtrader package, but we will build Bollinger Bands with pandas.
+Lewinson desribes Bollinger Bands as follows:</p>
+<blockquote>
+<div><p>Bollinger Bands are a statistical method, used for deriving information about the prices and volatility of a certain asset over time. To obtain the Bollinger Bands, we need to calculate the moving average and standard deviation of the time series (prices), using a specified window (typically, 20 days). Then, we set the upper/lower bands at K times (typically, 2) the moving standard deviation above/below the moving average.</p>
+<p>The interpretation of the bands is quite sample: the bands widen with an increase in volatility and contract with a decrease in volatility.</p>
+<p>In this recipe, we build a simple trading strategy, with the following rules:</p>
+<ul class="simple">
+<li><p>Buy when the price crosses the lower Bollinger Band upwards.</p></li>
+<li><p>Sell (only if stocks are in possession) when the price crosses the upper Bollinger Band downward.</p></li>
+<li><p>All-in strategy—when creating a buy order, buy as many shares as possible.</p></li>
+<li><p>Short selling is not allowed.</p></li>
+</ul>
+</div></blockquote>
+<p>We will implement Lewinson’s strategy with Tesla.
+First, we will plot the 20-day rolling means and plus/minus 2 standard deviations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tsla</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;TSLA&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;TSLA&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">win</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">K</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">tsla</span><span class="p">[[</span><span class="s1">&#39;SMA20&#39;</span><span class="p">,</span> <span class="s1">&#39;SMV20&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">win</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">])</span>
+<span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;LB20&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;SMA20&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">K</span><span class="o">*</span><span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;SMV20&#39;</span><span class="p">]</span>
+<span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;UB20&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;SMA20&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">K</span><span class="o">*</span><span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;SMV20&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tsla</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2020&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">,</span> <span class="s1">&#39;LB20&#39;</span><span class="p">,</span> <span class="s1">&#39;UB20&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="s1">&#39;g--&#39;</span><span class="p">,</span> <span class="s1">&#39;g--&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">,</span> <span class="s1">&#39;Bollinger Bands&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Price ($)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;TSLA Bollinger Band (</span><span class="si">{}</span><span class="s1">, </span><span class="si">{}</span><span class="s1">) Strategy&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">win</span><span class="p">,</span> <span class="n">K</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/lewinson-02_24_0.png" src="../_images/lewinson-02_24_0.png" />
+</div>
+</div>
+<p>We will implement the TSLA Bollinger Band (20, 2) strategy in class.</p>
+</section>
+<section id="calculating-the-relative-strength-index-and-testing-a-long-short-strategy">
+<h2>Calculating the relative strength index and testing a long/short strategy<a class="headerlink" href="#calculating-the-relative-strength-index-and-testing-a-long-short-strategy" title="Permalink to this headline">#</a></h2>
+<p>Lewinson describes the relative strength index (RSI) as follows:</p>
+<blockquote>
+<div><p>The RSI is an indicator that uses the closing prices of an asset to identify oversold/overbought conditions. Most commonly, the RSI is calculated using a 14-day period, and it is measured on a scale from 0 to 100 (it is an oscillator). Traders usually buy an asset when it is oversold (if the RSI is below 30), and sell when it is overbought (if the RSI is above 70). More extreme high/low levels, such as 80-20, are used less frequently and, at the same time, imply stronger momentum.</p>
+<p>In this recipe, we build a trading strategy with the following rules:</p>
+<ul class="simple">
+<li><p>We can go long and short.</p></li>
+<li><p>For calculating the RSI, we use 14 periods (trading days).</p></li>
+<li><p>Enter a long position if the RSI crosses the lower threshold (standard value of 30) upwards; exit the position when the RSI becomes larger than the middle level (value of 50).</p></li>
+<li><p>Enter a short position if the RSI crosses the upper threshold (standard value of 70) downwards; exit the position when the RSI becomes smaller than 50.</p></li>
+<li><p>Only one position can be open at a time.</p></li>
+</ul>
+</div></blockquote>
+<p>Lewinson uses a package to calculate the RSI and implement his strategy above.
+We do not need a package!
+Here is RSI’s formula: $<span class="math notranslate nohighlight">\(RSI = 100 - \frac{100}{1 + RS},\)</span><span class="math notranslate nohighlight">\( where \)</span><span class="math notranslate nohighlight">\(RS = \frac{SMA(U, n)}{SMA(D, n)}.\)</span><span class="math notranslate nohighlight">\(
+For &quot;up days&quot;, \)</span>U = \Delta Adj\ Close<span class="math notranslate nohighlight">\( and \)</span>D = 0<span class="math notranslate nohighlight">\(.
+For &quot;down days&quot;, \)</span>U = 0<span class="math notranslate nohighlight">\( and \)</span>D = - \Delta Adj\ Close<span class="math notranslate nohighlight">\(, so that \)</span>U<span class="math notranslate nohighlight">\( and \)</span>D$ are always non-negative.
+We can learn more about RSI <a class="reference external" href="https://en.wikipedia.org/wiki/Relative_strength_index">here</a>.</p>
+<p>We will use Tesla data, again, for this section, but in a new data frame <code class="docutils literal notranslate"><span class="pre">tsla2</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tsla2</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;TSLA&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tsla2</span><span class="p">[</span><span class="s1">&#39;TSLA&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tsla2</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>First, we will write a function <code class="docutils literal notranslate"><span class="pre">rsi()</span></code> that calculates <span class="math notranslate nohighlight">\(RSI\)</span> for a return series.
+Here are some details:</p>
+<ol class="simple">
+<li><p>We will make <code class="docutils literal notranslate"><span class="pre">rsi()</span></code>’s accept a series <code class="docutils literal notranslate"><span class="pre">x</span></code>, which can be either a series of dollar changes or a series of simple returns</p></li>
+<li><p>We will make <code class="docutils literal notranslate"><span class="pre">rsi()</span></code>’s default window <code class="docutils literal notranslate"><span class="pre">n=14</span></code></p></li>
+</ol>
+<p>Second, we will use <code class="docutils literal notranslate"><span class="pre">rsi()</span></code> to implement the RSI(14) strategy for TSLA.</p>
+</section>
+<section id="practice">
+<h2>Practice<a class="headerlink" href="#practice" title="Permalink to this headline">#</a></h2>
+<p><em><strong>Practice:</strong></em>
+Implement the SMA(20) strategy above with AAPL with one chained calculation.
+Save assign this new data frame to <code class="docutils literal notranslate"><span class="pre">aapl2</span></code>.</p>
+<p><em><strong>Practice:</strong></em>
+Use <code class="docutils literal notranslate"><span class="pre">np.allclose()</span></code> to compare <code class="docutils literal notranslate"><span class="pre">aapl</span></code> and <code class="docutils literal notranslate"><span class="pre">aapl2</span></code>.</p>
+<p><em><strong>Practice:</strong></em>
+What is the full-sample Sharpe Ratio for the SMA(20) strategy with AAPL?
+Use the risk-free rate <code class="docutils literal notranslate"><span class="pre">RF</span></code> from Ken French’s daily factors.</p>
+<p><em><strong>Practice:</strong></em>
+The AAPL SMA(20) strategy outperformed buy-and-hold for the full sample.
+How do SMA(20) and buy-and-hold perform over rolling 6-month windows?
+Plot the values of $1 invested in each for all possible 126-trading day windows.</p>
+<p><em><strong>Practice:</strong></em>
+Implement the BB(20, 2) strategy above with TSLA with one chained calculation.
+Save assign this new data frame to <code class="docutils literal notranslate"><span class="pre">tsla3</span></code>.</p>
+<p><em><strong>Practice:</strong></em>
+What is the full-sample Sharpe Ratio for the BB(20, 2) strategy with TSLA?
+Use the risk-free rate <code class="docutils literal notranslate"><span class="pre">RF</span></code> from Ken French’s daily factors.</p>
+<p><em><strong>Practice:</strong></em>
+Implement the RSI(14) strategy above with TSLA with one chained calculation.
+Save assign this new data frame to <code class="docutils literal notranslate"><span class="pre">tsla4</span></code>.</p>
+<p><em><strong>Practice:</strong></em>
+What is the full-sample Sharpe Ratio for the RSI(14) strategy with TSLA?
+Use the risk-free rate <code class="docutils literal notranslate"><span class="pre">RF</span></code> from Ken French’s daily factors.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Lewinson"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="lewinson-01.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Lewinson Chapter 1 - Financial Data and Preprocessing</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="lewinson-04.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lewinson Chapter 4 - Multi-Factor Models</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Richard Herron<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

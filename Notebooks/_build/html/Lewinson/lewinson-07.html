@@ -1,0 +1,1088 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Lewinson Chapter 7 - Asset Allocation in Python &#8212; FINA 4380 for Fall 2022</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Lewinson Chapter 6: Monte Carlo Simulations in Finance" href="lewinson-06.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">FINA 4380 for Fall 2022</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction.html">
+                    <no title>
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  McKinney
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../McKinney/mckinney-02.html">
+   McKinney Chapter 2 - Python Language Basics, IPython, and Jupyter Notebooks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../McKinney/mckinney-03.html">
+   McKinney Chapter 3 - Built-in Data Structures, Functions, and Files
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../McKinney/mckinney-04.html">
+   McKinney Chapter 4 - NumPy Basics: Arrays and Vectorized Computation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../McKinney/mckinney-05.html">
+   McKinney Chapter 5 - Getting Started with pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../McKinney/mckinney-08.html">
+   McKinney Chapter 8 - Data Wrangling: Join, Combine, and Reshape
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../McKinney/mckinney-10.html">
+   McKinney Chapter 10 - Data Aggregation and Group Operations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../McKinney/mckinney-11.html">
+   McKinney Chapter 11 - Time Series
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lewinson
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="lewinson-01.html">
+   Lewinson Chapter 1 - Financial Data and Preprocessing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lewinson-02.html">
+   Lewinson Chapter 2 - Technical Analysis in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lewinson-04.html">
+   Lewinson Chapter 4 - Multi-Factor Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lewinson-06.html">
+   Lewinson Chapter 6: Monte Carlo Simulations in Finance
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Lewinson Chapter 7 - Asset Allocation in Python
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/Lewinson/lewinson-07.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/Lewinson/lewinson-07.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evaluating-the-performance-of-a-basic-1-n-portfolio">
+   Evaluating the performance of a basic 1/n portfolio
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#finding-the-efficient-frontier-using-monte-carlo-simulations">
+   Finding the Efficient Frontier using Monte Carlo simulations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-crash-course-in-scipy-s-minimize-function">
+   A Crash Course in scipy’s minimize() Function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#finding-the-efficient-frontier-using-optimization-with-scipy">
+   Finding the Efficient Frontier using optimization with scipy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#practice">
+   Practice
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Lewinson Chapter 7 - Asset Allocation in Python</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evaluating-the-performance-of-a-basic-1-n-portfolio">
+   Evaluating the performance of a basic 1/n portfolio
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#finding-the-efficient-frontier-using-monte-carlo-simulations">
+   Finding the Efficient Frontier using Monte Carlo simulations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-crash-course-in-scipy-s-minimize-function">
+   A Crash Course in scipy’s minimize() Function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#finding-the-efficient-frontier-using-optimization-with-scipy">
+   Finding the Efficient Frontier using optimization with scipy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#practice">
+   Practice
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="lewinson-chapter-7-asset-allocation-in-python">
+<h1>Lewinson Chapter 7 - Asset Allocation in Python<a class="headerlink" href="#lewinson-chapter-7-asset-allocation-in-python" title="Permalink to this headline">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
+<p>Chapter 7 of Eryk Lewinson’s <a class="reference external" href="https://www.packtpub.com/product/python-for-finance-cookbook/9781789618518"><em>Python for Finance Cookbook</em></a> covers portfolios returns and optimization.</p>
+<p>We will focus on:</p>
+<ol class="simple">
+<li><p>Evaluating <span class="math notranslate nohighlight">\(\frac{1}{n}\)</span> portfolios (i.e., equal-weighted portfolios)</p></li>
+<li><p>Using SciPy’s optimizer to find the efficient frontier</p></li>
+<li><p>Using SciPy’s optimizer to achieve any objective</p></li>
+</ol>
+<p><em><strong>Note:</strong></em> Indented block quotes are from Lewinson, and section numbers differ from Lewinson because we will not discuss every topic.</p>
+<p>I will simplify and streamline his code, where possible.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">150</span>
+<span class="o">%</span><span class="k">precision</span> 4
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
+<span class="kn">import</span> <span class="nn">pandas_datareader</span> <span class="k">as</span> <span class="nn">pdr</span>
+<span class="kn">import</span> <span class="nn">requests_cache</span>
+<span class="n">session</span> <span class="o">=</span> <span class="n">requests_cache</span><span class="o">.</span><span class="n">CachedSession</span><span class="p">(</span><span class="n">expire_after</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="evaluating-the-performance-of-a-basic-1-n-portfolio">
+<h2>Evaluating the performance of a basic 1/n portfolio<a class="headerlink" href="#evaluating-the-performance-of-a-basic-1-n-portfolio" title="Permalink to this headline">#</a></h2>
+<blockquote>
+<div><p>We begin with inspecting the most basic asset allocation strategy: the 1/n portfolio. The idea is to assign equal weights to all the considered assets, thus diversifying the portfolio. As simple as that might sound, DeMiguel, Garlappi, and Uppal (2007) show that it can be difficult to beat the performance of the 1/n portfolio by using more advanced asset allocation strategies.</p>
+<p>The goal of the recipe is to show how to create a 1/n portfolio, calculate its returns, and then use a Python library called pyfolio to quickly obtain all relevant portfolio evaluation metrics in the form of a tear sheet. Historically, a tear sheet is a concise, usually one-page, document, summarizing important information about public companies.</p>
+</div></blockquote>
+<p>We will not use <code class="docutils literal notranslate"><span class="pre">pyfolio</span></code>, which appears to be abandoned.</p>
+<p>We will follow Lewinson’s structure, although I prefer to download all data.
+These data are small (kilobytes instead of megabytes or gigabytes), so we might as well download all data then subset when necessary.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RISKY_ASSETS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">,</span> <span class="s1">&#39;IBM&#39;</span><span class="p">,</span> <span class="s1">&#39;MSFT&#39;</span><span class="p">,</span> <span class="s1">&#39;TWTR&#39;</span><span class="p">]</span>
+<span class="n">START_DATE</span> <span class="o">=</span> <span class="s1">&#39;2017-01-01&#39;</span>
+<span class="n">END_DATE</span> <span class="o">=</span> <span class="s1">&#39;2018-12-31&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">tickers</span><span class="o">=</span><span class="n">RISKY_ASSETS</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[                       0%                       ]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************50%                       ]  2 of 4 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************75%***********            ]  3 of 4 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  4 of 4 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">returns</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">START_DATE</span><span class="p">:</span><span class="n">END_DATE</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Before we do any portfolio math, we can make <span class="math notranslate nohighlight">\(\frac{1}{n}\)</span> portfolios “by hand”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span> <span class="o">=</span> <span class="mf">0.25</span><span class="o">*</span><span class="n">returns</span><span class="p">[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.25</span><span class="o">*</span><span class="n">returns</span><span class="p">[</span><span class="s1">&#39;IBM&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.25</span><span class="o">*</span><span class="n">returns</span><span class="p">[</span><span class="s1">&#39;MSFT&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.25</span><span class="o">*</span><span class="n">returns</span><span class="p">[</span><span class="s1">&#39;TWTR&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p2</span> <span class="o">=</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="n">returns</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p3</span> <span class="o">=</span> <span class="n">returns</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p><em><strong>Note that when we apply the same portfolio weights every day, we rebalance at the same frequency as the returns data.</strong></em>
+If we have daily data, rebalance daily.
+If we have monthly data, we rebalance monthly, and so on.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">returns</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(502, 4)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">portfolio_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">returns</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">returns</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">portfolio_weights</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.25, 0.25, 0.25, 0.25])
+</pre></div>
+</div>
+</div>
+</div>
+<p>I prefer a different notation to calculate returns.
+The following notation is more compact than Lewinson’s notation and generates the same output.
+$<span class="math notranslate nohighlight">\(R_P = \omega^T R,\)</span><span class="math notranslate nohighlight">\( where \)</span>R_P<span class="math notranslate nohighlight">\( is a vector of portfolio returns, \)</span>\omega<span class="math notranslate nohighlight">\( is a vector of portfolio weights, and \)</span>R$ is a matrix of individual stock or asset returns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">portfolio_returns</span> <span class="o">=</span> <span class="n">returns</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">portfolio_weights</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">portfolio_returns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here are some silly data to help understand the <code class="docutils literal notranslate"><span class="pre">.dot()</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">silly</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">silly</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">silly</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">portfolio_weights</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0   1.5000
+1   5.5000
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">silly_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">silly</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">silly_weights</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    0
+1    4
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="finding-the-efficient-frontier-using-monte-carlo-simulations">
+<h2>Finding the Efficient Frontier using Monte Carlo simulations<a class="headerlink" href="#finding-the-efficient-frontier-using-monte-carlo-simulations" title="Permalink to this headline">#</a></h2>
+<blockquote>
+<div><p>According to the Modern Portfolio Theory, the Efficient Frontier is a set of optimal portfolios in the risk-return spectrum. This means that the portfolios on the frontier:</p>
+<ul class="simple">
+<li><p>Offer the highest expected return for a given level of risk</p></li>
+<li><p>Offer the lowest level of risk for a given level of expected returns</p></li>
+</ul>
+<p>All portfolios located under the Efficient Frontier curve are considered sub-optimal, so it is always better to choose the ones on the frontier instead.</p>
+<p>In this recipe, we show how to find the Efficient Frontier using Monte Carlo simulations. We build thousands of portfolios, using randomly assigned weights, and visualize the results. To do so, we use the returns of four US tech companies from 2018.</p>
+</div></blockquote>
+<p>We will skip Lewinson’s Monte Carlo simulation of the efficient frontier.
+For some students, this simulation is enlightening.
+However, for many students, it creates bad habits.
+Therefore, we will jump right to using the optimizer to find the efficient frontier.</p>
+</section>
+<section id="a-crash-course-in-scipy-s-minimize-function">
+<h2>A Crash Course in scipy’s minimize() Function<a class="headerlink" href="#a-crash-course-in-scipy-s-minimize-function" title="Permalink to this headline">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">sco.minimize()</span></code> function iteratively finds the input array <code class="docutils literal notranslate"><span class="pre">x</span></code> that minimizes the output of function <code class="docutils literal notranslate"><span class="pre">fun</span></code>.
+We pass our first guess for the input array <code class="docutils literal notranslate"><span class="pre">x</span></code> to the argument <code class="docutils literal notranslate"><span class="pre">x0=</span></code>.
+We pass additional arguments for the function <code class="docutils literal notranslate"><span class="pre">fun</span></code> as a tuple to the argument <code class="docutils literal notranslate"><span class="pre">args=</span></code>.
+We pass the lower and upper bounds on <code class="docutils literal notranslate"><span class="pre">x</span></code> as a tuple of tuples to the argument <code class="docutils literal notranslate"><span class="pre">bounds=</span></code>.
+We contrain our results with a tuple of dictionaries of functions to the argument<code class="docutils literal notranslate"><span class="pre">contraints=</span></code>.</p>
+<p>Here is a simple example that minimizes the <code class="docutils literal notranslate"><span class="pre">quadratic()</span></code> function <span class="math notranslate nohighlight">\(y = (x - a)^2\)</span> where <span class="math notranslate nohighlight">\(a=5\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.optimize</span> <span class="k">as</span> <span class="nn">sco</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">quadratic</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The minimum output of <code class="docutils literal notranslate"><span class="pre">quadratic()</span></code> occurs at <span class="math notranslate nohighlight">\(x=5\)</span> if we do not use bounds or constraints.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sco</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span>
+    <span class="n">fun</span><span class="o">=</span><span class="n">quadratic</span><span class="p">,</span>
+    <span class="n">x0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2001</span><span class="p">])</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      fun: 2.0392713450495178e-16
+ hess_inv: array([[0.5]])
+      jac: array([-1.3659e-08])
+  message: &#39;Optimization terminated successfully.&#39;
+     nfev: 18
+      nit: 4
+     njev: 9
+   status: 0
+  success: True
+        x: array([5.])
+</pre></div>
+</div>
+</div>
+</div>
+<p>The minimum output of <code class="docutils literal notranslate"><span class="pre">quadratic()</span></code> occurs at <span class="math notranslate nohighlight">\(x=6\)</span> if we bound <code class="docutils literal notranslate"><span class="pre">x</span></code> between 6 and 10 (i.e., <span class="math notranslate nohighlight">\(6 \leq x \leq 10\)</span>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sco</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span>
+    <span class="n">fun</span><span class="o">=</span><span class="n">quadratic</span><span class="p">,</span>
+    <span class="n">x0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2001</span><span class="p">]),</span>
+    <span class="n">bounds</span><span class="o">=</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">),)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      fun: array([1.])
+ hess_inv: &lt;1x1 LbfgsInvHessProduct with dtype=float64&gt;
+      jac: array([2.])
+  message: &#39;CONVERGENCE: NORM_OF_PROJECTED_GRADIENT_&lt;=_PGTOL&#39;
+     nfev: 4
+      nit: 1
+     njev: 2
+   status: 0
+  success: True
+        x: array([6.])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, the minimum output of <code class="docutils literal notranslate"><span class="pre">quadratic()</span></code> occurs at <span class="math notranslate nohighlight">\(x=6\)</span>, again, if bound <code class="docutils literal notranslate"><span class="pre">x</span></code> between 5 and 10 and we constrain <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">-</span> <span class="pre">6</span></code> to be positive.
+We use bounds to simply limit the search space, and we use constraints when we need to limit the search based on some formula.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sco</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span>
+	<span class="n">fun</span><span class="o">=</span><span class="n">quadratic</span><span class="p">,</span>
+	<span class="n">x0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2001</span><span class="p">]),</span>
+	<span class="n">bounds</span><span class="o">=</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">),),</span>
+	<span class="n">constraints</span><span class="o">=</span><span class="p">({</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ineq&#39;</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">6</span><span class="p">})</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     fun: array([1.])
+     jac: array([2.])
+ message: &#39;Optimization terminated successfully&#39;
+    nfev: 4
+     nit: 2
+    njev: 2
+  status: 0
+ success: True
+       x: array([6.])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we can use <code class="docutils literal notranslate"><span class="pre">sco.minimize()</span></code>s <code class="docutils literal notranslate"><span class="pre">args=</span></code> argument to to change the <code class="docutils literal notranslate"><span class="pre">a=</span></code> argument in <code class="docutils literal notranslate"><span class="pre">quadratic()</span></code>.
+Note that <code class="docutils literal notranslate"><span class="pre">args=</span></code> expects a tuple, so we need a trailing comma <code class="docutils literal notranslate"><span class="pre">,</span></code> if we only have one argument.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sco</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span>
+	<span class="n">fun</span><span class="o">=</span><span class="n">quadratic</span><span class="p">,</span>
+	<span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,),</span>
+	<span class="n">x0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2001</span><span class="p">]),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      fun: 7.090392030754976e-17
+ hess_inv: array([[0.5]])
+      jac: array([-1.9397e-09])
+  message: &#39;Optimization terminated successfully.&#39;
+     nfev: 18
+      nit: 4
+     njev: 9
+   status: 0
+  success: True
+        x: array([20.])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="finding-the-efficient-frontier-using-optimization-with-scipy">
+<h2>Finding the Efficient Frontier using optimization with scipy<a class="headerlink" href="#finding-the-efficient-frontier-using-optimization-with-scipy" title="Permalink to this headline">#</a></h2>
+<blockquote>
+<div><p>In the previous recipe, Finding the Efficient Frontier using Monte Carlo simulations, we used a brute-force approach based on Monte Carlo simulations to visualize the Efficient Frontier. In this recipe, we use a more refined method to determine the frontier.</p>
+<p>From its definition, the Efficient Frontier is formed by a set of portfolios offering the highest expected portfolio return for a certain volatility, or offering the lowest risk (volatility) for a certain level of expected returns. We can leverage this fact, and use it in numerical optimization. The goal of optimization is to find the best (optimal) value of the objective function by adjusting the target variables and taking into account some boundaries and constraints (which have an impact on the target variables). In this case, the objective function is a function returning portfolio volatility, and the target variables are portfolio weights.</p>
+<p>Mathematically, the problem can be expressed as: $<span class="math notranslate nohighlight">\(\min \omega^T \Sigma \omega\)</span><span class="math notranslate nohighlight">\( s.t. \)</span><span class="math notranslate nohighlight">\(\omega^T \textbf{1} = 1\)</span><span class="math notranslate nohighlight">\( \)</span><span class="math notranslate nohighlight">\(\omega \geq 0\)</span><span class="math notranslate nohighlight">\( \)</span><span class="math notranslate nohighlight">\(\omega^T \mu = \mu_P\)</span>$</p>
+<p>Here, <span class="math notranslate nohighlight">\(\omega\)</span> is a vector of weights, <span class="math notranslate nohighlight">\(\Sigma\)</span> is the covariance matrix, <span class="math notranslate nohighlight">\(\mu\)</span> is a vector of returns, <span class="math notranslate nohighlight">\(\mu_P\)</span> and is the expected portfolio return.</p>
+<p>We iterate the optimization routine used for finding the optimal portfolio weights over a range of expected portfolio returns, and this results in the Efficient Frontier.</p>
+</div></blockquote>
+<p>We optimize our portfolios (i.e., minimize portfolio variance subject to contraints) with SciPy’s optimize module.
+However, we will not use Lewinson’s helper functions.
+Lewinson’s approach is computationally efficient, but requires us to manage different <span class="math notranslate nohighlight">\(\mu\)</span> (mean return vector) and <span class="math notranslate nohighlight">\(\Sigma\)</span> (variance-covariance matrix) for every sample we want to consider.
+Instead, we will base our helper functions on weights and returns only.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">port_std</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">rs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">252</span><span class="p">)</span> <span class="o">*</span> <span class="n">rs</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res_mv</span> <span class="o">=</span> <span class="n">sco</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span>
+    <span class="n">fun</span><span class="o">=</span><span class="n">port_std</span><span class="p">,</span> <span class="c1"># we want to minimize portfolio volatility</span>
+    <span class="n">x0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">returns</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">returns</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="c1"># x0 contains our first guess at portfolio weights</span>
+    <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">returns</span><span class="p">,</span> <span class="p">),</span> <span class="c1"># args provides additional argument to the function we will minimize</span>
+    <span class="n">bounds</span><span class="o">=</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="c1"># bounds limits the search space for portfolio weights</span>
+    <span class="n">constraints</span><span class="o">=</span><span class="p">(</span>
+        <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;eq&#39;</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">}</span> <span class="c1"># &quot;eq&quot; constraints are driven to zero</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="k">assert</span> <span class="n">res_mv</span><span class="p">[</span><span class="s1">&#39;success&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res_mv</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     fun: 0.17664719492493317
+     jac: array([0.1767, 0.1766, 0.1768, 0.1774])
+ message: &#39;Optimization terminated successfully&#39;
+    nfev: 40
+     nit: 8
+    njev: 8
+  status: 0
+ success: True
+       x: array([0.2575, 0.5172, 0.2179, 0.0074])
+</pre></div>
+</div>
+</div>
+</div>
+<p>What are the attributes of this minimum variance portfolio?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">print_port_res</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">returns</span><span class="p">):</span>
+	<span class="nb">print</span><span class="p">(</span>
+		<span class="n">title</span><span class="p">,</span>
+		<span class="s1">&#39;=&#39;</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">title</span><span class="p">),</span>
+		<span class="s1">&#39;&#39;</span><span class="p">,</span>
+		<span class="s1">&#39;Performance&#39;</span><span class="p">,</span>
+		<span class="s1">&#39;-----------&#39;</span><span class="p">,</span>
+		<span class="s1">&#39;Return:       </span><span class="si">{:0.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">252</span> <span class="o">*</span> <span class="n">df</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span>
+		<span class="s1">&#39;Volatility:   </span><span class="si">{:0.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">252</span><span class="p">)</span> <span class="o">*</span> <span class="n">df</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="o">.</span><span class="n">std</span><span class="p">()),</span>
+		<span class="s1">&#39;&#39;</span><span class="p">,</span>
+		<span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+	<span class="p">)</span>
+
+	<span class="nb">print</span><span class="p">(</span>
+		<span class="s1">&#39;Weights&#39;</span><span class="p">,</span> 
+		<span class="s1">&#39;-------&#39;</span><span class="p">,</span> 
+		<span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+	<span class="p">)</span>
+	<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
+		<span class="nb">print</span><span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="si">{:0.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">j</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">print_port_res</span><span class="p">(</span><span class="n">res_mv</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="s1">&#39;Minimum Variance Portfolio&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Minimum Variance Portfolio
+==========================
+
+Performance
+-----------
+Return:       0.0520
+Volatility:   0.1766
+
+Weights
+-------
+AAPL:         0.2575
+IBM:          0.5172
+MSFT:         0.2179
+TWTR:         0.0074
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we will use these skills to map the efficient frontier in class.
+Here are some tips:</p>
+<ol class="simple">
+<li><p>Loop over a set of target returns from the best to worst</p></li>
+<li><p>Use each target return as a constraint to <code class="docutils literal notranslate"><span class="pre">sco.minimize()</span></code></p></li>
+<li><p>Save your portfolio weights, returns, and volatilities to a data frame named <code class="docutils literal notranslate"><span class="pre">ef</span></code></p></li>
+</ol>
+</section>
+<section id="practice">
+<h2>Practice<a class="headerlink" href="#practice" title="Permalink to this headline">#</a></h2>
+<p><em><strong>Practice:</strong></em>
+Write functions for the following performance measures that Lewinson discusses:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Sharpe ratio: One of the most popular performance evaluation metrics, it measures the excess return (over the risk-free rate) per unit of standard deviation. When no risk-free rate is provided, the default assumption is that it is equal to 0%. The greater the Sharpe ratio, the better the portfolio’s risk-adjusted performance.</p></li>
+<li><p>Max drawdown: A metric of the downside risk of a portfolio, it measures the largest peak-to-valley loss (expressed as a percentage) during the course of the investment. The lower the maximum drawdown, the better.</p></li>
+<li><p>Calmar ratio: The ratio is defined as the average annual compounded rate of return divided by the maximum drawdown for that same time period. The higher the ratio, the better.</p></li>
+<li><p>Stability: Measured as the R-squared of a linear fit to the cumulative log returns. In practice, this means regressing a range of integers (serving as the time index) on cumulative log returns.</p></li>
+<li><p>~~Omega ratio: The probability-weighted ratio of gains over losses for a determined return target threshold (default set to 0). Its main advantage over the Sharpe ratio is that the Omega ratio—by construction—considers all moments of the returns distribution, while the former only considers the first two (mean and variance).~~</p></li>
+<li><p>Sortino ratio: A modified version of the Sharpe ratio, where the standard deviation in the denominator is replaced with downside deviation.</p></li>
+<li><p>Skew: Skewness measures the degree of asymmetry, that is, how much is the given distribution (here, of portfolio returns) more skewed than the Normal distribution. Negative skewness (left-skewed distributions) means  that large negative returns occur more frequently than large positive ones.</p></li>
+<li><p>Kurtosis: Measures extreme values in either of the tails. Distributions with large kurtosis exhibit tail data exceeding the tails of the Gaussian distribution, meaning that large and small returns occur more frequently.</p></li>
+<li><p>Tail ratio: The ratio (absolute) between the 95th and 5th percentile of the daily returns. A tail ratio of ~0.8 means that losses are ~1.25 times as bad as profits.</p></li>
+<li><p>Daily value at risk: Calculated as <span class="math notranslate nohighlight">\(\mu - 2\sigma\)</span>, where <span class="math notranslate nohighlight">\(\mu\)</span> is the average portfolio return over the period, and <span class="math notranslate nohighlight">\(\sigma\)</span> the corresponding standard deviation.</p></li>
+</ul>
+</div></blockquote>
+<p>Here are some tips:</p>
+<ol class="simple">
+<li><p>Write functions that return decimal returns</p></li>
+<li><p>For performance measures with benchmarks or targets, set the default to the risk-free rate of return from Ken French</p></li>
+<li><p>Call these functions the lower-case version of the entry name with underscores instead of spaces</p></li>
+</ol>
+<p>Also add:</p>
+<ol class="simple">
+<li><p>Total return</p></li>
+<li><p>Annual geometric mean return</p></li>
+<li><p>Annual volatility</p></li>
+</ol>
+<p><em><strong>Practice:</strong></em>
+Write a <code class="docutils literal notranslate"><span class="pre">tear_sheet()</span></code> function that tabulates average annual returns, cumulative returns, annual volatility, and the performance measures in the previous practice.</p>
+<p><em><strong>Practice:</strong></em>
+Find the portfolio with the maximum Sharpe Ratio for a portfolio of FAANG stocks from 2010 to 2019.
+Note that <code class="docutils literal notranslate"><span class="pre">sco.minimize()</span></code> finds <em>minimums</em>, so you need to minimize the <em>negative</em> Sharpe Ratio.</p>
+<p><em><strong>Practice:</strong></em>
+What is the <em>out-of-sample</em> performance of this maximum Sharpe Ratio portfolio?
+For example, what is the Sharpe Ratio of this portfolio from 2020 through today?
+How does this compare to the Sharpe Ratio of the <span class="math notranslate nohighlight">\(1/N\)</span> portfolio?</p>
+<p><em><strong>Practice:</strong></em>
+Find the portfolio with the maximum Sharpe Ratio for a portfolio of FAANG stocks from 2010 to 2019, but allow short positions up to 30% of the portfolio.
+So for every one dollar invested, you can short one or more of these four stocks to finance another 30 cents.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Lewinson"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="lewinson-06.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Lewinson Chapter 6: Monte Carlo Simulations in Finance</p>
+        </div>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Richard Herron<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
