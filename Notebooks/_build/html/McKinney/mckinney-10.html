@@ -518,18 +518,6 @@ For example, we could use a pivot table to calculate mean daily stock returns by
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="nn">Input In [1],</span> in <span class="ni">&lt;cell line: 3&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;matplotlib&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -698,7 +686,7 @@ mockup of a simple group aggregation.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.SeriesGroupBy object at 0x7fe7c5a3b2e0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.SeriesGroupBy object at 0x7ff6fd37aa00&gt;
 </pre></div>
 </div>
 </div>
@@ -1890,7 +1878,25 @@ It is worthwhile to read-through the <code class="docutils literal notranslate">
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[                       0%                       ]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[****************      33%                       ]  2 of 6 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************50%                       ]  3 of 6 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************67%*******                ]  4 of 6 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************83%***************        ]  5 of 6 completed
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  6 of 6 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -1941,57 +1947,57 @@ It is worthwhile to read-through the <code class="docutils literal notranslate">
   <tbody>
     <tr>
       <th>^DJI</th>
-      <td>25021.0119</td>
-      <td>25021.0119</td>
-      <td>25155.2978</td>
-      <td>24872.2090</td>
-      <td>25018.9109</td>
-      <td>284288558.8388</td>
+      <td>25024.3743</td>
+      <td>25024.3743</td>
+      <td>25158.8267</td>
+      <td>24875.6480</td>
+      <td>25022.4385</td>
+      <td>284344772.0207</td>
     </tr>
     <tr>
       <th>^FTSE</th>
-      <td>6951.7877</td>
-      <td>6951.7877</td>
-      <td>6993.6672</td>
-      <td>6908.9483</td>
-      <td>6951.4488</td>
-      <td>803568782.3864</td>
+      <td>6951.8893</td>
+      <td>6951.8893</td>
+      <td>6993.8172</td>
+      <td>6909.0633</td>
+      <td>6951.6206</td>
+      <td>803749702.1167</td>
     </tr>
     <tr>
       <th>^GSPC</th>
-      <td>2943.3243</td>
-      <td>2943.3243</td>
-      <td>2958.8499</td>
-      <td>2925.6374</td>
-      <td>2943.0788</td>
-      <td>3840725899.4298</td>
+      <td>2943.8485</td>
+      <td>2943.8485</td>
+      <td>2959.3973</td>
+      <td>2926.1705</td>
+      <td>2943.6268</td>
+      <td>3840703689.1192</td>
     </tr>
     <tr>
       <th>^HSI</th>
-      <td>25462.9063</td>
-      <td>25462.9063</td>
-      <td>25625.1212</td>
-      <td>25291.5675</td>
-      <td>25479.2789</td>
-      <td>1949440787.8178</td>
+      <td>25459.8011</td>
+      <td>25459.8011</td>
+      <td>25622.0584</td>
+      <td>25288.5190</td>
+      <td>25476.2522</td>
+      <td>1949882219.4283</td>
     </tr>
     <tr>
       <th>^IXIC</th>
-      <td>8434.2287</td>
-      <td>8434.2287</td>
-      <td>8489.9196</td>
-      <td>8370.2131</td>
-      <td>8433.7484</td>
-      <td>2932143001.5552</td>
+      <td>8435.9810</td>
+      <td>8435.9810</td>
+      <td>8491.7525</td>
+      <td>8371.9975</td>
+      <td>8435.5820</td>
+      <td>2933168575.1295</td>
     </tr>
     <tr>
       <th>^N225</th>
-      <td>22171.8884</td>
-      <td>22171.8884</td>
-      <td>22291.2433</td>
-      <td>22044.3222</td>
-      <td>22173.8334</td>
-      <td>96609081.1966</td>
+      <td>22174.8194</td>
+      <td>22174.8194</td>
+      <td>22294.2020</td>
+      <td>22047.2829</td>
+      <td>22176.8356</td>
+      <td>96603523.7587</td>
     </tr>
   </tbody>
 </table>
@@ -2247,7 +2253,22 @@ We have to jump through some hoops with <code class="docutils literal notranslat
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[                       0%                       ]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*******************   40%                       ]  2 of 5 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************60%****                   ]  3 of 5 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************80%*************          ]  4 of 5 completed
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  5 of 5 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>

@@ -24,7 +24,7 @@ If GitHub does not intimidate you, you can use this repository in a few ways:
 1. Bulk upload all our notebooks to DataCamp Workspace (<https://app.datacamp.com/workspace/dashboard>) using its git integration
 1. Bulk upload all our notebooks to Devspaces (<https://eyk.devspaces.com/>) using its git integration
 
-If you use one of the last two options, I suggest you frequently back up your notebooks by downloading them or syncing them to a cloned GitHub repository.
+I suggest you back up your files frequently if you use JupyterLab in the cloud.
 If Python and GitHub are new to you, your best option is to install the Anaconda distribution of Python on your laptop and download notebooks as I describe above.
 
 ## References

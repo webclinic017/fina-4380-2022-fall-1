@@ -216,7 +216,7 @@ from scipy.stats import norm
 
 # We will use Lewinson's parameters.
 
-# In[52]:
+# In[11]:
 
 
 S_0 = 100
@@ -232,7 +232,7 @@ discount_factor = np.exp(-r * T)
 
 # There is an analytical solution to European options (i.e., the Black and Scholes (1973) formula).
 
-# In[53]:
+# In[12]:
 
 
 def black_scholes_analytical(S_0, K, T, r, sigma, type='call'):
@@ -275,7 +275,7 @@ def black_scholes_analytical(S_0, K, T, r, sigma, type='call'):
 
 # We can use `black_scholes_analytical()` to value European call and put options with the parameters above.
 
-# In[54]:
+# In[13]:
 
 
 black_scholes_analytical(S_0=S_0, K=K, T=T, r=r, sigma=sigma, type='call')
@@ -286,7 +286,7 @@ black_scholes_analytical(S_0=S_0, K=K, T=T, r=r, sigma=sigma, type='call')
 # 1. Calculate the expected payoff as $max(S_T - K, 0)$
 # 1. Discount the expected payoff to $t=0$ using the risk-free rate
 
-# In[55]:
+# In[14]:
 
 
 gbm_simulations_2 = pd.DataFrame(simulate_gbm(s_0=S_0, mu=r, sigma=sigma, n_sims=N_SIMS, T=T, N=N).T)
@@ -295,7 +295,7 @@ gbm_simulations_2 = pd.DataFrame(simulate_gbm(s_0=S_0, mu=r, sigma=sigma, n_sims
 # What is the payoff of a European option?
 # $$max(S_T - K, 0)$$
 
-# In[56]:
+# In[15]:
 
 
 gbm_simulations_2.iloc[-1].sub(K).pipe(np.maximum, 0).mean() * discount_factor
@@ -357,13 +357,13 @@ returns = df['Adj Close'].pct_change().loc[START_DATE:END_DATE]
 
 # We will need the variance-covariance matrix.
 
-# In[38]:
+# In[19]:
 
 
 cov_mat = returns.cov()
 
 
-# In[39]:
+# In[20]:
 
 
 cov_mat
@@ -391,7 +391,7 @@ chol_mat
 rv = np.random.normal(size=(N_SIMS, len(RISKY_ASSETS)))
 
 
-# In[26]:
+# In[24]:
 
 
 correlated_rv = (chol_mat @ rv.T).T
@@ -399,7 +399,7 @@ correlated_rv = (chol_mat @ rv.T).T
 
 # These random variables have a variance-covariance matrix similar to the real data.
 
-# In[34]:
+# In[25]:
 
 
 np.cov(correlated_rv.T)
@@ -407,7 +407,7 @@ np.cov(correlated_rv.T)
 
 # Here are the parameters for the simulated price paths:
 
-# In[35]:
+# In[26]:
 
 
 r = returns.mean().values
@@ -418,13 +418,13 @@ P_0 = np.sum(SHARES * S_0)
 
 # Calculate terminal prices:
 
-# In[36]:
+# In[27]:
 
 
 S_T = S_0 * np.exp((r - 0.5 * sigma ** 2) * T + sigma * np.sqrt(T) * correlated_rv)
 
 
-# In[37]:
+# In[28]:
 
 
 S_T
@@ -433,25 +433,25 @@ S_T
 # Calculate terminal portfolio values and returns.
 # Note that these are dollar values, since VaR is typically expressed in dollar values.
 
-# In[42]:
+# In[29]:
 
 
 P_T = np.sum(SHARES * S_T, axis=1)
 
 
-# In[43]:
+# In[30]:
 
 
 P_T
 
 
-# In[44]:
+# In[31]:
 
 
 P_diff = P_T - P_0
 
 
-# In[45]:
+# In[32]:
 
 
 P_diff
@@ -459,7 +459,7 @@ P_diff
 
 # Next, we calculate VaR.
 
-# In[50]:
+# In[33]:
 
 
 percentiles = [0.01, 0.1, 1.]
@@ -471,7 +471,7 @@ for x, y in zip(percentiles, var):
 
 # Finally, we will plot VaR:
 
-# In[51]:
+# In[34]:
 
 
 fig, ax = plt.subplots()

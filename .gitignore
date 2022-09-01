@@ -16,4 +16,5 @@
 *checkpoint*
 *checkpoint*
 *.pkl
+*.pickle
 *.sqlite

@@ -570,18 +570,6 @@ Chapter 5 of Wes McKinney’s <a class="reference external" href="https://wesmck
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="nn">Input In [1],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;matplotlib&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3662,7 +3650,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.2 µs ± 132 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10 µs ± 376 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -3674,7 +3662,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27.3 µs ± 126 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27.9 µs ± 1.16 µs per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -3934,7 +3922,19 @@ If we are running Python on DataCamp, we only need to run the <code class="docut
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[                       0%                       ]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************50%                       ]  2 of 4 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************75%***********            ]  3 of 4 completed
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  4 of 4 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -4016,7 +4016,7 @@ Therefore, the percent change in adjusted closes considers both price changs (i.
       <th>1962-01-08</th>
       <td>NaN</td>
       <td>NaN</td>
-      <td>-0.0188</td>
+      <td>-0.0187</td>
       <td>NaN</td>
     </tr>
     <tr>
@@ -4025,20 +4025,6 @@ Therefore, the percent change in adjusted closes considers both price changs (i.
       <td>...</td>
       <td>...</td>
       <td>...</td>
-    </tr>
-    <tr>
-      <th>2022-08-23</th>
-      <td>-0.0020</td>
-      <td>-0.0026</td>
-      <td>-0.0060</td>
-      <td>-0.0047</td>
-    </tr>
-    <tr>
-      <th>2022-08-24</th>
-      <td>0.0018</td>
-      <td>-0.0006</td>
-      <td>-0.0112</td>
-      <td>-0.0024</td>
     </tr>
     <tr>
       <th>2022-08-25</th>
@@ -4061,9 +4047,23 @@ Therefore, the percent change in adjusted closes considers both price changs (i.
       <td>-0.0005</td>
       <td>-0.0107</td>
     </tr>
+    <tr>
+      <th>2022-08-30</th>
+      <td>-0.0153</td>
+      <td>-0.0039</td>
+      <td>-0.0056</td>
+      <td>-0.0085</td>
+    </tr>
+    <tr>
+      <th>2022-08-31</th>
+      <td>-0.0106</td>
+      <td>-0.0069</td>
+      <td>-0.0087</td>
+      <td>-0.0057</td>
+    </tr>
   </tbody>
 </table>
-<p>15270 rows × 4 columns</p>
+<p>15272 rows × 4 columns</p>
 </div></div></div>
 </div>
 <div class="cell docutils container">
@@ -4130,13 +4130,13 @@ Therefore, the percent change in adjusted closes considers both price changs (i.
       <th>GOOG</th>
       <td>0.5128</td>
       <td>1.0000</td>
-      <td>0.4038</td>
+      <td>0.4039</td>
       <td>0.5526</td>
     </tr>
     <tr>
       <th>IBM</th>
       <td>0.3684</td>
-      <td>0.4038</td>
+      <td>0.4039</td>
       <td>1.0000</td>
       <td>0.4444</td>
     </tr>
@@ -4236,7 +4236,19 @@ Slice the column in <code class="docutils literal notranslate"><span class="pre"
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[                       0%                       ]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************50%                       ]  2 of 4 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************75%***********            ]  3 of 4 completed
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  4 of 4 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>

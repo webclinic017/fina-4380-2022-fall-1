@@ -576,18 +576,6 @@ We will use these time series and panel tools every day for the rest of the cour
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="nn">Input In [1],</span> in <span class="ni">&lt;cell line: 3&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;matplotlib&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -912,7 +900,7 @@ The following code works as though our data were sorted, but raises a warning th
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6782/386136989.py:1: FutureWarning: Value based partial slicing on non-monotonic DatetimeIndexes with non-existing keys is deprecated and will raise a KeyError in a future Version.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_116204/386136989.py:1: FutureWarning: Value based partial slicing on non-monotonic DatetimeIndexes with non-existing keys is deprecated and will raise a KeyError in a future Version.
   ts2[&#39;1/6/2011&#39;:&#39;1/11/2011&#39;]
 </pre></div>
 </div>
@@ -1478,6 +1466,9 @@ dtype: float64
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
 </pre></div>
 </div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -1549,60 +1540,60 @@ See below.</p>
   <tbody>
     <tr>
       <th>2010-06-29</th>
-      <td>3.8000</td>
-      <td>5.0000</td>
-      <td>3.5080</td>
-      <td>4.7780</td>
-      <td>4.7780</td>
-      <td>93831500</td>
+      <td>1.2667</td>
+      <td>1.6667</td>
+      <td>1.1693</td>
+      <td>1.5927</td>
+      <td>1.5927</td>
+      <td>281494500</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>2010-06-30</th>
-      <td>5.1580</td>
-      <td>6.0840</td>
-      <td>4.6600</td>
-      <td>4.7660</td>
-      <td>4.7660</td>
-      <td>85935500</td>
+      <td>1.7193</td>
+      <td>2.0280</td>
+      <td>1.5533</td>
+      <td>1.5887</td>
+      <td>1.5887</td>
+      <td>257806500</td>
       <td>-0.0025</td>
       <td>NaN</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>2010-07-01</th>
-      <td>5.0000</td>
-      <td>5.1840</td>
-      <td>4.0540</td>
-      <td>4.3920</td>
-      <td>4.3920</td>
-      <td>41094000</td>
+      <td>1.6667</td>
+      <td>1.7280</td>
+      <td>1.3513</td>
+      <td>1.4640</td>
+      <td>1.4640</td>
+      <td>123282000</td>
       <td>-0.0785</td>
       <td>-0.0025</td>
       <td>-0.0025</td>
     </tr>
     <tr>
       <th>2010-07-02</th>
-      <td>4.6000</td>
-      <td>4.6200</td>
-      <td>3.7420</td>
-      <td>3.8400</td>
-      <td>3.8400</td>
-      <td>25699000</td>
+      <td>1.5333</td>
+      <td>1.5400</td>
+      <td>1.2473</td>
+      <td>1.2800</td>
+      <td>1.2800</td>
+      <td>77097000</td>
       <td>-0.1257</td>
       <td>-0.0785</td>
       <td>-0.0785</td>
     </tr>
     <tr>
       <th>2010-07-06</th>
-      <td>4.0000</td>
-      <td>4.0000</td>
-      <td>3.1660</td>
-      <td>3.2220</td>
-      <td>3.2220</td>
-      <td>34334500</td>
+      <td>1.3333</td>
+      <td>1.3333</td>
+      <td>1.0553</td>
+      <td>1.0740</td>
+      <td>1.0740</td>
+      <td>103003500</td>
       <td>-0.1609</td>
       <td>-0.1257</td>
       <td>NaN</td>
@@ -1620,68 +1611,68 @@ See below.</p>
       <td>...</td>
     </tr>
     <tr>
-      <th>2022-07-27</th>
-      <td>791.4300</td>
-      <td>827.7800</td>
-      <td>785.3700</td>
-      <td>824.4600</td>
-      <td>824.4600</td>
-      <td>29370000</td>
-      <td>0.0617</td>
-      <td>-0.0357</td>
-      <td>-0.0357</td>
+      <th>2022-08-25</th>
+      <td>302.3600</td>
+      <td>302.9600</td>
+      <td>291.6000</td>
+      <td>296.0700</td>
+      <td>296.0700</td>
+      <td>53230000</td>
+      <td>-0.0035</td>
+      <td>0.0022</td>
+      <td>0.0022</td>
     </tr>
     <tr>
-      <th>2022-07-28</th>
-      <td>840.2000</td>
-      <td>849.9000</td>
-      <td>818.4000</td>
-      <td>842.7000</td>
-      <td>842.7000</td>
-      <td>28241000</td>
-      <td>0.0221</td>
-      <td>0.0617</td>
-      <td>0.0617</td>
+      <th>2022-08-26</th>
+      <td>297.4300</td>
+      <td>302.0000</td>
+      <td>287.4700</td>
+      <td>288.0900</td>
+      <td>288.0900</td>
+      <td>56905800</td>
+      <td>-0.0270</td>
+      <td>-0.0035</td>
+      <td>-0.0035</td>
     </tr>
     <tr>
-      <th>2022-07-29</th>
-      <td>842.1000</td>
-      <td>894.9600</td>
-      <td>837.3000</td>
-      <td>891.4500</td>
-      <td>891.4500</td>
-      <td>31771000</td>
-      <td>0.0578</td>
-      <td>0.0221</td>
-      <td>0.0221</td>
+      <th>2022-08-29</th>
+      <td>282.8300</td>
+      <td>287.7400</td>
+      <td>280.7000</td>
+      <td>284.8200</td>
+      <td>284.8200</td>
+      <td>41864700</td>
+      <td>-0.0114</td>
+      <td>-0.0270</td>
+      <td>-0.0270</td>
     </tr>
     <tr>
-      <th>2022-08-01</th>
-      <td>903.8300</td>
-      <td>935.6300</td>
-      <td>885.0000</td>
-      <td>891.8300</td>
-      <td>891.8300</td>
-      <td>39014300</td>
-      <td>0.0004</td>
-      <td>0.0578</td>
-      <td>0.0578</td>
+      <th>2022-08-30</th>
+      <td>287.8700</td>
+      <td>288.4800</td>
+      <td>272.6500</td>
+      <td>277.7000</td>
+      <td>277.7000</td>
+      <td>50541800</td>
+      <td>-0.0250</td>
+      <td>-0.0114</td>
+      <td>-0.0114</td>
     </tr>
     <tr>
-      <th>2022-08-02</th>
-      <td>882.0100</td>
-      <td>923.5000</td>
-      <td>878.0000</td>
-      <td>901.7600</td>
-      <td>901.7600</td>
-      <td>31859200</td>
-      <td>0.0111</td>
-      <td>0.0004</td>
-      <td>0.0004</td>
+      <th>2022-08-31</th>
+      <td>280.6200</td>
+      <td>281.2500</td>
+      <td>271.8100</td>
+      <td>275.6100</td>
+      <td>275.6100</td>
+      <td>52107300</td>
+      <td>-0.0075</td>
+      <td>-0.0250</td>
+      <td>-0.0250</td>
     </tr>
   </tbody>
 </table>
-<p>3045 rows × 9 columns</p>
+<p>3066 rows × 9 columns</p>
 </div></div></div>
 </div>
 </section>
@@ -2147,7 +2138,16 @@ We will use data similar, but not identical, to the book data.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[                       0%                       ]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************67%*******                ]  2 of 3 completed
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  3 of 3 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -2301,7 +2301,7 @@ Also, calculating rolling volatility with the <code class="docutils literal notr
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>461 ms ± 48.9 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>422 ms ± 3.73 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -2313,7 +2313,7 @@ Also, calculating rolling volatility with the <code class="docutils literal notr
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>222 µs ± 1.09 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>226 µs ± 2.03 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
 </pre></div>
 </div>
 </div>
