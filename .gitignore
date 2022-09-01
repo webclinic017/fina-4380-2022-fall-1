@@ -13,9 +13,7 @@
 /Teammates
 /Zoom
 .~*.ipynb
-*checkpoint.ipynb
-*checkpoint.py
-*.pdf
+*checkpoint*
+*checkpoint*
 *.pkl
-*.py
 *.sqlite
