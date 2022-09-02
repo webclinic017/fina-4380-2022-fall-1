@@ -14,4 +14,5 @@ repository:
   path_to_book: Notebooks
   branch: main
 html:
+  use_repository_button: true
   use_issues_button: true
