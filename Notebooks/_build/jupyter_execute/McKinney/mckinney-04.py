@@ -1039,3 +1039,17 @@ arr.sort(1)
 
 # ***Practice***
 # Create a copy of `data` named `data2`, and replace negative values with -1 and positive values with +1.
+
+# In[127]:
+
+
+np.random.seed(42)
+data = np.random.randn(7, 4)
+
+
+# ***Practice:***
+# Write a function that calculates the number of payments that generate $x\%$ of the present value of a perpetuity given $C_1$, $r$, and $g$.
+# Recall the present value of a growing perpetuity is $PV = \frac{C_1}{r - g}$.
+
+# ***Practice:***
+# Write a function that calculates the internal rate of return given an numpy array of cash flows.

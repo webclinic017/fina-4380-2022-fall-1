@@ -247,7 +247,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/McKinney/mckinney-05.ipynb"
+        <a href="https://mybinder.org/v2/gh/richardcherron/fina-4380-2022-fall/master?urlpath=tree/Notebooks/McKinney/mckinney-05.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -281,6 +281,51 @@ title="Fullscreen mode"
   </span>
 
 </button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/richardcherron/fina-4380-2022-fall/issues/new?title=Issue%20on%20page%20%2FMcKinney/mckinney-05.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/richardcherron/fina-4380-2022-fall/edit/master/Notebooks/McKinney/mckinney-05.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
 
 <div class="menu-dropdown menu-dropdown-download-buttons">
   <button class="headerbtn menu-dropdown__trigger"
@@ -604,22 +649,6 @@ Chapter 5 of Wes McKinney’s <a class="reference external" href="https://wesmck
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    4
-1    7
-2   -5
-3    3
-dtype: int64
-</pre></div>
-</div>
-</div>
-</div>
 <p>Contrast <code class="docutils literal notranslate"><span class="pre">obj</span></code> with a NumPy array equivalent:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -668,22 +697,6 @@ We can also explicitly assign an index.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obj2</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>d    4
-b    7
-a   -5
-c    3
-dtype: int64
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obj2</span><span class="o">.</span><span class="n">index</span>
 </pre></div>
 </div>
@@ -721,22 +734,6 @@ dtype: int64
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obj2</span><span class="p">[</span><span class="s1">&#39;d&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obj2</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>d    6
-b    7
-a   -5
-c    3
-dtype: int64
 </pre></div>
 </div>
 </div>
@@ -836,38 +833,6 @@ Also, pandas keeps California with <code class="docutils literal notranslate"><s
 </div>
 <p>Indices are one of pandas’ super powers.
 When we perform mathematical operations, pandas aligns series by their indices.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obj3</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ohio      35000
-Texas     71000
-Oregon    16000
-Utah       5000
-dtype: int64
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obj4</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>California          NaN
-Ohio         35000.0000
-Oregon       16000.0000
-Texas        71000.0000
-dtype: float64
-</pre></div>
-</div>
-</div>
-</div>
 <p>Here <code class="docutils literal notranslate"><span class="pre">NaN</span></code> is “not a number”, which indicates missing values.
 <code class="docutils literal notranslate"><span class="pre">NaN</span></code> is considered a float, so the data type switches from int64 to float64.</p>
 <div class="cell docutils container">
@@ -1628,23 +1593,6 @@ It is difficult to provide an exhaustive reference, but this section provides a 
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a   0.0000
-b   1.0000
-c   2.0000
-d   3.0000
-e   4.0000
-dtype: float64
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -1659,23 +1607,6 @@ dtype: float64
 </div>
 </div>
 <p>Note that we need to use the <code class="docutils literal notranslate"><span class="pre">inplace=True</span></code> argument to <code class="docutils literal notranslate"><span class="pre">.drop()</span></code> to change <code class="docutils literal notranslate"><span class="pre">obj</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a   0.0000
-b   1.0000
-c   2.0000
-d   3.0000
-e   4.0000
-dtype: float64
-</pre></div>
-</div>
-</div>
-</div>
 <p>The <code class="docutils literal notranslate"><span class="pre">.drop()</span></code> method works on data frames, too.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1687,70 +1618,6 @@ dtype: float64
 </pre></div>
 </div>
 </div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>one</th>
-      <th>two</th>
-      <th>three</th>
-      <th>four</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Ohio</th>
-      <td>0</td>
-      <td>1</td>
-      <td>2</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>Colorado</th>
-      <td>4</td>
-      <td>5</td>
-      <td>6</td>
-      <td>7</td>
-    </tr>
-    <tr>
-      <th>Utah</th>
-      <td>8</td>
-      <td>9</td>
-      <td>10</td>
-      <td>11</td>
-    </tr>
-    <tr>
-      <th>New York</th>
-      <td>12</td>
-      <td>13</td>
-      <td>14</td>
-      <td>15</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3650,7 +3517,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10 µs ± 376 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.72 µs ± 227 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -3662,7 +3529,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27.9 µs ± 1.16 µs per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27 µs ± 88.8 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -4027,13 +3894,6 @@ Therefore, the percent change in adjusted closes considers both price changs (i.
       <td>...</td>
     </tr>
     <tr>
-      <th>2022-08-25</th>
-      <td>0.0149</td>
-      <td>0.0262</td>
-      <td>0.0056</td>
-      <td>0.0111</td>
-    </tr>
-    <tr>
       <th>2022-08-26</th>
       <td>-0.0377</td>
       <td>-0.0544</td>
@@ -4061,9 +3921,16 @@ Therefore, the percent change in adjusted closes considers both price changs (i.
       <td>-0.0087</td>
       <td>-0.0057</td>
     </tr>
+    <tr>
+      <th>2022-09-01</th>
+      <td>0.0047</td>
+      <td>0.0128</td>
+      <td>0.0094</td>
+      <td>-0.0041</td>
+    </tr>
   </tbody>
 </table>
-<p>15272 rows × 4 columns</p>
+<p>15273 rows × 4 columns</p>
 </div></div></div>
 </div>
 <div class="cell docutils container">

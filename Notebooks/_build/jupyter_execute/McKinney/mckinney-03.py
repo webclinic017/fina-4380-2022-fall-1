@@ -779,3 +779,6 @@ b = 2
 
 # ***Practice:***
 # Use a lambda function to sort `strings` by the last letter.
+
+# You can find many more Python coding challenges at <www.hackerrank.com>.
+# These challenges are fun but not necessary for our course because we will spend our time using higher-level features.

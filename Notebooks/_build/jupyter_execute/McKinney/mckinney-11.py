@@ -83,11 +83,11 @@ session = requests_cache.CachedSession(expire_after='1D')
 from datetime import datetime
 dates = [
     datetime(2011, 1, 2), 
-     datetime(2011, 1, 5),
-     datetime(2011, 1, 7), 
-     datetime(2011, 1, 8),
-     datetime(2011, 1, 10), 
-     datetime(2011, 1, 12)
+    datetime(2011, 1, 5),
+    datetime(2011, 1, 7), 
+    datetime(2011, 1, 8),
+    datetime(2011, 1, 10), 
+    datetime(2011, 1, 12)
 ]
 np.random.seed(42)
 ts = pd.Series(np.random.randn(6), index=dates)
@@ -215,8 +215,6 @@ ts2 = ts.sort_values()
 
 
 ts2['1/6/2011':'1/11/2011']
-# <ipython-input-33-eb55134ff07e>:1: FutureWarning: Value based partial slicing on non-monotonic DatetimeIndexes with non-existing keys is deprecated and will raise a KeyError in a future Version.
-#   ts2['1/6/2011':'1/11/2011']
 
 
 # In[22]:
@@ -436,9 +434,9 @@ ts.pct_change()
 
 
 np.allclose(
-	a=ts.pct_change(),
-	b=ts.sub(ts.shift()).div(ts.shift()),
-	equal_nan=True
+    a=ts.pct_change(),
+    b=ts.sub(ts.shift()).div(ts.shift()),
+    equal_nan=True
 )
 
 
@@ -458,9 +456,9 @@ ts.diff().div(ts.shift())
 
 
 np.allclose(
-	a=ts.pct_change(),
-	b=ts.diff().div(ts.shift()),
-	equal_nan=True
+    a=ts.pct_change(),
+    b=ts.diff().div(ts.shift()),
+    equal_nan=True
 )
 
 
@@ -870,9 +868,3 @@ get_ipython().run_line_magic('timeit', "returns['AAPL'].rolling(252).std()")
 # While the Sharpe Ratio is typically used for funds, we can apply it to a single stock to test our knowledge of the `.rolling()` method.
 # Calculate and plot the one-year rolling Sharpe Ratio for GME using all available daily data.
 # Download GME data from Yahoo! Finance and risk-free rate data from Ken French.
-
-# In[ ]:
-
-
-
-

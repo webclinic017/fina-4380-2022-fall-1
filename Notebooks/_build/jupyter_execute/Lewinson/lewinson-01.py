@@ -149,13 +149,13 @@ plt.show()
 
 
 spy_m = (
-	spy
-	.resample(rule='M', kind='period')
-	['Return']
-	.agg(['mean', 'std', 'count'])
-	.query('count >= 15')
-	.drop(columns=['count'])
-	.mul(100)
+    spy
+    .resample(rule='M', kind='period')
+    ['Return']
+    .agg(['mean', 'std', 'count'])
+    .query('count >= 15')
+    .drop(columns=['count'])
+    .mul(100)
 )
 
 
@@ -169,8 +169,8 @@ axes = spy_m.plot(subplots=True, legend=False)
 axes[0].set_ylabel('Mean (%)')
 axes[1].set_ylabel('Std. Dev.(%)')
 plt.suptitle(
-	'Stock Return Volatility Clusters in Time\n' + 
-	'(Monthly Aggregates of Daily Returns on SPY)'
+    'Stock Return Volatility Clusters in Time\n' + 
+    '(Monthly Aggregates of Daily Returns on SPY)'
 )
 plt.show()
 
@@ -235,14 +235,14 @@ plt.show()
 
 
 spy_m = (
-	spy
-	.resample(rule='M', kind='period')
-	['Return']
-	.agg(['mean', 'std', 'count'])
-	.query('count >= 15')
-	.drop(columns=['count'])
-	.mul(100)
-	.assign(mean_lag1 = lambda x: x['mean'].shift(1))
+    spy
+    .resample(rule='M', kind='period')
+    ['Return']
+    .agg(['mean', 'std', 'count'])
+    .query('count >= 15')
+    .drop(columns=['count'])
+    .mul(100)
+    .assign(mean_lag1 = lambda x: x['mean'].shift(1))
 )
 
 
@@ -253,8 +253,8 @@ spy_m.plot(x='mean_lag1', y='std', kind='scatter', alpha=0.5)
 plt.xlabel('One-Month Lag of Mean Daily Returns (%)')
 plt.ylabel('Volatility of Daily Returns (%)')
 plt.suptitle(
-	'Fisher Black\'s Leverage Effect\n' + 
-	'(Monthly Aggregates of Daily Returns on SPY)'
+    'Fisher Black\'s Leverage Effect\n' + 
+    '(Monthly Aggregates of Daily Returns on SPY)'
 )
 plt.show()
 

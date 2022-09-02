@@ -129,25 +129,25 @@ aapl['Strategy'] = aapl['Position'] * aapl['AAPL']
 
 
 (
-	aapl
-	[['AAPL', 'Strategy']]
-	.dropna()
-	.add(1)
-	.cumprod()
-	.rename(columns={'Strategy': 'SMA(20)'})
-	.plot()
+    aapl
+    [['AAPL', 'Strategy']]
+    .dropna()
+    .add(1)
+    .cumprod()
+    .rename(columns={'Strategy': 'SMA(20)'})
+    .plot()
 )
 buy_date = (
-	aapl
-	[['AAPL', 'Strategy']]
-	.dropna()
-	.index[0] - 
-	pd.offsets.BDay(1)
+    aapl
+    [['AAPL', 'Strategy']]
+    .dropna()
+    .index[0] - 
+    pd.offsets.BDay(1)
 )
 plt.ylabel('Value ($)')
 plt.title(
-	'Value of $1 Invested\n' +
-	'at Close Price on ' + buy_date.strftime('%B %d, %Y')
+    'Value of $1 Invested\n' +
+    'at Close Price on ' + buy_date.strftime('%B %d, %Y')
 )
 plt.show()
 

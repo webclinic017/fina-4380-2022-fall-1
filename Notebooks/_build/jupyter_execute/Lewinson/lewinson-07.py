@@ -244,10 +244,10 @@ sco.minimize(
 
 
 sco.minimize(
-	fun=quadratic,
-	x0=np.array([2001]),
-	bounds=((5, 10),),
-	constraints=({'type': 'ineq', 'fun': lambda x: x - 6})
+    fun=quadratic,
+    x0=np.array([2001]),
+    bounds=((5, 10),),
+    constraints=({'type': 'ineq', 'fun': lambda x: x - 6})
 )
 
 
@@ -258,9 +258,9 @@ sco.minimize(
 
 
 sco.minimize(
-	fun=quadratic,
-	args=(20,),
-	x0=np.array([2001]),
+    fun=quadratic,
+    args=(20,),
+    x0=np.array([2001]),
 )
 
 
@@ -315,25 +315,25 @@ res_mv
 
 
 def print_port_res(w, title, df=returns):
-	print(
-		title,
-		'=' * len(title),
-		'',
-		'Performance',
-		'-----------',
-		'Return:       {:0.4f}'.format(252 * df.dot(w).mean()),
-		'Volatility:   {:0.4f}'.format(np.sqrt(252) * df.dot(w).std()),
-		'',
-		sep='\n'
-	)
+    print(
+        title,
+        '=' * len(title),
+        '',
+        'Performance',
+        '-----------',
+        'Return:       {:0.4f}'.format(252 * df.dot(w).mean()),
+        'Volatility:   {:0.4f}'.format(np.sqrt(252) * df.dot(w).std()),
+        '',
+        sep='\n'
+    )
 
-	print(
-		'Weights', 
-		'-------', 
-		sep='\n'
-	)
-	for i, j in zip(df.columns, w):
-		print((i + ':').ljust(14) + '{:0.4f}'.format(j))
+    print(
+        'Weights', 
+        '-------', 
+        sep='\n'
+    )
+    for i, j in zip(df.columns, w):
+        print((i + ':').ljust(14) + '{:0.4f}'.format(j))
 
 
 # In[32]:

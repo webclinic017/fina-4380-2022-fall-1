@@ -176,8 +176,8 @@ plt.ylabel('Price ($)')
 plt.xlabel('Date')
 plt.xticks(rotation=45) # but plt.plot() does not provide smart ticks
 plt.title(
-	'MSFT Simulated Prices\n' + 
-	'Trained from {} to {}'.format(returns.index[0].strftime('%Y-%m-%d'), returns.index[-1].strftime('%Y-%m-%d'))
+    'MSFT Simulated Prices\n' + 
+    'Trained from {} to {}'.format(returns.index[0].strftime('%Y-%m-%d'), returns.index[-1].strftime('%Y-%m-%d'))
 )
 plt.show()
 

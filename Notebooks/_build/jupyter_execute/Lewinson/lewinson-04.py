@@ -124,11 +124,11 @@ amzn = amzn.join(ff[0])
 
 
 amzn = amzn.assign(
-	rf = lambda x: x['RF'],
-	rm = lambda x: x['Mkt-RF'] + x['RF'],
-	Rm = lambda x: x['Mkt-RF'],
-	ri = lambda x: 100 * x['Adj Close'].pct_change(),
-	Ri = lambda x: x['ri'] - x['rf']
+    rf = lambda x: x['RF'],
+    rm = lambda x: x['Mkt-RF'] + x['RF'],
+    Rm = lambda x: x['Mkt-RF'],
+    ri = lambda x: 100 * x['Adj Close'].pct_change(),
+    Ri = lambda x: x['ri'] - x['rf']
 )
 
 
@@ -181,8 +181,8 @@ plt.xlabel('Daily Excess Market Return (%)')
 first_date = amzn.loc['2020-09':, ['Ri', 'Rm']].dropna().index[0]
 last_date = amzn.loc['2020-09':, ['Ri', 'Rm']].dropna().index[-1]
 plt.title(
-	'Beta Plot for AMZN Daily Returns\n' + 
-	'from {} to {}'.format(first_date.strftime('%Y-%m-%d'), last_date.strftime('%Y-%m-%d'))
+    'Beta Plot for AMZN Daily Returns\n' + 
+    'from {} to {}'.format(first_date.strftime('%Y-%m-%d'), last_date.strftime('%Y-%m-%d'))
 )
 plt.show()
 
@@ -204,8 +204,8 @@ plt.xlabel('Daily Excess Market Return (%)')
 first_date = amzn.loc['2020-09':, ['Ri', 'Rm']].dropna().index[0]
 last_date = amzn.loc['2020-09':, ['Ri', 'Rm']].dropna().index[-1]
 plt.title(
-	'Beta Plot for AMZN Daily Returns\n' + 
-	'from {} to {}'.format(first_date.strftime('%Y-%m-%d'), last_date.strftime('%Y-%m-%d'))
+    'Beta Plot for AMZN Daily Returns\n' + 
+    'from {} to {}'.format(first_date.strftime('%Y-%m-%d'), last_date.strftime('%Y-%m-%d'))
 )
 plt.show()
 

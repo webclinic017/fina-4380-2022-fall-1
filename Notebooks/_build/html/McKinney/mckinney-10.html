@@ -247,7 +247,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/McKinney/mckinney-10.ipynb"
+        <a href="https://mybinder.org/v2/gh/richardcherron/fina-4380-2022-fall/master?urlpath=tree/Notebooks/McKinney/mckinney-10.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -281,6 +281,51 @@ title="Fullscreen mode"
   </span>
 
 </button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/richardcherron/fina-4380-2022-fall/issues/new?title=Issue%20on%20page%20%2FMcKinney/mckinney-10.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/richardcherron/fina-4380-2022-fall/edit/master/Notebooks/McKinney/mckinney-10.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
 
 <div class="menu-dropdown menu-dropdown-download-buttons">
   <button class="headerbtn menu-dropdown__trigger"
@@ -570,77 +615,6 @@ mockup of a simple group aggregation.</p>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>key1</th>
-      <th>key2</th>
-      <th>data1</th>
-      <th>data2</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>a</td>
-      <td>one</td>
-      <td>0.4967</td>
-      <td>-0.2341</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>a</td>
-      <td>two</td>
-      <td>-0.1383</td>
-      <td>1.5792</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>b</td>
-      <td>one</td>
-      <td>0.6477</td>
-      <td>0.7674</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>b</td>
-      <td>two</td>
-      <td>1.5230</td>
-      <td>-0.4695</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>a</td>
-      <td>one</td>
-      <td>-0.2342</td>
-      <td>0.5426</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
 <p>Here is one way to calculate the means of <code class="docutils literal notranslate"><span class="pre">data1</span></code> by (grouops formed on) <code class="docutils literal notranslate"><span class="pre">key1</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -686,7 +660,7 @@ mockup of a simple group aggregation.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.SeriesGroupBy object at 0x7ff6fd37aa00&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.SeriesGroupBy object at 0x7f574ecaebe0&gt;
 </pre></div>
 </div>
 </div>
@@ -961,77 +935,6 @@ We can use tab completion to discover (or remind ourselves of) these other metho
 The <code class="docutils literal notranslate"><span class="pre">.groupby()</span></code> method generates a sequence of tuples.
 Each tuples contains the value(s) of the grouping variable(s) and associated chunk of the dataframe.
 McKinney provides two loops to show how to iterate over groups.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>key1</th>
-      <th>key2</th>
-      <th>data1</th>
-      <th>data2</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>a</td>
-      <td>one</td>
-      <td>0.4967</td>
-      <td>-0.2341</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>a</td>
-      <td>two</td>
-      <td>-0.1383</td>
-      <td>1.5792</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>b</td>
-      <td>one</td>
-      <td>0.6477</td>
-      <td>0.7674</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>b</td>
-      <td>two</td>
-      <td>1.5230</td>
-      <td>-0.4695</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>a</td>
-      <td>one</td>
-      <td>-0.2342</td>
-      <td>0.5426</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;key1&#39;</span><span class="p">):</span>
@@ -1870,9 +1773,9 @@ It is worthwhile to read-through the <code class="docutils literal notranslate">
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ind</span> <span class="o">=</span> <span class="p">(</span>
-	<span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">tickers</span><span class="o">=</span><span class="s1">&#39;^GSPC ^DJI ^IXIC ^FTSE ^N225 ^HSI&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
-	<span class="o">.</span><span class="n">rename_axis</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Variable&#39;</span><span class="p">,</span> <span class="s1">&#39;Index&#39;</span><span class="p">])</span>
-	<span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+    <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">tickers</span><span class="o">=</span><span class="s1">&#39;^GSPC ^DJI ^IXIC ^FTSE ^N225 ^HSI&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">rename_axis</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Variable&#39;</span><span class="p">,</span> <span class="s1">&#39;Index&#39;</span><span class="p">])</span>
+    <span class="o">.</span><span class="n">stack</span><span class="p">()</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -1947,12 +1850,12 @@ It is worthwhile to read-through the <code class="docutils literal notranslate">
   <tbody>
     <tr>
       <th>^DJI</th>
-      <td>25024.3743</td>
-      <td>25024.3743</td>
-      <td>25158.8267</td>
-      <td>24875.6480</td>
-      <td>25022.4385</td>
-      <td>284344772.0207</td>
+      <td>25027.8088</td>
+      <td>25027.8088</td>
+      <td>25162.2025</td>
+      <td>24878.9334</td>
+      <td>25025.7695</td>
+      <td>284373262.5583</td>
     </tr>
     <tr>
       <th>^FTSE</th>
@@ -1961,43 +1864,43 @@ It is worthwhile to read-through the <code class="docutils literal notranslate">
       <td>6993.8172</td>
       <td>6909.0633</td>
       <td>6951.6206</td>
-      <td>803749702.1167</td>
+      <td>804134961.8482</td>
     </tr>
     <tr>
       <th>^GSPC</th>
-      <td>2943.8485</td>
-      <td>2943.8485</td>
-      <td>2959.3973</td>
-      <td>2926.1705</td>
-      <td>2943.6268</td>
-      <td>3840703689.1192</td>
+      <td>2944.3783</td>
+      <td>2944.3783</td>
+      <td>2959.9208</td>
+      <td>2926.6767</td>
+      <td>2944.1410</td>
+      <td>3840659083.3765</td>
     </tr>
     <tr>
       <th>^HSI</th>
-      <td>25459.8011</td>
-      <td>25459.8011</td>
-      <td>25622.0584</td>
-      <td>25288.5190</td>
-      <td>25476.2522</td>
-      <td>1949882219.4283</td>
+      <td>25456.6225</td>
+      <td>25456.6225</td>
+      <td>25618.8885</td>
+      <td>25285.3729</td>
+      <td>25473.1285</td>
+      <td>1949908873.7566</td>
     </tr>
     <tr>
       <th>^IXIC</th>
-      <td>8435.9810</td>
-      <td>8435.9810</td>
-      <td>8491.7525</td>
-      <td>8371.9975</td>
-      <td>8435.5820</td>
-      <td>2933168575.1295</td>
+      <td>8437.7154</td>
+      <td>8437.7154</td>
+      <td>8493.4649</td>
+      <td>8373.6415</td>
+      <td>8437.2764</td>
+      <td>2931859482.1336</td>
     </tr>
     <tr>
       <th>^N225</th>
-      <td>22174.8194</td>
-      <td>22174.8194</td>
-      <td>22294.2020</td>
-      <td>22047.2829</td>
-      <td>22176.8356</td>
-      <td>96603523.7587</td>
+      <td>22177.7415</td>
+      <td>22177.7415</td>
+      <td>22297.1252</td>
+      <td>22050.2303</td>
+      <td>22179.8126</td>
+      <td>96588740.6617</td>
     </tr>
   </tbody>
 </table>
@@ -2011,15 +1914,15 @@ and
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
-	<span class="n">ind</span>
-	<span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2015&#39;</span><span class="p">:]</span>
-	<span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-	<span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
-		<span class="n">values</span><span class="o">=</span><span class="s1">&#39;Close&#39;</span><span class="p">,</span>
-		<span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Grouper</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">),</span>
-		<span class="n">columns</span><span class="o">=</span><span class="s1">&#39;Index&#39;</span><span class="p">,</span>
-		<span class="n">aggfunc</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">]</span>
-	<span class="p">)</span>
+    <span class="n">ind</span>
+    <span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2015&#39;</span><span class="p">:]</span>
+    <span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
+        <span class="n">values</span><span class="o">=</span><span class="s1">&#39;Close&#39;</span><span class="p">,</span>
+        <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Grouper</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">),</span>
+        <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;Index&#39;</span><span class="p">,</span>
+        <span class="n">aggfunc</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">]</span>
+    <span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
 </div>

@@ -247,7 +247,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/Lewinson/lewinson-06.ipynb"
+        <a href="https://mybinder.org/v2/gh/richardcherron/fina-4380-2022-fall/master?urlpath=tree/Notebooks/Lewinson/lewinson-06.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -281,6 +281,51 @@ title="Fullscreen mode"
   </span>
 
 </button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/richardcherron/fina-4380-2022-fall/issues/new?title=Issue%20on%20page%20%2FLewinson/lewinson-06.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/richardcherron/fina-4380-2022-fall/edit/master/Notebooks/Lewinson/lewinson-06.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
 
 <div class="menu-dropdown menu-dropdown-download-buttons">
   <button class="headerbtn menu-dropdown__trigger"
@@ -595,8 +640,8 @@ title="Print to PDF"
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span> <span class="c1"># but plt.plot() does not provide smart ticks</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
-	<span class="s1">&#39;MSFT Simulated Prices</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> 
-	<span class="s1">&#39;Trained from </span><span class="si">{}</span><span class="s1"> to </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">returns</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">),</span> <span class="n">returns</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">))</span>
+    <span class="s1">&#39;MSFT Simulated Prices</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> 
+    <span class="s1">&#39;Trained from </span><span class="si">{}</span><span class="s1"> to </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">returns</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">),</span> <span class="n">returns</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">))</span>
 <span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -925,13 +970,13 @@ It is common to present the loss given by VaR as a positive (absolute) value. Th
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[109.1355, 162.6902],
-       [109.1992, 162.8892],
-       [109.18  , 162.835 ],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[110.5353, 165.1166],
+       [110.5998, 165.3186],
+       [110.5804, 165.2636],
        ...,
-       [109.1125, 162.6644],
-       [109.1202, 162.6155],
-       [109.105 , 162.6391]])
+       [110.512 , 165.0904],
+       [110.5198, 165.0408],
+       [110.5044, 165.0648]])
 </pre></div>
 </div>
 </div>
@@ -952,8 +997,8 @@ Note that these are dollar values, since VaR is typically expressed in dollar va
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1359.1287, 1360.4416, 1360.0752, ..., 1358.8845, 1358.6782,
-       1358.7203])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1378.2599, 1379.5917, 1379.2201, ..., 1378.0123, 1377.8029,
+       1377.8458])
 </pre></div>
 </div>
 </div>
@@ -972,7 +1017,7 @@ Note that these are dollar values, since VaR is typically expressed in dollar va
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-1.2713,  0.0416, -0.3248, ..., -1.5155, -1.7217, -1.6797])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-1.2901,  0.0417, -0.33  , ..., -1.5377, -1.7471, -1.7042])
 </pre></div>
 </div>
 </div>
@@ -989,9 +1034,9 @@ Note that these are dollar values, since VaR is typically expressed in dollar va
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1-day VaR with 99.99% confidence: $3.14
-1-day VaR with 99.9% confidence: $2.77
-1-day VaR with 99.0% confidence: $2.34
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1-day VaR with 99.99% confidence: $3.19
+1-day VaR with 99.9% confidence: $2.81
+1-day VaR with 99.0% confidence: $2.38
 </pre></div>
 </div>
 </div>

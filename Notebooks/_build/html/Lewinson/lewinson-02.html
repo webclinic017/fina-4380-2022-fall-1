@@ -247,7 +247,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/Lewinson/lewinson-02.ipynb"
+        <a href="https://mybinder.org/v2/gh/richardcherron/fina-4380-2022-fall/master?urlpath=tree/Notebooks/Lewinson/lewinson-02.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -281,6 +281,51 @@ title="Fullscreen mode"
   </span>
 
 </button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/richardcherron/fina-4380-2022-fall/issues/new?title=Issue%20on%20page%20%2FLewinson/lewinson-02.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/richardcherron/fina-4380-2022-fall/edit/master/Notebooks/Lewinson/lewinson-02.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
 
 <div class="menu-dropdown menu-dropdown-download-buttons">
   <button class="headerbtn menu-dropdown__trigger"
@@ -566,25 +611,25 @@ There may be missing values for both strategies because:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
-	<span class="n">aapl</span>
-	<span class="p">[[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">,</span> <span class="s1">&#39;Strategy&#39;</span><span class="p">]]</span>
-	<span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
-	<span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-	<span class="o">.</span><span class="n">cumprod</span><span class="p">()</span>
-	<span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Strategy&#39;</span><span class="p">:</span> <span class="s1">&#39;SMA(20)&#39;</span><span class="p">})</span>
-	<span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+    <span class="n">aapl</span>
+    <span class="p">[[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">,</span> <span class="s1">&#39;Strategy&#39;</span><span class="p">]]</span>
+    <span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">cumprod</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Strategy&#39;</span><span class="p">:</span> <span class="s1">&#39;SMA(20)&#39;</span><span class="p">})</span>
+    <span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 <span class="p">)</span>
 <span class="n">buy_date</span> <span class="o">=</span> <span class="p">(</span>
-	<span class="n">aapl</span>
-	<span class="p">[[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">,</span> <span class="s1">&#39;Strategy&#39;</span><span class="p">]]</span>
-	<span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
-	<span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> 
-	<span class="n">pd</span><span class="o">.</span><span class="n">offsets</span><span class="o">.</span><span class="n">BDay</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">aapl</span>
+    <span class="p">[[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">,</span> <span class="s1">&#39;Strategy&#39;</span><span class="p">]]</span>
+    <span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> 
+    <span class="n">pd</span><span class="o">.</span><span class="n">offsets</span><span class="o">.</span><span class="n">BDay</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Value ($)&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
-	<span class="s1">&#39;Value of $1 Invested</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>
-	<span class="s1">&#39;at Close Price on &#39;</span> <span class="o">+</span> <span class="n">buy_date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%B </span><span class="si">%d</span><span class="s1">, %Y&#39;</span><span class="p">)</span>
+    <span class="s1">&#39;Value of $1 Invested</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>
+    <span class="s1">&#39;at Close Price on &#39;</span> <span class="o">+</span> <span class="n">buy_date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%B </span><span class="si">%d</span><span class="s1">, %Y&#39;</span><span class="p">)</span>
 <span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>

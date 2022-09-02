@@ -828,3 +828,17 @@ year
 
 # ***Practice:*** 
 # Use ternary expressions to make your FizzBuzz code more compact.
+
+# ***Practice:***
+# Given a positive integer $N$, print a numerical triangle of height $N-1$ like the one below for $N=6$.
+# 
+# ```
+# 1
+# 22
+# 333
+# 4444
+# 55555
+# ```
+
+# You can find many more Python coding challenges at <www.hackerrank.com>.
+# These challenges are fun but not necessary for our course because we will spend our time using higher-level features.
