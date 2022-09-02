@@ -11,7 +11,3 @@ ports:
     onOpen: open-browser
   - port: 8050
     onOpen: open-preview
-
-vscode:
-  extensions:
-    - ms-toolsai.jupyter
