@@ -1,0 +1,13 @@
+jupyterlab 
+jupyterlab-git 
+jupyter-book 
+numpy 
+scipy 
+pandas 
+matplotlib 
+seaborn 
+statsmodels 
+linearmodels 
+yfinance 
+pandas-datareader 
+requests-cache

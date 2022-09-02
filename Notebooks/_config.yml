@@ -6,6 +6,10 @@ latex:
   latex_documents:
     targetname: book.tex
 
+html:
+  use_repository_button: true
+  use_issues_button: true
+
 bibtex_bibfiles: 
   - references.bib
 
@@ -13,6 +17,8 @@ repository:
   url: https://github.com/richardcherron/fina-4380-2022-fall
   path_to_book: Notebooks
   branch: main
-html:
-  use_repository_button: true
-  use_issues_button: true
+
+launch_buttons:
+  notebook_interface: "jupyterlab"
+  colab_url: "https://colab.research.google.com"
+
