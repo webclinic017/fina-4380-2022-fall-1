@@ -12,6 +12,6 @@ bibtex_bibfiles:
 repository:
   url: https://github.com/richardcherron/fina-4380-2022-fall
   path_to_book: Notebooks
+  branch: main
 html:
   use_issues_button: true
-  use_edit_page_button: true
