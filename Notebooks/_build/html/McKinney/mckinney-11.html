@@ -961,7 +961,7 @@ The following code works as though our data were sorted, but raises a warning th
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_159778/1099700163.py:1: FutureWarning: Value based partial slicing on non-monotonic DatetimeIndexes with non-existing keys is deprecated and will raise a KeyError in a future Version.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\r.herron\AppData\Local\Temp\ipykernel_20444\1099700163.py:1: FutureWarning: Value based partial slicing on non-monotonic DatetimeIndexes with non-existing keys is deprecated and will raise a KeyError in a future Version.
   ts2[&#39;1/6/2011&#39;:&#39;1/11/2011&#39;]
 </pre></div>
 </div>
@@ -1037,7 +1037,7 @@ The toy data in series <code class="docutils literal notranslate"><span class="p
 2000-01-02    2
 2000-01-02    3
 2000-01-03    4
-dtype: int64
+dtype: int32
 </pre></div>
 </div>
 </div>
@@ -1077,7 +1077,7 @@ dtype: int64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2000-01-02    1
 2000-01-02    2
 2000-01-02    3
-dtype: int64
+dtype: int32
 </pre></div>
 </div>
 </div>
@@ -1117,7 +1117,7 @@ dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2000-01-01    0
 2000-01-02    3
 2000-01-03    4
-dtype: int64
+dtype: int32
 </pre></div>
 </div>
 </div>
@@ -1672,30 +1672,6 @@ See below.</p>
       <td>...</td>
     </tr>
     <tr>
-      <th>2022-08-26</th>
-      <td>297.4300</td>
-      <td>302.0000</td>
-      <td>287.4700</td>
-      <td>288.0900</td>
-      <td>288.0900</td>
-      <td>57163900</td>
-      <td>-0.0270</td>
-      <td>-0.0035</td>
-      <td>-0.0035</td>
-    </tr>
-    <tr>
-      <th>2022-08-29</th>
-      <td>282.8300</td>
-      <td>287.7400</td>
-      <td>280.7000</td>
-      <td>284.8200</td>
-      <td>284.8200</td>
-      <td>41864700</td>
-      <td>-0.0114</td>
-      <td>-0.0270</td>
-      <td>-0.0270</td>
-    </tr>
-    <tr>
       <th>2022-08-30</th>
       <td>287.8700</td>
       <td>288.4800</td>
@@ -1726,14 +1702,38 @@ See below.</p>
       <td>266.1500</td>
       <td>277.1600</td>
       <td>277.1600</td>
-      <td>54105500</td>
+      <td>54287000</td>
       <td>0.0056</td>
       <td>-0.0075</td>
       <td>-0.0075</td>
     </tr>
+    <tr>
+      <th>2022-09-02</th>
+      <td>281.0700</td>
+      <td>282.3500</td>
+      <td>269.0800</td>
+      <td>270.2100</td>
+      <td>270.2100</td>
+      <td>50752200</td>
+      <td>-0.0251</td>
+      <td>0.0056</td>
+      <td>0.0056</td>
+    </tr>
+    <tr>
+      <th>2022-09-06</th>
+      <td>272.6800</td>
+      <td>275.9900</td>
+      <td>265.7400</td>
+      <td>274.4200</td>
+      <td>274.4200</td>
+      <td>55860000</td>
+      <td>0.0156</td>
+      <td>-0.0251</td>
+      <td>NaN</td>
+    </tr>
   </tbody>
 </table>
-<p>3067 rows × 9 columns</p>
+<p>3069 rows × 9 columns</p>
 </div></div></div>
 </div>
 </section>
@@ -1892,7 +1892,7 @@ Resampling requires and aggregation method, and here McKinney chooses the <code 
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2000-01-01 00:00:00    10
 2000-01-01 00:05:00    35
 2000-01-01 00:10:00    21
-Freq: 5T, dtype: int64
+Freq: 5T, dtype: int32
 </pre></div>
 </div>
 </div>
@@ -1916,7 +1916,7 @@ We can use the <code class="docutils literal notranslate"><span class="pre">clos
 2000-01-01 00:05:00    15
 2000-01-01 00:10:00    40
 2000-01-01 00:15:00    11
-Freq: 5T, dtype: int64
+Freq: 5T, dtype: int32
 </pre></div>
 </div>
 </div>
@@ -2362,7 +2362,7 @@ Also, calculating rolling volatility with the <code class="docutils literal notr
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>409 ms ± 4.23 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>718 ms ± 19.2 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -2374,7 +2374,7 @@ Also, calculating rolling volatility with the <code class="docutils literal notr
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>221 µs ± 1.73 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>369 µs ± 20.1 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
 </pre></div>
 </div>
 </div>

@@ -37,6 +37,32 @@ for x in array:
         greater.append(x)
 
 
+# In[2]:
+
+
+less
+
+
+# In[3]:
+
+
+greater
+
+
+# Is 0 less than 2?
+
+# In[4]:
+
+
+less.append(0)
+
+
+# In[5]:
+
+
+less
+
+
 # ### Comments
 # 
 # > Any text preceded by the hash mark (pound sign) # is ignored by the Python interpreter. This is often used to add comments to code. At times you may also want to exclude certain blocks of code without deleting them.
@@ -44,7 +70,7 @@ for x in array:
 # We can enter the hash mark anywhere in the line to ignore all code after the hash mark on the same line.
 # We can quickly comment/un-comment code with `<Ctrl>-/` in notebook cells.
 
-# In[2]:
+# In[6]:
 
 
 # 5 + 5
@@ -69,60 +95,132 @@ for x in array:
 # 
 # We can write a function that adds two numbers.
 
-# In[3]:
+# In[7]:
 
 
 def add_numbers(a, b):
     return a + b
 
 
+# In[8]:
+
+
+add_numbers(5, 5)
+
+
 # We can write a function that adds two strings, separated by a space.
 
-# In[4]:
+# In[9]:
 
 
 def add_strings(a, b):
     return a + ' ' + b
 
 
+# In[10]:
+
+
+add_strings('5', '5')
+
+
+# What is the difference between `print()` and `return`?
+# `print()` just prints to the console, while `return` lets us assign values.
+# In the example below, we use the `return` line to assign the output of `add_string_2()` to the variable `return_from_add_strings_2`, and we use the `print()` line to print to the output cell, which is neither assigned nor captured.
+
+# In[11]:
+
+
+def add_strings_2(a, b):
+    print(a + ' ' + b + ' (this is from the print statement)')
+    return a + ' ' + b
+
+
+# In[12]:
+
+
+return_from_add_strings_2 = add_strings_2('5', '5')
+
+
+# In[13]:
+
+
+return_from_add_strings_2
+
+
 # ### Variables and argument passing
 # 
 # > When assigning a variable (or name) in Python, you are creating a reference to the object on the righthand side of the equals sign.
 
-# In[5]:
+# In[14]:
 
 
 a = [1, 2, 3]
+
+
+# In[15]:
+
+
+a
 
 
 # If we assign `a` to a new variable `b`, both `a` and `b` refer to the *same* object.
 # This same object is the original list `[1, 2, 3]`.
 # If we change `a`, we also change `b`, because both refer to the *same* object.
 
-# In[6]:
+# In[16]:
 
 
 b = a
 
 
+# In[17]:
+
+
+b
+
+
 # ***Here, `a` and `b` are the same object with different names!***
 
-# In[7]:
+# In[18]:
 
 
 a is b
 
 
-# In[8]:
+# In[19]:
 
 
 a.append(4)
 
 
-# In[9]:
+# In[20]:
+
+
+a
+
+
+# In[21]:
+
+
+b
+
+
+# In[22]:
 
 
 b.append(5)
+
+
+# In[23]:
+
+
+a
+
+
+# In[24]:
+
+
+b
 
 
 # When we append to `a`, we also appead to `b` because `a` and `b` are the same object!
@@ -139,20 +237,26 @@ b.append(5)
 # 1. We do not declare variables and their types
 # 1. We can change variables' types because variables are only names that refer to objects
 
-# In[10]:
+# In[25]:
+
+
+b
+
+
+# In[26]:
 
 
 type(a)
 
 
-# In[11]:
+# In[27]:
 
 
 a = 5
 type(a)
 
 
-# In[12]:
+# In[28]:
 
 
 a = 'foo'
@@ -163,7 +267,7 @@ type(a)
 # For examples, in many programming languages, the following code returns either string '55' or integer 10.
 # However, in Python, it returns an error.
 
-# In[13]:
+# In[29]:
 
 
 # '5' + 5
@@ -171,7 +275,7 @@ type(a)
 
 # A counterexample is that Python converts integers to floats.
 
-# In[14]:
+# In[30]:
 
 
 a = 4.5
@@ -188,13 +292,13 @@ a / b
 # 
 # If we want integer division (or floor division) we have to use `//`.
 
-# In[15]:
+# In[31]:
 
 
 5 / 2
 
 
-# In[16]:
+# In[32]:
 
 
 5 // 2
@@ -204,13 +308,13 @@ a / b
 # 
 # We can use tab completion to list attributes (characteristics stored inside objects) and methods (functions associated with objects).
 
-# In[17]:
+# In[33]:
 
 
 a = 'foo'
 
 
-# In[18]:
+# In[34]:
 
 
 a.capitalize()
@@ -225,7 +329,7 @@ a.capitalize()
 # 
 # If we `import pandas`, we have to use the full `pandas.` prefix
 
-# In[19]:
+# In[35]:
 
 
 import pandas
@@ -233,7 +337,7 @@ import pandas
 
 # The `import as ` syntax lets us define an abbreviated prefix.
 
-# In[20]:
+# In[36]:
 
 
 import pandas as pd
@@ -241,13 +345,13 @@ import pandas as pd
 
 # We can also import one or more functions from a package with the following syntax.
 
-# In[21]:
+# In[37]:
 
 
 from pandas import DataFrame
 
 
-# In[22]:
+# In[38]:
 
 
 from pandas import DataFrame as df
@@ -261,19 +365,19 @@ from pandas import DataFrame as df
 # 
 # Binary operators work like we expect based on our Excel experience.
 
-# In[23]:
+# In[39]:
 
 
 5 - 7
 
 
-# In[24]:
+# In[40]:
 
 
 12 + 21.5
 
 
-# In[25]:
+# In[41]:
 
 
 5 <= 2
@@ -281,7 +385,7 @@ from pandas import DataFrame as df
 
 # The textbook presents one way to make sure different names refer to different objects: perform any operation during assignment.
 
-# In[26]:
+# In[42]:
 
 
 a = [1, 2, 3]
@@ -289,13 +393,13 @@ b = a
 c = list(a)
 
 
-# In[27]:
+# In[43]:
 
 
 a is b
 
 
-# In[28]:
+# In[44]:
 
 
 a is c
@@ -303,13 +407,13 @@ a is c
 
 # Here `a` and `c` have the same *values*, but they are not the same object!
 
-# In[29]:
+# In[45]:
 
 
 a == c
 
 
-# In[30]:
+# In[46]:
 
 
 a is not c
@@ -317,13 +421,13 @@ a is not c
 
 # In Python, `=` is the assignment operator, `==` tests equality, and `!=` tests inequality.
 
-# In[31]:
+# In[47]:
 
 
 a == c
 
 
-# In[32]:
+# In[48]:
 
 
 a != c
@@ -357,7 +461,7 @@ a != c
 # 
 # Lists are mutable, therefore we can modify them.
 
-# In[33]:
+# In[49]:
 
 
 a_list = ['foo', 2, [4, 5]]
@@ -365,19 +469,19 @@ a_list = ['foo', 2, [4, 5]]
 
 # ***Python is zero-indexed! The first element has a zero subscript `[0]`!***
 
-# In[34]:
+# In[50]:
 
 
 a_list[0]
 
 
-# In[35]:
+# In[51]:
 
 
 a_list[2]
 
 
-# In[36]:
+# In[52]:
 
 
 a_list[2] = (3, 4)
@@ -385,7 +489,7 @@ a_list[2] = (3, 4)
 
 # Tuples are *immutable*, therefore we cannot modify them.
 
-# In[37]:
+# In[53]:
 
 
 a_tuple = (3, 5, (4, 5))
@@ -393,7 +497,7 @@ a_tuple = (3, 5, (4, 5))
 
 # The Python interpreter returns an error is we try to modify `a_tuple` becuase tuples are immutable.
 
-# In[38]:
+# In[54]:
 
 
 # a_tuple[1] = 'four'
@@ -417,7 +521,7 @@ a_tuple = (3, 5, (4, 5))
 # In Python, integers are unbounded, and `**` raises numbers to a power.
 # So, `ival ** 6` is $17239781^6$.
 
-# In[39]:
+# In[55]:
 
 
 ival = 17239871
@@ -426,13 +530,13 @@ ival ** 6
 
 # Floats (decimal numbers) are 64-bit in Python.
 
-# In[40]:
+# In[56]:
 
 
 fval = 7.243
 
 
-# In[41]:
+# In[57]:
 
 
 type(fval)
@@ -440,7 +544,7 @@ type(fval)
 
 # Dividing integers yields a float, if necessary.
 
-# In[42]:
+# In[58]:
 
 
 3 / 2
@@ -448,7 +552,7 @@ type(fval)
 
 # If we want C-style integer division (i.e., $3 / 2 = 1$), we have to use `//` (i.e., floor division).
 
-# In[43]:
+# In[59]:
 
 
 3 // 2
@@ -464,13 +568,13 @@ type(fval)
 # 
 # Note the capitalization, which may be different from your prior programming languages.
 
-# In[44]:
+# In[60]:
 
 
 True and True
 
 
-# In[45]:
+# In[61]:
 
 
 False or True
@@ -478,13 +582,13 @@ False or True
 
 # We can also substitute `&` for `and` and `|` for `or`.
 
-# In[46]:
+# In[62]:
 
 
 True & True
 
 
-# In[47]:
+# In[63]:
 
 
 False | True
@@ -494,49 +598,49 @@ False | True
 # 
 # We can "recast" variables to change their types.
 
-# In[48]:
+# In[64]:
 
 
 s = '3.14159'
 
 
-# In[49]:
+# In[65]:
 
 
 # 1 + s
 
 
-# In[50]:
+# In[66]:
 
 
 1 + float(s)
 
 
-# In[51]:
+# In[67]:
 
 
 fval = float(s)
 
 
-# In[52]:
+# In[68]:
 
 
 type(fval)
 
 
-# In[53]:
+# In[69]:
 
 
 int(fval)
 
 
-# In[54]:
+# In[70]:
 
 
 bool(fval)
 
 
-# In[55]:
+# In[71]:
 
 
 bool(0)
@@ -544,7 +648,7 @@ bool(0)
 
 # Anything other than zero converts to a boolean `True`.
 
-# In[56]:
+# In[72]:
 
 
 bool(-1)
@@ -552,13 +656,13 @@ bool(-1)
 
 # We recast the string `'5'` to an integer or the integer `5` to a string to prevent the `5 + '5'` error above.
 
-# In[57]:
+# In[73]:
 
 
 5 + int('5')
 
 
-# In[58]:
+# In[74]:
 
 
 str(5) + '5'
@@ -569,21 +673,21 @@ str(5) + '5'
 # In Python, `None` is null.
 # `None` is like `#N/A` or `=na()` in Excel.
 
-# In[59]:
+# In[75]:
 
 
 a = None
 a is None
 
 
-# In[60]:
+# In[76]:
 
 
 b = 5
 b is not None
 
 
-# In[61]:
+# In[77]:
 
 
 type(None)
@@ -600,19 +704,19 @@ type(None)
 # In general, I prefer single quotes because they do not require pressing the shift key.
 # However, in the following example, we must use double quotes to avoid confusion with the apostrophe in "it's".
 
-# In[62]:
+# In[78]:
 
 
 x = -1
 
 
-# In[63]:
+# In[79]:
 
 
 type(x)
 
 
-# In[64]:
+# In[80]:
 
 
 if x < 0:
@@ -622,7 +726,7 @@ if x < 0:
 # Python's `elif` avoids Excel's nested `if()`s.
 # `elif` continues an `if` block, and `else` runs if the other conditions are not met.
 
-# In[65]:
+# In[81]:
 
 
 x = 10
@@ -638,7 +742,7 @@ else:
 
 # We can combine comparisons with `and` and `or`.
 
-# In[66]:
+# In[82]:
 
 
 a = 5
@@ -659,7 +763,7 @@ if a < b or c > d:
 # 
 # The `continue` keyword skips the remainder of the `if` block for that loop iteration.
 
-# In[67]:
+# In[83]:
 
 
 sequence = [1, 2, None, 4, None, 5]
@@ -672,7 +776,7 @@ for value in sequence:
 
 # The `break` keyword exits the loop altogether.
 
-# In[68]:
+# In[84]:
 
 
 sequence = [1, 2, 0, 4, 6, 5, 2, 1]
@@ -694,31 +798,31 @@ for value in sequence:
 # 
 # One advantage of `range()` is that is memory efficient because it does not expand to a list.
 
-# In[69]:
+# In[85]:
 
 
 range(10)
 
 
-# In[70]:
+# In[86]:
 
 
 list(range(10))
 
 
-# In[71]:
+# In[87]:
 
 
 list(range(1, 10))
 
 
-# In[72]:
+# In[88]:
 
 
 list(range(1, 10, 1))
 
 
-# In[73]:
+# In[89]:
 
 
 list(range(0, 20, 2))
@@ -727,19 +831,19 @@ list(range(0, 20, 2))
 # In Python, intervals are "closed" (inclusive or square bracket) on the left and "open" (exclusive or parentheses) on the right.
 # The following is an empty list because we cannot count from 5 to 0 by steps of +1.
 
-# In[74]:
+# In[90]:
 
 
 list(range(5, 0))
 
 
-# In[75]:
+# In[91]:
 
 
 list(range(5, 0, -1))
 
 
-# In[76]:
+# In[92]:
 
 
 seq = [1, 2, 3, 4]
@@ -750,7 +854,7 @@ for i in range(len(seq)):
 # We can loop over the list `seq` directly.
 # The following code is equivalent to the previous code, but is more "Pythonic".
 
-# In[77]:
+# In[93]:
 
 
 for i in seq:
@@ -760,19 +864,19 @@ for i in seq:
 # The modulo operator (`%`) returns the remainder.
 # For example, two goes into five twice with a remainder of one.
 
-# In[78]:
+# In[94]:
 
 
 5 // 2
 
 
-# In[79]:
+# In[95]:
 
 
 5 % 2
 
 
-# In[80]:
+# In[96]:
 
 
 sum = 0
@@ -786,7 +890,7 @@ for i in range(100000):
 # We said above that Python `if` and `else` is cumbersome relative to Excel's `if()`.
 # We can complete simple comparisons on one line in Python.
 
-# In[81]:
+# In[97]:
 
 
 x = 5
@@ -799,7 +903,25 @@ value = 'Non-negative' if x >= 0 else 'Negative'
 # Extract the year, month, and day from an 8-digit date (i.e., YYYYMMDD format).
 # Try `20080915` using `//` (integer division) and `%` (modulo division, which returns the remainder).
 
-# In[82]:
+# In[98]:
+
+
+5 / 2
+
+
+# In[99]:
+
+
+5 // 2
+
+
+# In[100]:
+
+
+5 % 2
+
+
+# In[101]:
 
 
 ymd = 20080915
