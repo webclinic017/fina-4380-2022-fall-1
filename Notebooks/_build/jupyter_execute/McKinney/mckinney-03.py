@@ -42,7 +42,7 @@ tup = (4, 5, 6) # the parentheses are optional, but we will use them
 # In[2]:
 
 
-# tup = 4, 5, 6
+# tup = 4, 5, 6 # this is the same as the previous code cell because the parentheses are optional
 
 
 # In[3]:
@@ -54,46 +54,64 @@ tup[0] # PYTHON IS ZERO-INDEXED!
 # In[4]:
 
 
-nested_tup = ((4, 5, 6), (7, 8))
+tup[1]
 
 
 # In[5]:
 
 
-nested_tup[0] # PYTHON IS ZERO-INDEXED!
+nested_tup = ((4, 5, 6), (7, 8))
 
 
 # In[6]:
 
 
-nested_tup[0][0]
+nested_tup[0] # PYTHON IS ZERO-INDEXED!
 
 
 # In[7]:
 
 
-tuple([4, 0, 2])
+nested_tup[0][0]
 
 
 # In[8]:
 
 
-tup = tuple('string')
+tuple([4, 0, 2])
 
 
 # In[9]:
 
 
-tup[0]
+tup = tuple('string')
 
 
 # In[10]:
 
 
-tup = tuple(['foo', [1, 2], True])
+tup
 
 
 # In[11]:
+
+
+tup[0]
+
+
+# In[12]:
+
+
+tup = tuple(['foo', [1, 2], True])
+
+
+# In[13]:
+
+
+tup
+
+
+# In[14]:
 
 
 # tup[2] = False # gives an error, because tuples are immutable (unchangeable)
@@ -101,7 +119,7 @@ tup = tuple(['foo', [1, 2], True])
 
 # > If an object inside a tuple is mutable, such as a list, you can modify it in-place.
 
-# In[12]:
+# In[15]:
 
 
 tup
@@ -112,13 +130,13 @@ tup
 # Tuples are immutable.
 # So we cannot modify a tuple, but we can combine two tuples into a new tuple.
 
-# In[13]:
+# In[16]:
 
 
 (1, 2) + (1, 2)
 
 
-# In[14]:
+# In[17]:
 
 
 (4, None, 'foo') + (6, 0) + ('bar',)
@@ -130,13 +148,19 @@ tup
 # This multiplication behavior is the logical extension of the addition behavior above.
 # The output of `tup + tup` should be the same as the output of `2 * tup`.
 
-# In[15]:
+# In[18]:
 
 
 ('foo', 'bar') * 4
 
 
-# In[16]:
+# In[19]:
+
+
+('foo', 'bar') + ('foo', 'bar') + ('foo', 'bar') + ('foo', 'bar')
+
+
+# In[20]:
 
 
 (1, 2) * 4
@@ -147,20 +171,92 @@ tup
 # > If you try to assign to a tuple-like expression of variables, Python will attempt to
 # unpack the value on the righthand side of the equals sign.
 
-# In[17]:
+# In[21]:
 
 
 tup = (4, 5, 6)
 a, b, c = tup
 
 
+# In[22]:
+
+
+a
+
+
+# In[23]:
+
+
+b
+
+
+# In[24]:
+
+
+c
+
+
+# In[25]:
+
+
+(d, e, f) = (7, 8, 9) # the parentheses are optional but helpful
+
+
+# In[26]:
+
+
+d
+
+
+# In[27]:
+
+
+e
+
+
+# In[28]:
+
+
+f
+
+
+# In[29]:
+
+
+# g, h = 10, 11, 12 # ValueError: too many values to unpack (expected 2)
+
+
 # We can even unpack nested tuples!
 
-# In[18]:
+# In[30]:
 
 
 tup = 4, 5, (6, 7)
 a, b, (c, d) = tup
+
+
+# In[31]:
+
+
+a
+
+
+# In[32]:
+
+
+b
+
+
+# In[33]:
+
+
+c
+
+
+# In[34]:
+
+
+d
 
 
 # You can use this functionality to rename variables without a using a third, temporary variable.
@@ -171,24 +267,24 @@ a, b, (c, d) = tup
 # methods. A particularly useful one (also available on lists) is count, which counts the
 # number of occurrences of a value.
 
-# In[19]:
+# In[35]:
 
 
 a = (1, 2, 2, 2, 3, 4, 2)
 a.count(2)
 
 
-# In[20]:
+# In[36]:
 
 
-a.index(2)
+import this
 
 
 # ### List
 # 
 # > In contrast with tuples, lists are variable-length and their contents can be modified in-place. You can define them using square brackets [ ] or using the list type function.
 
-# In[21]:
+# In[37]:
 
 
 a_list = [2, 3, 7, None]
@@ -196,19 +292,19 @@ tup = ('foo', 'bar', 'baz')
 b_list = list(tup)
 
 
-# In[22]:
+# In[38]:
 
 
 a_list
 
 
-# In[23]:
+# In[39]:
 
 
 b_list
 
 
-# In[24]:
+# In[40]:
 
 
 a_list[0] # PYTHON IS ZERO-INDEXED!
@@ -220,40 +316,46 @@ a_list[0] # PYTHON IS ZERO-INDEXED!
 # 
 # The `.append()` method appends an element to the list *in place* without reassigning the list.
 
-# In[25]:
+# In[41]:
 
 
 b_list.append('dwarf')
 
 
-# > Using insert you can insert an element at a specific location in the list.
-# The insertion index must be between 0 and the length of the list, inclusive.
-
-# In[26]:
-
-
-b_list.insert(1, 'red') # PYTHON IS ZERO INDEXED
-
-
-# In[27]:
+# In[42]:
 
 
 b_list
 
 
-# In[28]:
+# > Using insert you can insert an element at a specific location in the list.
+# The insertion index must be between 0 and the length of the list, inclusive.
+
+# In[43]:
+
+
+b_list.insert(1, 'red') # PYTHON IS ZERO INDEXED
+
+
+# In[44]:
+
+
+b_list
+
+
+# In[45]:
 
 
 b_list.index('red')
 
 
-# In[29]:
+# In[46]:
 
 
 b_list[b_list.index('red')] = 'blue'
 
 
-# In[30]:
+# In[47]:
 
 
 b_list
@@ -262,36 +364,42 @@ b_list
 # > The inverse operation to insert is pop, which removes and returns an element at a
 # particular index.
 
-# In[31]:
+# In[48]:
 
 
 b_list.pop(2)
 
 
-# Note that `.pop(2)` removes the 2 element.
-# If we do not want to remove the 2 element, we should use `[2]` to access an element without removing it.
-
-# In[32]:
+# In[49]:
 
 
 b_list
 
 
+# Note that `.pop(2)` removes the 2 element.
+# If we do not want to remove the 2 element, we should use `[2]` to access an element without removing it.
+
 # > Elements can be removed by value with remove, which locates the first such value and removes it from the list.
 
-# In[33]:
+# In[50]:
 
 
 b_list.append('foo')
 
 
-# In[34]:
+# In[51]:
+
+
+b_list
+
+
+# In[52]:
 
 
 b_list.remove('foo')
 
 
-# In[35]:
+# In[53]:
 
 
 b_list
@@ -302,13 +410,13 @@ b_list
 # However, appending to and removing from a list is very slow.
 # When an example arises, we will benchmark appending to a list against alternatives.
 
-# In[36]:
+# In[54]:
 
 
 'dwarf' in b_list
 
 
-# In[37]:
+# In[55]:
 
 
 'dwarf' not in b_list
@@ -318,37 +426,82 @@ b_list
 # 
 # > Similar to tuples, adding two lists together with + concatenates them.
 
-# In[38]:
+# In[56]:
 
 
 [4, None, 'foo'] + [7, 8, (2, 3)]
 
 
-# In[39]:
+# In[57]:
 
 
 xx = [4, None, 'foo']
 xx.append([7, 8, (2, 3)])
 
 
+# In[58]:
+
+
+xx
+
+
 # > If you have a list already defined, you can append multiple elements to it using the extend method.
 
-# In[40]:
+# In[59]:
 
 
 x = [4, None, 'foo']
 x.extend([7, 8, (2, 3)])
 
 
+# In[60]:
+
+
+x
+
+
+# ***CHECK YOUR OUTPUT! IT IS DIFFICULT TO MEMORIZE ALL THESE METHODS!!!***
+
+# In[61]:
+
+
+xxx = [4, None, 'foo']
+xxx.append((7, 8, (2, 3)))
+
+
+# In[62]:
+
+
+xxx
+
+
+# In[63]:
+
+
+type([1,2,3])
+
+
+# In[64]:
+
+
+type((1,2,3))
+
+
 # #### Sorting
 # 
 # > You can sort a list in-place (without creating a new object) by calling its sort function.
 
-# In[41]:
+# In[65]:
 
 
 a = [7, 2, 5, 1, 3]
 a.sort()
+
+
+# In[66]:
+
+
+a
 
 
 # > sort has a few options that will occasionally come in handy. One is the ability to pass a secondary sort key—that is, a function that produces a value to use to sort the objects. For example, we could sort a collection of strings by their lengths.
@@ -356,22 +509,29 @@ a.sort()
 # Before you write your own solution to a problem, read the docstring (help file) of the built-in function.
 # The built-in function may already solve your problem (typically faster and with fewer bugs).
 
-# In[42]:
+# In[67]:
 
 
 b = ['saw', 'small', 'He', 'foxes', 'six']
-
-
-# In[43]:
-
-
 b.sort()
 
 
-# In[44]:
+# In[68]:
+
+
+b # Python is case sensitive, so "He" sorts before "foxes"
+
+
+# In[69]:
 
 
 b.sort(key=len)
+
+
+# In[70]:
+
+
+b
 
 
 # #### Slicing
@@ -383,25 +543,31 @@ b.sort(key=len)
 # Recall that Python is zero-indexed, so the first element has an index of 0.
 # The necessary consequence of zero-indexing is that start:stop is inclusive on the left edge (start) and exclusive on the right edge (stop).
 
-# In[45]:
+# In[71]:
 
 
 seq = [7, 2, 3, 7, 5, 6, 0, 1]
 
 
-# In[46]:
+# In[72]:
 
 
-seq[:5]
+seq[5]
 
 
-# In[47]:
+# In[73]:
+
+
+seq[:5] # we read the ":5" slice as "0:5"
+
+
+# In[74]:
 
 
 seq[1:5]
 
 
-# In[48]:
+# In[75]:
 
 
 seq[3:5]
@@ -409,13 +575,13 @@ seq[3:5]
 
 # > Either the start or stop can be omitted, in which case they default to the start of the sequence and the end of the sequence, respectively.
 
-# In[49]:
+# In[76]:
 
 
 seq[:5]
 
 
-# In[50]:
+# In[77]:
 
 
 seq[3:]
@@ -423,25 +589,31 @@ seq[3:]
 
 # > Negative indices slice the sequence relative to the end.
 
-# In[51]:
+# In[78]:
 
 
 seq
 
 
-# In[52]:
+# In[79]:
+
+
+seq[-1:]
+
+
+# In[80]:
 
 
 seq[-4:]
 
 
-# In[53]:
+# In[81]:
 
 
 seq[-4:-1]
 
 
-# In[54]:
+# In[82]:
 
 
 seq[-6:-2]
@@ -449,19 +621,19 @@ seq[-6:-2]
 
 # > A step can also be used after a second colon to, say, take every other element.
 
-# In[55]:
+# In[83]:
 
 
 seq
 
 
-# In[56]:
+# In[84]:
 
 
 seq[::2]
 
 
-# In[57]:
+# In[85]:
 
 
 seq[1::2]
@@ -471,7 +643,7 @@ seq[1::2]
 
 # > A clever use of this is to pass -1, which has the useful effect of reversing a list or tuple.
 
-# In[58]:
+# In[86]:
 
 
 seq[::-1]
@@ -489,7 +661,7 @@ seq[::-1]
 # Elements in dictionaries have names, while elements in tuples and lists have numerical indices.
 # Dictionaries are handy for passing named arguments and returning named results.
 
-# In[59]:
+# In[87]:
 
 
 empty_dict = {}
@@ -497,19 +669,19 @@ empty_dict = {}
 
 # A dictionary is a set of key-value pairs.
 
-# In[60]:
+# In[88]:
 
 
 d1 = {'a' : 'some value', 'b' : [1, 2, 3, 4]}
 
 
-# In[61]:
+# In[89]:
 
 
 d1['a']
 
 
-# In[62]:
+# In[90]:
 
 
 d1[7] = 'an integer'
@@ -517,13 +689,13 @@ d1[7] = 'an integer'
 
 # We access dictionary elements by name/label instead of position.
 
-# In[63]:
+# In[91]:
 
 
 d1['b']
 
 
-# In[64]:
+# In[92]:
 
 
 'b' in d1
@@ -531,49 +703,49 @@ d1['b']
 
 # > You can delete values either using the del keyword or the pop method (which simultaneously returns the value and deletes the key).
 
-# In[65]:
+# In[93]:
 
 
 d1[5] = 'some value'
 
 
-# In[66]:
+# In[94]:
 
 
 d1['dummy'] = 'another value'
 
 
-# In[67]:
+# In[95]:
 
 
 d1
 
 
-# In[68]:
+# In[96]:
 
 
 del d1[5]
 
 
-# In[69]:
+# In[97]:
 
 
 d1
 
 
-# In[70]:
+# In[98]:
 
 
 ret = d1.pop('dummy')
 
 
-# In[71]:
+# In[99]:
 
 
 ret
 
 
-# In[72]:
+# In[100]:
 
 
 d1
@@ -581,13 +753,13 @@ d1
 
 # > The keys and values method give you iterators of the dict’s keys and values, respectively. While the key-value pairs are not in any particular order, these functions output the keys and values in the same order.
 
-# In[73]:
+# In[101]:
 
 
 d1.keys()
 
 
-# In[74]:
+# In[102]:
 
 
 d1.values()
@@ -595,13 +767,13 @@ d1.values()
 
 # > You can merge one dict into another using the update method.
 
-# In[75]:
+# In[103]:
 
 
 d1.update({'b' : 'foo', 'c' : 12})
 
 
-# In[76]:
+# In[104]:
 
 
 d1
@@ -626,13 +798,13 @@ d1
 # 
 # We will focus on list comprehensions, which are very [Pythonic](https://blog.startifact.com/posts/older/what-is-pythonic.html).
 
-# In[77]:
+# In[105]:
 
 
 strings = ['a', 'as', 'bat', 'car', 'dove', 'python']
 
 
-# In[78]:
+# In[106]:
 
 
 caps = []
@@ -644,7 +816,7 @@ caps
 
 # We can replace the for loop above with a list comprehension.
 
-# In[79]:
+# In[107]:
 
 
 # [operation on x for x in list if condition is met]
@@ -675,7 +847,7 @@ caps
 # 
 # Here is the basic syntax for a function:
 
-# In[80]:
+# In[108]:
 
 
 def mult_by_two(x):
@@ -687,7 +859,7 @@ def mult_by_two(x):
 # We can write Python functions that return multiple objects.
 # In reality, the function `f()` below returns one object, a tuple, that we can unpack to multiple objects.
 
-# In[81]:
+# In[109]:
 
 
 def f():
@@ -699,7 +871,7 @@ def f():
 
 # If we want to return multiple objects with names or labels, we can return a dictionary.
 
-# In[82]:
+# In[110]:
 
 
 def f():
@@ -709,7 +881,7 @@ def f():
     return {'a' : a, 'b' : b, 'c' : c}
 
 
-# In[83]:
+# In[111]:
 
 
 f()['a']
@@ -724,19 +896,19 @@ f()['a']
 # Lambda functions are very Pythonic and let us to write simple functions on the fly.
 # For example, we could use a lambda function to sort `strings` by the number of unique letters.
 
-# In[84]:
+# In[112]:
 
 
 strings = ['foo', 'card', 'bar', 'aaaa', 'abab']
 
 
-# In[85]:
+# In[113]:
 
 
 strings.sort(key=lambda x: len(set(list(x))))
 
 
-# In[86]:
+# In[114]:
 
 
 strings.sort(key=lambda x: x[-1]) # this lambda function slices the last character in each string i
@@ -747,29 +919,121 @@ strings.sort(key=lambda x: x[-1]) # this lambda function slices the last charact
 # ***Practice:***
 # Swap the values assigned to `a` and `b` using a third variable `c`.
 
-# In[87]:
+# In[115]:
 
 
 a = 1
 
 
-# In[88]:
+# In[116]:
 
 
 b = 2
 
 
+# In[117]:
+
+
+c = a
+
+
+# In[118]:
+
+
+a = b
+
+
+# In[119]:
+
+
+b = c
+
+
+# In[120]:
+
+
+del c
+
+
+# In[121]:
+
+
+print(f'a is {a} and b is {b}')
+
+
 # ***Practice:***
 # Use tuple-unpacking to swap the values assigned to `a` and `b` ***without*** using a third variable.
+
+# In[122]:
+
+
+a = 1
+
+
+# In[123]:
+
+
+b = 2
+
+
+# In[124]:
+
+
+a, b = b, a
+
+
+# In[125]:
+
+
+print(f'a is {a} and b is {b}')
+
 
 # ***Practice:*** 
 # Create a list of integers from 1 to 100 using `range()` and `list()` named `l1`.
 
+# In[126]:
+
+
+l1 = list(range(1, 101))
+
+
 # ***Practice:*** 
 # Slice `l1` to create a list of integers from 60 to 50 (inclusive) named `l2`.
 
+# In[127]:
+
+
+l2 = l1[59:48:-1]
+
+
+# In[128]:
+
+
+l1[-41:-52:-1] 
+
+
+# In[129]:
+
+
+l1[49:60][::-1]
+
+
+# If we do not want to slice `l1`, prettier solutions are possible:
+
+# In[130]:
+
+
+list(range(60, 49, -1))
+
+
 # ***Practice:***
 # Create a list of odd integers from 1 to 21 named `l3`.
+
+# In[131]:
+
+
+list(range(1, 22, 2))
+
 
 # ***Practice:***
 # Use a list comprehension to create a list `l4` that contains the squares of integers from 1 to 100.

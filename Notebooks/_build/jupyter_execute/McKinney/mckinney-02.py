@@ -435,6 +435,35 @@ a != c
 
 # Because we assigned `c` as a function of `a`,  `c` and `a` have the same values but reference different objects in memory.
 
+# ***Question:*** If we change `a`, does `b` change?
+# Yes.
+# What about `c`?
+# No.
+
+# In[49]:
+
+
+a.append(4)
+
+
+# In[50]:
+
+
+a
+
+
+# In[51]:
+
+
+b
+
+
+# In[52]:
+
+
+c
+
+
 # ***Table 2-3*** in the textbook summarizes the binary operators.
 # 
 # - `a + b` : Add a and b
@@ -461,7 +490,7 @@ a != c
 # 
 # Lists are mutable, therefore we can modify them.
 
-# In[49]:
+# In[53]:
 
 
 a_list = ['foo', 2, [4, 5]]
@@ -469,27 +498,39 @@ a_list = ['foo', 2, [4, 5]]
 
 # ***Python is zero-indexed! The first element has a zero subscript `[0]`!***
 
-# In[50]:
+# In[54]:
 
 
 a_list[0]
 
 
-# In[51]:
+# In[55]:
 
 
 a_list[2]
 
 
-# In[52]:
+# In[56]:
+
+
+a_list[2][0]
+
+
+# In[57]:
 
 
 a_list[2] = (3, 4)
 
 
+# In[58]:
+
+
+a_list
+
+
 # Tuples are *immutable*, therefore we cannot modify them.
 
-# In[53]:
+# In[59]:
 
 
 a_tuple = (3, 5, (4, 5))
@@ -497,10 +538,25 @@ a_tuple = (3, 5, (4, 5))
 
 # The Python interpreter returns an error is we try to modify `a_tuple` becuase tuples are immutable.
 
-# In[54]:
+# In[60]:
 
 
 # a_tuple[1] = 'four'
+
+
+# ***Note:***
+# Tuples do not require `()`, but they are good idea and help future you.
+
+# In[61]:
+
+
+test = 1, 2, 3
+
+
+# In[62]:
+
+
+type(test)
 
 
 # ## Scalar Types
@@ -521,7 +577,7 @@ a_tuple = (3, 5, (4, 5))
 # In Python, integers are unbounded, and `**` raises numbers to a power.
 # So, `ival ** 6` is $17239781^6$.
 
-# In[55]:
+# In[63]:
 
 
 ival = 17239871
@@ -530,13 +586,13 @@ ival ** 6
 
 # Floats (decimal numbers) are 64-bit in Python.
 
-# In[56]:
+# In[64]:
 
 
 fval = 7.243
 
 
-# In[57]:
+# In[65]:
 
 
 type(fval)
@@ -544,7 +600,7 @@ type(fval)
 
 # Dividing integers yields a float, if necessary.
 
-# In[58]:
+# In[66]:
 
 
 3 / 2
@@ -552,7 +608,7 @@ type(fval)
 
 # If we want C-style integer division (i.e., $3 / 2 = 1$), we have to use `//` (i.e., floor division).
 
-# In[59]:
+# In[67]:
 
 
 3 // 2
@@ -568,27 +624,39 @@ type(fval)
 # 
 # Note the capitalization, which may be different from your prior programming languages.
 
-# In[60]:
+# In[68]:
 
 
 True and True
 
 
-# In[61]:
+# In[69]:
+
+
+(5 > 1) and (10 > 5)
+
+
+# In[70]:
 
 
 False or True
 
 
+# In[71]:
+
+
+(5 > 1) or (10 > 5)
+
+
 # We can also substitute `&` for `and` and `|` for `or`.
 
-# In[62]:
+# In[72]:
 
 
 True & True
 
 
-# In[63]:
+# In[73]:
 
 
 False | True
@@ -598,49 +666,55 @@ False | True
 # 
 # We can "recast" variables to change their types.
 
-# In[64]:
+# In[74]:
 
 
 s = '3.14159'
 
 
-# In[65]:
+# In[75]:
+
+
+type(s)
+
+
+# In[76]:
 
 
 # 1 + s
 
 
-# In[66]:
+# In[77]:
 
 
 1 + float(s)
 
 
-# In[67]:
+# In[78]:
 
 
 fval = float(s)
 
 
-# In[68]:
+# In[79]:
 
 
 type(fval)
 
 
-# In[69]:
+# In[80]:
 
 
 int(fval)
 
 
-# In[70]:
+# In[81]:
 
 
 bool(fval)
 
 
-# In[71]:
+# In[82]:
 
 
 bool(0)
@@ -648,7 +722,7 @@ bool(0)
 
 # Anything other than zero converts to a boolean `True`.
 
-# In[72]:
+# In[83]:
 
 
 bool(-1)
@@ -656,13 +730,13 @@ bool(-1)
 
 # We recast the string `'5'` to an integer or the integer `5` to a string to prevent the `5 + '5'` error above.
 
-# In[73]:
+# In[84]:
 
 
 5 + int('5')
 
 
-# In[74]:
+# In[85]:
 
 
 str(5) + '5'
@@ -673,21 +747,21 @@ str(5) + '5'
 # In Python, `None` is null.
 # `None` is like `#N/A` or `=na()` in Excel.
 
-# In[75]:
+# In[86]:
 
 
 a = None
 a is None
 
 
-# In[76]:
+# In[87]:
 
 
 b = 5
 b is not None
 
 
-# In[77]:
+# In[88]:
 
 
 type(None)
@@ -704,19 +778,19 @@ type(None)
 # In general, I prefer single quotes because they do not require pressing the shift key.
 # However, in the following example, we must use double quotes to avoid confusion with the apostrophe in "it's".
 
-# In[78]:
+# In[89]:
 
 
 x = -1
 
 
-# In[79]:
+# In[90]:
 
 
 type(x)
 
 
-# In[80]:
+# In[91]:
 
 
 if x < 0:
@@ -726,7 +800,7 @@ if x < 0:
 # Python's `elif` avoids Excel's nested `if()`s.
 # `elif` continues an `if` block, and `else` runs if the other conditions are not met.
 
-# In[81]:
+# In[92]:
 
 
 x = 10
@@ -742,7 +816,7 @@ else:
 
 # We can combine comparisons with `and` and `or`.
 
-# In[82]:
+# In[93]:
 
 
 a = 5
@@ -763,20 +837,27 @@ if a < b or c > d:
 # 
 # The `continue` keyword skips the remainder of the `if` block for that loop iteration.
 
-# In[83]:
+# In[94]:
 
 
-sequence = [1, 2, None, 4, None, 5]
+sequence = [1, 2, None, 4, None, 5, 'Alex']
 total = 0
 for value in sequence:
-    if value is None:
+    if value is None or type(value) is str:
         continue
-    total += value
+        # break
+    total += value # the += operator is like "total = total + value"
+
+
+# In[95]:
+
+
+total
 
 
 # The `break` keyword exits the loop altogether.
 
-# In[84]:
+# In[96]:
 
 
 sequence = [1, 2, 0, 4, 6, 5, 2, 1]
@@ -798,31 +879,31 @@ for value in sequence:
 # 
 # One advantage of `range()` is that is memory efficient because it does not expand to a list.
 
-# In[85]:
+# In[97]:
 
 
 range(10)
 
 
-# In[86]:
+# In[98]:
 
 
 list(range(10))
 
 
-# In[87]:
+# In[99]:
 
 
 list(range(1, 10))
 
 
-# In[88]:
+# In[100]:
 
 
 list(range(1, 10, 1))
 
 
-# In[89]:
+# In[101]:
 
 
 list(range(0, 20, 2))
@@ -831,19 +912,19 @@ list(range(0, 20, 2))
 # In Python, intervals are "closed" (inclusive or square bracket) on the left and "open" (exclusive or parentheses) on the right.
 # The following is an empty list because we cannot count from 5 to 0 by steps of +1.
 
-# In[90]:
+# In[102]:
 
 
 list(range(5, 0))
 
 
-# In[91]:
+# In[103]:
 
 
 list(range(5, 0, -1))
 
 
-# In[92]:
+# In[104]:
 
 
 seq = [1, 2, 3, 4]
@@ -854,7 +935,7 @@ for i in range(len(seq)):
 # We can loop over the list `seq` directly.
 # The following code is equivalent to the previous code, but is more "Pythonic".
 
-# In[93]:
+# In[105]:
 
 
 for i in seq:
@@ -864,19 +945,19 @@ for i in seq:
 # The modulo operator (`%`) returns the remainder.
 # For example, two goes into five twice with a remainder of one.
 
-# In[94]:
+# In[106]:
 
 
 5 // 2
 
 
-# In[95]:
+# In[107]:
 
 
 5 % 2
 
 
-# In[96]:
+# In[108]:
 
 
 sum = 0
@@ -890,7 +971,7 @@ for i in range(100000):
 # We said above that Python `if` and `else` is cumbersome relative to Excel's `if()`.
 # We can complete simple comparisons on one line in Python.
 
-# In[97]:
+# In[109]:
 
 
 x = 5
@@ -903,25 +984,25 @@ value = 'Non-negative' if x >= 0 else 'Negative'
 # Extract the year, month, and day from an 8-digit date (i.e., YYYYMMDD format).
 # Try `20080915` using `//` (integer division) and `%` (modulo division, which returns the remainder).
 
-# In[98]:
+# In[110]:
 
 
 5 / 2
 
 
-# In[99]:
+# In[111]:
 
 
 5 // 2
 
 
-# In[100]:
+# In[112]:
 
 
 5 % 2
 
 
-# In[101]:
+# In[113]:
 
 
 ymd = 20080915
@@ -929,17 +1010,143 @@ year = ymd // 10000
 year
 
 
+# In[114]:
+
+
+month = (ymd % 10000) // 100
+month
+
+
+# In[115]:
+
+
+day = ymd % 100
+day
+
+
 # ***Practice:***
 # Convert your code above in to a function `date` that parses 8-digit integer dates and returns a tuple the the year, month, and date (i.e., `return (year, month, date)`)
+
+# In[116]:
+
+
+def date(ymd):
+    year = ymd // 10000
+    month = (ymd % 10000) // 100
+    day = ymd % 100
+    return (year, month, day)
+
+
+# In[117]:
+
+
+lehman = date(ymd=20080915)
+lehman
+
 
 # ***Practice:***
 # Write a for loop that prints the squares of integers from 1 to 10.
 
+# In[118]:
+
+
+list_1_10 = [1,2,3,4,5,6,7,8,9,10] # if we think we will use this list again
+for i in list_1_10:
+    print(i**2)
+
+
+# Or, we could use `range()`.
+
+# In[119]:
+
+
+list(range(1, 11)) # a consequence of zero-indexing is that ranges at left-inclusive and right-exclusive
+
+
+# In[120]:
+
+
+for i in range(1, 11):
+    print(i**2)
+
+
 # ***Practice:*** 
 # Write a for loop that sums the squares of integers from 1 to 10 while the sum is less than 50.
 
+# In[121]:
+
+
+sum = 0
+for i in range(1, 11):
+    if sum < 50:
+        sum += i**2
+
+sum
+
+
+# We could also use `break` to break out of the loop.
+# This approach is more efficient since `sum` never decreases.
+
+# In[122]:
+
+
+sum = 0
+for i in range(1, 11):
+    if sum > 50:
+        break
+    sum += i**2
+
+sum
+
+
+# ***Here is an alternative parsing of my sentence above.***
+# Add to `sum` but never let it exceed 50.
+# To satirsfy this alternative parsing, we have to check `sum + i**2` before we `+=`.
+
+# In[123]:
+
+
+sum = 0
+for i in range(1, 11):
+    if sum + i**2 > 50:
+        break
+    sum += i**2
+
+sum
+
+
 # ***Practice:*** 
 # Write a for loop that sums the squares of ***even*** integers from 1 to 10 while the sum is less than 50.
+
+# In[124]:
+
+
+sum = 0
+for i in range(1, 11):
+    if i % 2 == 1:
+        continue
+    if sum > 50:
+        break
+    sum += i**2
+
+sum
+
+
+# Or, with the alternative parsing of "while the sum is less than 50".
+
+# In[125]:
+
+
+sum = 0
+for i in range(1, 11):
+    if i % 2 == 1:
+        continue
+    if sum + i**2 > 50:
+        break
+    sum += i**2
+
+sum
+
 
 # ***Practice:*** 
 # Write a for loop that prints the numbers from 1 to 100. 
@@ -948,8 +1155,51 @@ year
 # For numbers that are multiples of both three and five print "FizzBuzz".
 # More [here](https://blog.codinghorror.com/why-cant-programmers-program/).
 
+# In[126]:
+
+
+for i in range(1, 101):
+    if i%3==0 and i%5==0:
+        print('FizzBuzz', end=' ')
+    elif i%3==0: # the modulo operator % gives us the remainder of i/3, which is 0 for muitples of 3
+        print('Fizz', end=' ')
+    elif i%5==0:
+        print('Buzz', end=' ')
+    else:
+        print(i, end=' ')
+
+
 # ***Practice:*** 
 # Use ternary expressions to make your FizzBuzz code more compact.
+
+# The concepts we will use are: 
+# 
+# 1. A string times `True` is the string and a string times `False` is an empty string
+# 2. The addition operator concatenates (adds) strings
+
+# In[127]:
+
+
+'Fizz'*True
+
+
+# In[128]:
+
+
+'Fizz'*False
+
+
+# In[129]:
+
+
+'Fizz'*True + 'Buzz'*True
+
+
+# In[130]:
+
+
+for i in range(1, 101): print('Fizz'*(i%3==0) + 'Buzz'*(i%5==0) if (i%3==0) or (i%5==0) else i, end=' ')
+
 
 # ***Practice:***
 # Given a positive integer $N$, print a numerical triangle of height $N-1$ like the one below for $N=6$.
@@ -961,6 +1211,22 @@ year
 # 4444
 # 55555
 # ```
+
+# In[131]:
+
+
+def triangle(N):
+    for i in range(1, N):
+        print(str(i)*i)
+
+
+# In[132]:
+
+
+triangle(6)
+
+
+# This works because multiplying a string by an integer $N$ is like adding the string $N$ times.
 
 # You can find many more Python coding challenges at <www.hackerrank.com>.
 # These challenges are fun but not necessary for our course because we will spend our time using higher-level features.

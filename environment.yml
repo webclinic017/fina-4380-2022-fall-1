@@ -1,18 +1,17 @@
 name: fina-4380
+channels:
+  - defaults
 dependencies:
-  - matplotlib
-  - numpy
-  - pandas
-  - pandas-datareader
-  - scipy
   - seaborn
+  - matplotlib
+  - pandas
+  - numpy
   - statsmodels
-  - pip
-  - pip:
-    - ghp-import
-    - jupyter-book
-    - jupyterlab
-    - jupyterlab-git
-    - linearmodels
-    - requests-cache
-    - yfinance
+  - scipy
+  - jupyterlab
+  - jupyter-book
+  - jupyterlab-git
+  - jupyterlab-lsp
+  - linearmodels
+  - requests-cache
+prefix: C:\Users\r.herron\Anaconda3\envs\fina-4380

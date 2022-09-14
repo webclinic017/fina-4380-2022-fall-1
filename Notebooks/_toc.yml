@@ -17,3 +17,6 @@ parts:
     - file: Lewinson/lewinson-04
     - file: Lewinson/lewinson-06
     - file: Lewinson/lewinson-07
+  - caption: Herron
+    chapters:
+    - file: Herron/herron-lookups
