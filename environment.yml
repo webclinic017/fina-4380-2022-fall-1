@@ -1,6 +1,6 @@
 name: fina-4380
 channels:
-  - defaults
+  - conda-forge
 dependencies:
   - seaborn
   - matplotlib
@@ -14,4 +14,4 @@ dependencies:
   - jupyterlab-lsp
   - linearmodels
   - requests-cache
-prefix: C:\Users\r.herron\Anaconda3\envs\fina-4380
+# prefix: C:\Users\r.herron\Anaconda3\envs\fina-4380
