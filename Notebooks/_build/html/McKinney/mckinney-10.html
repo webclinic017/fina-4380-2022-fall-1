@@ -189,6 +189,18 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Herron
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Herron/herron-lookups.html">
+   Herron - Lookups
+  </a>
+ </li>
+</ul>
 
     </div>
 </nav></div>
@@ -600,6 +612,19 @@ For example, we could use a pivot table to calculate mean daily stock returns by
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="nn">Input In [3],</span> in <span class="ni">&lt;cell line: 3&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">requests_cache</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">session</span> <span class="o">=</span> <span class="n">requests_cache</span><span class="o">.</span><span class="n">CachedSession</span><span class="p">(</span><span class="n">expire_after</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">pandas_datareader</span> <span class="k">as</span> <span class="nn">pdr</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;yfinance&#39;
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="groupby-mechanics">
@@ -640,20 +665,10 @@ mockup of a simple group aggregation.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0414
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;key1&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;data1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0854
 </pre></div>
 </div>
 </div>
@@ -677,23 +692,10 @@ mockup of a simple group aggregation.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.SeriesGroupBy object at 0x000001EB68C4B2B0&gt;
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grouped</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>key1
-a   0.0414
-b   1.0854
-Name: data1, dtype: float64
 </pre></div>
 </div>
 </div>
@@ -705,14 +707,6 @@ Name: data1, dtype: float64
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>key1
-a   0.0414
-b   1.0854
-Name: data1, dtype: float64
-</pre></div>
-</div>
-</div>
 </div>
 <p>If we prefer our result as a dataframe instead of a series, we can wrap <code class="docutils literal notranslate"><span class="pre">data1</span></code> with two sets of square brackets.</p>
 <div class="cell docutils container">
@@ -721,44 +715,6 @@ Name: data1, dtype: float64
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>data1</th>
-    </tr>
-    <tr>
-      <th>key1</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>a</th>
-      <td>0.0414</td>
-    </tr>
-    <tr>
-      <th>b</th>
-      <td>1.0854</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>We can group by more than one variable.
 We get a hierarchical row index (or row multi-index) when we group by more than one variable.</p>
@@ -766,16 +722,6 @@ We get a hierarchical row index (or row multi-index) when we group by more than 
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">means</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;data1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;key1&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;key2&#39;</span><span class="p">]])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 <span class="n">means</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>key1  key2
-a     one     0.1313
-      two    -0.1383
-b     one     0.6477
-      two     1.5230
-Name: data1, dtype: float64
 </pre></div>
 </div>
 </div>
@@ -788,48 +734,6 @@ Note that, the <code class="docutils literal notranslate"><span class="pre">.uns
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th>key2</th>
-      <th>one</th>
-      <th>two</th>
-    </tr>
-    <tr>
-      <th>key1</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>a</th>
-      <td>0.1313</td>
-      <td>-0.1383</td>
-    </tr>
-    <tr>
-      <th>b</th>
-      <td>0.6477</td>
-      <td>1.5230</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>The grouping variables can also be columns in the data frame passed to the <code class="docutils literal notranslate"><span class="pre">.groupby()</span></code> method.
 I prefer this approach because we will typically have all data in one data frame.</p>
@@ -839,48 +743,6 @@ I prefer this approach because we will typically have all data in one data frame
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>data1</th>
-      <th>data2</th>
-    </tr>
-    <tr>
-      <th>key1</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>a</th>
-      <td>0.0414</td>
-      <td>0.6292</td>
-    </tr>
-    <tr>
-      <th>b</th>
-      <td>1.0854</td>
-      <td>0.1490</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -888,62 +750,6 @@ I prefer this approach because we will typically have all data in one data frame
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th></th>
-      <th>data1</th>
-      <th>data2</th>
-    </tr>
-    <tr>
-      <th>key1</th>
-      <th>key2</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="2" valign="top">a</th>
-      <th>one</th>
-      <td>0.1313</td>
-      <td>0.1542</td>
-    </tr>
-    <tr>
-      <th>two</th>
-      <td>-0.1383</td>
-      <td>1.5792</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">b</th>
-      <th>one</th>
-      <td>0.6477</td>
-      <td>0.7674</td>
-    </tr>
-    <tr>
-      <th>two</th>
-      <td>1.5230</td>
-      <td>-0.4695</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>There are many more methods than <code class="docutils literal notranslate"><span class="pre">.mean()</span></code>.
 We can use tab completion to discover (or remind ourselves of) these other methods.</p>
@@ -961,42 +767,12 @@ McKinney provides two loops to show how to iterate over groups.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a
-  key1 key2   data1   data2
-0    a  one  0.4967 -0.2341
-1    a  two -0.1383  1.5792
-4    a  one -0.2342  0.5426
-b
-  key1 key2  data1   data2
-2    b  one 0.6477  0.7674
-3    b  two 1.5230 -0.4695
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">),</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;key1&#39;</span><span class="p">,</span> <span class="s1">&#39;key2&#39;</span><span class="p">]):</span>
     <span class="nb">print</span><span class="p">((</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">))</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;a&#39;, &#39;one&#39;)
-  key1 key2   data1   data2
-0    a  one  0.4967 -0.2341
-4    a  one -0.2342  0.5426
-(&#39;a&#39;, &#39;two&#39;)
-  key1 key2   data1  data2
-1    a  two -0.1383 1.5792
-(&#39;b&#39;, &#39;one&#39;)
-  key1 key2  data1  data2
-2    b  one 0.6477 0.7674
-(&#39;b&#39;, &#39;two&#39;)
-  key1 key2  data1   data2
-3    b  two 1.5230 -0.4695
 </pre></div>
 </div>
 </div>
@@ -1030,56 +806,6 @@ The implication is that syntactic sugar makes code faster to type/read but does 
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th></th>
-      <th>data2</th>
-    </tr>
-    <tr>
-      <th>key1</th>
-      <th>key2</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="2" valign="top">a</th>
-      <th>one</th>
-      <td>0.1542</td>
-    </tr>
-    <tr>
-      <th>two</th>
-      <td>1.5792</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">b</th>
-      <th>one</th>
-      <td>0.7674</td>
-    </tr>
-    <tr>
-      <th>two</th>
-      <td>-0.4695</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 </section>
 <section id="grouping-with-functions">
@@ -1105,60 +831,6 @@ We could instead add a helper column to <code class="docutils literal notranslat
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>a</th>
-      <th>b</th>
-      <th>c</th>
-      <th>d</th>
-      <th>e</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>3</th>
-      <td>-0.5290</td>
-      <td>-1.6168</td>
-      <td>1.2039</td>
-      <td>-1.2983</td>
-      <td>-3.3714</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>-0.2341</td>
-      <td>1.5792</td>
-      <td>0.7674</td>
-      <td>-0.4695</td>
-      <td>0.5426</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>1.4656</td>
-      <td>-0.2258</td>
-      <td>0.0675</td>
-      <td>-1.4247</td>
-      <td>-0.5444</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>We can mix functions, lists, etc. that we pass to <code class="docutils literal notranslate"><span class="pre">.groupby()</span></code>.</p>
 <div class="cell docutils container">
@@ -1168,72 +840,6 @@ We could instead add a helper column to <code class="docutils literal notranslat
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th></th>
-      <th>a</th>
-      <th>b</th>
-      <th>c</th>
-      <th>d</th>
-      <th>e</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="2" valign="top">3</th>
-      <th>one</th>
-      <td>-0.4634</td>
-      <td>-0.4657</td>
-      <td>0.2420</td>
-      <td>-1.9133</td>
-      <td>-1.7249</td>
-    </tr>
-    <tr>
-      <th>two</th>
-      <td>-0.5623</td>
-      <td>-1.0128</td>
-      <td>0.3142</td>
-      <td>-0.9080</td>
-      <td>-1.4123</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <th>one</th>
-      <td>-0.2341</td>
-      <td>1.5792</td>
-      <td>0.7674</td>
-      <td>-0.4695</td>
-      <td>0.5426</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <th>two</th>
-      <td>1.4656</td>
-      <td>-0.2258</td>
-      <td>0.0675</td>
-      <td>-1.4247</td>
-      <td>-0.5444</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1242,54 +848,6 @@ We could instead add a helper column to <code class="docutils literal notranslat
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th></th>
-      <th>a</th>
-      <th>b</th>
-      <th>c</th>
-      <th>d</th>
-      <th>e</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="2" valign="top">3</th>
-      <th>a</th>
-      <td>0.4967</td>
-      <td>-0.1383</td>
-      <td>0.6477</td>
-      <td>1.5230</td>
-      <td>-0.2342</td>
-    </tr>
-    <tr>
-      <th>b</th>
-      <td>-0.5623</td>
-      <td>-1.0128</td>
-      <td>0.3142</td>
-      <td>-0.9080</td>
-      <td>-1.4123</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 </section>
 <section id="grouping-by-index-levels">
@@ -1312,53 +870,6 @@ We can specify index levels by either level number or name.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th>cty</th>
-      <th>JP</th>
-      <th>US</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2</td>
-      <td>3</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1366,53 +877,6 @@ We can specify index levels by either level number or name.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th>cty</th>
-      <th>JP</th>
-      <th>US</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2</td>
-      <td>3</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1420,58 +884,6 @@ We can specify index levels by either level number or name.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th>tenor</th>
-      <th>1</th>
-      <th>3</th>
-      <th>5</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2</td>
-      <td>2</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>2</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>2</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2</td>
-      <td>2</td>
-      <td>1</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 </section>
 </section>
@@ -1496,14 +908,6 @@ First, any series method is available.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>key1
-a   0.3697
-b   1.4355
-Name: data1, dtype: float64
-</pre></div>
-</div>
-</div>
 </div>
 <p>Second, we can write our own functions and pass them to the <code class="docutils literal notranslate"><span class="pre">.agg()</span></code> method.
 These functions should accept an array and returns a single value.</p>
@@ -1521,14 +925,6 @@ These functions should accept an array and returns a single value.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>key1
-a   0.7309
-b   0.8753
-Name: data1, dtype: float64
-</pre></div>
-</div>
-</div>
 </div>
 <p>Some other methods work, too, even if they are do not aggregate an array to a single value.</p>
 <div class="cell docutils container">
@@ -1537,72 +933,6 @@ Name: data1, dtype: float64
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>count</th>
-      <th>mean</th>
-      <th>std</th>
-      <th>min</th>
-      <th>25%</th>
-      <th>50%</th>
-      <th>75%</th>
-      <th>max</th>
-    </tr>
-    <tr>
-      <th>key1</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>a</th>
-      <td>3.0000</td>
-      <td>0.0414</td>
-      <td>0.3972</td>
-      <td>-0.2342</td>
-      <td>-0.1862</td>
-      <td>-0.1383</td>
-      <td>0.1792</td>
-      <td>0.4967</td>
-    </tr>
-    <tr>
-      <th>b</th>
-      <td>2.0000</td>
-      <td>1.0854</td>
-      <td>0.6190</td>
-      <td>0.6477</td>
-      <td>0.8665</td>
-      <td>1.0854</td>
-      <td>1.3042</td>
-      <td>1.5230</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <section id="column-wise-and-multiple-function-application">
 <h3>Column-Wise and Multiple Function Application<a class="headerlink" href="#column-wise-and-multiple-function-application" title="Permalink to this headline">#</a></h3>
@@ -1637,74 +967,6 @@ We can use the <code class="docutils literal notranslate"><span class="pre">.app
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th></th>
-      <th>key1</th>
-      <th>key2</th>
-      <th>data1</th>
-      <th>data2</th>
-    </tr>
-    <tr>
-      <th>key1</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="2" valign="top">a</th>
-      <th>4</th>
-      <td>a</td>
-      <td>one</td>
-      <td>-0.2342</td>
-      <td>0.5426</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>a</td>
-      <td>two</td>
-      <td>-0.1383</td>
-      <td>1.5792</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">b</th>
-      <th>2</th>
-      <td>b</td>
-      <td>one</td>
-      <td>0.6477</td>
-      <td>0.7674</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>b</td>
-      <td>two</td>
-      <td>1.5230</td>
-      <td>-0.4695</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1712,74 +974,6 @@ We can use the <code class="docutils literal notranslate"><span class="pre">.app
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th></th>
-      <th>key1</th>
-      <th>key2</th>
-      <th>data1</th>
-      <th>data2</th>
-    </tr>
-    <tr>
-      <th>key1</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="2" valign="top">a</th>
-      <th>0</th>
-      <td>a</td>
-      <td>one</td>
-      <td>0.4967</td>
-      <td>-0.2341</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>a</td>
-      <td>one</td>
-      <td>-0.2342</td>
-      <td>0.5426</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">b</th>
-      <th>3</th>
-      <td>b</td>
-      <td>two</td>
-      <td>1.5230</td>
-      <td>-0.4695</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>b</td>
-      <td>one</td>
-      <td>0.6477</td>
-      <td>0.7674</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 </section>
 <section id="pivot-tables-and-cross-tabulation">
@@ -1798,27 +992,6 @@ It is worthwhile to read-through the <code class="docutils literal notranslate">
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[                       0%                       ]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[****************      33%                       ]  2 of 6 completed
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************50%                       ]  3 of 6 completed
-[**********************50%                       ]  3 of 6 completed
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************83%***************        ]  5 of 6 completed
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  6 of 6 completed
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
 </div>
 <p>The default aggregation function for <code class="docutils literal notranslate"><span class="pre">.pivot_table()</span></code> is <code class="docutils literal notranslate"><span class="pre">mean</span></code>.</p>
 <div class="cell docutils container">
@@ -1827,100 +1000,6 @@ It is worthwhile to read-through the <code class="docutils literal notranslate">
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th>Variable</th>
-      <th>Adj Close</th>
-      <th>Close</th>
-      <th>High</th>
-      <th>Low</th>
-      <th>Open</th>
-      <th>Volume</th>
-    </tr>
-    <tr>
-      <th>Index</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>^DJI</th>
-      <td>25034.2279</td>
-      <td>25034.2279</td>
-      <td>25169.0138</td>
-      <td>24885.3859</td>
-      <td>25032.5676</td>
-      <td>284417108.1221</td>
-    </tr>
-    <tr>
-      <th>^FTSE</th>
-      <td>6952.5586</td>
-      <td>6952.5586</td>
-      <td>6994.4491</td>
-      <td>6909.6540</td>
-      <td>6952.2445</td>
-      <td>803677241.8856</td>
-    </tr>
-    <tr>
-      <th>^GSPC</th>
-      <td>2945.3838</td>
-      <td>2945.3838</td>
-      <td>2960.9767</td>
-      <td>2927.6801</td>
-      <td>2945.1950</td>
-      <td>3838824423.1764</td>
-    </tr>
-    <tr>
-      <th>^HSI</th>
-      <td>25446.6398</td>
-      <td>25446.6398</td>
-      <td>25608.7825</td>
-      <td>25275.4073</td>
-      <td>25463.1218</td>
-      <td>1949984540.7818</td>
-    </tr>
-    <tr>
-      <th>^IXIC</th>
-      <td>8440.9748</td>
-      <td>8440.9748</td>
-      <td>8496.8991</td>
-      <td>8376.8995</td>
-      <td>8440.7258</td>
-      <td>2929212762.5453</td>
-    </tr>
-    <tr>
-      <th>^N225</th>
-      <td>22186.3420</td>
-      <td>22186.3420</td>
-      <td>22305.7250</td>
-      <td>22058.8545</td>
-      <td>22188.4562</td>
-      <td>96515450.1865</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>We can use
 <code class="docutils literal notranslate"><span class="pre">values</span></code> to select specific variables,
@@ -1943,187 +1022,6 @@ and
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead tr th {
-        text-align: left;
-    }
-
-    .dataframe thead tr:last-of-type th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr>
-      <th></th>
-      <th colspan="6" halign="left">min</th>
-      <th colspan="6" halign="left">max</th>
-    </tr>
-    <tr>
-      <th>Index</th>
-      <th>^DJI</th>
-      <th>^FTSE</th>
-      <th>^GSPC</th>
-      <th>^HSI</th>
-      <th>^IXIC</th>
-      <th>^N225</th>
-      <th>^DJI</th>
-      <th>^FTSE</th>
-      <th>^GSPC</th>
-      <th>^HSI</th>
-      <th>^IXIC</th>
-      <th>^N225</th>
-    </tr>
-    <tr>
-      <th>Date</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2015-12-31</th>
-      <td>15666.4404</td>
-      <td>5874.1001</td>
-      <td>1867.6100</td>
-      <td>20556.5996</td>
-      <td>4506.4902</td>
-      <td>16795.9609</td>
-      <td>18312.3906</td>
-      <td>7104.0000</td>
-      <td>2130.8201</td>
-      <td>28442.7500</td>
-      <td>5218.8599</td>
-      <td>20868.0293</td>
-    </tr>
-    <tr>
-      <th>2016-12-31</th>
-      <td>15660.1797</td>
-      <td>5537.0000</td>
-      <td>1829.0800</td>
-      <td>18319.5801</td>
-      <td>4266.8398</td>
-      <td>14952.0195</td>
-      <td>19974.6191</td>
-      <td>7142.7998</td>
-      <td>2271.7200</td>
-      <td>24099.6992</td>
-      <td>5487.4399</td>
-      <td>19494.5293</td>
-    </tr>
-    <tr>
-      <th>2017-12-31</th>
-      <td>19732.4004</td>
-      <td>7099.2002</td>
-      <td>2257.8301</td>
-      <td>22134.4707</td>
-      <td>5429.0801</td>
-      <td>18335.6309</td>
-      <td>24837.5098</td>
-      <td>7687.7998</td>
-      <td>2690.1599</td>
-      <td>30003.4902</td>
-      <td>6994.7598</td>
-      <td>22939.1797</td>
-    </tr>
-    <tr>
-      <th>2018-12-31</th>
-      <td>21792.1992</td>
-      <td>6584.7002</td>
-      <td>2351.1001</td>
-      <td>24585.5293</td>
-      <td>6192.9199</td>
-      <td>19155.7402</td>
-      <td>26828.3906</td>
-      <td>7877.5000</td>
-      <td>2930.7500</td>
-      <td>33154.1211</td>
-      <td>8109.6899</td>
-      <td>24270.6191</td>
-    </tr>
-    <tr>
-      <th>2019-12-31</th>
-      <td>22686.2207</td>
-      <td>6692.7002</td>
-      <td>2447.8899</td>
-      <td>25064.3594</td>
-      <td>6463.5000</td>
-      <td>19561.9609</td>
-      <td>28645.2598</td>
-      <td>7686.6001</td>
-      <td>3240.0200</td>
-      <td>30157.4902</td>
-      <td>9022.3896</td>
-      <td>24066.1191</td>
-    </tr>
-    <tr>
-      <th>2020-12-31</th>
-      <td>18591.9297</td>
-      <td>4993.8999</td>
-      <td>2237.3999</td>
-      <td>21696.1309</td>
-      <td>6860.6699</td>
-      <td>16552.8301</td>
-      <td>30606.4805</td>
-      <td>7674.6001</td>
-      <td>3756.0701</td>
-      <td>29056.4199</td>
-      <td>12899.4199</td>
-      <td>27568.1504</td>
-    </tr>
-    <tr>
-      <th>2021-12-31</th>
-      <td>29982.6191</td>
-      <td>6407.5000</td>
-      <td>3700.6499</td>
-      <td>22744.8594</td>
-      <td>12609.1602</td>
-      <td>27013.2500</td>
-      <td>36488.6289</td>
-      <td>7420.7002</td>
-      <td>4793.0601</td>
-      <td>31084.9395</td>
-      <td>16057.4404</td>
-      <td>30670.0996</td>
-    </tr>
-    <tr>
-      <th>2022-12-31</th>
-      <td>29888.7793</td>
-      <td>6959.5000</td>
-      <td>3666.7700</td>
-      <td>18415.0801</td>
-      <td>10646.0996</td>
-      <td>24717.5293</td>
-      <td>36799.6484</td>
-      <td>7672.3999</td>
-      <td>4796.5601</td>
-      <td>24965.5508</td>
-      <td>15832.7998</td>
-      <td>29332.1602</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 </section>
 <section id="practice">
@@ -2168,26 +1066,6 @@ We have to jump through some hoops with <code class="docutils literal notranslat
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">faang</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">tickers</span><span class="o">=</span><span class="s1">&#39;META AAPL AMZN NFLX GOOG&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
 <span class="n">faang</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Variable&#39;</span><span class="p">,</span> <span class="s1">&#39;Ticker&#39;</span><span class="p">]</span>
 <span class="n">faang</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_product</span><span class="p">([[</span><span class="s1">&#39;Return&#39;</span><span class="p">],</span> <span class="n">faang</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">columns</span><span class="p">])]</span> <span class="o">=</span> <span class="n">faang</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[                       0%                       ]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*******************   40%                       ]  2 of 5 completed
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************60%****                   ]  3 of 5 completed
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************80%*************          ]  4 of 5 completed
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  5 of 5 completed
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>

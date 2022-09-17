@@ -189,6 +189,18 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Herron
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Herron/herron-lookups.html">
+   Herron - Lookups
+  </a>
+ </li>
+</ul>
 
     </div>
 </nav></div>
@@ -687,7 +699,7 @@ Chapter 5 of Wes McKinney’s <a class="reference external" href="https://wesmck
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 4,  7, -5,  3], dtype=int64)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 4,  7, -5,  3])
 </pre></div>
 </div>
 </div>
@@ -1987,7 +1999,7 @@ dtype: float64
 Colorado     5
 Utah         9
 New York    13
-Name: two, dtype: int32
+Name: two, dtype: int64
 </pre></div>
 </div>
 </div>
@@ -2059,7 +2071,7 @@ Name: two, dtype: int32
 Colorado     6
 Utah        10
 New York    14
-Name: three, dtype: int32
+Name: three, dtype: int64
 </pre></div>
 </div>
 </div>
@@ -2299,7 +2311,7 @@ Name: three, dtype: int32
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>two      5
 three    6
-Name: Colorado, dtype: int32
+Name: Colorado, dtype: int64
 </pre></div>
 </div>
 </div>
@@ -2314,7 +2326,7 @@ Name: Colorado, dtype: int32
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>four    11
 one      8
 two      9
-Name: Utah, dtype: int32
+Name: Utah, dtype: int64
 </pre></div>
 </div>
 </div>
@@ -2330,7 +2342,7 @@ Name: Utah, dtype: int32
 two       9
 three    10
 four     11
-Name: Utah, dtype: int32
+Name: Utah, dtype: int64
 </pre></div>
 </div>
 </div>
@@ -2393,7 +2405,7 @@ Name: Utah, dtype: int32
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ohio        0
 Colorado    5
 Utah        9
-Name: two, dtype: int32
+Name: two, dtype: int64
 </pre></div>
 </div>
 </div>
@@ -3535,7 +3547,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21.9 µs ± 244 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12.1 µs ± 2.04 µs per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -3547,7 +3559,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>46.4 µs ± 775 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>29.2 µs ± 4.29 µs per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -3799,27 +3811,22 @@ If we are running Python on DataCamp, we only need to run the <code class="docut
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="nn">Input In [129],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">requests_cache</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">session</span> <span class="o">=</span> <span class="n">requests_cache</span><span class="o">.</span><span class="n">CachedSession</span><span class="p">(</span><span class="n">expire_after</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;yfinance&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stocks</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">tickers</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">,</span> <span class="s1">&#39;IBM&#39;</span><span class="p">,</span> <span class="s1">&#39;MSFT&#39;</span><span class="p">,</span> <span class="s1">&#39;GOOG&#39;</span><span class="p">],</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[                       0%                       ]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************50%                       ]  2 of 4 completed
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************75%***********            ]  3 of 4 completed
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  4 of 4 completed
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -3836,120 +3843,6 @@ Therefore, the percent change in adjusted closes considers both price changs (i.
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>AAPL</th>
-      <th>GOOG</th>
-      <th>IBM</th>
-      <th>MSFT</th>
-    </tr>
-    <tr>
-      <th>Date</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1962-01-02</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1962-01-03</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.0087</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1962-01-04</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>-0.0100</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1962-01-05</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>-0.0197</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1962-01-08</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>-0.0188</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>2022-08-30</th>
-      <td>-0.0153</td>
-      <td>-0.0039</td>
-      <td>-0.0056</td>
-      <td>-0.0085</td>
-    </tr>
-    <tr>
-      <th>2022-08-31</th>
-      <td>-0.0106</td>
-      <td>-0.0069</td>
-      <td>-0.0087</td>
-      <td>-0.0057</td>
-    </tr>
-    <tr>
-      <th>2022-09-01</th>
-      <td>0.0047</td>
-      <td>0.0128</td>
-      <td>0.0094</td>
-      <td>-0.0041</td>
-    </tr>
-    <tr>
-      <th>2022-09-02</th>
-      <td>-0.0136</td>
-      <td>-0.0169</td>
-      <td>-0.0144</td>
-      <td>-0.0167</td>
-    </tr>
-    <tr>
-      <th>2022-09-06</th>
-      <td>-0.0082</td>
-      <td>-0.0110</td>
-      <td>-0.0084</td>
-      <td>-0.0110</td>
-    </tr>
-  </tbody>
-</table>
-<p>15275 rows × 4 columns</p>
-</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3965,11 +3858,6 @@ Therefore, the percent change in adjusted closes considers both price changs (i.
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4444
-</pre></div>
-</div>
-</div>
 </div>
 <p>We can also calculate correlation and covariance matrices.</p>
 <div class="cell docutils container">
@@ -3978,72 +3866,10 @@ Therefore, the percent change in adjusted closes considers both price changs (i.
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>AAPL</th>
-      <th>GOOG</th>
-      <th>IBM</th>
-      <th>MSFT</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>AAPL</th>
-      <td>1.0000</td>
-      <td>0.5129</td>
-      <td>0.3684</td>
-      <td>0.4262</td>
-    </tr>
-    <tr>
-      <th>GOOG</th>
-      <td>0.5129</td>
-      <td>1.0000</td>
-      <td>0.4041</td>
-      <td>0.5527</td>
-    </tr>
-    <tr>
-      <th>IBM</th>
-      <td>0.3684</td>
-      <td>0.4041</td>
-      <td>1.0000</td>
-      <td>0.4444</td>
-    </tr>
-    <tr>
-      <th>MSFT</th>
-      <td>0.4262</td>
-      <td>0.5527</td>
-      <td>0.4444</td>
-      <td>1.0000</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">returns</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;MSFT&#39;</span><span class="p">,</span> <span class="s1">&#39;IBM&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4444
 </pre></div>
 </div>
 </div>
@@ -4057,11 +3883,6 @@ Note that we have to explicitly subset to the same dates for both tickers becaus
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4444
-</pre></div>
-</div>
-</div>
 </div>
 <p>We can also chain all these commands into one line of code.
 Using one long chain avoids temporary variables and is often easier to read, because chains read like sentences.
@@ -4069,11 +3890,6 @@ However, this is unnecessarily complex since we have the <code class="docutils l
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">returns</span><span class="p">[[</span><span class="s1">&#39;MSFT&#39;</span><span class="p">,</span> <span class="s1">&#39;IBM&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">cov</span><span class="p">()</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;MSFT&#39;</span><span class="p">,</span> <span class="s1">&#39;IBM&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;MSFT&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;IBM&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4444
 </pre></div>
 </div>
 </div>
@@ -4086,11 +3902,6 @@ However, this is unnecessarily complex since we have the <code class="docutils l
 	<span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
 	<span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">cov</span><span class="p">()</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;MSFT&#39;</span><span class="p">,</span> <span class="s1">&#39;IBM&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;MSFT&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;IBM&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()))</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4444
 </pre></div>
 </div>
 </div>
@@ -4117,23 +3928,6 @@ Slice the column in <code class="docutils literal notranslate"><span class="pre"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stocks</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">tickers</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">,</span> <span class="s1">&#39;IBM&#39;</span><span class="p">,</span> <span class="s1">&#39;MSFT&#39;</span><span class="p">,</span> <span class="s1">&#39;GOOG&#39;</span><span class="p">],</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[                       0%                       ]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************50%                       ]  2 of 4 completed
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************75%***********            ]  3 of 4 completed
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  4 of 4 completed
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>

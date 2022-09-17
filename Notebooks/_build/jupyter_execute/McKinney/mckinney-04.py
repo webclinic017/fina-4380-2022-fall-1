@@ -143,14 +143,26 @@ get_ipython().run_line_magic('timeit', 'my_arr * 2')
 # In[12]:
 
 
+import this
+
+
+# In[13]:
+
+
 np.random.seed(42)
 data = np.random.randn(2, 3)
+
+
+# In[14]:
+
+
+data
 
 
 # Multiplying `data` by 10 multiplies each element in `data` by 10, and adding `data` to itself does element-wise addition.
 # The compromise to achieve this common-sense behavior is that NumPy arrays must contain homogeneous data types (e.g., all floats or all integers).
 
-# In[13]:
+# In[15]:
 
 
 data * 10
@@ -158,40 +170,40 @@ data * 10
 
 # Addition in NumPy is also elementwise.
 
-# In[14]:
+# In[16]:
 
 
-data + data
+data_2 = data + data
 
 
 # NumPy arrays also have attributes.
 # Recall that Jupyter Notebooks provides tab completion.
 
-# In[15]:
+# In[17]:
 
 
 data.shape
 
 
-# In[16]:
+# In[18]:
 
 
 data.dtype
 
 
-# In[17]:
+# In[19]:
 
 
 data[0]
 
 
-# In[18]:
+# In[20]:
 
 
 data[0][0] # zero row, then the zero element in the zero row
 
 
-# In[19]:
+# In[21]:
 
 
 data[0, 0] # zero row, zero column
@@ -201,14 +213,20 @@ data[0, 0] # zero row, zero column
 # 
 # > The easiest way to create an array is to use the array function. This accepts any sequence-like object (including other arrays) and produces a new NumPy array containing the passed data
 
-# In[20]:
+# In[22]:
 
 
 data1 = [6, 7.5, 8, 0, 1]
 arr1 = np.array(data1)
 
 
-# In[21]:
+# In[23]:
+
+
+arr1
+
+
+# In[24]:
 
 
 arr1.dtype
@@ -217,7 +235,7 @@ arr1.dtype
 # We could coerce these values to integers, but we would lose information.
 # The default is to select a `dtype` that would not lose information.
 
-# In[22]:
+# In[25]:
 
 
 np.array(data1, dtype=np.int64)
@@ -226,32 +244,32 @@ np.array(data1, dtype=np.int64)
 # Note that `np.array()` re-cast the values in `data1` to floats becuase NumPy arrays must be homogenous data types.
 # A list of lists becomes a two-dimensional array.
 
-# In[23]:
+# In[26]:
 
 
 data2 = [[1, 2, 3, 4], [5, 6, 7, 8]]
 arr2 = np.array(data2)
 
 
-# In[24]:
+# In[27]:
+
+
+arr2
+
+
+# In[28]:
 
 
 arr2.ndim
 
 
-# In[25]:
+# In[29]:
 
 
 arr2.shape
 
 
-# In[26]:
-
-
-arr1.dtype
-
-
-# In[27]:
+# In[30]:
 
 
 arr2.dtype
@@ -259,13 +277,13 @@ arr2.dtype
 
 # There are several other ways to create NumPy arrays.
 
-# In[28]:
+# In[31]:
 
 
 np.zeros(10)
 
 
-# In[29]:
+# In[32]:
 
 
 np.zeros((3, 6))
@@ -273,13 +291,13 @@ np.zeros((3, 6))
 
 # The `np.arange()` function is similar to the core `range()` but it creates an array directly.
 
-# In[30]:
+# In[33]:
 
 
 list(range(15))
 
 
-# In[31]:
+# In[34]:
 
 
 np.arange(15)
@@ -300,15 +318,16 @@ np.arange(15)
 # 
 # > Arrays are important because they enable you to express batch operations on data without writing any for loops. NumPy users call this vectorization. Any arithmetic operations between equal-size arrays applies the operation element-wise
 
-# In[32]:
+# In[35]:
 
 
 arr = np.array([[1., 2., 3.], [4., 5., 6.]])
+arr
 
 
 # NumPy array addition is elementwise.
 
-# In[33]:
+# In[36]:
 
 
 arr + arr
@@ -316,7 +335,7 @@ arr + arr
 
 # NumPy array multiplication is elementwise.
 
-# In[34]:
+# In[37]:
 
 
 arr * arr
@@ -324,19 +343,19 @@ arr * arr
 
 # NumPy array division is elementwise.
 
-# In[35]:
+# In[38]:
 
 
 1 / arr
 
 
-# In[36]:
+# In[39]:
 
 
 arr ** 0.5
 
 
-# In[37]:
+# In[40]:
 
 
 arr2 = np.array([[0., 4., 1.], [7., 2., 12.]])
@@ -346,63 +365,48 @@ arr2 = np.array([[0., 4., 1.], [7., 2., 12.]])
 # 
 # One-dimensional array index and slice the same as lists.
 
-# In[38]:
-
-
-arr = np.arange(10)
-
-
-# In[39]:
-
-
-arr
-
-
-# In[40]:
-
-
-arr[5]
-
-
 # In[41]:
 
 
-arr[5:8]
+arr = np.arange(10)
+arr
 
 
 # In[42]:
 
 
-equiv_list = list(range(10))
+arr[5]
 
 
 # In[43]:
 
 
-equiv_list
+arr[5:8]
 
 
 # In[44]:
 
 
-equiv_list[5:8]
+equiv_list = list(range(10))
+equiv_list
 
 
 # In[45]:
 
 
-# equiv_list[5:8] = 12 # TypeError: can only assign an iterable
+equiv_list[5:8]
 
 
 # In[46]:
 
 
-equiv_list[5:8] = [12] * 3
+# equiv_list[5:8] = 12 # TypeError: can only assign an iterable
 
 
 # In[47]:
 
 
+equiv_list[5:8] = [12] * 3
 equiv_list
 
 
@@ -421,43 +425,43 @@ arr
 
 
 arr_slice = arr[5:8]
+arr_slice
 
 
 # In[50]:
 
 
-arr_slice
+x = arr_slice
 
 
 # In[51]:
 
 
-arr_slice[1] = 12345
+x
 
 
 # In[52]:
 
 
-arr_slice
+x is arr_slice
 
 
 # In[53]:
 
 
-arr
+y = x.copy()
 
-
-# The `:` slices every element in `arr_slice`.
 
 # In[54]:
 
 
-arr_slice[:] = 64
+y is x
 
 
 # In[55]:
 
 
+arr_slice[1] = 12345
 arr_slice
 
 
@@ -467,33 +471,43 @@ arr_slice
 arr
 
 
-# > If you want a copy of a slice of an ndarray instead of a view, you will need to explicitly copy the array-for example, `arr[5:8].copy()`.
+# The `:` slices every element in `arr_slice`.
 
 # In[57]:
 
 
-arr_slice_2 = arr[5:8].copy()
+arr_slice[:] = 64
+arr_slice
 
 
 # In[58]:
 
 
-arr_slice_2
+arr
 
+
+# > If you want a copy of a slice of an ndarray instead of a view, you will need to explicitly copy the array-for example, `arr[5:8].copy()`.
 
 # In[59]:
 
 
-arr_slice_2[:] = 2001
+arr_slice_2 = arr[5:8].copy()
+arr_slice_2
 
 
 # In[60]:
 
 
-arr_slice_2
+arr_slice_2[:] = 2001
 
 
 # In[61]:
+
+
+arr_slice_2
+
+
+# In[62]:
 
 
 arr
@@ -501,15 +515,10 @@ arr
 
 # > With higher dimensional arrays, you have many more options. In a two-dimensional array, the elements at each index are no longer scalars but rather one-dimensional arrays... Thus, individual elements can be accessed recursively. But that is a bit too much work, so you can pass a comma-separated list of indices to select individual elements.
 
-# In[62]:
-
-
-arr2d = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
-
-
 # In[63]:
 
 
+arr2d = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
 arr2d
 
 
@@ -1024,15 +1033,54 @@ arr.sort(1)
 # ***Practice:***
 # Create a 1-dimensional array named `a1` that counts from 0 to 24 by 1.
 
+# In[127]:
+
+
+a1 = np.arange(25)
+a1
+
+
 # ***Practice:***
 # Create a 1-dimentional array named `a2` that counts from 0 to 24 by 3.
+
+# In[128]:
+
+
+a2 = np.arange(0, 25, 3)
+a2
+
 
 # ***Practice:***
 # Create a 1-dimentional array named `a3` that counts from 0 to 100 by multiples of 3 and 5.
 
+# In[129]:
+
+
+np.array([i for i in range(101) if i%3==0 or i%5==0])
+
+
 # ***Practice:***
 # Create a 1-dimensional array `a3` that contains the squares of the even integers through 100,000.
 # How much faster is the NumPy version than the list comprehension version?
+
+# In[130]:
+
+
+a3 = np.arange(0, 100001, 2)**2
+a3
+
+
+# In[131]:
+
+
+get_ipython().run_line_magic('timeit', 'np.arange(0, 100001, 2)**2')
+
+
+# In[132]:
+
+
+get_ipython().run_line_magic('timeit', '[i**2 for i in range(0, 100001, 2)]')
+
 
 # ***Practice:***
 # Write functions that mimic Excel's `pv` and `fv` functions.
@@ -1040,7 +1088,7 @@ arr.sort(1)
 # ***Practice***
 # Create a copy of `data` named `data2`, and replace negative values with -1 and positive values with +1.
 
-# In[127]:
+# In[133]:
 
 
 np.random.seed(42)

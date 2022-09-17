@@ -14,4 +14,6 @@ dependencies:
   - jupyterlab-lsp
   - linearmodels
   - requests-cache
+  - yfinance
+  - pandas-datareader
 # prefix: C:\Users\r.herron\Anaconda3\envs\fina-4380

@@ -189,6 +189,18 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Herron
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Herron/herron-lookups.html">
+   Herron - Lookups
+  </a>
+ </li>
+</ul>
 
     </div>
 </nav></div>
@@ -540,6 +552,18 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="nn">Input In [3],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pandas_datareader</span> <span class="k">as</span> <span class="nn">pdr</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">requests_cache</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;yfinance&#39;
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="implementing-the-capm-in-python">
@@ -579,14 +603,6 @@ We will use statsmodels’ formula API (advanced programming interface) to match
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
 </div>
 <p>Lewinson uses the S&amp;P 500 index from Yahoo! Finance (ticker <code class="docutils literal notranslate"><span class="pre">^GSPC</span></code>) as his market return.
 <code class="docutils literal notranslate"><span class="pre">^GSPC</span></code> is not a total return index, so it excludes dividends and is incorrect for CAPM estimations.
@@ -610,16 +626,6 @@ Note that we specify an early start date to download and parse all available dat
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">ff</span><span class="p">[</span><span class="s1">&#39;DESCR&#39;</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>F-F Research Data Factors daily
--------------------------------
-
-This file was created by CMPT_ME_BEME_RETS_DAILY using the 202207 CRSP database. The Tbill return is the simple daily rate that, over the number of trading days in the month, compounds to 1-month TBill rate from Ibbotson and Associates Inc. Copyright 2022 Kenneth R. French
-
-  0 : (25292 rows x 4 cols)
 </pre></div>
 </div>
 </div>
@@ -662,43 +668,6 @@ We will keep all returns in percent because regressions with precent are easier 
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Ri</th>
-      <th>Rm</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Ri</th>
-      <td>5.5664</td>
-      <td>2.0831</td>
-    </tr>
-    <tr>
-      <th>Rm</th>
-      <td>2.0831</td>
-      <td>1.4704</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>Because <span class="math notranslate nohighlight">\(var(R_m) = cov(R_m, R_m)\)</span>, we do not need to recalculate the market variance.</p>
 <div class="cell docutils container">
@@ -714,11 +683,6 @@ We will keep all returns in percent because regressions with precent are easier 
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;AMZN beta: 1.4167&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <p>Second, we can estimate <span class="math notranslate nohighlight">\(\beta_i\)</span> with a linear regression.
 We will use statsmodels’ formula API, which provides an R-like formula syntax.</p>
@@ -729,62 +693,6 @@ We will use statsmodels’ formula API, which provides an R-like formula syntax.
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><table class="simpletable">
-<caption>OLS Regression Results</caption>
-<tr>
-  <th>Dep. Variable:</th>           <td>Ri</td>        <th>  R-squared:         </th> <td>   0.530</td>
-</tr>
-<tr>
-  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.529</td>
-</tr>
-<tr>
-  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   540.5</td>
-</tr>
-<tr>
-  <th>Date:</th>             <td>Wed, 07 Sep 2022</td> <th>  Prob (F-statistic):</th> <td>1.34e-80</td>
-</tr>
-<tr>
-  <th>Time:</th>                 <td>16:59:33</td>     <th>  Log-Likelihood:    </th> <td> -913.22</td>
-</tr>
-<tr>
-  <th>No. Observations:</th>      <td>   481</td>      <th>  AIC:               </th> <td>   1830.</td>
-</tr>
-<tr>
-  <th>Df Residuals:</th>          <td>   479</td>      <th>  BIC:               </th> <td>   1839.</td>
-</tr>
-<tr>
-  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>   
-</tr>
-<tr>
-  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
-</tr>
-</table>
-<table class="simpletable">
-<tr>
-      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
-</tr>
-<tr>
-  <th>Intercept</th> <td>   -0.0805</td> <td>    0.074</td> <td>   -1.090</td> <td> 0.276</td> <td>   -0.226</td> <td>    0.065</td>
-</tr>
-<tr>
-  <th>Rm</th>        <td>    1.4167</td> <td>    0.061</td> <td>   23.249</td> <td> 0.000</td> <td>    1.297</td> <td>    1.536</td>
-</tr>
-</table>
-<table class="simpletable">
-<tr>
-  <th>Omnibus:</th>       <td>148.440</td> <th>  Durbin-Watson:     </th> <td>   1.929</td>
-</tr>
-<tr>
-  <th>Prob(Omnibus):</th> <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td>2412.450</td>
-</tr>
-<tr>
-  <th>Skew:</th>          <td> 0.870</td>  <th>  Prob(JB):          </th> <td>    0.00</td>
-</tr>
-<tr>
-  <th>Kurtosis:</th>      <td>13.832</td>  <th>  Cond. No.          </th> <td>    1.22</td>
-</tr>
-</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
 </div>
 <p>Third, we can visualize the CAPM <span class="math notranslate nohighlight">\(\beta\)</span> as the slope of the best fit line through a scatter plot of stock (or portfolio) excess returns against market excess returns.</p>
 <div class="cell docutils container">
@@ -801,9 +709,6 @@ We will use statsmodels’ formula API, which provides an R-like formula syntax.
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/lewinson-04_26_0.png" src="../_images/lewinson-04_26_0.png" />
 </div>
 </div>
 <p>The easiest way to add the best-fit-line is to use <code class="docutils literal notranslate"><span class="pre">regplot()</span></code> from the seaborn package.</p>
@@ -829,9 +734,6 @@ We will use statsmodels’ formula API, which provides an R-like formula syntax.
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/lewinson-04_29_0.png" src="../_images/lewinson-04_29_0.png" />
-</div>
 </div>
 <p>We add the <code class="docutils literal notranslate"><span class="pre">Ri</span></code> and <code class="docutils literal notranslate"><span class="pre">Rm</span></code> columns to follow Lewinson’s syntax.
 However, the formula API provides two functions that help us avoid adding columns just for a regression:</p>
@@ -845,62 +747,6 @@ However, the formula API provides two functions that help us avoid adding column
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><table class="simpletable">
-<caption>OLS Regression Results</caption>
-<tr>
-  <th>Dep. Variable:</th>       <td>I(ri - rf)</td>    <th>  R-squared:         </th> <td>   0.530</td>
-</tr>
-<tr>
-  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.529</td>
-</tr>
-<tr>
-  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   540.5</td>
-</tr>
-<tr>
-  <th>Date:</th>             <td>Wed, 07 Sep 2022</td> <th>  Prob (F-statistic):</th> <td>1.34e-80</td>
-</tr>
-<tr>
-  <th>Time:</th>                 <td>16:59:34</td>     <th>  Log-Likelihood:    </th> <td> -913.22</td>
-</tr>
-<tr>
-  <th>No. Observations:</th>      <td>   481</td>      <th>  AIC:               </th> <td>   1830.</td>
-</tr>
-<tr>
-  <th>Df Residuals:</th>          <td>   479</td>      <th>  BIC:               </th> <td>   1839.</td>
-</tr>
-<tr>
-  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>   
-</tr>
-<tr>
-  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
-</tr>
-</table>
-<table class="simpletable">
-<tr>
-       <td></td>          <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
-</tr>
-<tr>
-  <th>Intercept</th>   <td>   -0.0805</td> <td>    0.074</td> <td>   -1.090</td> <td> 0.276</td> <td>   -0.226</td> <td>    0.065</td>
-</tr>
-<tr>
-  <th>Q("Mkt-RF")</th> <td>    1.4167</td> <td>    0.061</td> <td>   23.249</td> <td> 0.000</td> <td>    1.297</td> <td>    1.536</td>
-</tr>
-</table>
-<table class="simpletable">
-<tr>
-  <th>Omnibus:</th>       <td>148.440</td> <th>  Durbin-Watson:     </th> <td>   1.929</td>
-</tr>
-<tr>
-  <th>Prob(Omnibus):</th> <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td>2412.450</td>
-</tr>
-<tr>
-  <th>Skew:</th>          <td> 0.870</td>  <th>  Prob(JB):          </th> <td>    0.00</td>
-</tr>
-<tr>
-  <th>Kurtosis:</th>      <td>13.832</td>  <th>  Cond. No.          </th> <td>    1.22</td>
-</tr>
-</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
 </div>
 </section>
 <section id="implementing-the-fama-french-three-factor-model-in-python">
@@ -933,68 +779,6 @@ As with CAPM estimations, we should estimate the three-factor model with one to 
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><table class="simpletable">
-<caption>OLS Regression Results</caption>
-<tr>
-  <th>Dep. Variable:</th>           <td>Ri</td>        <th>  R-squared:         </th> <td>   0.625</td> 
-</tr>
-<tr>
-  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.623</td> 
-</tr>
-<tr>
-  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   265.0</td> 
-</tr>
-<tr>
-  <th>Date:</th>             <td>Wed, 07 Sep 2022</td> <th>  Prob (F-statistic):</th> <td>3.49e-101</td>
-</tr>
-<tr>
-  <th>Time:</th>                 <td>16:59:34</td>     <th>  Log-Likelihood:    </th> <td> -858.99</td> 
-</tr>
-<tr>
-  <th>No. Observations:</th>      <td>   481</td>      <th>  AIC:               </th> <td>   1726.</td> 
-</tr>
-<tr>
-  <th>Df Residuals:</th>          <td>   477</td>      <th>  BIC:               </th> <td>   1743.</td> 
-</tr>
-<tr>
-  <th>Df Model:</th>              <td>     3</td>      <th>                     </th>     <td> </td>    
-</tr>
-<tr>
-  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
-</tr>
-</table>
-<table class="simpletable">
-<tr>
-      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
-</tr>
-<tr>
-  <th>Intercept</th> <td>   -0.0217</td> <td>    0.066</td> <td>   -0.326</td> <td> 0.744</td> <td>   -0.152</td> <td>    0.109</td>
-</tr>
-<tr>
-  <th>Rm</th>        <td>    1.2988</td> <td>    0.061</td> <td>   21.399</td> <td> 0.000</td> <td>    1.180</td> <td>    1.418</td>
-</tr>
-<tr>
-  <th>SMB</th>       <td>   -0.4266</td> <td>    0.088</td> <td>   -4.865</td> <td> 0.000</td> <td>   -0.599</td> <td>   -0.254</td>
-</tr>
-<tr>
-  <th>HML</th>       <td>   -0.5439</td> <td>    0.055</td> <td>   -9.904</td> <td> 0.000</td> <td>   -0.652</td> <td>   -0.436</td>
-</tr>
-</table>
-<table class="simpletable">
-<tr>
-  <th>Omnibus:</th>       <td>206.609</td> <th>  Durbin-Watson:     </th> <td>   1.990</td>
-</tr>
-<tr>
-  <th>Prob(Omnibus):</th> <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td>5256.572</td>
-</tr>
-<tr>
-  <th>Skew:</th>          <td> 1.274</td>  <th>  Prob(JB):          </th> <td>    0.00</td>
-</tr>
-<tr>
-  <th>Kurtosis:</th>      <td>18.993</td>  <th>  Cond. No.          </th> <td>    2.02</td>
-</tr>
-</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
 </div>
 <p>Above, the coefficient on the market risk premium (<code class="docutils literal notranslate"><span class="pre">Rm</span></code>) is greater than one, indicating that AMZN has greater than average systematic risk.
 The average stock has a market beta of one by construction.
@@ -1021,9 +805,6 @@ However, statsmodels estimates rolling regressions out of the box!</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/lewinson-04_37_0.png" src="../_images/lewinson-04_37_0.png" />
 </div>
 </div>
 </section>

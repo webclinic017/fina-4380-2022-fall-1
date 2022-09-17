@@ -71,7 +71,7 @@ session = requests_cache.CachedSession(expire_after='1D')
 # > 
 # > *GBM is a process that does not account for mean-reversion and time-dependent volatility. That is why it is often used for stocks and not for bond prices, which tend to display long-term reversion to the face value.*
 
-# In[4]:
+# In[ ]:
 
 
 df = yf.download(tickers='MSFT', session=session)
@@ -81,7 +81,7 @@ returns = df.loc['2019', 'Return']
 
 # We will use the first ten months to "train" and the last two months to "test".
 
-# In[5]:
+# In[ ]:
 
 
 train = returns[:'2019-10-31']
@@ -90,7 +90,7 @@ test = returns['2019-11-01':]
 
 # We will use the training sample to estimate parameters, like $\mu$ and $\sigma$.
 
-# In[6]:
+# In[ ]:
 
 
 T = len(test)
@@ -103,7 +103,7 @@ sigma = train.std()
 
 # We will use Lewinson's `simulate_gbm()` function for simulations.
 
-# In[7]:
+# In[ ]:
 
 
 def simulate_gbm(s_0, mu, sigma, n_sims, T, N, random_seed=42):
@@ -152,7 +152,7 @@ def simulate_gbm(s_0, mu, sigma, n_sims, T, N, random_seed=42):
 
 # Next, we run the simulations.
 
-# In[8]:
+# In[ ]:
 
 
 np.random.seed(42)
@@ -165,7 +165,7 @@ gbm_simulations = pd.DataFrame(
 
 # Finally, plot the simulation results.
 
-# In[9]:
+# In[ ]:
 
 
 plt.plot(gbm_simulations, alpha=0.2, label='_nolegend_') # use plt.plot to omit lines from legend
@@ -208,7 +208,7 @@ plt.show()
 # 
 # We will use `norm()` from SciPy to estimate cumulative distribution functions.
 
-# In[10]:
+# In[ ]:
 
 
 from scipy.stats import norm
@@ -216,7 +216,7 @@ from scipy.stats import norm
 
 # We will use Lewinson's parameters.
 
-# In[11]:
+# In[ ]:
 
 
 S_0 = 100
@@ -232,7 +232,7 @@ discount_factor = np.exp(-r * T)
 
 # There is an analytical solution to European options (i.e., the Black and Scholes (1973) formula).
 
-# In[12]:
+# In[ ]:
 
 
 def black_scholes_analytical(S_0, K, T, r, sigma, type='call'):
@@ -275,7 +275,7 @@ def black_scholes_analytical(S_0, K, T, r, sigma, type='call'):
 
 # We can use `black_scholes_analytical()` to value European call and put options with the parameters above.
 
-# In[13]:
+# In[ ]:
 
 
 black_scholes_analytical(S_0=S_0, K=K, T=T, r=r, sigma=sigma, type='call')
@@ -286,7 +286,7 @@ black_scholes_analytical(S_0=S_0, K=K, T=T, r=r, sigma=sigma, type='call')
 # 1. Calculate the expected payoff as $max(S_T - K, 0)$
 # 1. Discount the expected payoff to $t=0$ using the risk-free rate
 
-# In[14]:
+# In[ ]:
 
 
 gbm_simulations_2 = pd.DataFrame(simulate_gbm(s_0=S_0, mu=r, sigma=sigma, n_sims=N_SIMS, T=T, N=N).T)
@@ -295,7 +295,7 @@ gbm_simulations_2 = pd.DataFrame(simulate_gbm(s_0=S_0, mu=r, sigma=sigma, n_sims
 # What is the payoff of a European option?
 # $$max(S_T - K, 0)$$
 
-# In[15]:
+# In[ ]:
 
 
 gbm_simulations_2.iloc[-1].sub(K).pipe(np.maximum, 0).mean() * discount_factor
@@ -328,7 +328,7 @@ gbm_simulations_2.iloc[-1].sub(K).pipe(np.maximum, 0).mean() * discount_factor
 
 # We will follow Lewinson's approach and set a handful of parameters in the following code cell.
 
-# In[16]:
+# In[ ]:
 
 
 RISKY_ASSETS = ['GOOG', 'META']
@@ -341,7 +341,7 @@ N_SIMS = 10 ** 5
 
 # However, we will download all data from Yahoo! Finance, and use the start and end dates to subset our data later.
 
-# In[17]:
+# In[ ]:
 
 
 df = yf.download(tickers=RISKY_ASSETS, session=session)
@@ -349,7 +349,7 @@ df = yf.download(tickers=RISKY_ASSETS, session=session)
 
 # Next, we calculate daily returns.
 
-# In[18]:
+# In[ ]:
 
 
 returns = df['Adj Close'].pct_change().loc[START_DATE:END_DATE]
@@ -357,13 +357,13 @@ returns = df['Adj Close'].pct_change().loc[START_DATE:END_DATE]
 
 # We will need the variance-covariance matrix.
 
-# In[19]:
+# In[ ]:
 
 
 cov_mat = returns.cov()
 
 
-# In[20]:
+# In[ ]:
 
 
 cov_mat
@@ -371,13 +371,13 @@ cov_mat
 
 # We will use the variance-covariance matrix to calculate the Cholesky decomposition.
 
-# In[21]:
+# In[ ]:
 
 
 chol_mat = np.linalg.cholesky(cov_mat)
 
 
-# In[22]:
+# In[ ]:
 
 
 chol_mat
@@ -385,13 +385,13 @@ chol_mat
 
 # The Cholesky decomposition helps us generate random variables with the same variance and covariance as the observed data.
 
-# In[23]:
+# In[ ]:
 
 
 rv = np.random.normal(size=(N_SIMS, len(RISKY_ASSETS)))
 
 
-# In[24]:
+# In[ ]:
 
 
 correlated_rv = (chol_mat @ rv.T).T
@@ -399,7 +399,7 @@ correlated_rv = (chol_mat @ rv.T).T
 
 # These random variables have a variance-covariance matrix similar to the real data.
 
-# In[25]:
+# In[ ]:
 
 
 np.cov(correlated_rv.T)
@@ -407,7 +407,7 @@ np.cov(correlated_rv.T)
 
 # Here are the parameters for the simulated price paths:
 
-# In[26]:
+# In[ ]:
 
 
 r = returns.mean().values
@@ -418,13 +418,13 @@ P_0 = np.sum(SHARES * S_0)
 
 # Calculate terminal prices:
 
-# In[27]:
+# In[ ]:
 
 
 S_T = S_0 * np.exp((r - 0.5 * sigma ** 2) * T + sigma * np.sqrt(T) * correlated_rv)
 
 
-# In[28]:
+# In[ ]:
 
 
 S_T
@@ -433,25 +433,25 @@ S_T
 # Calculate terminal portfolio values and returns.
 # Note that these are dollar values, since VaR is typically expressed in dollar values.
 
-# In[29]:
+# In[ ]:
 
 
 P_T = np.sum(SHARES * S_T, axis=1)
 
 
-# In[30]:
+# In[ ]:
 
 
 P_T
 
 
-# In[31]:
+# In[ ]:
 
 
 P_diff = P_T - P_0
 
 
-# In[32]:
+# In[ ]:
 
 
 P_diff
@@ -459,7 +459,7 @@ P_diff
 
 # Next, we calculate VaR.
 
-# In[33]:
+# In[ ]:
 
 
 percentiles = [0.01, 0.1, 1.]
@@ -471,7 +471,7 @@ for x, y in zip(percentiles, var):
 
 # Finally, we will plot VaR:
 
-# In[34]:
+# In[ ]:
 
 
 fig, ax = plt.subplots()

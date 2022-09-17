@@ -51,19 +51,19 @@ session = requests_cache.CachedSession(expire_after='1D')
 # 
 # Note, you may need to install yfinance and request-cache, again.
 
-# In[4]:
+# In[ ]:
 
 
 # %pip install yfinance requests-cache
 
 
-# In[5]:
+# In[ ]:
 
 
 spy = yf.download(tickers='SPY', session=session)
 
 
-# In[6]:
+# In[ ]:
 
 
 spy['Return'] = spy['Adj Close'].pct_change()
@@ -87,7 +87,7 @@ spy['Return'] = spy['Adj Close'].pct_change()
 # However, log returns can approach positive and negative infinity.
 # Note that `np.log1p(X)` is equivalent to `np.log(1 + X)`.
 
-# In[7]:
+# In[ ]:
 
 
 spy['log Return'] = spy['Return'].pipe(np.log1p)
@@ -98,13 +98,13 @@ spy['log Return'] = spy['Return'].pipe(np.log1p)
 # The `.describe()` method reports mean and standard deviation (the first and second moments of the distribution) but does not report skewness and kurtosis (the third and fourth moments).
 # However, we can use the `.skew()` and `.kurt()` methods.
 
-# In[8]:
+# In[ ]:
 
 
 spy.filter(regex='Return').describe().T
 
 
-# In[9]:
+# In[ ]:
 
 
 print('Skewness:        {:.2f}'.format(spy['log Return'].skew()))
@@ -120,7 +120,7 @@ print('Excess Kurtosis: {:.2f}'.format(spy['log Return'].kurt()))
 # Histograms provide another way to see the skewness and kurtosis of daily stock returns.
 # We can overlay a normal distribution with the same mean and standard deviation to highlight negative skewness and excess kurtosis.
 
-# In[10]:
+# In[ ]:
 
 
 spy['log Return'].plot(kind='hist', bins=100, density=True, label='Observed')
@@ -145,7 +145,7 @@ plt.show()
 # To reduce noise, we can plot the monthly means and standard deviations of daily returns.
 # We will learn more about the `.resample()` method in chapter 11 of McKinney.
 
-# In[11]:
+# In[ ]:
 
 
 spy_m = (
@@ -162,7 +162,7 @@ spy_m = (
 # In the top panel, we see that there are alternating periods of low magnitude and high magnitude mean daily returns.
 # In the bottom panel, we see that there are alternating periods of low and high volatility.
 
-# In[12]:
+# In[ ]:
 
 
 axes = spy_m.plot(subplots=True, legend=False)
@@ -184,7 +184,7 @@ plt.show()
 # We can show this with an autocorrelation plot of daily stock returns.
 # The height of each line indicates the correlation coefficient ($\rho$) between returns on day 0 and lag $t$ (i.e., day $0 - t$).
 
-# In[13]:
+# In[ ]:
 
 
 N = 10
@@ -208,7 +208,7 @@ plt.show()
 # 
 # Because volatility clusters in time, squared stock returns (and the absolute values of stock returns) are autocorrelated.
 
-# In[14]:
+# In[ ]:
 
 
 N = 60
@@ -231,7 +231,7 @@ plt.show()
 # We typically want to report *annualized* mean and volatility of returns (i.e., multiply the mean and volatility of daily returns by 252 and $\sqrt{252}$).
 # However, we will plot daily values here  because some annualized values would be very large when we estimate means and volatilities using only one month of data.
 
-# In[15]:
+# In[ ]:
 
 
 spy_m = (
@@ -246,7 +246,7 @@ spy_m = (
 )
 
 
-# In[16]:
+# In[ ]:
 
 
 spy_m.plot(x='mean_lag1', y='std', kind='scatter', alpha=0.5)

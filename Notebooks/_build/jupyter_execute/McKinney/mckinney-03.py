@@ -667,35 +667,47 @@ seq[::-1]
 empty_dict = {}
 
 
+# In[88]:
+
+
+empty_dict
+
+
 # A dictionary is a set of key-value pairs.
 
-# In[88]:
+# In[89]:
 
 
 d1 = {'a' : 'some value', 'b' : [1, 2, 3, 4]}
 
 
-# In[89]:
+# In[90]:
 
 
 d1['a']
 
 
-# In[90]:
+# In[91]:
 
 
 d1[7] = 'an integer'
 
 
+# In[92]:
+
+
+d1
+
+
 # We access dictionary elements by name/label instead of position.
 
-# In[91]:
+# In[93]:
 
 
 d1['b']
 
 
-# In[92]:
+# In[94]:
 
 
 'b' in d1
@@ -703,28 +715,16 @@ d1['b']
 
 # > You can delete values either using the del keyword or the pop method (which simultaneously returns the value and deletes the key).
 
-# In[93]:
+# In[95]:
 
 
 d1[5] = 'some value'
 
 
-# In[94]:
-
-
-d1['dummy'] = 'another value'
-
-
-# In[95]:
-
-
-d1
-
-
 # In[96]:
 
 
-del d1[5]
+d1['dummy'] = 'another value'
 
 
 # In[97]:
@@ -736,16 +736,28 @@ d1
 # In[98]:
 
 
-ret = d1.pop('dummy')
+del d1[5]
 
 
 # In[99]:
 
 
-ret
+d1
 
 
 # In[100]:
+
+
+ret = d1.pop('dummy')
+
+
+# In[101]:
+
+
+ret
+
+
+# In[102]:
 
 
 d1
@@ -753,13 +765,13 @@ d1
 
 # > The keys and values method give you iterators of the dict’s keys and values, respectively. While the key-value pairs are not in any particular order, these functions output the keys and values in the same order.
 
-# In[101]:
+# In[103]:
 
 
 d1.keys()
 
 
-# In[102]:
+# In[104]:
 
 
 d1.values()
@@ -767,13 +779,13 @@ d1.values()
 
 # > You can merge one dict into another using the update method.
 
-# In[103]:
+# In[105]:
 
 
 d1.update({'b' : 'foo', 'c' : 12})
 
 
-# In[104]:
+# In[106]:
 
 
 d1
@@ -798,13 +810,13 @@ d1
 # 
 # We will focus on list comprehensions, which are very [Pythonic](https://blog.startifact.com/posts/older/what-is-pythonic.html).
 
-# In[105]:
+# In[107]:
 
 
 strings = ['a', 'as', 'bat', 'car', 'dove', 'python']
 
 
-# In[106]:
+# In[108]:
 
 
 caps = []
@@ -816,11 +828,32 @@ caps
 
 # We can replace the for loop above with a list comprehension.
 
-# In[107]:
+# In[109]:
 
 
 # [operation on x for x in list if condition is met]
 [x.upper() for x in strings if len(x) > 2]
+
+
+# Here is another example.
+# Write a for-loop and the equivalent list comprehension that squares the integers from 1 to 10.
+
+# In[110]:
+
+
+squares = []
+for i in range(1, 11):
+    squares.append(i ** 2)
+    
+squares
+
+
+# In[111]:
+
+
+squares_2 = [i**2 for i in range(1, 11)]
+
+squares_2
 
 
 # ## Functions
@@ -847,7 +880,7 @@ caps
 # 
 # Here is the basic syntax for a function:
 
-# In[108]:
+# In[112]:
 
 
 def mult_by_two(x):
@@ -859,7 +892,7 @@ def mult_by_two(x):
 # We can write Python functions that return multiple objects.
 # In reality, the function `f()` below returns one object, a tuple, that we can unpack to multiple objects.
 
-# In[109]:
+# In[113]:
 
 
 def f():
@@ -871,7 +904,7 @@ def f():
 
 # If we want to return multiple objects with names or labels, we can return a dictionary.
 
-# In[110]:
+# In[114]:
 
 
 def f():
@@ -881,7 +914,7 @@ def f():
     return {'a' : a, 'b' : b, 'c' : c}
 
 
-# In[111]:
+# In[115]:
 
 
 f()['a']
@@ -896,73 +929,52 @@ f()['a']
 # Lambda functions are very Pythonic and let us to write simple functions on the fly.
 # For example, we could use a lambda function to sort `strings` by the number of unique letters.
 
-# In[112]:
+# In[116]:
 
 
 strings = ['foo', 'card', 'bar', 'aaaa', 'abab']
 
 
-# In[113]:
+# In[117]:
 
 
-strings.sort(key=lambda x: len(set(list(x))))
+strings.sort()
+strings
 
 
-# In[114]:
+# In[118]:
+
+
+strings.sort(key=len)
+strings
+
+
+# In[119]:
 
 
 strings.sort(key=lambda x: x[-1]) # this lambda function slices the last character in each string i
+strings
+
+
+# How can I sort by the *second* letter in each string?
+
+# In[120]:
+
+
+strings[2][1]
+
+
+# In[121]:
+
+
+strings.sort(key=lambda x: x[1]) # this lambda function slices the second character in each string i
+strings
 
 
 # ## Practice
 
 # ***Practice:***
 # Swap the values assigned to `a` and `b` using a third variable `c`.
-
-# In[115]:
-
-
-a = 1
-
-
-# In[116]:
-
-
-b = 2
-
-
-# In[117]:
-
-
-c = a
-
-
-# In[118]:
-
-
-a = b
-
-
-# In[119]:
-
-
-b = c
-
-
-# In[120]:
-
-
-del c
-
-
-# In[121]:
-
-
-print(f'a is {a} and b is {b}')
-
-
-# ***Practice:***
-# Use tuple-unpacking to swap the values assigned to `a` and `b` ***without*** using a third variable.
 
 # In[122]:
 
@@ -979,10 +991,55 @@ b = 2
 # In[124]:
 
 
-a, b = b, a
+c = a
 
 
 # In[125]:
+
+
+a = b
+
+
+# In[126]:
+
+
+b = c
+
+
+# In[127]:
+
+
+del c
+
+
+# In[128]:
+
+
+print(f'a is {a} and b is {b}')
+
+
+# ***Practice:***
+# Use tuple-unpacking to swap the values assigned to `a` and `b` ***without*** using a third variable.
+
+# In[129]:
+
+
+a = 1
+
+
+# In[130]:
+
+
+b = 2
+
+
+# In[131]:
+
+
+a, b = b, a
+
+
+# In[132]:
 
 
 print(f'a is {a} and b is {b}')
@@ -991,7 +1048,7 @@ print(f'a is {a} and b is {b}')
 # ***Practice:*** 
 # Create a list of integers from 1 to 100 using `range()` and `list()` named `l1`.
 
-# In[126]:
+# In[133]:
 
 
 l1 = list(range(1, 101))
@@ -1000,19 +1057,19 @@ l1 = list(range(1, 101))
 # ***Practice:*** 
 # Slice `l1` to create a list of integers from 60 to 50 (inclusive) named `l2`.
 
-# In[127]:
+# In[134]:
 
 
 l2 = l1[59:48:-1]
 
 
-# In[128]:
+# In[135]:
 
 
 l1[-41:-52:-1] 
 
 
-# In[129]:
+# In[136]:
 
 
 l1[49:60][::-1]
@@ -1020,7 +1077,7 @@ l1[49:60][::-1]
 
 # If we do not want to slice `l1`, prettier solutions are possible:
 
-# In[130]:
+# In[137]:
 
 
 list(range(60, 49, -1))
@@ -1029,20 +1086,51 @@ list(range(60, 49, -1))
 # ***Practice:***
 # Create a list of odd integers from 1 to 21 named `l3`.
 
-# In[131]:
+# In[138]:
 
 
-list(range(1, 22, 2))
+l3 = list(range(1, 22, 2))
 
 
 # ***Practice:***
 # Use a list comprehension to create a list `l4` that contains the squares of integers from 1 to 100.
 
+# In[139]:
+
+
+l4 = [i**2 for i in range(1, 101)]
+
+
 # ***Practice:***
 # Use a list comprehension to create a list `l5` that contains the squares of ***odd*** integers from 1 to 100.
+
+# In[140]:
+
+
+l5 = [i**2 for i in range(1, 101, 2)]
+
+
+# In[141]:
+
+
+print(l5, end=' ')
+
+
+# In[142]:
+
+
+print([i**2 for i in range(1, 101) if i%2==1], end=' ')
+
 
 # ***Practice:***
 # Use a lambda function to sort `strings` by the last letter.
 
-# You can find many more Python coding challenges at <www.hackerrank.com>.
+# In[143]:
+
+
+strings.sort(key=lambda x: x[-1])
+strings
+
+
+# You can find many more Python coding challenges at <www.hackerrank.com> and <www.leetcode.com>.
 # These challenges are fun but not necessary for our course because we will spend our time using higher-level features.

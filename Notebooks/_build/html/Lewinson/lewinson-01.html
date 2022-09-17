@@ -189,6 +189,18 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Herron
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Herron/herron-lookups.html">
+   Herron - Lookups
+  </a>
+ </li>
+</ul>
 
     </div>
 </nav></div>
@@ -628,6 +640,19 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="nn">Input In [3],</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">scs</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">requests_cache</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">session</span> <span class="o">=</span> <span class="n">requests_cache</span><span class="o">.</span><span class="n">CachedSession</span><span class="p">(</span><span class="n">expire_after</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;yfinance&#39;
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="investigating-stylized-facts-of-asset-returns">
@@ -649,14 +674,6 @@ We will:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spy</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">tickers</span><span class="o">=</span><span class="s1">&#39;SPY&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -702,72 +719,11 @@ However, we can use the <code class="docutils literal notranslate"><span class="
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>count</th>
-      <th>mean</th>
-      <th>std</th>
-      <th>min</th>
-      <th>25%</th>
-      <th>50%</th>
-      <th>75%</th>
-      <th>max</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Return</th>
-      <td>7454.0000</td>
-      <td>0.0004</td>
-      <td>0.0119</td>
-      <td>-0.1094</td>
-      <td>-0.0044</td>
-      <td>0.0007</td>
-      <td>0.0059</td>
-      <td>0.1452</td>
-    </tr>
-    <tr>
-      <th>log Return</th>
-      <td>7454.0000</td>
-      <td>0.0004</td>
-      <td>0.0119</td>
-      <td>-0.1159</td>
-      <td>-0.0044</td>
-      <td>0.0007</td>
-      <td>0.0059</td>
-      <td>0.1356</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Skewness:        </span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">spy</span><span class="p">[</span><span class="s1">&#39;log Return&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">skew</span><span class="p">()))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Excess Kurtosis: </span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">spy</span><span class="p">[</span><span class="s1">&#39;log Return&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">kurt</span><span class="p">()))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Skewness:        -0.30
-Excess Kurtosis: 11.22
 </pre></div>
 </div>
 </div>
@@ -794,9 +750,6 @@ We can overlay a normal distribution with the same mean and standard deviation t
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/lewinson-01_17_0.png" src="../_images/lewinson-01_17_0.png" />
 </div>
 </div>
 <p>If we zoom in, we can see that returns in the left tail (large magnitude negative returns) are much more likely than if they were normally distributed.
@@ -839,9 +792,6 @@ In the bottom panel, we see that there are alternating periods of low and high v
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/lewinson-01_22_0.png" src="../_images/lewinson-01_22_0.png" />
-</div>
 </div>
 </section>
 <section id="stock-returns-are-not-autocorrelated">
@@ -867,9 +817,6 @@ The height of each line indicates the correlation coefficient (<span class="math
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/lewinson-01_24_0.png" src="../_images/lewinson-01_24_0.png" />
-</div>
 </div>
 <p>The plot above suggests weak, negative autocorrelation (<span class="math notranslate nohighlight">\(\rho \approx -0.09\)</span>) for the 1-day lag.
 However, this is due to bid-ask bounce.
@@ -893,9 +840,6 @@ If we repeat the autocorrelation plot above monthly data, the negative autocorre
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/lewinson-01_27_0.png" src="../_images/lewinson-01_27_0.png" />
 </div>
 </div>
 </section>
@@ -935,9 +879,6 @@ However, we will plot daily values here  because some annualized values would be
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/lewinson-01_30_0.png" src="../_images/lewinson-01_30_0.png" />
 </div>
 </div>
 </section>

@@ -189,6 +189,18 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Herron
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Herron/herron-lookups.html">
+   Herron - Lookups
+  </a>
+ </li>
+</ul>
 
     </div>
 </nav></div>
@@ -521,6 +533,18 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="nn">Input In [3],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pandas_datareader</span> <span class="k">as</span> <span class="nn">pdr</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">requests_cache</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;yfinance&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <blockquote>
 <div><p>Monte Carlo simulations are a class of computational algorithms that use repeated random sampling to solve any problems that have a probabilistic interpretation. In finance, one of the reasons they gained popularity is that they can be used to accurately estimate integrals. The main idea of Monte Carlo simulations is to produce a multitude of sample paths—possible scenarios/outcomes, often over a given period of time. The horizon is then split into a specified number of time steps and the process of doing so is called discretization. Its goal is to approximate continuous time, since the pricing of financial instruments happens in continuous time.</p>
@@ -551,14 +575,6 @@ title="Print to PDF"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">tickers</span><span class="o">=</span><span class="s1">&#39;MSFT&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
 <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Return&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
 <span class="n">returns</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2019&#39;</span><span class="p">,</span> <span class="s1">&#39;Return&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -665,9 +681,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/lewinson-06_17_0.png" src="../_images/lewinson-06_17_0.png" />
-</div>
 </div>
 <p>The average simulation is very close to the observed truth!
 The <em>average</em> average simulation should be close to the <em>average</em> observed truth (if the training period is similar to the test period).
@@ -764,11 +777,6 @@ We will repeat the exercise above for 2018 to see that average simulation predic
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21.7926
-</pre></div>
-</div>
-</div>
 </div>
 <p>We can also use <code class="docutils literal notranslate"><span class="pre">simulate_gbm()</span></code> to simulate multiple price paths, then:</p>
 <ol class="simple">
@@ -787,11 +795,6 @@ $<span class="math notranslate nohighlight">\(max(S_T - K, 0)\)</span>$</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gbm_simulations_2</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">K</span><span class="p">)</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="n">discount_factor</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21.7319
 </pre></div>
 </div>
 </div>
@@ -840,17 +843,6 @@ It is common to present the loss given by VaR as a positive (absolute) value. Th
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[                       0%                       ]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  2 of 2 completed
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
 </div>
 <p>Next, we calculate daily returns.</p>
 <div class="cell docutils container">
@@ -874,43 +866,6 @@ It is common to present the loss given by VaR as a positive (absolute) value. Th
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>GOOG</th>
-      <th>META</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>GOOG</th>
-      <td>0.0003</td>
-      <td>0.0003</td>
-    </tr>
-    <tr>
-      <th>META</th>
-      <td>0.0003</td>
-      <td>0.0006</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>We will use the variance-covariance matrix to calculate the Cholesky decomposition.</p>
 <div class="cell docutils container">
@@ -923,12 +878,6 @@ It is common to present the loss given by VaR as a positive (absolute) value. Th
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chol_mat</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.0177, 0.    ],
-       [0.015 , 0.0187]])
 </pre></div>
 </div>
 </div>
@@ -952,12 +901,6 @@ It is common to present the loss given by VaR as a positive (absolute) value. Th
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">correlated_rv</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.0003, 0.0003],
-       [0.0003, 0.0006]])
 </pre></div>
 </div>
 </div>
@@ -987,17 +930,6 @@ It is common to present the loss given by VaR as a positive (absolute) value. Th
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[107.4658, 158.3067],
-       [107.5284, 158.5003],
-       [107.5095, 158.4476],
-       ...,
-       [107.4431, 158.2815],
-       [107.4506, 158.2339],
-       [107.4357, 158.2569]])
-</pre></div>
-</div>
-</div>
 </div>
 <p>Calculate terminal portfolio values and returns.
 Note that these are dollar values, since VaR is typically expressed in dollar values.</p>
@@ -1011,12 +943,6 @@ Note that these are dollar values, since VaR is typically expressed in dollar va
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P_T</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1328.8621, 1330.1433, 1329.7857, ..., 1328.6231, 1328.4229,
-       1328.463 ])
 </pre></div>
 </div>
 </div>
@@ -1034,11 +960,6 @@ Note that these are dollar values, since VaR is typically expressed in dollar va
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-1.2379,  0.0434, -0.3143, ..., -1.4769, -1.6771, -1.637 ])
-</pre></div>
-</div>
-</div>
 </div>
 <p>Next, we calculate VaR.</p>
 <div class="cell docutils container">
@@ -1048,13 +969,6 @@ Note that these are dollar values, since VaR is typically expressed in dollar va
 
 <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">percentiles</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;1-day VaR with </span><span class="si">{</span><span class="mi">100</span><span class="o">-</span><span class="n">x</span><span class="si">}</span><span class="s1">% confidence: $</span><span class="si">{</span><span class="o">-</span><span class="n">y</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1-day VaR with 99.99% confidence: $3.07
-1-day VaR with 99.9% confidence: $2.70
-1-day VaR with 99.0% confidence: $2.28
 </pre></div>
 </div>
 </div>
@@ -1071,9 +985,6 @@ Note that these are dollar values, since VaR is typically expressed in dollar va
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/lewinson-06_63_0.png" src="../_images/lewinson-06_63_0.png" />
 </div>
 </div>
 </section>

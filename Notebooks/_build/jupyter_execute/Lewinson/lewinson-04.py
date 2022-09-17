@@ -70,7 +70,7 @@ session = requests_cache.CachedSession(expire_after='1D')
 # To move beyond the CAPM, we need the statsmodels package for linear regressions and rolling linear regressions.
 # We will use statsmodels' formula API (advanced programming interface) to match R's regression formulas.
 
-# In[4]:
+# In[ ]:
 
 
 import statsmodels.formula.api as smf
@@ -78,7 +78,7 @@ import statsmodels.formula.api as smf
 
 # We will also estimate the CAPM for Amazon (AMZN), but we will not limit our data download.
 
-# In[5]:
+# In[ ]:
 
 
 amzn = yf.download(tickers='AMZN', session=session)
@@ -90,7 +90,7 @@ amzn = yf.download(tickers='AMZN', session=session)
 # Ken French also provides the risk-free rate (`RF`).
 # Note that we specify an early start date to download and parse all available data.
 
-# In[6]:
+# In[ ]:
 
 
 ff = pdr.get_data_famafrench('F-F_Research_Data_Factors_daily', start='1900', session=session)
@@ -103,13 +103,13 @@ ff = pdr.get_data_famafrench('F-F_Research_Data_Factors_daily', start='1900', se
 # - the `DESCR` item is the data description
 # - returns are in percents instead of decimals
 
-# In[7]:
+# In[ ]:
 
 
 print(ff['DESCR'])
 
 
-# In[8]:
+# In[ ]:
 
 
 amzn = amzn.join(ff[0])
@@ -120,7 +120,7 @@ amzn = amzn.join(ff[0])
 # We will add the `r` and `R` columns that Lewinson uses in his formulas for raw and excess returns, respectively.
 # We will keep all returns in percent because regressions with precent are easier to interpret than regressions with zeros.
 
-# In[9]:
+# In[ ]:
 
 
 amzn = amzn.assign(
@@ -134,13 +134,13 @@ amzn = amzn.assign(
 
 # First, we can estimate $\beta_i$ with the covariance approach.
 
-# In[10]:
+# In[ ]:
 
 
 cov = amzn.loc['2020-09':, ['Ri', 'Rm']].cov()
 
 
-# In[11]:
+# In[ ]:
 
 
 cov
@@ -148,13 +148,13 @@ cov
 
 # Because $var(R_m) = cov(R_m, R_m)$, we do not need to recalculate the market variance.
 
-# In[12]:
+# In[ ]:
 
 
 beta = cov.loc['Ri', 'Rm'] / cov.loc['Rm', 'Rm']
 
 
-# In[13]:
+# In[ ]:
 
 
 'AMZN beta: {:0.4f}'.format(beta)
@@ -163,7 +163,7 @@ beta = cov.loc['Ri', 'Rm'] / cov.loc['Rm', 'Rm']
 # Second, we can estimate $\beta_i$ with a linear regression.
 # We will use statsmodels' formula API, which provides an R-like formula syntax.
 
-# In[14]:
+# In[ ]:
 
 
 capm_fit = smf.ols(formula='Ri ~ Rm', data=amzn.loc['2020-09':]).fit()
@@ -172,7 +172,7 @@ capm_fit.summary()
 
 # Third, we can visualize the CAPM $\beta$ as the slope of the best fit line through a scatter plot of stock (or portfolio) excess returns against market excess returns.
 
-# In[15]:
+# In[ ]:
 
 
 amzn.loc['2020-09':].plot(x='Rm', y='Ri', kind='scatter', alpha=0.1)
@@ -189,13 +189,13 @@ plt.show()
 
 # The easiest way to add the best-fit-line is to use `regplot()` from the seaborn package.
 
-# In[16]:
+# In[ ]:
 
 
 import seaborn as sns
 
 
-# In[17]:
+# In[ ]:
 
 
 sns.regplot(x='Rm', y='Ri', data=amzn.loc['2020-09':])
@@ -216,7 +216,7 @@ plt.show()
 # 1. `I()` lets us preform calculations on-the-fly inside a formula
 # 1. `Q()` lets us use columns with bad names that contain spaces and other characters that would confuse our formula
 
-# In[18]:
+# In[ ]:
 
 
 smf.ols(formula='I(ri - rf) ~ Q("Mkt-RF")', data=amzn.loc['2020-09':]).fit().summary()
@@ -251,7 +251,7 @@ smf.ols(formula='I(ri - rf) ~ Q("Mkt-RF")', data=amzn.loc['2020-09':]).fit().sum
 # 
 # We can estimate the Fama-French three-factor model for AMZN, again.
 
-# In[19]:
+# In[ ]:
 
 
 smf.ols(formula='Ri ~ Rm + SMB + HML', data=amzn.loc['2020-09':]).fit().summary()
@@ -267,13 +267,13 @@ smf.ols(formula='Ri ~ Rm + SMB + HML', data=amzn.loc['2020-09':]).fit().summary(
 # Lewinson manually estimates rolling three-factor regressions.
 # However, statsmodels estimates rolling regressions out of the box!
 
-# In[20]:
+# In[ ]:
 
 
 from statsmodels.regression.rolling import RollingOLS
 
 
-# In[21]:
+# In[ ]:
 
 
 RollingOLS.from_formula('Ri ~ Rm + SMB + HML', data=amzn, window=3*252).fit().params.plot()

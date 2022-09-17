@@ -77,7 +77,7 @@ session = requests_cache.CachedSession(expire_after='1D')
 # 
 # Let us create a time series to play with.
 
-# In[4]:
+# In[ ]:
 
 
 from datetime import datetime
@@ -95,13 +95,13 @@ ts = pd.Series(np.random.randn(6), index=dates)
 
 # Note that pandas converts the `datetime` objects to a pandas `DatetimeIndex` object and a single index value is a `Timestamp` object.
 
-# In[5]:
+# In[ ]:
 
 
 ts.index
 
 
-# In[6]:
+# In[ ]:
 
 
 ts.index[0]
@@ -109,7 +109,7 @@ ts.index[0]
 
 # Recall that arithmetic operations between pandas objects automatically align on indexes.
 
-# In[7]:
+# In[ ]:
 
 
 ts + ts[::2]
@@ -119,19 +119,19 @@ ts + ts[::2]
 # 
 # We can use date and time labels to select data.
 
-# In[8]:
+# In[ ]:
 
 
 stamp = ts.index[2]
 
 
-# In[9]:
+# In[ ]:
 
 
 stamp
 
 
-# In[10]:
+# In[ ]:
 
 
 ts[stamp]
@@ -139,31 +139,31 @@ ts[stamp]
 
 # pandas uses unambiguous date strings to select data.
 
-# In[11]:
+# In[ ]:
 
 
 ts['1/10/2011'] # M/D/YYYY
 
 
-# In[12]:
+# In[ ]:
 
 
 ts['20110110'] # YYYYMMDD
 
 
-# In[13]:
+# In[ ]:
 
 
 ts['2011-01-10'] # YYYY-MM-DD
 
 
-# In[14]:
+# In[ ]:
 
 
 ts['10-Jan-2011'] # D-Mon-YYYY
 
 
-# In[15]:
+# In[ ]:
 
 
 ts['Jan-10-2011'] # Mon-D-YYYY
@@ -171,7 +171,7 @@ ts['Jan-10-2011'] # Mon-D-YYYY
 
 # Here is a longer time series for longer slices.
 
-# In[16]:
+# In[ ]:
 
 
 np.random.seed(42)
@@ -180,7 +180,7 @@ longer_ts = pd.Series(np.random.randn(1000), index=pd.date_range('1/1/2000', per
 
 # We can pass a year-month to slice all of the observations in May of 2001.
 
-# In[17]:
+# In[ ]:
 
 
 longer_ts['2001-05']
@@ -188,7 +188,7 @@ longer_ts['2001-05']
 
 # We can also pass a year to slice all observations in 2001.
 
-# In[18]:
+# In[ ]:
 
 
 longer_ts['2001']
@@ -196,7 +196,7 @@ longer_ts['2001']
 
 # If we sort our data chronologically, we can also slice with a range of date strings.
 
-# In[19]:
+# In[ ]:
 
 
 ts['1/6/2011':'1/11/2011']
@@ -205,19 +205,19 @@ ts['1/6/2011':'1/11/2011']
 # To use date slices, our data should be sorted by the date index, as above.
 # The following code works as though our data were sorted, but raises a warning that it will not work in future versions.
 
-# In[20]:
+# In[ ]:
 
 
 ts2 = ts.sort_values()
 
 
-# In[21]:
+# In[ ]:
 
 
 ts2['1/6/2011':'1/11/2011']
 
 
-# In[22]:
+# In[ ]:
 
 
 ts2.sort_index()['1/6/2011':'1/11/2011']
@@ -225,7 +225,7 @@ ts2.sort_index()['1/6/2011':'1/11/2011']
 
 # ***To be clear, a range of date strings is inclusive on both ends.***
 
-# In[23]:
+# In[ ]:
 
 
 longer_ts['1/6/2001':'1/11/2001']
@@ -241,14 +241,14 @@ longer_ts['1/6/2001':'1/11/2001']
 # However, you may later receive poorly-formed data with duplicate observations.
 # The toy data in series `dup_ts` has three observations on February 2nd.
 
-# In[24]:
+# In[ ]:
 
 
 dates = pd.DatetimeIndex(['1/1/2000', '1/2/2000', '1/2/2000', '1/2/2000', '1/3/2000'])
 dup_ts = pd.Series(np.arange(5), index=dates)
 
 
-# In[25]:
+# In[ ]:
 
 
 dup_ts
@@ -256,19 +256,19 @@ dup_ts
 
 # The `.is_unique` property tells us if an index is unique.
 
-# In[26]:
+# In[ ]:
 
 
 dup_ts.index.is_unique
 
 
-# In[27]:
+# In[ ]:
 
 
 dup_ts['1/3/2000']  # not duplicated
 
 
-# In[28]:
+# In[ ]:
 
 
 dup_ts['1/2/2000']  # duplicated
@@ -278,19 +278,19 @@ dup_ts['1/2/2000']  # duplicated
 # For example, we may want the mean of all observations on a given date.
 # The `.groupby()`  method can help us here.
 
-# In[29]:
+# In[ ]:
 
 
 grouped = dup_ts.groupby(level=0)
 
 
-# In[30]:
+# In[ ]:
 
 
 grouped.mean()
 
 
-# In[31]:
+# In[ ]:
 
 
 grouped.last()
@@ -298,7 +298,7 @@ grouped.last()
 
 # Or we may want the number of observations on each date.
 
-# In[32]:
+# In[ ]:
 
 
 grouped.count()
@@ -317,7 +317,7 @@ grouped.count()
 # 
 # > freq : str or DateOffset, default 'D'
 
-# In[33]:
+# In[ ]:
 
 
 index = pd.date_range('2012-04-01', '2012-06-01')
@@ -325,13 +325,13 @@ index = pd.date_range('2012-04-01', '2012-06-01')
 
 # If we specify only a start or end date, we must specify the number of periods.
 
-# In[34]:
+# In[ ]:
 
 
 pd.date_range(start='2012-04-01', periods=20)
 
 
-# In[35]:
+# In[ ]:
 
 
 pd.date_range(end='2012-06-01', periods=20)
@@ -340,7 +340,7 @@ pd.date_range(end='2012-06-01', periods=20)
 # pandas provides many frequencies.
 # Here we use `freq = 'BM'` to get the last business day in each month.
 
-# In[36]:
+# In[ ]:
 
 
 pd.date_range('2000-01-01', '2000-12-01', freq='BM') # here "BM" is business month (end)
@@ -348,7 +348,7 @@ pd.date_range('2000-01-01', '2000-12-01', freq='BM') # here "BM" is business mon
 
 # Or `freq = '5D'` to get every fifth day.
 
-# In[37]:
+# In[ ]:
 
 
 pd.date_range('2000-01-01', '2000-12-01', freq='5D')
@@ -362,13 +362,13 @@ pd.date_range('2000-01-01', '2000-12-01', freq='5D')
 # 
 # >Frequencies in pandas are composed of a base frequency and a multiplier. Base frequencies are typically referred to by a string alias, like 'M' for monthly or 'H' for hourly. For each base frequency, there is an object defined generally referred to as a date offset.
 
-# In[38]:
+# In[ ]:
 
 
 pd.date_range('2000-01-01', '2000-01-03 23:59', freq='4h')
 
 
-# In[39]:
+# In[ ]:
 
 
 pd.date_range('2000-01-01', periods=10, freq='1h30min')
@@ -379,7 +379,7 @@ pd.date_range('2000-01-01', periods=10, freq='1h30min')
 # ***Shifting is an important feature!***
 # Shifting is moving data backward (or forward) through time.
 
-# In[40]:
+# In[ ]:
 
 
 np.random.seed(42)
@@ -393,13 +393,13 @@ ts = pd.Series(np.random.randn(4), index=pd.date_range('1/1/2000', periods=4, fr
 # 
 # "Lag" might be a better name than "shift" since a postive 2 makes the value at any timestamp the value from 2 timestamps above (earlier, since most time-series data are chronological).
 
-# In[41]:
+# In[ ]:
 
 
 ts.shift() # if we do not specify "periods", pandas assumes 1
 
 
-# In[42]:
+# In[ ]:
 
 
 ts.shift(2)
@@ -407,7 +407,7 @@ ts.shift(2)
 
 # If we pass a _negative_ integer $N$ to the `.shift()` method, values are shifted _up_ $N$ observations.
 
-# In[43]:
+# In[ ]:
 
 
 ts.shift(-2)
@@ -418,19 +418,19 @@ ts.shift(-2)
 # Our most common shift will be to compute the percent change from one period to the next.
 # We can calculate the percent change two ways.
 
-# In[44]:
+# In[ ]:
 
 
 ts.pct_change()
 
 
-# In[45]:
+# In[ ]:
 
 
 (ts - ts.shift()) / ts.shift()
 
 
-# In[46]:
+# In[ ]:
 
 
 np.allclose(
@@ -440,19 +440,19 @@ np.allclose(
 )
 
 
-# In[47]:
+# In[ ]:
 
 
 ts.diff() / ts.shift()
 
 
-# In[48]:
+# In[ ]:
 
 
 ts.diff().div(ts.shift())
 
 
-# In[49]:
+# In[ ]:
 
 
 np.allclose(
@@ -473,13 +473,13 @@ np.allclose(
 # With the `freq` argument, timestamps shift by a multiple (specified by the `periods` argument) of datetime intervals (specified by the `freq` argument).
 # Note that the examples below generate new datetime indexes.
 
-# In[50]:
+# In[ ]:
 
 
 ts.shift(2, freq='M')
 
 
-# In[51]:
+# In[ ]:
 
 
 ts.shift(3, freq='D')
@@ -487,7 +487,7 @@ ts.shift(3, freq='D')
 
 # `M` was already months, so `T` is minutes.
 
-# In[52]:
+# In[ ]:
 
 
 ts.shift(1, freq='90T')
@@ -495,19 +495,19 @@ ts.shift(1, freq='90T')
 
 # ---
 
-# In[53]:
+# In[ ]:
 
 
 tsla = yf.download(tickers='TSLA', session=session)
 
 
-# In[54]:
+# In[ ]:
 
 
 tsla['Return'] = tsla['Adj Close'].pct_change()
 
 
-# In[55]:
+# In[ ]:
 
 
 tsla['Return_lag1'] = tsla['Return'].shift(1)
@@ -518,7 +518,7 @@ tsla['Return_lag1'] = tsla['Return'].shift(1)
 # The problem is worse if we shift all days with `freq='D'`.
 # See below.
 
-# In[56]:
+# In[ ]:
 
 
 tsla.join(tsla[['Return']].shift(1, freq='B'), rsuffix='_lag1_alt')
@@ -530,7 +530,7 @@ tsla.join(tsla[['Return']].shift(1, freq='B'), rsuffix='_lag1_alt')
 # 
 # We can also shift timestamps to the beginning or end of a period or interval.
 
-# In[57]:
+# In[ ]:
 
 
 from pandas.tseries.offsets import Day, MonthEnd
@@ -538,19 +538,19 @@ now = datetime(2011, 11, 17)
 now + 3 * Day()
 
 
-# In[58]:
+# In[ ]:
 
 
 now + MonthEnd(0) # 0 is for move to the end of the month, but never leave the month
 
 
-# In[59]:
+# In[ ]:
 
 
 now + MonthEnd(1) # 1 is for move to the end of the month, if already at end, move to the next end
 
 
-# In[60]:
+# In[ ]:
 
 
 now + MonthEnd(2)
@@ -560,25 +560,25 @@ now + MonthEnd(2)
 # ***But, be careful!***
 # The default argument is 1, but we typically want 0.
 
-# In[61]:
+# In[ ]:
 
 
 datetime(2021, 10, 30) + MonthEnd(0)
 
 
-# In[62]:
+# In[ ]:
 
 
 datetime(2021, 10, 30) + MonthEnd(1)
 
 
-# In[63]:
+# In[ ]:
 
 
 datetime(2021, 10, 31) + MonthEnd(0)
 
 
-# In[64]:
+# In[ ]:
 
 
 datetime(2021, 10, 31) + MonthEnd(1)
@@ -611,7 +611,7 @@ datetime(2021, 10, 31) + MonthEnd(1)
 # > - Which side of each interval is closed
 # > - How to label each aggregated bin, either with the start of the interval or the end
 
-# In[65]:
+# In[ ]:
 
 
 rng = pd.date_range('2000-01-01', periods=12, freq='T')
@@ -621,7 +621,7 @@ ts = pd.Series(np.arange(12), index=rng)
 # We can aggregate the one-minute frequency data above to a five-minute frequency.
 # Resampling requires and aggregation method, and here McKinney chooses the `.sum()` method.
 
-# In[66]:
+# In[ ]:
 
 
 ts.resample('5min').sum()
@@ -637,7 +637,7 @@ ts.resample('5min').sum()
 
 # In finance, we prefer `closed='right'` and `label='right'`.
 
-# In[67]:
+# In[ ]:
 
 
 ts.resample('5min', closed='right', label='right').sum() 
@@ -656,7 +656,7 @@ ts.resample('5min', closed='right', label='right').sum()
 # To downsample (i.e., resample from higher frequency to lower frequency), we have to choose an aggregation method (e.g., `.mean()`, `.sum()`, `.first()`, or `.last()`).
 # To upsample (i.e., resample from lower frequency to higher frequency), we do not have to choose an aggregation method.
 
-# In[68]:
+# In[ ]:
 
 
 np.random.seed(42)
@@ -667,7 +667,7 @@ frame = pd.DataFrame(np.random.randn(2, 4),
 
 # We can use the `.asfreq()` method to convert to the new frequency "as is".
 
-# In[69]:
+# In[ ]:
 
 
 df_daily = frame.resample('D').asfreq()
@@ -675,19 +675,19 @@ df_daily = frame.resample('D').asfreq()
 
 # We do not *have* to choose an aggregation method, but we may want to choose a method to fill in the missing values.
 
-# In[70]:
+# In[ ]:
 
 
 frame.resample('D').ffill()
 
 
-# In[71]:
+# In[ ]:
 
 
 frame.resample('D').ffill(limit=2)
 
 
-# In[72]:
+# In[ ]:
 
 
 frame.resample('W-THU').ffill()
@@ -698,7 +698,7 @@ frame.resample('W-THU').ffill()
 # ***Moving window (or rolling window) functions are one of the neatest features of pandas, and we will frequently use moving window functions.***
 # We will use data similar, but not identical, to the book data.
 
-# In[73]:
+# In[ ]:
 
 
 df = yf.download(tickers=['AAPL', 'MSFT', 'SPY'], session=session)
@@ -708,7 +708,7 @@ df = yf.download(tickers=['AAPL', 'MSFT', 'SPY'], session=session)
 # The `.rolling()` method accepts a window-width and requires an aggregation method.
 # The next example calculates and plots the 252-trading day moving average of AAPL's price alongside the daily price.
 
-# In[74]:
+# In[ ]:
 
 
 aapl = df.loc['2012':, ('Adj Close', 'AAPL')]
@@ -736,13 +736,13 @@ plt.show()
 # Binary moving window functions accept two inputs.
 # The most common example is the rolling correlation between two returns series.
 
-# In[75]:
+# In[ ]:
 
 
 returns = df['Adj Close'].pct_change()
 
 
-# In[76]:
+# In[ ]:
 
 
 returns['AAPL'].rolling(126, min_periods=100).corr(returns['SPY']).plot()
@@ -751,7 +751,7 @@ plt.title('Rolling Correlation between AAPL and SPY\n (126-Day Window w/ 100-Day
 plt.show()
 
 
-# In[77]:
+# In[ ]:
 
 
 returns[['AAPL', 'MSFT']].rolling(126, min_periods=100).corr(returns['SPY']).plot()
@@ -760,43 +760,43 @@ plt.title('Rolling Correlation with SPY\n (126-Day Window w/ 100-Day Minimum)')
 plt.show()
 
 
-# In[78]:
+# In[ ]:
 
 
 ff = pdr.get_data_famafrench('F-F_Research_Data_Factors_daily', start='1900', session=session)[0] / 100
 
 
-# In[79]:
+# In[ ]:
 
 
 excess_returns = returns.sub(ff['RF'], axis=0).dropna()
 
 
-# In[80]:
+# In[ ]:
 
 
 cov_term = excess_returns.rolling(252).cov(excess_returns['SPY'])
 
 
-# In[81]:
+# In[ ]:
 
 
 var_term = excess_returns['SPY'].rolling(252).var()
 
 
-# In[82]:
+# In[ ]:
 
 
 betas = cov_term.div(var_term, axis=0)
 
 
-# In[83]:
+# In[ ]:
 
 
 betas.columns.name = 'Ticker'
 
 
-# In[84]:
+# In[ ]:
 
 
 betas.drop(columns='SPY').plot()
@@ -813,7 +813,7 @@ plt.show()
 # McKinney provides an abstract example here, but we will discuss a simpler example that calculates rolling volatility.
 # Also, calculating rolling volatility with the `.apply()` method provides us a chance to benchmark it against the optimized version.
 
-# In[85]:
+# In[ ]:
 
 
 returns['AAPL'].rolling(252).apply(np.std).mul(np.sqrt(252) * 100).plot() # annualize and convert to percent
@@ -824,13 +824,13 @@ plt.show()
 
 # Do not be afraid to use `.apply()`, but realize that `.apply()` is typically 1000-times slower than the pre-built method.
 
-# In[86]:
+# In[ ]:
 
 
 get_ipython().run_line_magic('timeit', "returns['AAPL'].rolling(252).apply(np.std)")
 
 
-# In[87]:
+# In[ ]:
 
 
 get_ipython().run_line_magic('timeit', "returns['AAPL'].rolling(252).std()")
