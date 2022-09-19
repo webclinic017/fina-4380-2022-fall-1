@@ -2,18 +2,20 @@ name: fina-4380
 channels:
   - conda-forge
 dependencies:
-  - seaborn
-  - matplotlib
-  - pandas
-  - numpy
-  - statsmodels
-  - scipy
-  - jupyterlab
+  - ghp-import
+  - jedi-language-server
   - jupyter-book
+  - jupyterlab
   - jupyterlab-git
   - jupyterlab-lsp
   - linearmodels
-  - requests-cache
-  - yfinance
+  - matplotlib
+  - numpy
+  - pandas
   - pandas-datareader
+  - requests-cache
+  - scipy
+  - seaborn
+  - statsmodels
+  - yfinance
 # prefix: C:\Users\r.herron\Anaconda3\envs\fina-4380

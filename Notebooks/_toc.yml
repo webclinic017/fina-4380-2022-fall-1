@@ -20,3 +20,4 @@ parts:
   - caption: Herron
     chapters:
     - file: Herron/herron-lookups
+    - file: Herron/herron-downloading-data
