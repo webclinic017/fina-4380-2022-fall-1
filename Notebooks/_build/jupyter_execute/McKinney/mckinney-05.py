@@ -1018,7 +1018,7 @@ import requests_cache
 session = requests_cache.CachedSession(expire_after='1D')
 
 
-# In[ ]:
+# In[130]:
 
 
 stocks = yf.download(tickers=['AAPL', 'IBM', 'MSFT', 'GOOG'], session=session)
@@ -1031,13 +1031,13 @@ stocks = yf.download(tickers=['AAPL', 'IBM', 'MSFT', 'GOOG'], session=session)
 # 
 # $$R_t = \frac{(P_t + D_t) - P_{t-1}}{P_{t-1}} = \frac{\text{Adj Close}_t - \text{Adj Close}_{t-1}}{\text{Adj Close}_{t-1}}$$
 
-# In[ ]:
+# In[131]:
 
 
 stocks['Adj Close'].pct_change()
 
 
-# In[ ]:
+# In[132]:
 
 
 returns = stocks['Adj Close'].pct_change()
@@ -1045,7 +1045,7 @@ returns = stocks['Adj Close'].pct_change()
 
 # We can calculate pairwise correlation and covariance.
 
-# In[ ]:
+# In[133]:
 
 
 returns['MSFT'].corr(returns['IBM'])
@@ -1053,13 +1053,13 @@ returns['MSFT'].corr(returns['IBM'])
 
 # We can also calculate correlation and covariance matrices.
 
-# In[ ]:
+# In[134]:
 
 
 returns.corr()
 
 
-# In[ ]:
+# In[135]:
 
 
 returns.corr().loc['MSFT', 'IBM']
@@ -1068,7 +1068,7 @@ returns.corr().loc['MSFT', 'IBM']
 # Or manually with `.cov()` and `std()` methods because $$Corr(x, y) = \frac{Cov(x, y)}{Std(x) \times Std(y)}.$$
 # Note that we have to explicitly subset to the same dates for both tickers because otherwise we would use different data for the covariances and standard deviations.
 
-# In[ ]:
+# In[136]:
 
 
 _ = returns[['MSFT', 'IBM']].dropna()
@@ -1079,7 +1079,7 @@ _.cov().loc['MSFT', 'IBM'] / (_['MSFT'].std() * _['IBM'].std())
 # Using one long chain avoids temporary variables and is often easier to read, because chains read like sentences.
 # However, this is unnecessarily complex since we have the `.corr()` method!
 
-# In[ ]:
+# In[137]:
 
 
 returns[['MSFT', 'IBM']].dropna().pipe(lambda x: x.cov().loc['MSFT', 'IBM'] / (x['MSFT'].std() * x['IBM'].std()))
@@ -1087,7 +1087,7 @@ returns[['MSFT', 'IBM']].dropna().pipe(lambda x: x.cov().loc['MSFT', 'IBM'] / (x
 
 # We can make long chains more readable by wrapping them in `()` and inserting line breaks.
 
-# In[ ]:
+# In[138]:
 
 
 (
@@ -1099,7 +1099,7 @@ returns[['MSFT', 'IBM']].dropna().pipe(lambda x: x.cov().loc['MSFT', 'IBM'] / (x
 
 # ## Practice
 
-# In[ ]:
+# In[139]:
 
 
 df = pd.DataFrame(
@@ -1115,7 +1115,7 @@ df = pd.DataFrame(
 # ***Practice:***
 # Slice the column in `df` with the largest value in row `a`.
 
-# In[ ]:
+# In[140]:
 
 
 stocks = yf.download(tickers=['AAPL', 'IBM', 'MSFT', 'GOOG'], session=session)
