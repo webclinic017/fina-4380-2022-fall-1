@@ -200,6 +200,11 @@ const thebe_selector_output = ".output, .cell_output"
    Herron - Lookups
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Herron/herron-downloading-data.html">
+   Herron - Downloading Data
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -553,18 +558,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="nn">Input In [3],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pandas_datareader</span> <span class="k">as</span> <span class="nn">pdr</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">requests_cache</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;yfinance&#39;
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="evaluating-the-performance-of-a-basic-1-n-portfolio">
@@ -588,6 +581,21 @@ These data are small (kilobytes instead of megabytes or gigabytes), so we might 
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">tickers</span><span class="o">=</span><span class="n">RISKY_ASSETS</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[                       0%                       ]
+[                       0%                       ]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************75%***********            ]  3 of 4 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  4 of 4 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -620,6 +628,11 @@ These data are small (kilobytes instead of megabytes or gigabytes), so we might 
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -634,6 +647,11 @@ These data are small (kilobytes instead of megabytes or gigabytes), so we might 
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
 </div>
 <p><em><strong>Note that when we apply the same portfolio weights every day, we rebalance at the same frequency as the returns data.</strong></em>
 If we have daily data, rebalance daily.
@@ -641,6 +659,11 @@ If we have monthly data, we rebalance monthly, and so on.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">returns</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(502, 4)
 </pre></div>
 </div>
 </div>
@@ -655,6 +678,11 @@ If we have monthly data, we rebalance monthly, and so on.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">portfolio_weights</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.25, 0.25, 0.25, 0.25])
 </pre></div>
 </div>
 </div>
@@ -675,6 +703,11 @@ $<span class="math notranslate nohighlight">\(R_P = \omega^T R,\)</span><span cl
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
 </div>
 <p>Here are some silly data to help understand the <code class="docutils literal notranslate"><span class="pre">.dot()</span></code> method.</p>
 <div class="cell docutils container">
@@ -690,10 +723,60 @@ $<span class="math notranslate nohighlight">\(R_P = \omega^T R,\)</span><span cl
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">silly</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">portfolio_weights</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0   1.5000
+1   5.5000
+dtype: float64
 </pre></div>
 </div>
 </div>
@@ -708,6 +791,13 @@ $<span class="math notranslate nohighlight">\(R_P = \omega^T R,\)</span><span cl
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">silly</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">silly_weights</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    0
+1    4
+dtype: int32
 </pre></div>
 </div>
 </div>
@@ -762,6 +852,20 @@ We contrain our results with a tuple of dictionaries of functions to the argumen
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      fun: 2.0392713450495178e-16
+ hess_inv: array([[0.5]])
+      jac: array([-1.3659e-08])
+  message: &#39;Optimization terminated successfully.&#39;
+     nfev: 18
+      nit: 4
+     njev: 9
+   status: 0
+  success: True
+        x: array([5.])
+</pre></div>
+</div>
+</div>
 </div>
 <p>The minimum output of <code class="docutils literal notranslate"><span class="pre">quadratic()</span></code> occurs at <span class="math notranslate nohighlight">\(x=6\)</span> if we bound <code class="docutils literal notranslate"><span class="pre">x</span></code> between 6 and 10 (i.e., <span class="math notranslate nohighlight">\(6 \leq x \leq 10\)</span>).</p>
 <div class="cell docutils container">
@@ -771,6 +875,20 @@ We contrain our results with a tuple of dictionaries of functions to the argumen
     <span class="n">x0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2001</span><span class="p">]),</span>
     <span class="n">bounds</span><span class="o">=</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">),)</span>
 <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      fun: array([1.])
+ hess_inv: &lt;1x1 LbfgsInvHessProduct with dtype=float64&gt;
+      jac: array([2.])
+  message: &#39;CONVERGENCE: NORM_OF_PROJECTED_GRADIENT_&lt;=_PGTOL&#39;
+     nfev: 4
+      nit: 1
+     njev: 2
+   status: 0
+  success: True
+        x: array([6.])
 </pre></div>
 </div>
 </div>
@@ -788,6 +906,19 @@ We use bounds to simply limit the search space, and we use constraints when we n
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     fun: array([1.])
+     jac: array([2.])
+ message: &#39;Optimization terminated successfully&#39;
+    nfev: 4
+     nit: 2
+    njev: 2
+  status: 0
+ success: True
+       x: array([6.])
+</pre></div>
+</div>
+</div>
 </div>
 <p>Finally, we can use <code class="docutils literal notranslate"><span class="pre">sco.minimize()</span></code>s <code class="docutils literal notranslate"><span class="pre">args=</span></code> argument to to change the <code class="docutils literal notranslate"><span class="pre">a=</span></code> argument in <code class="docutils literal notranslate"><span class="pre">quadratic()</span></code>.
 Note that <code class="docutils literal notranslate"><span class="pre">args=</span></code> expects a tuple, so we need a trailing comma <code class="docutils literal notranslate"><span class="pre">,</span></code> if we only have one argument.</p>
@@ -798,6 +929,20 @@ Note that <code class="docutils literal notranslate"><span class="pre">args=</sp
     <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,),</span>
     <span class="n">x0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2001</span><span class="p">]),</span>
 <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      fun: 7.090392030754976e-17
+ hess_inv: array([[0.5]])
+      jac: array([-1.9397e-09])
+  message: &#39;Optimization terminated successfully.&#39;
+     nfev: 18
+      nit: 4
+     njev: 9
+   status: 0
+  success: True
+        x: array([20.])
 </pre></div>
 </div>
 </div>
@@ -846,6 +991,19 @@ Instead, we will base our helper functions on weights and returns only.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     fun: 0.1766471475572238
+     jac: array([0.1767, 0.1766, 0.1768, 0.1774])
+ message: &#39;Optimization terminated successfully&#39;
+    nfev: 40
+     nit: 8
+    njev: 8
+  status: 0
+ success: True
+       x: array([0.2575, 0.5172, 0.2179, 0.0074])
+</pre></div>
+</div>
+</div>
 </div>
 <p>What are the attributes of this minimum variance portfolio?</p>
 <div class="cell docutils container">
@@ -877,6 +1035,24 @@ Instead, we will base our helper functions on weights and returns only.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">print_port_res</span><span class="p">(</span><span class="n">res_mv</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="s1">&#39;Minimum Variance Portfolio&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Minimum Variance Portfolio
+==========================
+
+Performance
+-----------
+Return:       0.0520
+Volatility:   0.1766
+
+Weights
+-------
+AAPL:         0.2575
+IBM:          0.5172
+MSFT:         0.2179
+TWTR:         0.0074
 </pre></div>
 </div>
 </div>

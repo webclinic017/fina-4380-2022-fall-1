@@ -200,6 +200,11 @@ const thebe_selector_output = ".output, .cell_output"
    Herron - Lookups
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Herron/herron-downloading-data.html">
+   Herron - Downloading Data
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -746,7 +751,7 @@ So we use a list comprehension to multiply the elements in <code class="docutils
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26.9 ms ± 344 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>78.5 ms ± 2.84 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
 </pre></div>
 </div>
 </div>
@@ -758,7 +763,7 @@ So we use a list comprehension to multiply the elements in <code class="docutils
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>169 µs ± 5 µs per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.98 ms ± 160 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -957,7 +962,7 @@ The default is to select a <code class="docutils literal notranslate"><span clas
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([6, 7, 8, 0, 1])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([6, 7, 8, 0, 1], dtype=int64)
 </pre></div>
 </div>
 </div>
@@ -1016,7 +1021,7 @@ A list of lists becomes a two-dimensional array.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dtype(&#39;int64&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dtype(&#39;int32&#39;)
 </pre></div>
 </div>
 </div>
@@ -1905,7 +1910,7 @@ even if the returned array is unchanged.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([  1,   2,   4,   8,  16,  32,  64, 128, 256, 512])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([  1,   2,   4,   8,  16,  32,  64, 128, 256, 512], dtype=int32)
 </pre></div>
 </div>
 </div>
@@ -2145,7 +2150,7 @@ We can use the <code class="docutils literal notranslate"><span class="pre">axis
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0,  1,  3,  6, 10, 15, 21, 28])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0,  1,  3,  6, 10, 15, 21, 28], dtype=int32)
 </pre></div>
 </div>
 </div>
@@ -2180,7 +2185,7 @@ We can use the <code class="docutils literal notranslate"><span class="pre">axis
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0,  1,  2],
        [ 3,  5,  7],
-       [ 9, 12, 15]])
+       [ 9, 12, 15]], dtype=int32)
 </pre></div>
 </div>
 </div>
@@ -2194,7 +2199,7 @@ We can use the <code class="docutils literal notranslate"><span class="pre">axis
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[  0,   0,   0],
        [  3,  12,  60],
-       [  6,  42, 336]])
+       [  6,  42, 336]], dtype=int32)
 </pre></div>
 </div>
 </div>
@@ -2380,8 +2385,8 @@ How much faster is the NumPy version than the list comprehension version?</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([          0,           4,          16, ...,  9999200016,
-        9999600004, 10000000000])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([         0,          4,         16, ..., 1409265424, 1409665412,
+       1410065408], dtype=int32)
 </pre></div>
 </div>
 </div>
@@ -2393,7 +2398,7 @@ How much faster is the NumPy version than the list comprehension version?</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20.3 µs ± 237 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>49.8 µs ± 384 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -2405,13 +2410,59 @@ How much faster is the NumPy version than the list comprehension version?</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.83 ms ± 1.69 ms per loop (mean ± std. dev. of 7 runs, 100 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11.9 ms ± 733 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
 </pre></div>
 </div>
 </div>
 </div>
 <p><em><strong>Practice:</strong></em>
 Write functions that mimic Excel’s <code class="docutils literal notranslate"><span class="pre">pv</span></code> and <code class="docutils literal notranslate"><span class="pre">fv</span></code> functions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pv</span><span class="p">(</span><span class="n">rate</span><span class="p">,</span> <span class="n">nper</span><span class="p">,</span> <span class="n">pmt</span><span class="p">,</span> <span class="n">fv</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="n">_pv_pmt</span> <span class="o">=</span> <span class="p">(</span><span class="n">pmt</span> <span class="o">/</span> <span class="n">rate</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">rate</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">nper</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">end</span><span class="p">:</span> <span class="n">_pm_pmt</span> <span class="o">*=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">rate</span><span class="p">)</span>
+    <span class="n">_pv_fv</span> <span class="o">=</span> <span class="n">fv</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">rate</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">nper</span><span class="p">)</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="p">(</span><span class="n">_pv_pmt</span> <span class="o">+</span> <span class="n">_pv_fv</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pv</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-100.0000
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fv</span><span class="p">(</span><span class="n">rate</span><span class="p">,</span> <span class="n">nper</span><span class="p">,</span> <span class="n">pmt</span><span class="p">,</span> <span class="n">fv</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="n">_fv_pmt</span> <span class="o">=</span> <span class="p">(</span><span class="n">pmt</span> <span class="o">/</span> <span class="n">rate</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">rate</span><span class="p">)</span><span class="o">**</span><span class="n">nper</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">end</span><span class="p">:</span> <span class="n">_pm_pmt</span> <span class="o">*=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">rate</span><span class="p">)</span>
+    <span class="n">_fv_fv</span> <span class="o">=</span> <span class="n">fv</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">rate</span><span class="p">)</span><span class="o">**</span><span class="n">nper</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="p">(</span><span class="n">_fv_pmt</span> <span class="o">+</span> <span class="n">_fv_fv</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fv</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-418.7485
+</pre></div>
+</div>
+</div>
+</div>
 <p><em><strong>Practice</strong></em>
 Create a copy of <code class="docutils literal notranslate"><span class="pre">data</span></code> named <code class="docutils literal notranslate"><span class="pre">data2</span></code>, and replace negative values with -1 and positive values with +1.</p>
 <div class="cell docutils container">
@@ -2422,11 +2473,169 @@ Create a copy of <code class="docutils literal notranslate"><span class="pre">da
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data2</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">data2</span><span class="p">[</span><span class="n">data2</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">data2</span><span class="p">[</span><span class="n">data2</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">+</span><span class="mi">1</span>
+<span class="n">data2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1., -1.,  1.,  1.],
+       [-1., -1.,  1.,  1.],
+       [-1.,  1., -1., -1.],
+       [ 1., -1., -1., -1.],
+       [-1.,  1., -1., -1.],
+       [ 1., -1.,  1., -1.],
+       [-1.,  1., -1.,  1.]])
+</pre></div>
+</div>
+</div>
+</div>
+<p><em><strong>Or</strong></em>, we can use <code class="docutils literal notranslate"><span class="pre">np.select()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+    <span class="n">condlist</span><span class="o">=</span><span class="p">[</span><span class="n">data</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">,</span> <span class="n">data</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">],</span>
+    <span class="n">choicelist</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">+</span><span class="mi">1</span><span class="p">],</span>
+    <span class="n">default</span><span class="o">=</span><span class="n">data</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1., -1.,  1.,  1.],
+       [-1., -1.,  1.,  1.],
+       [-1.,  1., -1., -1.],
+       [ 1., -1., -1., -1.],
+       [-1.,  1., -1., -1.],
+       [ 1., -1.,  1., -1.],
+       [-1.,  1., -1.,  1.]])
+</pre></div>
+</div>
+</div>
+</div>
 <p><em><strong>Practice:</strong></em>
 Write a function that calculates the number of payments that generate <span class="math notranslate nohighlight">\(x\%\)</span> of the present value of a perpetuity given <span class="math notranslate nohighlight">\(C_1\)</span>, <span class="math notranslate nohighlight">\(r\)</span>, and <span class="math notranslate nohighlight">\(g\)</span>.
-Recall the present value of a growing perpetuity is <span class="math notranslate nohighlight">\(PV = \frac{C_1}{r - g}\)</span>.</p>
+Recall the present value of a growing perpetuity is <span class="math notranslate nohighlight">\(PV = \frac{C_1}{r - g}\)</span> and the present value of a growing annuity is <span class="math notranslate nohighlight">\(PV = \frac{C_1}{r - g}\left[ 1 - \left( \frac{1 + g}{1 + r} \right)^t \right]\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">npmt</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">g</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">r</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">npmt</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14.9000
+</pre></div>
+</div>
+</div>
+</div>
+<p>We do not need to use <span class="math notranslate nohighlight">\(C_1\)</span> because it cancels from both sides of the <span class="math notranslate nohighlight">\(=\)</span>.
+So
+$<span class="math notranslate nohighlight">\(x \times \frac{C_1}{r-g} = \frac{C_1}{r-g} \left[ 1 - \left( \frac{1 + g}{1 + r} \right)^t \right],\)</span><span class="math notranslate nohighlight">\(
+becomes
+\)</span><span class="math notranslate nohighlight">\(x = \left[ 1 - \left( \frac{1 + g}{1 + r} \right)^t \right],\)</span><span class="math notranslate nohighlight">\(
+which we can manipulate to solve for \)</span>t<span class="math notranslate nohighlight">\(:
+\)</span><span class="math notranslate nohighlight">\(t = \log(1 - x) \div \log\left(\frac{1+g}{1+r}\right).\)</span>$
+We can verify this with present value of perpetuity and annuity functions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pv_perp</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">c</span> <span class="o">/</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">g</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pv_ann</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">pv_perp</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">g</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">r</span><span class="p">))</span><span class="o">**</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pv_ann</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">14.899977377480532</span><span class="p">)</span> <span class="o">/</span> <span class="n">pv_perp</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5000
+</pre></div>
+</div>
+</div>
+</div>
 <p><em><strong>Practice:</strong></em>
 Write a function that calculates the internal rate of return given an numpy array of cash flows.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">npv</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">cf</span><span class="p">):</span>
+    <span class="n">_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">cf</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">cf</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">r</span><span class="p">)</span><span class="o">**</span><span class="n">_t</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">irr</span><span class="p">(</span><span class="n">cf</span><span class="p">,</span> <span class="n">guess</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
+    
+    <span class="n">_r</span> <span class="o">=</span> <span class="n">guess</span> <span class="c1"># our first guess, recall we can have multiple IRRs, so we may need to guess</span>
+    <span class="n">_npv</span> <span class="o">=</span> <span class="n">npv</span><span class="p">(</span><span class="n">_r</span><span class="p">,</span> <span class="n">cf</span><span class="p">)</span> <span class="c1"># IRR is the rate where NPV equals 0</span>
+    <span class="k">while</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">_npv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">tol</span><span class="p">:</span> <span class="c1"># while the absolute value of NPV does not equal 0...</span>
+        <span class="n">_r</span> <span class="o">+=</span> <span class="n">_npv</span> <span class="o">*</span> <span class="n">step</span> <span class="c1"># increase the discount if NPV &lt; 0, otherwise decrease the discount rate</span>
+        <span class="n">_npv</span> <span class="o">=</span> <span class="n">npv</span><span class="p">(</span><span class="n">_r</span><span class="p">,</span> <span class="n">cf</span><span class="p">)</span> <span class="c1"># re-calculate NPV with new discount rate</span>
+    
+    <span class="k">return</span> <span class="n">_r</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">irr</span><span class="p">(</span><span class="n">cf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2338
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can check that NPV is zero at this rate:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">npv</span><span class="p">(</span><span class="n">irr</span><span class="p">(</span><span class="n">cf</span><span class="p">),</span> <span class="n">cf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0000
+</pre></div>
+</div>
+</div>
+</div>
+<p>Excel and your financial calculator use a more sophisticated algorithm.
+We can revisit this problem once we know more Python.</p>
 </section>
 </section>
 

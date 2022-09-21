@@ -1085,19 +1085,159 @@ get_ipython().run_line_magic('timeit', '[i**2 for i in range(0, 100001, 2)]')
 # ***Practice:***
 # Write functions that mimic Excel's `pv` and `fv` functions.
 
+# In[133]:
+
+
+def pv(rate, nper, pmt, fv=0, end=True):
+    _pv_pmt = (pmt / rate) * (1 - (1 + rate)**(-nper))
+    if not end: _pm_pmt *= (1 + rate)
+    _pv_fv = fv * (1 + rate)**(-nper)
+    return -1 * (_pv_pmt + _pv_fv)
+
+
+# In[134]:
+
+
+pv(0.1, 10, 10, 100)
+
+
+# In[135]:
+
+
+def fv(rate, nper, pmt, fv=0, end=True):
+    _fv_pmt = (pmt / rate) * ((1 + rate)**nper - 1)
+    if not end: _pm_pmt *= (1 + rate)
+    _fv_fv = fv * (1 + rate)**nper
+    return -1 * (_fv_pmt + _fv_fv)
+
+
+# In[136]:
+
+
+fv(0.1, 10, 10, 100)
+
+
 # ***Practice***
 # Create a copy of `data` named `data2`, and replace negative values with -1 and positive values with +1.
 
-# In[133]:
+# In[137]:
 
 
 np.random.seed(42)
 data = np.random.randn(7, 4)
 
 
+# In[138]:
+
+
+data2 = data.copy()
+data2[data2 < 0] = -1
+data2[data2 > 0] = +1
+data2
+
+
+# ***Or***, we can use `np.select()`.
+
+# In[139]:
+
+
+np.select(
+    condlist=[data<0, data>0],
+    choicelist=[-1, +1],
+    default=data
+)
+
+
 # ***Practice:***
 # Write a function that calculates the number of payments that generate $x\%$ of the present value of a perpetuity given $C_1$, $r$, and $g$.
-# Recall the present value of a growing perpetuity is $PV = \frac{C_1}{r - g}$.
+# Recall the present value of a growing perpetuity is $PV = \frac{C_1}{r - g}$ and the present value of a growing annuity is $PV = \frac{C_1}{r - g}\left[ 1 - \left( \frac{1 + g}{1 + r} \right)^t \right]$.
+
+# In[140]:
+
+
+def npmt(x, r, g):
+    return np.log(1 - x) / np.log((1 + g) / (1 + r))
+
+
+# In[141]:
+
+
+npmt(0.5, 0.1, 0.05)
+
+
+# We do not need to use $C_1$ because it cancels from both sides of the $=$.
+# So
+# $$x \times \frac{C_1}{r-g} = \frac{C_1}{r-g} \left[ 1 - \left( \frac{1 + g}{1 + r} \right)^t \right],$$
+# becomes
+# $$x = \left[ 1 - \left( \frac{1 + g}{1 + r} \right)^t \right],$$
+# which we can manipulate to solve for $t$:
+# $$t = \log(1 - x) \div \log\left(\frac{1+g}{1+r}\right).$$
+# We can verify this with present value of perpetuity and annuity functions.
+
+# In[142]:
+
+
+def pv_perp(c, r, g):
+    return c / (r - g)
+
+
+# In[143]:
+
+
+def pv_ann(c, r, g, t):
+    return pv_perp(c, r, g) * (1 - ((1 + g) / (1 + r))**t)
+
+
+# In[144]:
+
+
+pv_ann(1, 0.1, 0.05, 14.899977377480532) / pv_perp(1, 0.1, 0.05)
+
 
 # ***Practice:***
 # Write a function that calculates the internal rate of return given an numpy array of cash flows.
+
+# In[145]:
+
+
+cf = np.array([-100, 50, 50, 50])
+
+
+# In[146]:
+
+
+def npv(r, cf):
+    _t = np.arange(cf.shape[0])
+    return (cf / (1 + r)**_t).sum()
+
+
+# In[147]:
+
+
+def irr(cf, guess=0, tol=1e-6, step=1e-6):
+    
+    _r = guess # our first guess, recall we can have multiple IRRs, so we may need to guess
+    _npv = npv(_r, cf) # IRR is the rate where NPV equals 0
+    while np.abs(_npv) > tol: # while the absolute value of NPV does not equal 0...
+        _r += _npv * step # increase the discount if NPV < 0, otherwise decrease the discount rate
+        _npv = npv(_r, cf) # re-calculate NPV with new discount rate
+    
+    return _r
+
+
+# In[148]:
+
+
+irr(cf)
+
+
+# We can check that NPV is zero at this rate:
+
+# In[149]:
+
+
+npv(irr(cf), cf)
+
+
+# Excel and your financial calculator use a more sophisticated algorithm.
+# We can revisit this problem once we know more Python.

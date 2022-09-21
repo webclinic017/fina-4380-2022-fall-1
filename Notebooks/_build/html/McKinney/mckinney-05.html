@@ -680,6 +680,16 @@ Chapter 5 of Wes McKinney’s <a class="reference external" href="https://wesmck
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">obj</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    4
+1    7
+2   -5
+3    3
+dtype: int64
 </pre></div>
 </div>
 </div>
@@ -704,7 +714,7 @@ Chapter 5 of Wes McKinney’s <a class="reference external" href="https://wesmck
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 4,  7, -5,  3])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 4,  7, -5,  3], dtype=int64)
 </pre></div>
 </div>
 </div>
@@ -726,6 +736,16 @@ We can also explicitly assign an index.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obj2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>
+<span class="n">obj2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>d    4
+b    7
+a   -5
+c    3
+dtype: int64
 </pre></div>
 </div>
 </div>
@@ -775,6 +795,22 @@ We can also explicitly assign an index.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obj2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>d    6
+b    7
+a   -5
+c    3
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obj2</span><span class="p">[[</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">]]</span>
 </pre></div>
 </div>
@@ -790,6 +826,22 @@ dtype: int64
 </div>
 <p>A pandas series behaves like a NumPy array.
 We can use Boolean filters and perform vectorized mathematical operations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obj2</span> <span class="o">&gt;</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>d     True
+b     True
+a    False
+c     True
+dtype: bool
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obj2</span><span class="p">[</span><span class="n">obj2</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
@@ -851,6 +903,16 @@ The dictionary labels become the series index.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sdata</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Ohio&#39;</span><span class="p">:</span> <span class="mi">35000</span><span class="p">,</span> <span class="s1">&#39;Texas&#39;</span><span class="p">:</span> <span class="mi">71000</span><span class="p">,</span> <span class="s1">&#39;Oregon&#39;</span><span class="p">:</span> <span class="mi">16000</span><span class="p">,</span> <span class="s1">&#39;Utah&#39;</span><span class="p">:</span> <span class="mi">5000</span><span class="p">}</span>
 <span class="n">obj3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">sdata</span><span class="p">)</span>
+<span class="n">obj3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ohio      35000
+Texas     71000
+Oregon    16000
+Utah       5000
+dtype: int64
 </pre></div>
 </div>
 </div>
@@ -862,6 +924,16 @@ Also, pandas keeps California with <code class="docutils literal notranslate"><s
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">states</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;California&#39;</span><span class="p">,</span> <span class="s1">&#39;Ohio&#39;</span><span class="p">,</span> <span class="s1">&#39;Oregon&#39;</span><span class="p">,</span> <span class="s1">&#39;Texas&#39;</span><span class="p">]</span>
 <span class="n">obj4</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">sdata</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">states</span><span class="p">)</span>
+<span class="n">obj4</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>California          NaN
+Ohio         35000.0000
+Oregon       16000.0000
+Texas        71000.0000
+dtype: float64
 </pre></div>
 </div>
 </div>
@@ -2004,7 +2076,7 @@ dtype: float64
 Colorado     5
 Utah         9
 New York    13
-Name: two, dtype: int64
+Name: two, dtype: int32
 </pre></div>
 </div>
 </div>
@@ -2076,7 +2148,7 @@ Name: two, dtype: int64
 Colorado     6
 Utah        10
 New York    14
-Name: three, dtype: int64
+Name: three, dtype: int32
 </pre></div>
 </div>
 </div>
@@ -2316,7 +2388,7 @@ Name: three, dtype: int64
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>two      5
 three    6
-Name: Colorado, dtype: int64
+Name: Colorado, dtype: int32
 </pre></div>
 </div>
 </div>
@@ -2331,7 +2403,7 @@ Name: Colorado, dtype: int64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>four    11
 one      8
 two      9
-Name: Utah, dtype: int64
+Name: Utah, dtype: int32
 </pre></div>
 </div>
 </div>
@@ -2347,7 +2419,7 @@ Name: Utah, dtype: int64
 two       9
 three    10
 four     11
-Name: Utah, dtype: int64
+Name: Utah, dtype: int32
 </pre></div>
 </div>
 </div>
@@ -2410,7 +2482,7 @@ Name: Utah, dtype: int64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ohio        0
 Colorado    5
 Utah        9
-Name: two, dtype: int64
+Name: two, dtype: int32
 </pre></div>
 </div>
 </div>
@@ -3552,7 +3624,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.17 µs ± 54.7 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21.7 µs ± 202 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -3564,7 +3636,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25 µs ± 154 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>45.2 µs ± 851 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -3918,7 +3990,7 @@ Therefore, the percent change in adjusted closes considers both price changs (i.
       <th>1962-01-08</th>
       <td>NaN</td>
       <td>NaN</td>
-      <td>-0.0187</td>
+      <td>-0.0188</td>
       <td>NaN</td>
     </tr>
     <tr>
@@ -3927,20 +3999,6 @@ Therefore, the percent change in adjusted closes considers both price changs (i.
       <td>...</td>
       <td>...</td>
       <td>...</td>
-    </tr>
-    <tr>
-      <th>2022-09-12</th>
-      <td>0.0385</td>
-      <td>0.0008</td>
-      <td>0.0114</td>
-      <td>0.0083</td>
-    </tr>
-    <tr>
-      <th>2022-09-13</th>
-      <td>-0.0587</td>
-      <td>-0.0586</td>
-      <td>-0.0261</td>
-      <td>-0.0550</td>
     </tr>
     <tr>
       <th>2022-09-14</th>
@@ -3963,9 +4021,23 @@ Therefore, the percent change in adjusted closes considers both price changs (i.
       <td>0.0142</td>
       <td>-0.0026</td>
     </tr>
+    <tr>
+      <th>2022-09-19</th>
+      <td>0.0251</td>
+      <td>0.0021</td>
+      <td>0.0036</td>
+      <td>-0.0009</td>
+    </tr>
+    <tr>
+      <th>2022-09-20</th>
+      <td>0.0157</td>
+      <td>-0.0195</td>
+      <td>-0.0112</td>
+      <td>-0.0085</td>
+    </tr>
   </tbody>
 </table>
-<p>15283 rows × 4 columns</p>
+<p>15285 rows × 4 columns</p>
 </div></div></div>
 </div>
 <div class="cell docutils container">
@@ -4024,21 +4096,21 @@ Therefore, the percent change in adjusted closes considers both price changs (i.
     <tr>
       <th>AAPL</th>
       <td>1.0000</td>
-      <td>0.5139</td>
-      <td>0.3687</td>
+      <td>0.5136</td>
+      <td>0.3686</td>
       <td>0.4266</td>
     </tr>
     <tr>
       <th>GOOG</th>
-      <td>0.5139</td>
+      <td>0.5136</td>
       <td>1.0000</td>
-      <td>0.4048</td>
+      <td>0.4049</td>
       <td>0.5541</td>
     </tr>
     <tr>
       <th>IBM</th>
-      <td>0.3687</td>
-      <td>0.4048</td>
+      <td>0.3686</td>
+      <td>0.4049</td>
       <td>1.0000</td>
       <td>0.4447</td>
     </tr>

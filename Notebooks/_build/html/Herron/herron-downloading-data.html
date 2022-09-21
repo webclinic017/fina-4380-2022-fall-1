@@ -504,7 +504,7 @@ For completeness, this notebooks also covers saving to and reading from .csv and
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">300</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">150</span>
 <span class="o">%</span><span class="k">precision</span> 4
 <span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>
 </pre></div>
@@ -518,7 +518,7 @@ Other packages that provide similar functionality, but I think yfinance is simpl
 To avoid repeated calls to Yahoo! Finance’s advanced programming interface (API), we will use the <a class="reference external" href="https://github.com/requests-cache/requests-cache">requests-cache package</a>.
 These packages should already be installed in your DataCamp Workspace environment.
 If not, we can install these packages with the <code class="docutils literal notranslate"><span class="pre">%pip</span></code> magic in the following cell, which we only need to run once.
-If you use a local installation of the Anaconda distribution, you can instead run <code class="docutils literal notranslate"><span class="pre">!</span> <span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">conda-forge</span> <span class="pre">yfinance</span> <span class="pre">requests-cache</span></code>.</p>
+If you use a local installation of the Anaconda distribution, you can instead run <code class="docutils literal notranslate"><span class="pre">!</span> <span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-y</span> <span class="pre">-c</span> <span class="pre">conda-forge</span> <span class="pre">yfinance</span> <span class="pre">requests-cache</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %pip install yfinance requests-cache</span>
@@ -528,7 +528,7 @@ If you use a local installation of the Anaconda distribution, you can instead ru
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ! conda install -c conda-forge yfinance requests-cache</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ! conda install -y -c conda-forge yfinance requests-cache</span>
 </pre></div>
 </div>
 </div>
@@ -554,10 +554,8 @@ We can pass tickers as either a space-delimited string or a list of strings.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[                       0%                       ]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[                       0%                       ]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************60%****                   ]  3 of 5 completed
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*******************   40%                       ]  2 of 5 completed
+[*******************   40%                       ]  2 of 5 completed
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************80%*************          ]  4 of 5 completed
@@ -571,6 +569,29 @@ We can pass tickers as either a space-delimited string or a list of strings.</p>
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span> <span class="c1"># we can insert line breaks inside the chain if we wrap the chain in ()</span>
+    <span class="n">faang</span> <span class="c1"># start with the faang data frame</span>
+    <span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span> <span class="c1"># grab all adjusted closes</span>
+    <span class="o">.</span><span class="n">pct_change</span><span class="p">()</span> <span class="c1"># calculate the percent change, which is a return that accounts for splits and dividends</span>
+    <span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2022&#39;</span><span class="p">]</span> <span class="c1"># select returns from 2022</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># add 1</span>
+    <span class="o">.</span><span class="n">cumprod</span><span class="p">()</span> <span class="c1"># compound returns</span>
+    <span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># subtract 1 to get cumulative (year-to-date) returns</span>
+    <span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="c1"># multiply by 100 to convert decimal returns to percent returns</span>
+    <span class="o">.</span><span class="n">plot</span><span class="p">()</span> <span class="c1"># plot</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Year-to-Date Return (%)&#39;</span><span class="p">)</span> <span class="c1"># add label to y axis (vertical axis)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Year-to-Date Returns for FAANG Stocks&#39;</span><span class="p">)</span> <span class="c1"># add title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1"># suppress output from plt.title()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/herron-downloading-data_10_0.png" src="../_images/herron-downloading-data_10_0.png" />
+</div>
+</div>
 </section>
 <section id="the-pandas-datareader-package">
 <h2>The pandas-datareader package<a class="headerlink" href="#the-pandas-datareader-package" title="Permalink to this headline">#</a></h2>
@@ -581,7 +602,7 @@ and
 The pandas-datareader package also provides access to Yahoo! Finance data, but the yfinance package has better documentation.
 The pandas-datareader packages should already be installed in your DataCamp Workspace environment.
 If not, we can install these packages with the <code class="docutils literal notranslate"><span class="pre">%pip</span></code> magic in the following cell, which we only need to run once.
-If you use a local installation of the Anaconda distribution, you can instead run <code class="docutils literal notranslate"><span class="pre">!</span> <span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">conda-forge</span> <span class="pre">pandas-datareader</span></code>.</p>
+If you use a local installation of the Anaconda distribution, you can instead run <code class="docutils literal notranslate"><span class="pre">!</span> <span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-y</span> <span class="pre">-c</span> <span class="pre">conda-forge</span> <span class="pre">pandas-datareader</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %pip install pandas-datareader</span>
@@ -591,7 +612,7 @@ If you use a local installation of the Anaconda distribution, you can instead ru
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ! conda install -c conda-forge pandas-datareader</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ! conda install -y -c conda-forge pandas-datareader</span>
 </pre></div>
 </div>
 </div>
@@ -627,6 +648,144 @@ Most of French’s data are available back through the second half od 1926.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ff</span> <span class="o">=</span> <span class="n">pdr</span><span class="o">.</span><span class="n">get_data_famafrench</span><span class="p">(</span><span class="s1">&#39;F-F_Research_Data_Factors_daily&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="s1">&#39;1900&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ff</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Mkt-RF</th>
+      <th>SMB</th>
+      <th>HML</th>
+      <th>RF</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1926-07-01</th>
+      <td>0.1000</td>
+      <td>-0.2500</td>
+      <td>-0.2700</td>
+      <td>0.0090</td>
+    </tr>
+    <tr>
+      <th>1926-07-02</th>
+      <td>0.4500</td>
+      <td>-0.3300</td>
+      <td>-0.0600</td>
+      <td>0.0090</td>
+    </tr>
+    <tr>
+      <th>1926-07-06</th>
+      <td>0.1700</td>
+      <td>0.3000</td>
+      <td>-0.3900</td>
+      <td>0.0090</td>
+    </tr>
+    <tr>
+      <th>1926-07-07</th>
+      <td>0.0900</td>
+      <td>-0.5800</td>
+      <td>0.0200</td>
+      <td>0.0090</td>
+    </tr>
+    <tr>
+      <th>1926-07-08</th>
+      <td>0.2100</td>
+      <td>-0.3800</td>
+      <td>0.1900</td>
+      <td>0.0090</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2022-07-25</th>
+      <td>0.1100</td>
+      <td>-0.3100</td>
+      <td>1.7000</td>
+      <td>0.0040</td>
+    </tr>
+    <tr>
+      <th>2022-07-26</th>
+      <td>-1.3200</td>
+      <td>0.0800</td>
+      <td>1.0800</td>
+      <td>0.0040</td>
+    </tr>
+    <tr>
+      <th>2022-07-27</th>
+      <td>2.7200</td>
+      <td>0.4900</td>
+      <td>-1.2800</td>
+      <td>0.0040</td>
+    </tr>
+    <tr>
+      <th>2022-07-28</th>
+      <td>1.1900</td>
+      <td>0.0800</td>
+      <td>-0.8700</td>
+      <td>0.0040</td>
+    </tr>
+    <tr>
+      <th>2022-07-29</th>
+      <td>1.4400</td>
+      <td>-0.9600</td>
+      <td>0.4500</td>
+      <td>0.0040</td>
+    </tr>
+  </tbody>
+</table>
+<p>25292 rows × 4 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">ff</span><span class="p">[</span><span class="s1">&#39;DESCR&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>F-F Research Data Factors daily
+-------------------------------
+
+This file was created by CMPT_ME_BEME_RETS_DAILY using the 202207 CRSP database. The Tbill return is the simple daily rate that, over the number of trading days in the month, compounds to 1-month TBill rate from Ibbotson and Associates Inc. Copyright 2022 Kenneth R. French
+
+  0 : (25292 rows x 4 cols)
 </pre></div>
 </div>
 </div>
@@ -874,54 +1033,6 @@ You may need to add a “Data” folder at the same hieracrchy as your “Notebo
       <td>...</td>
     </tr>
     <tr>
-      <th>2022-09-12</th>
-      <td>163.4300</td>
-      <td>136.4500</td>
-      <td>111.8700</td>
-      <td>168.9600</td>
-      <td>236.5300</td>
-      <td>163.4300</td>
-      <td>136.4500</td>
-      <td>111.8700</td>
-      <td>168.9600</td>
-      <td>236.5300</td>
-      <td>...</td>
-      <td>159.5900</td>
-      <td>134.1000</td>
-      <td>111.9900</td>
-      <td>167.3900</td>
-      <td>233.6100</td>
-      <td>104956000</td>
-      <td>53826900.0000</td>
-      <td>19732900.0000</td>
-      <td>23220400.0000</td>
-      <td>6047400.0000</td>
-    </tr>
-    <tr>
-      <th>2022-09-13</th>
-      <td>153.8400</td>
-      <td>126.8200</td>
-      <td>105.3100</td>
-      <td>153.1300</td>
-      <td>218.1300</td>
-      <td>153.8400</td>
-      <td>126.8200</td>
-      <td>105.3100</td>
-      <td>153.1300</td>
-      <td>218.1300</td>
-      <td>...</td>
-      <td>159.9000</td>
-      <td>131.0100</td>
-      <td>108.8900</td>
-      <td>161.5400</td>
-      <td>226.5000</td>
-      <td>122656600</td>
-      <td>72694000.0000</td>
-      <td>33015000.0000</td>
-      <td>44444100.0000</td>
-      <td>8000100.0000</td>
-    </tr>
-    <tr>
       <th>2022-09-14</th>
       <td>155.3100</td>
       <td>128.5500</td>
@@ -993,9 +1104,57 @@ You may need to add a “Data” folder at the same hieracrchy as your “Notebo
       <td>40018700.0000</td>
       <td>18871600.0000</td>
     </tr>
+    <tr>
+      <th>2022-09-19</th>
+      <td>154.4800</td>
+      <td>124.6600</td>
+      <td>103.8500</td>
+      <td>148.0200</td>
+      <td>243.6300</td>
+      <td>154.4800</td>
+      <td>124.6600</td>
+      <td>103.8500</td>
+      <td>148.0200</td>
+      <td>243.6300</td>
+      <td>...</td>
+      <td>149.3100</td>
+      <td>122.1600</td>
+      <td>102.5400</td>
+      <td>145.2400</td>
+      <td>245.0500</td>
+      <td>81474200</td>
+      <td>47279700.0000</td>
+      <td>19738600.0000</td>
+      <td>22169500.0000</td>
+      <td>17912400.0000</td>
+    </tr>
+    <tr>
+      <th>2022-09-20</th>
+      <td>156.9000</td>
+      <td>122.1900</td>
+      <td>101.8300</td>
+      <td>146.0900</td>
+      <td>242.8500</td>
+      <td>156.9000</td>
+      <td>122.1900</td>
+      <td>101.8300</td>
+      <td>146.0900</td>
+      <td>242.8500</td>
+      <td>...</td>
+      <td>153.4000</td>
+      <td>123.3500</td>
+      <td>102.8800</td>
+      <td>145.7800</td>
+      <td>240.3700</td>
+      <td>107689800</td>
+      <td>47698400.0000</td>
+      <td>24001700.0000</td>
+      <td>23217400.0000</td>
+      <td>16037400.0000</td>
+    </tr>
   </tbody>
 </table>
-<p>10530 rows × 30 columns</p>
+<p>10532 rows × 30 columns</p>
 </div></div></div>
 </div>
 <p>We can use a .pkl file to save and read a pandas object as-is.
@@ -1237,54 +1396,6 @@ These .pkl files are easier to use than .csv files but less universal.</p>
       <td>...</td>
     </tr>
     <tr>
-      <th>2022-09-12</th>
-      <td>163.4300</td>
-      <td>136.4500</td>
-      <td>111.8700</td>
-      <td>168.9600</td>
-      <td>236.5300</td>
-      <td>163.4300</td>
-      <td>136.4500</td>
-      <td>111.8700</td>
-      <td>168.9600</td>
-      <td>236.5300</td>
-      <td>...</td>
-      <td>159.5900</td>
-      <td>134.1000</td>
-      <td>111.9900</td>
-      <td>167.3900</td>
-      <td>233.6100</td>
-      <td>104956000</td>
-      <td>53826900.0000</td>
-      <td>19732900.0000</td>
-      <td>23220400.0000</td>
-      <td>6047400.0000</td>
-    </tr>
-    <tr>
-      <th>2022-09-13</th>
-      <td>153.8400</td>
-      <td>126.8200</td>
-      <td>105.3100</td>
-      <td>153.1300</td>
-      <td>218.1300</td>
-      <td>153.8400</td>
-      <td>126.8200</td>
-      <td>105.3100</td>
-      <td>153.1300</td>
-      <td>218.1300</td>
-      <td>...</td>
-      <td>159.9000</td>
-      <td>131.0100</td>
-      <td>108.8900</td>
-      <td>161.5400</td>
-      <td>226.5000</td>
-      <td>122656600</td>
-      <td>72694000.0000</td>
-      <td>33015000.0000</td>
-      <td>44444100.0000</td>
-      <td>8000100.0000</td>
-    </tr>
-    <tr>
       <th>2022-09-14</th>
       <td>155.3100</td>
       <td>128.5500</td>
@@ -1356,10 +1467,73 @@ These .pkl files are easier to use than .csv files but less universal.</p>
       <td>40018700.0000</td>
       <td>18871600.0000</td>
     </tr>
+    <tr>
+      <th>2022-09-19</th>
+      <td>154.4800</td>
+      <td>124.6600</td>
+      <td>103.8500</td>
+      <td>148.0200</td>
+      <td>243.6300</td>
+      <td>154.4800</td>
+      <td>124.6600</td>
+      <td>103.8500</td>
+      <td>148.0200</td>
+      <td>243.6300</td>
+      <td>...</td>
+      <td>149.3100</td>
+      <td>122.1600</td>
+      <td>102.5400</td>
+      <td>145.2400</td>
+      <td>245.0500</td>
+      <td>81474200</td>
+      <td>47279700.0000</td>
+      <td>19738600.0000</td>
+      <td>22169500.0000</td>
+      <td>17912400.0000</td>
+    </tr>
+    <tr>
+      <th>2022-09-20</th>
+      <td>156.9000</td>
+      <td>122.1900</td>
+      <td>101.8300</td>
+      <td>146.0900</td>
+      <td>242.8500</td>
+      <td>156.9000</td>
+      <td>122.1900</td>
+      <td>101.8300</td>
+      <td>146.0900</td>
+      <td>242.8500</td>
+      <td>...</td>
+      <td>153.4000</td>
+      <td>123.3500</td>
+      <td>102.8800</td>
+      <td>145.7800</td>
+      <td>240.3700</td>
+      <td>107689800</td>
+      <td>47698400.0000</td>
+      <td>24001700.0000</td>
+      <td>23217400.0000</td>
+      <td>16037400.0000</td>
+    </tr>
   </tbody>
 </table>
-<p>10530 rows × 30 columns</p>
+<p>10532 rows × 30 columns</p>
 </div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="n">title</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Input</span> <span class="n">In</span> <span class="p">[</span><span class="mi">19</span><span class="p">]</span>
+    <span class="n">d</span> <span class="n">title</span>
+      <span class="o">^</span>
+<span class="ne">SyntaxError</span>: invalid syntax
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>

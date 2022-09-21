@@ -53,7 +53,7 @@ session = requests_cache.CachedSession(expire_after='1D')
 # We will follow Lewinson's structure, although I prefer to download all data.
 # These data are small (kilobytes instead of megabytes or gigabytes), so we might as well download all data then subset when necessary.
 
-# In[ ]:
+# In[4]:
 
 
 RISKY_ASSETS = ['AAPL', 'IBM', 'MSFT', 'TWTR']
@@ -61,13 +61,13 @@ START_DATE = '2017-01-01'
 END_DATE = '2018-12-31'
 
 
-# In[ ]:
+# In[5]:
 
 
 df = yf.download(tickers=RISKY_ASSETS, session=session)
 
 
-# In[ ]:
+# In[6]:
 
 
 returns = df['Adj Close'].pct_change().loc[START_DATE:END_DATE]
@@ -75,31 +75,31 @@ returns = df['Adj Close'].pct_change().loc[START_DATE:END_DATE]
 
 # Before we do any portfolio math, we can make $\frac{1}{n}$ portfolios "by hand".
 
-# In[ ]:
+# In[7]:
 
 
 p1 = 0.25*returns['AAPL'] + 0.25*returns['IBM'] + 0.25*returns['MSFT'] + 0.25*returns['TWTR']
 
 
-# In[ ]:
+# In[8]:
 
 
 p2 = 0.25 * returns.sum(axis=1)
 
 
-# In[ ]:
+# In[9]:
 
 
 np.allclose(p1, p2)
 
 
-# In[ ]:
+# In[10]:
 
 
 p3 = returns.mean(axis=1)
 
 
-# In[ ]:
+# In[11]:
 
 
 np.allclose(p1, p3)
@@ -109,19 +109,19 @@ np.allclose(p1, p3)
 # If we have daily data, rebalance daily.
 # If we have monthly data, we rebalance monthly, and so on.
 
-# In[ ]:
+# In[12]:
 
 
 returns.shape
 
 
-# In[ ]:
+# In[13]:
 
 
 portfolio_weights = np.ones(returns.shape[1]) / returns.shape[1]
 
 
-# In[ ]:
+# In[14]:
 
 
 portfolio_weights
@@ -131,13 +131,13 @@ portfolio_weights
 # The following notation is more compact than Lewinson's notation and generates the same output.
 # $$R_P = \omega^T R,$$ where $R_P$ is a vector of portfolio returns, $\omega$ is a vector of portfolio weights, and $R$ is a matrix of individual stock or asset returns.
 
-# In[ ]:
+# In[15]:
 
 
 portfolio_returns = returns.dot(portfolio_weights)
 
 
-# In[ ]:
+# In[16]:
 
 
 np.allclose(p1, portfolio_returns)
@@ -145,31 +145,31 @@ np.allclose(p1, portfolio_returns)
 
 # Here are some silly data to help understand the `.dot()` method.
 
-# In[ ]:
+# In[17]:
 
 
 silly = pd.DataFrame(np.arange(8).reshape(2, 4))
 
 
-# In[ ]:
+# In[18]:
 
 
 silly
 
 
-# In[ ]:
+# In[19]:
 
 
 silly.dot(portfolio_weights)
 
 
-# In[ ]:
+# In[20]:
 
 
 silly_weights = np.array([1, 0, 0, 0])
 
 
-# In[ ]:
+# In[21]:
 
 
 silly.dot(silly_weights)
@@ -201,13 +201,13 @@ silly.dot(silly_weights)
 # 
 # Here is a simple example that minimizes the `quadratic()` function $y = (x - a)^2$ where $a=5$.
 
-# In[ ]:
+# In[22]:
 
 
 import scipy.optimize as sco
 
 
-# In[ ]:
+# In[23]:
 
 
 def quadratic(x, a=5):
@@ -216,7 +216,7 @@ def quadratic(x, a=5):
 
 # The minimum output of `quadratic()` occurs at $x=5$ if we do not use bounds or constraints.
 
-# In[ ]:
+# In[24]:
 
 
 sco.minimize(
@@ -227,7 +227,7 @@ sco.minimize(
 
 # The minimum output of `quadratic()` occurs at $x=6$ if we bound `x` between 6 and 10 (i.e., $6 \leq x \leq 10$).
 
-# In[ ]:
+# In[25]:
 
 
 sco.minimize(
@@ -240,7 +240,7 @@ sco.minimize(
 # Finally, the minimum output of `quadratic()` occurs at $x=6$, again, if bound `x` between 5 and 10 and we constrain `x - 6` to be positive.
 # We use bounds to simply limit the search space, and we use constraints when we need to limit the search based on some formula.
 
-# In[ ]:
+# In[26]:
 
 
 sco.minimize(
@@ -254,7 +254,7 @@ sco.minimize(
 # Finally, we can use `sco.minimize()`s `args=` argument to to change the `a=` argument in `quadratic()`.
 # Note that `args=` expects a tuple, so we need a trailing comma `,` if we only have one argument.
 
-# In[ ]:
+# In[27]:
 
 
 sco.minimize(
@@ -281,14 +281,14 @@ sco.minimize(
 # Lewinson's approach is computationally efficient, but requires us to manage different $\mu$ (mean return vector) and $\Sigma$ (variance-covariance matrix) for every sample we want to consider.
 # Instead, we will base our helper functions on weights and returns only.
 
-# In[ ]:
+# In[28]:
 
 
 def port_std(w, rs):
     return np.sqrt(252) * rs.dot(w).std()
 
 
-# In[ ]:
+# In[29]:
 
 
 res_mv = sco.minimize(
@@ -303,7 +303,7 @@ res_mv = sco.minimize(
 assert res_mv['success']
 
 
-# In[ ]:
+# In[30]:
 
 
 res_mv
@@ -311,7 +311,7 @@ res_mv
 
 # What are the attributes of this minimum variance portfolio?
 
-# In[ ]:
+# In[31]:
 
 
 def print_port_res(w, title, df=returns):
@@ -336,7 +336,7 @@ def print_port_res(w, title, df=returns):
         print((i + ':').ljust(14) + '{:0.4f}'.format(j))
 
 
-# In[ ]:
+# In[32]:
 
 
 print_port_res(res_mv['x'], 'Minimum Variance Portfolio')

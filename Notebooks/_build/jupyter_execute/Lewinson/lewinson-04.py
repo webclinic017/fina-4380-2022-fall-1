@@ -70,7 +70,7 @@ session = requests_cache.CachedSession(expire_after='1D')
 # To move beyond the CAPM, we need the statsmodels package for linear regressions and rolling linear regressions.
 # We will use statsmodels' formula API (advanced programming interface) to match R's regression formulas.
 
-# In[ ]:
+# In[4]:
 
 
 import statsmodels.formula.api as smf

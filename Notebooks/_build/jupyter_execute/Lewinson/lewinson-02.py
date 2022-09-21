@@ -54,7 +54,7 @@ session = requests_cache.CachedSession(expire_after='1D')
 # 
 # We do these calculations in *dollar* terms instead of *share* terms.
 
-# In[ ]:
+# In[4]:
 
 
 aapl = yf.download('AAPL', session=session)
@@ -63,7 +63,7 @@ aapl = yf.download('AAPL', session=session)
 # Second, we calculate daily returns and add SMA(20) for the adjusted close.
 # We use the adjust close because we do not want to misinterpret splits and dividends as price changes.
 
-# In[ ]:
+# In[5]:
 
 
 aapl['AAPL'] = aapl['Adj Close'].pct_change()
@@ -76,7 +76,7 @@ aapl['SMA20'] = aapl['Adj Close'].rolling(20).mean()
 # We `.shift()` inputs one day because we do not know closing prices and SMA(20) until the end of the day.
 # Therefore, we cannot update `Position` until the next trading day.
 
-# In[ ]:
+# In[6]:
 
 
 aapl['Position'] = np.select(
@@ -92,7 +92,7 @@ aapl['Position'] = np.select(
 # I find the following two steps helpful.
 # First, plot the adjusted close, SMA(20), and position for a short window.
 
-# In[ ]:
+# In[7]:
 
 
 aapl.loc['1981-01':'1981-02', ['Adj Close', 'SMA20', 'Position']].plot(secondary_y='Position')
@@ -103,7 +103,7 @@ plt.show()
 # Second, copy-and-paste these data to Excel!
 # Excel is an excellent place to check your work!
 
-# In[ ]:
+# In[8]:
 
 
 # aapl.loc[:'1981-02'].to_clipboard()
@@ -112,7 +112,7 @@ plt.show()
 # Finally, we create a `Strategy` column that provides the return on the strategy.
 # We will assume that we earn a cash return of 0% when we are neutral AAPL.
 
-# In[ ]:
+# In[9]:
 
 
 aapl['Strategy'] = aapl['Position'] * aapl['AAPL']
@@ -125,7 +125,7 @@ aapl['Strategy'] = aapl['Position'] * aapl['AAPL']
 # 1. We need 2 days to calculate 1 daily return 
 # 1. We need 20 days to calculate the first SMA(20)
 
-# In[ ]:
+# In[10]:
 
 
 (
@@ -181,19 +181,19 @@ plt.show()
 # We will implement Lewinson's strategy with Tesla.
 # First, we will plot the 20-day rolling means and plus/minus 2 standard deviations.
 
-# In[ ]:
+# In[11]:
 
 
 tsla = yf.download('TSLA', session=session)
 
 
-# In[ ]:
+# In[12]:
 
 
 tsla['TSLA'] = tsla['Adj Close'].pct_change()
 
 
-# In[ ]:
+# In[13]:
 
 
 win = 20
@@ -203,7 +203,7 @@ tsla['LB20'] = tsla['SMA20'] - K*tsla['SMV20']
 tsla['UB20'] = tsla['SMA20'] + K*tsla['SMV20']
 
 
-# In[ ]:
+# In[14]:
 
 
 tsla.loc['2020', ['Adj Close', 'LB20', 'UB20']].plot(style=['b-', 'g--', 'g--'])
@@ -238,13 +238,13 @@ plt.show()
 # 
 # We will use Tesla data, again, for this section, but in a new data frame `tsla2`.
 
-# In[ ]:
+# In[15]:
 
 
 tsla2 = yf.download('TSLA', session=session)
 
 
-# In[ ]:
+# In[16]:
 
 
 tsla2['TSLA'] = tsla2['Adj Close'].pct_change()
