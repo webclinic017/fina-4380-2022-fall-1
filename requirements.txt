@@ -1,9 +1,7 @@
 ghp-import
-jedi-language-server
 jupyter-book 
 jupyterlab 
 jupyterlab-git
-jupyterlab-lsp
 linearmodels 
 matplotlib 
 numpy 
