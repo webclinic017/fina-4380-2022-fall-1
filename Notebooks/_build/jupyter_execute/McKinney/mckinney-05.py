@@ -249,6 +249,12 @@ frame2.state
 # In[28]:
 
 
+frame2
+
+
+# In[29]:
+
+
 frame2.loc['one']
 
 
@@ -257,31 +263,25 @@ frame2.loc['one']
 # 1. The `.loc[]` method slices by row labels and column names
 # 1. The `.iloc[]` method slices by *integer* row and label indices
 
-# In[29]:
+# In[30]:
 
 
 frame2.loc['three']
 
 
-# In[30]:
-
-
-frame2.loc['three', 'state']
-
-
 # In[31]:
+
+
+frame2.loc['three', 'state'] # row, column
+
+
+# In[32]:
 
 
 frame2.iloc[2]
 
 
 # We can assign either scalars or arrays (or lists) to data frame columns.
-
-# In[32]:
-
-
-frame2['debt'] = 16.5
-
 
 # In[33]:
 
@@ -292,7 +292,7 @@ frame2
 # In[34]:
 
 
-frame2['debt'] = np.arange(6.)
+frame2['debt'] = 16.5
 
 
 # In[35]:
@@ -301,23 +301,35 @@ frame2['debt'] = np.arange(6.)
 frame2
 
 
+# In[36]:
+
+
+frame2['debt'] = np.arange(6.)
+
+
+# In[37]:
+
+
+frame2
+
+
 # If we assign a series to a data frame column, pandas will use the index to align it with the data frame.
 # Data frame rows that are not in the series become missing values `NaN`.
 
-# In[36]:
+# In[38]:
 
 
 val = pd.Series([-1.2, -1.5, -1.7], index=['two', 'four', 'five'])
 frame2['debt'] = val
 
 
-# In[37]:
+# In[39]:
 
 
 val
 
 
-# In[38]:
+# In[40]:
 
 
 frame2
@@ -325,19 +337,25 @@ frame2
 
 # We can add columns to our data frame, then delete them with `del`.
 
-# In[39]:
+# In[41]:
 
 
 frame2['eastern'] = frame2.state == 'Ohio'
 
 
-# In[40]:
+# In[42]:
+
+
+frame2
+
+
+# In[43]:
 
 
 del frame2['eastern']
 
 
-# In[41]:
+# In[44]:
 
 
 frame2
@@ -345,14 +363,14 @@ frame2
 
 # ### Index Objects
 
-# In[42]:
+# In[45]:
 
 
 obj = pd.Series(range(3), index=['a', 'b', 'c'])
 index = obj.index
 
 
-# In[43]:
+# In[46]:
 
 
 index[1:]
@@ -360,25 +378,25 @@ index[1:]
 
 # Index objects are immutable!
 
-# In[44]:
+# In[47]:
 
 
 # index[1] = 'd'  # TypeError: Index does not support mutable operations
 
 
-# In[45]:
+# In[48]:
 
 
 labels = pd.Index(np.arange(3))
 
 
-# In[46]:
+# In[49]:
 
 
 obj2 = pd.Series([1.5, -2.5, 0], index=labels)
 
 
-# In[47]:
+# In[50]:
 
 
 obj2
@@ -386,7 +404,7 @@ obj2
 
 # Indices can contain duplicates, so an index does not guarantee our data are duplicate-free.
 
-# In[48]:
+# In[51]:
 
 
 dup_labels = pd.Index(['foo', 'foo', 'bar', 'bar'])
@@ -401,23 +419,59 @@ dup_labels = pd.Index(['foo', 'foo', 'bar', 'bar'])
 # 
 # > Dropping one or more entries from an axis is easy if you already have an index array or list without those entries. As that can require a bit of munging and set logic, the  drop method will return a new object with the indicated value or values deleted from an axis.
 
-# In[49]:
+# In[52]:
 
 
 obj = pd.Series(np.arange(5.), index=['a', 'b', 'c', 'd', 'e'])
 
 
-# In[50]:
+# In[53]:
 
 
-obj.drop(['d', 'c'])
+obj
+
+
+# In[54]:
+
+
+obj_without_d_and_c = obj.drop(['d', 'c'])
+
+
+# In[55]:
+
+
+obj
+
+
+# In[56]:
+
+
+obj_without_d_and_c
 
 
 # Note that we need to use the `inplace=True` argument to `.drop()` to change `obj`.
 
+# In[57]:
+
+
+obj_copy = obj.copy()
+
+
+# In[58]:
+
+
+obj_copy.drop(['d', 'c'], inplace=True)
+
+
+# In[59]:
+
+
+obj_copy
+
+
 # The `.drop()` method works on data frames, too.
 
-# In[51]:
+# In[60]:
 
 
 data = pd.DataFrame(
@@ -427,25 +481,43 @@ data = pd.DataFrame(
 )
 
 
-# In[52]:
+# In[61]:
+
+
+data
+
+
+# In[62]:
 
 
 data.drop(['Colorado', 'Ohio']) # implied ", axis=0"
 
 
+# In[63]:
+
+
+data.drop(index=['Colorado', 'Ohio'])
+
+
 # The `.drop()` method accepts an `axis` argument and the default is `axis=0` to drop rows based on labels.
 # To drop columns, we use `axis=1` or `axis='columns'`.
 
-# In[53]:
+# In[64]:
 
 
 data.drop('two', axis=1)
 
 
-# In[54]:
+# In[65]:
 
 
-data.drop(['two', 'four'], axis='columns')
+data.drop(columns='two')
+
+
+# In[66]:
+
+
+data.drop(['two', 'four'], axis='columns') # axis='columns' is the same as axis=1
 
 
 # ### Indexing, Selection, and Filtering
@@ -454,19 +526,25 @@ data.drop(['two', 'four'], axis='columns')
 # 
 # > Series indexing (obj[...]) works analogously to NumPy array indexing, except you can use the Series's index values instead of only integers.  
 
-# In[55]:
+# In[67]:
 
 
 obj = pd.Series(np.arange(4.), index=['a', 'b', 'c', 'd'])
 
 
-# In[56]:
+# In[68]:
+
+
+obj
+
+
+# In[69]:
 
 
 obj['b']
 
 
-# In[57]:
+# In[70]:
 
 
 obj[1]
@@ -475,43 +553,37 @@ obj[1]
 # The code directly above works, but when we index/slice by integers, we should use `.iloc[]`.
 # We should be as explicit as possible!
 
-# In[58]:
+# In[71]:
 
 
 obj.iloc[1]
 
 
-# In[59]:
-
-
-obj
-
-
-# In[60]:
+# In[72]:
 
 
 obj.iloc[1:3]
 
 
-# In[61]:
+# In[73]:
 
 
 obj.loc['b':'d'] # STRING SLICES ARE INCLUSIVE ON BOTH ENDS!!!
 
 
-# In[62]:
+# In[74]:
 
 
 obj[['b', 'a', 'd']]
 
 
-# In[63]:
+# In[75]:
 
 
 obj[[1, 3]]
 
 
-# In[64]:
+# In[76]:
 
 
 obj[obj < 2]
@@ -519,19 +591,25 @@ obj[obj < 2]
 
 # When we slice with labels, the left and right endpoints are inclusive.
 
-# In[65]:
+# In[77]:
 
 
 obj['b':'c']
 
 
-# In[66]:
+# In[78]:
 
 
 obj['b':'c'] = 5
 
 
-# In[67]:
+# In[79]:
+
+
+obj
+
+
+# In[80]:
 
 
 data = pd.DataFrame(
@@ -543,7 +621,7 @@ data = pd.DataFrame(
 
 # Indexing one column returns a series.
 
-# In[68]:
+# In[81]:
 
 
 data['two']
@@ -551,7 +629,7 @@ data['two']
 
 # Indexing two or more columns returns a data frame.
 
-# In[69]:
+# In[82]:
 
 
 data[['three', 'one']]
@@ -559,13 +637,13 @@ data[['three', 'one']]
 
 # If we want a data frame with one column, we can use `[[]]`:
 
-# In[70]:
+# In[83]:
 
 
 data['three']
 
 
-# In[71]:
+# In[84]:
 
 
 data[['three']]
@@ -573,7 +651,7 @@ data[['three']]
 
 # When we slice with integer indices with `[]`, we slice rows.
 
-# In[72]:
+# In[85]:
 
 
 data[:2]
@@ -581,7 +659,7 @@ data[:2]
 
 # When I slice rows, I prefer to use `.loc[]` or `.iloc[]`.
 
-# In[73]:
+# In[86]:
 
 
 data.iloc[:2]
@@ -589,13 +667,13 @@ data.iloc[:2]
 
 # We can index a data frame with Booleans, as we did with NumPy arrays.
 
-# In[74]:
+# In[87]:
 
 
 data < 5
 
 
-# In[75]:
+# In[88]:
 
 
 data[data < 5] = 0
@@ -603,25 +681,25 @@ data[data < 5] = 0
 
 # > For DataFrame label-indexing on the rows, I introduce the special indexing operators loc and iloc. They enable you to select a subset of the rows and columns from a DataFrame with NumPy-like notation using either axis labels (loc) or integers (iloc).
 
-# In[76]:
+# In[89]:
 
 
 data.loc['Colorado', ['two', 'three']]
 
 
-# In[77]:
+# In[90]:
 
 
 data.iloc[2, [3, 0, 1]]
 
 
-# In[78]:
+# In[91]:
 
 
 data.iloc[2]
 
 
-# In[79]:
+# In[92]:
 
 
 data.iloc[[1, 2], [3, 0, 1]]
@@ -629,13 +707,13 @@ data.iloc[[1, 2], [3, 0, 1]]
 
 # If we want to combine integer, label, and Boolean indices, we can chain the indices.
 
-# In[80]:
+# In[93]:
 
 
 data.loc[:'Utah', 'two']
 
 
-# In[81]:
+# In[94]:
 
 
 data.iloc[:, :3][data.three > 5]
@@ -661,28 +739,23 @@ data.iloc[:, :3][data.three > 5]
 
 # ### Integer Indexes
 
-# In[82]:
+# In[95]:
 
 
 ser = pd.Series(np.arange(3.))
-
-
-# In[83]:
-
-
 ser
 
 
 # The following indexing yields an error because the series cannot fall back to NumPy array indexing.
 # Falling back to NumPy array indexing here would generate many subtle bugs elsewhere.
 
-# In[84]:
+# In[96]:
 
 
 # ser[-1]
 
 
-# In[85]:
+# In[97]:
 
 
 ser.iloc[-1]
@@ -690,31 +763,31 @@ ser.iloc[-1]
 
 # However, the following indexing works fine because with string labels there is no ambiguity.
 
-# In[86]:
+# In[98]:
 
 
 ser2 = pd.Series(np.arange(3.), index=['a', 'b', 'c'])
 
 
-# In[87]:
+# In[99]:
 
 
 ser2[-1]
 
 
-# In[88]:
+# In[100]:
 
 
 ser[:1]
 
 
-# In[89]:
+# In[101]:
 
 
 ser.loc[:1]
 
 
-# In[90]:
+# In[102]:
 
 
 ser.iloc[:1]
@@ -727,40 +800,40 @@ ser.iloc[:1]
 # 
 # > An important pandas feature for some applications is the behavior of arithmetic between objects with different indexes. When you are adding together objects, if any index pairs are not the same, the respective index in the result will be the union of the index pairs. For users with database experience, this is similar to an automatic outer join on the index labels. 
 
-# In[91]:
+# In[103]:
 
 
 s1 = pd.Series([7.3, -2.5, 3.4, 1.5], index=['a', 'c', 'd', 'e'])
 s2 = pd.Series([-2.1, 3.6, -1.5, 4, 3.1], index=['a', 'c', 'e', 'f', 'g'])
 
 
-# In[92]:
+# In[104]:
 
 
 s1 + s2
 
 
-# In[93]:
+# In[105]:
 
 
 df1 = pd.DataFrame(np.arange(9.).reshape((3, 3)), columns=list('bcd'), index=['Ohio', 'Texas', 'Colorado'])
 df2 = pd.DataFrame(np.arange(12.).reshape((4, 3)), columns=list('bde'), index=['Utah', 'Ohio', 'Texas', 'Oregon'])
 
 
-# In[94]:
+# In[106]:
 
 
 df1 + df2
 
 
-# In[95]:
+# In[107]:
 
 
 df1 = pd.DataFrame({'A': [1, 2]})
 df2 = pd.DataFrame({'B': [3, 4]})
 
 
-# In[96]:
+# In[108]:
 
 
 df1 - df2
@@ -768,7 +841,7 @@ df1 - df2
 
 # #### Arithmetic methods with fill values
 
-# In[97]:
+# In[109]:
 
 
 df1 = pd.DataFrame(np.arange(12.).reshape((3, 4)), columns=list('abcd'))
@@ -776,7 +849,19 @@ df2 = pd.DataFrame(np.arange(20.).reshape((4, 5)), columns=list('abcde'))
 df2.loc[1, 'b'] = np.nan
 
 
-# In[98]:
+# In[110]:
+
+
+df1
+
+
+# In[111]:
+
+
+df2
+
+
+# In[112]:
 
 
 df1 + df2
@@ -785,7 +870,7 @@ df1 + df2
 # We can specify a fill value for `NaN` values.
 # Note that pandas fills would-be `NaN` values in each data frame *before* the arithmetic operation.
 
-# In[99]:
+# In[113]:
 
 
 df1.add(df2, fill_value=0)
@@ -793,25 +878,25 @@ df1.add(df2, fill_value=0)
 
 # #### Operations between DataFrame and Series
 
-# In[100]:
+# In[114]:
 
 
 arr = np.arange(12.).reshape((3, 4))
 
 
-# In[101]:
+# In[115]:
 
 
 arr
 
 
-# In[102]:
+# In[116]:
 
 
 arr[0]
 
 
-# In[103]:
+# In[117]:
 
 
 arr - arr[0]
@@ -819,7 +904,7 @@ arr - arr[0]
 
 # Arithmetic operations between series and data frames behave the same as the example above.
 
-# In[104]:
+# In[118]:
 
 
 frame = pd.DataFrame(
@@ -830,43 +915,43 @@ frame = pd.DataFrame(
 series = frame.iloc[0]
 
 
-# In[105]:
+# In[119]:
 
 
 frame
 
 
-# In[106]:
+# In[120]:
 
 
 series
 
 
-# In[107]:
+# In[121]:
 
 
 frame - series
 
 
-# In[108]:
+# In[122]:
 
 
 series2 = pd.Series(range(3), index=['b', 'e', 'f'])
 
 
-# In[109]:
+# In[123]:
 
 
 frame + series2
 
 
-# In[110]:
+# In[124]:
 
 
 series3 = frame['d']
 
 
-# In[111]:
+# In[125]:
 
 
 frame.sub(series3, axis='index')
@@ -874,7 +959,7 @@ frame.sub(series3, axis='index')
 
 # ### Function Application and Mapping
 
-# In[112]:
+# In[126]:
 
 
 np.random.seed(42)
@@ -885,19 +970,19 @@ frame = pd.DataFrame(
 )
 
 
-# In[113]:
+# In[127]:
 
 
 frame
 
 
-# In[114]:
+# In[128]:
 
 
-np.abs(frame)
+np.abs(frame) # np.abs() returns the absolute value
 
 
-# In[115]:
+# In[129]:
 
 
 frame.apply(np.abs)
@@ -905,20 +990,20 @@ frame.apply(np.abs)
 
 # > Another frequent operation is applying a function on one-dimensional arrays to each column or row. DataFrame’s apply method does exactly this:
 
-# In[116]:
+# In[130]:
 
 
 frame
 
 
-# In[117]:
+# In[131]:
 
 
 f = lambda x: x.max() - x.min()
 frame.apply(f)
 
 
-# In[118]:
+# In[132]:
 
 
 frame.apply(f, axis=1)
@@ -926,7 +1011,7 @@ frame.apply(f, axis=1)
 
 # Note that we can use anonymous (lambda) functions "on the fly":
 
-# In[119]:
+# In[133]:
 
 
 frame.apply(lambda x: x.max() - x.min(), axis=1)
@@ -934,13 +1019,13 @@ frame.apply(lambda x: x.max() - x.min(), axis=1)
 
 # Here is an example of the speed costs of `.apply()`:
 
-# In[120]:
+# In[134]:
 
 
 get_ipython().run_line_magic('timeit', "frame['e'].abs()")
 
 
-# In[121]:
+# In[135]:
 
 
 get_ipython().run_line_magic('timeit', "frame['e'].apply(np.abs)")
@@ -948,7 +1033,7 @@ get_ipython().run_line_magic('timeit', "frame['e'].apply(np.abs)")
 
 # ## Summarizing and Computing Descriptive Statistics
 
-# In[122]:
+# In[136]:
 
 
 df = pd.DataFrame(
@@ -958,19 +1043,25 @@ df = pd.DataFrame(
 )
 
 
-# In[123]:
+# In[137]:
+
+
+df
+
+
+# In[138]:
 
 
 df.sum()
 
 
-# In[124]:
+# In[139]:
 
 
 df.sum(axis=1)
 
 
-# In[125]:
+# In[140]:
 
 
 df.mean(axis=1, skipna=False)
@@ -978,7 +1069,7 @@ df.mean(axis=1, skipna=False)
 
 # The `.idxmax()` method returns the label for the maximum observation.
 
-# In[126]:
+# In[141]:
 
 
 df.idxmax()
@@ -986,7 +1077,7 @@ df.idxmax()
 
 # The `.describe()` returns summary statistics for each numerical column in a data frame.
 
-# In[127]:
+# In[142]:
 
 
 df.describe()
@@ -994,20 +1085,18 @@ df.describe()
 
 # For non-numerical data, `.describe()` returns alternative summary statistics.
 
-# In[128]:
+# In[143]:
 
 
 obj = pd.Series(['a', 'a', 'b', 'c'] * 4)
 obj.describe()
 
 
-# In[129]:
+# In[144]:
 
 
 df
 
-
-# ---
 
 # ### Correlation and Covariance
 
@@ -1017,7 +1106,7 @@ df
 # 
 # We can install these two functions with the `%pip` magic:
 
-# In[130]:
+# In[145]:
 
 
 # %pip install yfinance requests-cache
@@ -1026,7 +1115,7 @@ df
 # If we are running Python locally, we only need to run the `%pip` magic once.
 # If we are running Python on DataCamp, we only need to run the `%pip` magic once *per workspace*.
 
-# In[131]:
+# In[146]:
 
 
 import yfinance as yf
@@ -1034,7 +1123,7 @@ import requests_cache
 session = requests_cache.CachedSession(expire_after='1D')
 
 
-# In[132]:
+# In[147]:
 
 
 stocks = yf.download(tickers=['AAPL', 'IBM', 'MSFT', 'GOOG'], session=session)
@@ -1047,13 +1136,7 @@ stocks = yf.download(tickers=['AAPL', 'IBM', 'MSFT', 'GOOG'], session=session)
 # 
 # $$R_t = \frac{(P_t + D_t) - P_{t-1}}{P_{t-1}} = \frac{\text{Adj Close}_t - \text{Adj Close}_{t-1}}{\text{Adj Close}_{t-1}}$$
 
-# In[133]:
-
-
-stocks['Adj Close'].pct_change()
-
-
-# In[134]:
+# In[148]:
 
 
 returns = stocks['Adj Close'].pct_change()
@@ -1061,7 +1144,7 @@ returns = stocks['Adj Close'].pct_change()
 
 # We can calculate pairwise correlation and covariance.
 
-# In[135]:
+# In[149]:
 
 
 returns['MSFT'].corr(returns['IBM'])
@@ -1069,13 +1152,13 @@ returns['MSFT'].corr(returns['IBM'])
 
 # We can also calculate correlation and covariance matrices.
 
-# In[136]:
+# In[150]:
 
 
 returns.corr()
 
 
-# In[137]:
+# In[151]:
 
 
 returns.corr().loc['MSFT', 'IBM']
@@ -1084,7 +1167,7 @@ returns.corr().loc['MSFT', 'IBM']
 # Or manually with `.cov()` and `std()` methods because $$Corr(x, y) = \frac{Cov(x, y)}{Std(x) \times Std(y)}.$$
 # Note that we have to explicitly subset to the same dates for both tickers because otherwise we would use different data for the covariances and standard deviations.
 
-# In[138]:
+# In[152]:
 
 
 _ = returns[['MSFT', 'IBM']].dropna()
@@ -1095,7 +1178,7 @@ _.cov().loc['MSFT', 'IBM'] / (_['MSFT'].std() * _['IBM'].std())
 # Using one long chain avoids temporary variables and is often easier to read, because chains read like sentences.
 # However, this is unnecessarily complex since we have the `.corr()` method!
 
-# In[139]:
+# In[153]:
 
 
 returns[['MSFT', 'IBM']].dropna().pipe(lambda x: x.cov().loc['MSFT', 'IBM'] / (x['MSFT'].std() * x['IBM'].std()))
@@ -1103,19 +1186,19 @@ returns[['MSFT', 'IBM']].dropna().pipe(lambda x: x.cov().loc['MSFT', 'IBM'] / (x
 
 # We can make long chains more readable by wrapping them in `()` and inserting line breaks.
 
-# In[140]:
+# In[154]:
 
 
 (
-	returns[['MSFT', 'IBM']]
-	.dropna()
-	.pipe(lambda x: x.cov().loc['MSFT', 'IBM'] / (x['MSFT'].std() * x['IBM'].std()))
+    returns[['MSFT', 'IBM']]
+    .dropna()
+    .pipe(lambda x: x.cov().loc['MSFT', 'IBM'] / (x['MSFT'].std() * x['IBM'].std()))
 )
 
 
 # ## Practice
 
-# In[141]:
+# In[155]:
 
 
 df = pd.DataFrame(
@@ -1125,13 +1208,59 @@ df = pd.DataFrame(
 )
 
 
+# In[156]:
+
+
+df
+
+
 # ***Practice:***
 # Slice the row in `df` with the largest value in column `one`.
+
+# In[157]:
+
+
+df.loc[df['one'] == df['one'].max()]
+
+
+# Here is the more Pythonic/pandas-like solution that uses the `.idxmax()` method.
+
+# In[158]:
+
+
+df.loc[df['one'].idxmax()]
+
+
+# If we really want to return a data frame, we can wrap the `.idxmax()` with `[]`.
+
+# In[159]:
+
+
+df.loc[[df['one'].idxmax()]]
+
 
 # ***Practice:***
 # Slice the column in `df` with the largest value in row `a`.
 
-# In[142]:
+# In[160]:
+
+
+df.loc[:, df.loc['a'] == df.loc['a'].max()]
+
+
+# In[161]:
+
+
+df[df.loc['a'].idxmax()]
+
+
+# In[162]:
+
+
+df.loc[:, df.loc['a'].idxmax()]
+
+
+# In[163]:
 
 
 stocks = yf.download(tickers=['AAPL', 'IBM', 'MSFT', 'GOOG'], session=session)

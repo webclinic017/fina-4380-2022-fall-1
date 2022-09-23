@@ -462,6 +462,35 @@ title="Print to PDF"
    </li>
   </ul>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   2022-09-23 Friday
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#can-i-update-a-data-frame-column-with-only-new-or-changed-values-from-a-series">
+     Can I update a data frame column with only new or changed values from a series?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#can-i-ignore-nan-values-when-i-sum-data-frame-rows-unless-all-values-are-nan">
+     Can I ignore
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       NaN
+      </span>
+     </code>
+     values when I sum data frame rows, unless all values are
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       NaN
+      </span>
+     </code>
+     ?
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
     </nav>
@@ -512,6 +541,35 @@ title="Print to PDF"
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#are-list-comprehensions-more-than-syntactic-sugar">
      Are list comprehensions more than syntactic sugar?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   2022-09-23 Friday
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#can-i-update-a-data-frame-column-with-only-new-or-changed-values-from-a-series">
+     Can I update a data frame column with only new or changed values from a series?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#can-i-ignore-nan-values-when-i-sum-data-frame-rows-unless-all-values-are-nan">
+     Can I ignore
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       NaN
+      </span>
+     </code>
+     values when I sum data frame rows, unless all values are
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       NaN
+      </span>
+     </code>
+     ?
     </a>
    </li>
   </ul>
@@ -607,6 +665,359 @@ We would need to write our own classes if we wrote an econometrics package, but 
 <p>I do not expect list comprehensions to be faster than for-loops, but it is hard to generalize and we would need to benchmark (<code class="docutils literal notranslate"><span class="pre">%%timeit</span></code>) specific cases.
 However, I consider the advantage of list comprehensions to be fast coding and comprehending instead of fast execution.
 <a class="reference external" href="https://realpython.com/list-comprehension-python/#benefits-of-using-list-comprehensions">Here</a> is a clear discussion of the benefits of list comprehensions.</p>
+</section>
+</section>
+<section id="id1">
+<h2>2022-09-23 Friday<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<p>We know pandas, so I will add the pandas (and others) import statements and settings changes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">150</span>
+<span class="o">%</span><span class="k">precision</span> 4
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="can-i-update-a-data-frame-column-with-only-new-or-changed-values-from-a-series">
+<h3>Can I update a data frame column with only new or changed values from a series?<a class="headerlink" href="#can-i-update-a-data-frame-column-with-only-new-or-changed-values-from-a-series" title="Permalink to this headline">#</a></h3>
+<p>Here are some toy data.
+We will add the data in the series <code class="docutils literal notranslate"><span class="pre">ser</span></code> to the <code class="docutils literal notranslate"><span class="pre">b</span></code> and <code class="docutils literal notranslate"><span class="pre">c</span></code> columns in the data frame <code class="docutils literal notranslate"><span class="pre">df</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;zero&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">))</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;one&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>zero</th>
+      <td>0.0000</td>
+      <td>1.0000</td>
+      <td>2.0000</td>
+    </tr>
+    <tr>
+      <th>one</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>6.0000</td>
+      <td>7.0000</td>
+      <td>8.0000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ser</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;zero&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">])</span>
+<span class="n">ser</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;zero&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ser</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>zero        NaN
+one    100.0000
+two    200.0000
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>By default, pandas overwrites all column values with those from the series.
+Therefore, column <code class="docutils literal notranslate"><span class="pre">b</span></code> takes all the values of <code class="docutils literal notranslate"><span class="pre">ser</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ser</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>zero</th>
+      <td>0.0000</td>
+      <td>NaN</td>
+      <td>2.0000</td>
+    </tr>
+    <tr>
+      <th>one</th>
+      <td>NaN</td>
+      <td>100.0000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>6.0000</td>
+      <td>200.0000</td>
+      <td>8.0000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>But can we keep the values in column <code class="docutils literal notranslate"><span class="pre">c</span></code> if the values in <code class="docutils literal notranslate"><span class="pre">ser</span></code> are missing?
+Yes, we can use the <code class="docutils literal notranslate"><span class="pre">.update()</span></code> method to update column <code class="docutils literal notranslate"><span class="pre">c</span></code> with the non-missing values in <code class="docutils literal notranslate"><span class="pre">ser</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ser</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>zero</th>
+      <td>0.0000</td>
+      <td>NaN</td>
+      <td>2.0000</td>
+    </tr>
+    <tr>
+      <th>one</th>
+      <td>NaN</td>
+      <td>100.0000</td>
+      <td>100.0000</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>6.0000</td>
+      <td>200.0000</td>
+      <td>200.0000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Series <code class="docutils literal notranslate"><span class="pre">ser</span></code> was missing the <code class="docutils literal notranslate"><span class="pre">zero</span></code> value, so <code class="docutils literal notranslate"><span class="pre">df</span></code> keeps its original 2.0000 value in the <code class="docutils literal notranslate"><span class="pre">zero</span></code> row and <code class="docutils literal notranslate"><span class="pre">c</span></code> column.
+However, <code class="docutils literal notranslate"><span class="pre">ser</span></code> was not missing the <code class="docutils literal notranslate"><span class="pre">one</span></code> and <code class="docutils literal notranslate"><span class="pre">two</span></code> values, so these values overwrite the <code class="docutils literal notranslate"><span class="pre">c</span></code> column values in <code class="docutils literal notranslate"><span class="pre">df</span></code>.</p>
+</section>
+<section id="can-i-ignore-nan-values-when-i-sum-data-frame-rows-unless-all-values-are-nan">
+<h3>Can I ignore <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values when I sum data frame rows, unless all values are <code class="docutils literal notranslate"><span class="pre">NaN</span></code>?<a class="headerlink" href="#can-i-ignore-nan-values-when-i-sum-data-frame-rows-unless-all-values-are-nan" title="Permalink to this headline">#</a></h3>
+<p>Here is a data frame <code class="docutils literal notranslate"><span class="pre">df</span></code> that is missing one value in row <code class="docutils literal notranslate"><span class="pre">zero</span></code> and all values in row <code class="docutils literal notranslate"><span class="pre">one</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;zero&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">))</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;zero&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;one&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>zero</th>
+      <td>NaN</td>
+      <td>1.0000</td>
+      <td>2.0000</td>
+    </tr>
+    <tr>
+      <th>one</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>6.0000</td>
+      <td>7.0000</td>
+      <td>8.0000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">.sum(axis=1)</span></code> method ignores <code class="docutils literal notranslate"><span class="pre">np.nan</span></code> by default.
+Therefore, the sum of the <code class="docutils literal notranslate"><span class="pre">zero</span></code> row is 3.000 and the sum of the <code class="docutils literal notranslate"><span class="pre">one</span></code> row is 0.0000, even though the <code class="docutils literal notranslate"><span class="pre">one</span></code> row has <code class="docutils literal notranslate"><span class="pre">np.nan</span></code> for every value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>zero    3.0000
+one     0.0000
+two    21.0000
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we want a row sum of <code class="docutils literal notranslate"><span class="pre">np.nan</span></code> when every value is missing, we can use the <code class="docutils literal notranslate"><span class="pre">min_counts</span></code> argument in <code class="docutils literal notranslate"><span class="pre">.sum()</span></code>.
+If we require at least one value, the sum of row <code class="docutils literal notranslate"><span class="pre">one</span></code> becomes <code class="docutils literal notranslate"><span class="pre">np.nan</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>zero    3.0000
+one        NaN
+two    21.0000
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we require at least three non-missing values, the sum of row <code class="docutils literal notranslate"><span class="pre">zero</span></code> becomes <code class="docutils literal notranslate"><span class="pre">np.nan</span></code> because it only had two non-missing values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">min_count</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>zero       NaN
+one        NaN
+two    21.0000
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 </section>
