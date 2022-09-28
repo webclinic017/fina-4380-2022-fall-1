@@ -586,7 +586,9 @@ These data are small (kilobytes instead of megabytes or gigabytes), so we might 
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[                       0%                       ]
-[                       0%                       ]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************50%                       ]  2 of 4 completed
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************75%***********            ]  3 of 4 completed
@@ -797,7 +799,7 @@ dtype: float64
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    0
 1    4
-dtype: int32
+dtype: int64
 </pre></div>
 </div>
 </div>
@@ -879,7 +881,7 @@ We contrain our results with a tuple of dictionaries of functions to the argumen
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      fun: array([1.])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      fun: 1.0
  hess_inv: &lt;1x1 LbfgsInvHessProduct with dtype=float64&gt;
       jac: array([2.])
   message: &#39;CONVERGENCE: NORM_OF_PROJECTED_GRADIENT_&lt;=_PGTOL&#39;
@@ -907,7 +909,7 @@ We use bounds to simply limit the search space, and we use constraints when we n
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     fun: array([1.])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     fun: 1.0000000000001776
      jac: array([2.])
  message: &#39;Optimization terminated successfully&#39;
     nfev: 4
@@ -992,7 +994,7 @@ Instead, we will base our helper functions on weights and returns only.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     fun: 0.1766471475572238
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     fun: 0.1766472998168987
      jac: array([0.1767, 0.1766, 0.1768, 0.1774])
  message: &#39;Optimization terminated successfully&#39;
     nfev: 40
@@ -1040,7 +1042,9 @@ Instead, we will base our helper functions on weights and returns only.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Minimum Variance Portfolio
-==========================
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==========================
 
 Performance
 -----------

@@ -978,7 +978,7 @@ The following code works as though our data were sorted, but raises a warning th
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\r.herron\AppData\Local\Temp\ipykernel_6180\1099700163.py:1: FutureWarning: Value based partial slicing on non-monotonic DatetimeIndexes with non-existing keys is deprecated and will raise a KeyError in a future Version.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_84392/1099700163.py:1: FutureWarning: Value based partial slicing on non-monotonic DatetimeIndexes with non-existing keys is deprecated and will raise a KeyError in a future Version.
   ts2[&#39;1/6/2011&#39;:&#39;1/11/2011&#39;]
 </pre></div>
 </div>
@@ -1054,7 +1054,7 @@ The toy data in series <code class="docutils literal notranslate"><span class="p
 2000-01-02    2
 2000-01-02    3
 2000-01-03    4
-dtype: int32
+dtype: int64
 </pre></div>
 </div>
 </div>
@@ -1094,7 +1094,7 @@ dtype: int32
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2000-01-02    1
 2000-01-02    2
 2000-01-02    3
-dtype: int32
+dtype: int64
 </pre></div>
 </div>
 </div>
@@ -1134,7 +1134,7 @@ dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2000-01-01    0
 2000-01-02    3
 2000-01-03    4
-dtype: int32
+dtype: int64
 </pre></div>
 </div>
 </div>
@@ -1689,68 +1689,68 @@ See below.</p>
       <td>...</td>
     </tr>
     <tr>
-      <th>2022-09-14</th>
-      <td>292.2400</td>
-      <td>306.0000</td>
-      <td>291.6400</td>
-      <td>302.6100</td>
-      <td>302.6100</td>
-      <td>72628700</td>
-      <td>0.0359</td>
-      <td>-0.0404</td>
-      <td>-0.0404</td>
-    </tr>
-    <tr>
-      <th>2022-09-15</th>
-      <td>301.8300</td>
-      <td>309.1200</td>
-      <td>300.7200</td>
-      <td>303.7500</td>
-      <td>303.7500</td>
-      <td>64795500</td>
-      <td>0.0038</td>
-      <td>0.0359</td>
-      <td>0.0359</td>
-    </tr>
-    <tr>
-      <th>2022-09-16</th>
-      <td>299.6100</td>
-      <td>303.7100</td>
-      <td>295.6000</td>
-      <td>303.3500</td>
-      <td>303.3500</td>
-      <td>86949500</td>
-      <td>-0.0013</td>
-      <td>0.0038</td>
-      <td>0.0038</td>
-    </tr>
-    <tr>
-      <th>2022-09-19</th>
-      <td>300.0900</td>
-      <td>309.8400</td>
-      <td>297.8000</td>
-      <td>309.0700</td>
-      <td>309.0700</td>
-      <td>60231200</td>
-      <td>0.0189</td>
-      <td>-0.0013</td>
-      <td>-0.0013</td>
-    </tr>
-    <tr>
-      <th>2022-09-20</th>
-      <td>306.9100</td>
-      <td>313.3300</td>
-      <td>305.5800</td>
-      <td>308.7300</td>
-      <td>308.7300</td>
-      <td>61642800</td>
+      <th>2022-09-21</th>
+      <td>308.2900</td>
+      <td>313.8000</td>
+      <td>300.6300</td>
+      <td>300.8000</td>
+      <td>300.8000</td>
+      <td>62555700</td>
+      <td>-0.0257</td>
       <td>-0.0011</td>
-      <td>0.0189</td>
-      <td>0.0189</td>
+      <td>-0.0011</td>
+    </tr>
+    <tr>
+      <th>2022-09-22</th>
+      <td>299.8600</td>
+      <td>301.2900</td>
+      <td>285.8200</td>
+      <td>288.5900</td>
+      <td>288.5900</td>
+      <td>70545400</td>
+      <td>-0.0406</td>
+      <td>-0.0257</td>
+      <td>-0.0257</td>
+    </tr>
+    <tr>
+      <th>2022-09-23</th>
+      <td>283.0900</td>
+      <td>284.5000</td>
+      <td>272.8200</td>
+      <td>275.3300</td>
+      <td>275.3300</td>
+      <td>63615400</td>
+      <td>-0.0459</td>
+      <td>-0.0406</td>
+      <td>-0.0406</td>
+    </tr>
+    <tr>
+      <th>2022-09-26</th>
+      <td>271.8300</td>
+      <td>284.0900</td>
+      <td>270.3100</td>
+      <td>276.0100</td>
+      <td>276.0100</td>
+      <td>58076900</td>
+      <td>0.0025</td>
+      <td>-0.0459</td>
+      <td>-0.0459</td>
+    </tr>
+    <tr>
+      <th>2022-09-27</th>
+      <td>283.8400</td>
+      <td>288.6700</td>
+      <td>277.5100</td>
+      <td>282.9400</td>
+      <td>282.9400</td>
+      <td>61609500</td>
+      <td>0.0251</td>
+      <td>0.0025</td>
+      <td>0.0025</td>
     </tr>
   </tbody>
 </table>
-<p>3079 rows × 9 columns</p>
+<p>3084 rows × 9 columns</p>
 </div></div></div>
 </div>
 </section>
@@ -1909,7 +1909,7 @@ Resampling requires and aggregation method, and here McKinney chooses the <code 
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2000-01-01 00:00:00    10
 2000-01-01 00:05:00    35
 2000-01-01 00:10:00    21
-Freq: 5T, dtype: int32
+Freq: 5T, dtype: int64
 </pre></div>
 </div>
 </div>
@@ -1933,7 +1933,7 @@ We can use the <code class="docutils literal notranslate"><span class="pre">clos
 2000-01-01 00:05:00    15
 2000-01-01 00:10:00    40
 2000-01-01 00:15:00    11
-Freq: 5T, dtype: int32
+Freq: 5T, dtype: int64
 </pre></div>
 </div>
 </div>
@@ -2220,7 +2220,9 @@ We will use data similar, but not identical, to the book data.</p>
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************67%*******                ]  2 of 3 completed
-[*********************100%***********************]  3 of 3 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  3 of 3 completed
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -2377,7 +2379,7 @@ Also, calculating rolling volatility with the <code class="docutils literal notr
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>737 ms ± 97.2 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>799 ms ± 21.3 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -2389,7 +2391,7 @@ Also, calculating rolling volatility with the <code class="docutils literal notr
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>434 µs ± 68.4 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>228 µs ± 7.48 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
 </pre></div>
 </div>
 </div>

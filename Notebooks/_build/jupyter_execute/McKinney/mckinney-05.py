@@ -1142,23 +1142,71 @@ stocks = yf.download(tickers=['AAPL', 'IBM', 'MSFT', 'GOOG'], session=session)
 returns = stocks['Adj Close'].pct_change()
 
 
-# We can calculate pairwise correlation and covariance.
+# We multiply by 252 to annualize mean daily returns because means grow linearly with time and there are (about) 252 trading days per year.
 
 # In[149]:
+
+
+returns.mean().mul(252)
+
+
+# We multiply by $\sqrt{252}$ to annualize the standard deviation of daily returns because variances grow linearly with time, there are (about) 252 trading days per year, and the standard deviation is the square root of the variance.
+
+# In[150]:
+
+
+returns.std().mul(np.sqrt(252))
+
+
+# ---
+
+# ***SIDEBAR, THAT IS A FEW WEEKS EARLY***
+# We find similar means is we convert our daily returns to annual returns, then use calculate the means of annual returns.
+# We will learn more about `.resample('A')` in a few weeks.
+
+# In[151]:
+
+
+returns.loc['2005':'2021'].mean().mul(252)
+
+
+# In[152]:
+
+
+returns.loc['2005':'2021'].add(1).resample('A').prod().sub(1).mean()
+
+
+# In[153]:
+
+
+returns.loc['2005':'2021'].std().mul(np.sqrt(252))
+
+
+# In[154]:
+
+
+returns.loc['2005':'2021'].add(1).resample('A').prod().sub(1).std()
+
+
+# ---
+
+# We can calculate pairwise correlations.
+
+# In[155]:
 
 
 returns['MSFT'].corr(returns['IBM'])
 
 
-# We can also calculate correlation and covariance matrices.
+# We can also calculate correlation matrices.
 
-# In[150]:
+# In[156]:
 
 
 returns.corr()
 
 
-# In[151]:
+# In[157]:
 
 
 returns.corr().loc['MSFT', 'IBM']
@@ -1167,7 +1215,20 @@ returns.corr().loc['MSFT', 'IBM']
 # Or manually with `.cov()` and `std()` methods because $$Corr(x, y) = \frac{Cov(x, y)}{Std(x) \times Std(y)}.$$
 # Note that we have to explicitly subset to the same dates for both tickers because otherwise we would use different data for the covariances and standard deviations.
 
-# In[152]:
+# ***Here is the wrong way!***
+# The following is wrong because pandas will use different data for the `.cov()` and `.std()` calculations.
+# When possible, use a pre-built function or method to avoid silent failures!
+
+# In[158]:
+
+
+returns.cov().loc['MSFT', 'IBM'] / (returns['MSFT'].std() * returns['IBM'].std())
+
+
+# ***The following is correct, but tedious since it requires a disposable data frame `_` that we only use in this cell!***
+# There is nothing special about `_`, it is just commonly used for disposable variables that we do not plan to reuse.
+
+# In[159]:
 
 
 _ = returns[['MSFT', 'IBM']].dropna()
@@ -1178,7 +1239,7 @@ _.cov().loc['MSFT', 'IBM'] / (_['MSFT'].std() * _['IBM'].std())
 # Using one long chain avoids temporary variables and is often easier to read, because chains read like sentences.
 # However, this is unnecessarily complex since we have the `.corr()` method!
 
-# In[153]:
+# In[160]:
 
 
 returns[['MSFT', 'IBM']].dropna().pipe(lambda x: x.cov().loc['MSFT', 'IBM'] / (x['MSFT'].std() * x['IBM'].std()))
@@ -1186,7 +1247,7 @@ returns[['MSFT', 'IBM']].dropna().pipe(lambda x: x.cov().loc['MSFT', 'IBM'] / (x
 
 # We can make long chains more readable by wrapping them in `()` and inserting line breaks.
 
-# In[154]:
+# In[161]:
 
 
 (
@@ -1198,7 +1259,10 @@ returns[['MSFT', 'IBM']].dropna().pipe(lambda x: x.cov().loc['MSFT', 'IBM'] / (x
 
 # ## Practice
 
-# In[155]:
+# ***Practice:***
+# Slice the row in `df` with the largest value in column `one`.
+
+# In[162]:
 
 
 df = pd.DataFrame(
@@ -1208,16 +1272,7 @@ df = pd.DataFrame(
 )
 
 
-# In[156]:
-
-
-df
-
-
-# ***Practice:***
-# Slice the row in `df` with the largest value in column `one`.
-
-# In[157]:
+# In[163]:
 
 
 df.loc[df['one'] == df['one'].max()]
@@ -1225,7 +1280,7 @@ df.loc[df['one'] == df['one'].max()]
 
 # Here is the more Pythonic/pandas-like solution that uses the `.idxmax()` method.
 
-# In[158]:
+# In[164]:
 
 
 df.loc[df['one'].idxmax()]
@@ -1233,7 +1288,7 @@ df.loc[df['one'].idxmax()]
 
 # If we really want to return a data frame, we can wrap the `.idxmax()` with `[]`.
 
-# In[159]:
+# In[165]:
 
 
 df.loc[[df['one'].idxmax()]]
@@ -1242,40 +1297,83 @@ df.loc[[df['one'].idxmax()]]
 # ***Practice:***
 # Slice the column in `df` with the largest value in row `a`.
 
-# In[160]:
+# In[166]:
 
 
 df.loc[:, df.loc['a'] == df.loc['a'].max()]
 
 
-# In[161]:
+# In[167]:
 
 
 df[df.loc['a'].idxmax()]
 
 
-# In[162]:
+# In[168]:
 
 
 df.loc[:, df.loc['a'].idxmax()]
 
 
-# In[163]:
+# ***Practice:***
+# Calculate the correlation matrix for these four stocks using data from 2010 through 2015.
+
+# In[169]:
 
 
 stocks = yf.download(tickers=['AAPL', 'IBM', 'MSFT', 'GOOG'], session=session)
 
 
-# ***Practice:***
-# Calculate the correlation matrix for these four stocks using data from 2010 through 2015.
+# In[170]:
+
+
+returns = stocks['Adj Close'].pct_change()
+
+
+# In[171]:
+
+
+returns.loc['2010':'2015'].corr()
+
 
 # ***Practice:***
 # Calculate the correlation matrix for these four stocks using data from 2016 through today.
+
+# In[172]:
+
+
+returns.loc['2016':].corr()
+
 
 # ***Practice:***
 # Calculate the cumulative returns for these four stocks for 2020 through today.
 # We can compound returns as: $$1 + R_{cumulative,T} = \prod_{t=1}^T 1 + R_t.$$ 
 # We can use the cumulative product method `.cumprod()` to calculate the right hand side of the formula above.
 
+# In[173]:
+
+
+returns.loc['2020':].add(1).cumprod().sub(1)
+
+
 # ***Practice:***
 # Use the `.plot()` method to plot these cumulative returns.
+
+# In[174]:
+
+
+returns.loc['2020':].add(1).cumprod().sub(1).mul(100).plot()
+plt.ylabel('Cumulative Return (%)')
+plt.title('Cumulative Returns Since 2020')
+plt.show()
+
+
+# In[175]:
+
+
+returns.add(1).cumprod().sub(1).mul(100).loc['2020':].plot()
+plt.ylabel('Cumulative Return (%)')
+plt.title('Cumulative Returns Since Close of IPO Day')
+plt.semilogy() # I added this after class to use a log-scale on the y axis to improve readability
+plt.show()
+

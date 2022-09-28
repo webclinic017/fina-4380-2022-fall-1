@@ -638,6 +638,27 @@ Hierarchical indexing helps us work with higher-dimensional data in a lower-dime
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a  1    0.4967
+   2   -0.1383
+   3    0.6477
+b  1    1.5230
+   3   -0.2342
+c  1   -0.2341
+   2    1.5792
+d  2    0.7674
+   3   -0.4695
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
 <p>We can partially index this series to concisely subset data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -685,7 +706,8 @@ dtype: float64
 </div>
 </div>
 </div>
-<p>We can also subset on the inner index level.</p>
+<p>We can also subset on the inner index level.
+Here the first <code class="docutils literal notranslate"><span class="pre">:</span></code> slices all values in the outer index (a, b, c, and d).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
@@ -763,6 +785,27 @@ We can un-stack <code class="docutils literal notranslate"><span class="pre">dat
 </table>
 </div></div></div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a  1    0.4967
+   2   -0.1383
+   3    0.6477
+b  1    1.5230
+   3   -0.2342
+c  1   -0.2341
+   2    1.5792
+d  2    0.7674
+   3   -0.4695
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
 <p>We can create a data frame with hieracrhical indices or multi-indices on rows <em>and</em> columns.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -783,6 +826,85 @@ We can un-stack <code class="docutils literal notranslate"><span class="pre">dat
 </pre></div>
 </div>
 </div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">frame</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>state</th>
+      <th colspan="2" halign="left">Ohio</th>
+      <th>Colorado</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>color</th>
+      <th>Green</th>
+      <th>Red</th>
+      <th>Green</th>
+    </tr>
+    <tr>
+      <th>key1</th>
+      <th>key2</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">a</th>
+      <th>1</th>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">b</th>
+      <th>1</th>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>9</td>
+      <td>10</td>
+      <td>11</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Recall that <code class="docutils literal notranslate"><span class="pre">df[val]</span></code> selects the <code class="docutils literal notranslate"><span class="pre">val</span></code> column (or columns when <code class="docutils literal notranslate"><span class="pre">val</span></code> is a list).
 Here <code class="docutils literal notranslate"><span class="pre">frame</span></code> has a multi-index for the columns, so <code class="docutils literal notranslate"><span class="pre">frame['Ohio']</span></code> selects all columns with Ohio as the outer index level.</p>
@@ -4136,7 +4258,7 @@ Ohio      one       0
 Colorado  one       3
           two       4
           three     5
-dtype: int32
+dtype: int64
 </pre></div>
 </div>
 </div>
@@ -4647,6 +4769,9 @@ We will skip these additional aggregation methods for now.</p>
 </section>
 <section id="practice">
 <h2>Practice<a class="headerlink" href="#practice" title="Permalink to this headline">#</a></h2>
+<p><em><strong>Practice:</strong></em>
+Above, we un-stacked the inner index level to columns.
+Instead, un-stack the outer index level to columns.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
@@ -4661,11 +4786,236 @@ We will skip these additional aggregation methods for now.</p>
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+      <th>d</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>0.4967</td>
+      <td>1.5230</td>
+      <td>-0.2341</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.1383</td>
+      <td>NaN</td>
+      <td>1.5792</td>
+      <td>0.7674</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.6477</td>
+      <td>-0.2342</td>
+      <td>NaN</td>
+      <td>-0.4695</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">swaplevel</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+      <th>d</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>0.4967</td>
+      <td>1.5230</td>
+      <td>-0.2341</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.1383</td>
+      <td>NaN</td>
+      <td>1.5792</td>
+      <td>0.7674</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.6477</td>
+      <td>-0.2342</td>
+      <td>NaN</td>
+      <td>-0.4695</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+      <th>d</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>0.4967</td>
+      <td>1.5230</td>
+      <td>-0.2341</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.1383</td>
+      <td>NaN</td>
+      <td>1.5792</td>
+      <td>0.7674</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.6477</td>
+      <td>-0.2342</td>
+      <td>NaN</td>
+      <td>-0.4695</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+      <th>d</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>0.4967</td>
+      <td>1.5230</td>
+      <td>-0.2341</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.1383</td>
+      <td>NaN</td>
+      <td>1.5792</td>
+      <td>0.7674</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.6477</td>
+      <td>-0.2342</td>
+      <td>NaN</td>
+      <td>-0.4695</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
 <p><em><strong>Practice:</strong></em>
-Above, we un-stacked the inner index level to columns.
-Instead, un-stack the outer index level to columns.</p>
-<p><em><strong>Practice:</strong></em>
-Download data from Yahoo Finance for AAPL, FB, and MSFT to a data frame named <code class="docutils literal notranslate"><span class="pre">stocks</span></code>.
+Download data from Yahoo Finance for AAPL, META, and MSFT to a data frame named <code class="docutils literal notranslate"><span class="pre">stocks</span></code>.
 Then add daily returns for each stock as the percent change in the adjusted closing price, and call it <code class="docutils literal notranslate"><span class="pre">Returns</span></code>.
 Finally, wrangle <code class="docutils literal notranslate"><span class="pre">stocks</span></code> as follows and assign to a new data frame <code class="docutils literal notranslate"><span class="pre">stocks_long</span></code>.
 <em>Hint:</em> You may want to use <code class="docutils literal notranslate"><span class="pre">pd.MultiIndex()</span></code> to add multiple return columns at once:</p>
@@ -4678,6 +5028,409 @@ Finally, wrangle <code class="docutils literal notranslate"><span class="pre">st
 </li>
 <li><p>Sort <code class="docutils literal notranslate"><span class="pre">stocks_long</span></code> so that data are in chronological order within alphabetical blocks by ticker</p></li>
 </ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stocks</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">tickers</span><span class="o">=</span><span class="s1">&#39;AAPL META MSFT&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[                       0%                       ]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************67%*******                ]  2 of 3 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  3 of 3 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">returns</span> <span class="o">=</span> <span class="n">stocks</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Copy-and-paste works, but does not scale well.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># stocks[(&#39;Returns&#39;, &#39;AAPL&#39;)] = returns[&#39;AAPL&#39;]</span>
+<span class="c1"># stocks[(&#39;Returns&#39;, &#39;META&#39;)] = returns[&#39;META&#39;]</span>
+<span class="c1"># stocks[(&#39;Returns&#39;, &#39;MSFT&#39;)] = returns[&#39;MSFT&#39;]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>A better solution is to use <code class="docutils literal notranslate"><span class="pre">pd.multiIndex.from_product()</span></code> to create a <code class="docutils literal notranslate"><span class="pre">Returns</span></code> column for every ticker.
+Getting column names from the <code class="docutils literal notranslate"><span class="pre">Adj</span> <span class="pre">Close</span></code> group makes sure that we do not assign returns to the wrong tickers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stocks</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_product</span><span class="p">([[</span><span class="s1">&#39;Returns&#39;</span><span class="p">],</span> <span class="n">stocks</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">columns</span><span class="p">])]</span> <span class="o">=</span> <span class="n">returns</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stocks</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="3" halign="left">Adj Close</th>
+      <th colspan="3" halign="left">Close</th>
+      <th colspan="3" halign="left">High</th>
+      <th colspan="3" halign="left">Low</th>
+      <th colspan="3" halign="left">Open</th>
+      <th colspan="3" halign="left">Volume</th>
+      <th colspan="3" halign="left">Returns</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>AAPL</th>
+      <th>META</th>
+      <th>MSFT</th>
+      <th>AAPL</th>
+      <th>META</th>
+      <th>MSFT</th>
+      <th>AAPL</th>
+      <th>META</th>
+      <th>MSFT</th>
+      <th>AAPL</th>
+      <th>...</th>
+      <th>MSFT</th>
+      <th>AAPL</th>
+      <th>META</th>
+      <th>MSFT</th>
+      <th>AAPL</th>
+      <th>META</th>
+      <th>MSFT</th>
+      <th>AAPL</th>
+      <th>META</th>
+      <th>MSFT</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1980-12-12</th>
+      <td>0.1000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.1283</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.1289</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.1283</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>0.1283</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>469033600</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1980-12-15</th>
+      <td>0.0948</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.1217</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.1222</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.1217</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>0.1222</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>175884800</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>-0.0522</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1980-12-16</th>
+      <td>0.0879</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.1127</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.1133</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.1127</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>0.1133</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>105728000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>-0.0734</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1980-12-17</th>
+      <td>0.0900</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.1155</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.1161</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.1155</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>0.1155</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>86441600</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.0248</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1980-12-18</th>
+      <td>0.0926</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.1189</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.1194</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.1189</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>0.1189</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>73449600</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.0290</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2022-09-21</th>
+      <td>153.7200</td>
+      <td>142.1200</td>
+      <td>238.9500</td>
+      <td>153.7200</td>
+      <td>142.1200</td>
+      <td>238.9500</td>
+      <td>158.7400</td>
+      <td>149.6000</td>
+      <td>247.6600</td>
+      <td>153.6000</td>
+      <td>...</td>
+      <td>238.9000</td>
+      <td>157.3400</td>
+      <td>146.3900</td>
+      <td>244.2700</td>
+      <td>101696800</td>
+      <td>38338600.0000</td>
+      <td>28625600.0000</td>
+      <td>-0.0203</td>
+      <td>-0.0272</td>
+      <td>-0.0144</td>
+    </tr>
+    <tr>
+      <th>2022-09-22</th>
+      <td>152.7400</td>
+      <td>142.8200</td>
+      <td>240.9800</td>
+      <td>152.7400</td>
+      <td>142.8200</td>
+      <td>240.9800</td>
+      <td>154.4700</td>
+      <td>144.5800</td>
+      <td>243.8600</td>
+      <td>150.9100</td>
+      <td>...</td>
+      <td>237.5700</td>
+      <td>152.3800</td>
+      <td>141.5500</td>
+      <td>237.8700</td>
+      <td>86652500</td>
+      <td>34418500.0000</td>
+      <td>31061200.0000</td>
+      <td>-0.0064</td>
+      <td>0.0049</td>
+      <td>0.0085</td>
+    </tr>
+    <tr>
+      <th>2022-09-23</th>
+      <td>150.4300</td>
+      <td>140.4100</td>
+      <td>237.9200</td>
+      <td>150.4300</td>
+      <td>140.4100</td>
+      <td>237.9200</td>
+      <td>151.4700</td>
+      <td>142.6200</td>
+      <td>241.1300</td>
+      <td>148.5600</td>
+      <td>...</td>
+      <td>235.2000</td>
+      <td>151.1900</td>
+      <td>141.4200</td>
+      <td>239.5400</td>
+      <td>95939200</td>
+      <td>31663300.0000</td>
+      <td>34137200.0000</td>
+      <td>-0.0151</td>
+      <td>-0.0169</td>
+      <td>-0.0127</td>
+    </tr>
+    <tr>
+      <th>2022-09-26</th>
+      <td>150.7700</td>
+      <td>136.3700</td>
+      <td>237.4500</td>
+      <td>150.7700</td>
+      <td>136.3700</td>
+      <td>237.4500</td>
+      <td>153.7700</td>
+      <td>142.2400</td>
+      <td>241.4500</td>
+      <td>149.6400</td>
+      <td>...</td>
+      <td>236.9000</td>
+      <td>149.6600</td>
+      <td>140.1200</td>
+      <td>237.0500</td>
+      <td>93339400</td>
+      <td>30497000.0000</td>
+      <td>27694200.0000</td>
+      <td>0.0023</td>
+      <td>-0.0288</td>
+      <td>-0.0020</td>
+    </tr>
+    <tr>
+      <th>2022-09-27</th>
+      <td>151.7600</td>
+      <td>134.4000</td>
+      <td>236.4100</td>
+      <td>151.7600</td>
+      <td>134.4000</td>
+      <td>236.4100</td>
+      <td>154.7200</td>
+      <td>139.4200</td>
+      <td>241.8000</td>
+      <td>149.9500</td>
+      <td>...</td>
+      <td>234.5000</td>
+      <td>152.7400</td>
+      <td>137.9200</td>
+      <td>239.9800</td>
+      <td>84319100</td>
+      <td>30749400.0000</td>
+      <td>26987700.0000</td>
+      <td>0.0066</td>
+      <td>-0.0144</td>
+      <td>-0.0044</td>
+    </tr>
+  </tbody>
+</table>
+<p>10537 rows × 21 columns</p>
+</div></div></div>
+</div>
 <p><em><strong>Practice:</strong></em>
 Remove the ticker-date index from the <code class="docutils literal notranslate"><span class="pre">stocks_long</span></code> data frame and add it as columns.
 Name this new data frame <code class="docutils literal notranslate"><span class="pre">stocks_long_2</span></code>.</p>

@@ -1,18 +1,21 @@
 name: fina-4380
 channels:
   - conda-forge
+  - defaults
 dependencies:
-  - ghp-import
-  - jupyter-book
-  - jupyterlab
-  - jupyterlab-git
-  - linearmodels
   - matplotlib
   - numpy
   - pandas
-  - pandas-datareader
-  - requests-cache
   - scipy
   - seaborn
   - statsmodels
-  - yfinance
+  - pip
+  - pip:
+      - ghp-import
+      - jupyter-book
+      - jupyterlab
+      - jupyterlab-git
+      - linearmodels
+      - pandas-datareader
+      - requests-cache
+      - yfinance
