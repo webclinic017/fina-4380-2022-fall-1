@@ -183,21 +183,3 @@ pd.read_pickle('../../Data/FAANG.pkl')
 
 
 
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[19]:
-
-
-d title
-
