@@ -177,9 +177,3 @@ faang.to_pickle('../../Data/FAANG.pkl')
 
 pd.read_pickle('../../Data/FAANG.pkl')
 
-
-# In[ ]:
-
-
-
-

@@ -288,9 +288,21 @@ df1 = pd.DataFrame({'key': ['b', 'b', 'a', 'c', 'a', 'a', 'b'], 'data1': range(7
 df2 = pd.DataFrame({'key': ['a', 'b', 'd'], 'data2': range(3)})
 
 
+# In[31]:
+
+
+df1
+
+
+# In[32]:
+
+
+df2
+
+
 # The default `how` is `how='inner'`, so `pd.merge` keeps only rows that appear in both data frames.
 
-# In[31]:
+# In[33]:
 
 
 pd.merge(df1, df2)
@@ -298,7 +310,7 @@ pd.merge(df1, df2)
 
 # An outer merge keeps all rows.
 
-# In[32]:
+# In[34]:
 
 
 pd.merge(df1, df2, how='outer')
@@ -306,7 +318,7 @@ pd.merge(df1, df2, how='outer')
 
 # A left merge keeps only rows that appear in the left data frame.
 
-# In[33]:
+# In[35]:
 
 
 pd.merge(df1, df2, how='left')
@@ -323,26 +335,38 @@ pd.merge(df1, df2, how='left')
 # We *should* specify keys with `on` to avoid unexpected results.
 # We *must* specify keys with `left_on` and `right_on` if we do not have a common column.
 
-# In[34]:
+# In[36]:
 
 
 pd.merge(df1, df2, on='key')
 
 
-# In[35]:
+# In[37]:
 
 
 df3 = pd.DataFrame({'lkey': ['b', 'b', 'a', 'c', 'a', 'a', 'b'], 'data1': range(7)})
 df4 = pd.DataFrame({'rkey': ['a', 'b', 'd'], 'data2': range(3)})
 
 
-# In[36]:
+# In[38]:
+
+
+df3
+
+
+# In[39]:
+
+
+df4
+
+
+# In[40]:
 
 
 # pd.merge(df3, df4) # this code fails/errors because there are not common columns
 
 
-# In[37]:
+# In[41]:
 
 
 pd.merge(df3, df4, left_on='lkey', right_on='rkey')
@@ -356,7 +380,7 @@ pd.merge(df3, df4, left_on='lkey', right_on='rkey')
 # If we want to keep rows `c` and `d`, we can *outer* join `df3` and `df4` with `how='outer'`.
 # Note that missing values become `NaN`.
 
-# In[38]:
+# In[42]:
 
 
 pd.merge(df1, df2, how='outer')
@@ -364,14 +388,26 @@ pd.merge(df1, df2, how='outer')
 
 # > Many-to-many merges have well-defined, though not necessarily intuitive, behavior.
 
-# In[39]:
+# In[43]:
 
 
 df1 = pd.DataFrame({'key': ['b', 'b', 'a', 'c', 'a', 'b'], 'data1': range(6)})
 df2 = pd.DataFrame({'key': ['a', 'b', 'a', 'b', 'd'], 'data2': range(5)})
 
 
-# In[40]:
+# In[44]:
+
+
+df1
+
+
+# In[45]:
+
+
+df2
+
+
+# In[46]:
 
 
 pd.merge(df1, df2, on='key', how='left')
@@ -379,7 +415,7 @@ pd.merge(df1, df2, on='key', how='left')
 
 # > Many-to-many joins form the Cartesian product of the rows. Since there were three 'b' rows in the left DataFrame and two in the right one, there are six 'b' rows in the result. The join method only affects the distinct key values appearing in the result.
 
-# In[41]:
+# In[47]:
 
 
 pd.merge(df1, df2, how='inner')
@@ -392,7 +428,7 @@ pd.merge(df1, df2, how='inner')
 # We can merge on more than one key.
 # For example, we may merge two data sets on ticker-date pairs or industry-date pairs.
 
-# In[42]:
+# In[48]:
 
 
 left = pd.DataFrame({'key1': ['foo', 'foo', 'bar'],
@@ -403,7 +439,19 @@ right = pd.DataFrame({'key1': ['foo', 'foo', 'bar', 'bar'],
                       'rval': [4, 5, 6, 7]})
 
 
-# In[43]:
+# In[49]:
+
+
+left
+
+
+# In[50]:
+
+
+right
+
+
+# In[51]:
 
 
 pd.merge(left, right, on=['key1', 'key2'], how='outer')
@@ -411,7 +459,7 @@ pd.merge(left, right, on=['key1', 'key2'], how='outer')
 
 # When there are overlapping column names, `pd.merge()` appends `_x` and `_y` to the left and right versions of the overlapping columns.
 
-# In[44]:
+# In[52]:
 
 
 pd.merge(left, right, on='key1')
@@ -419,7 +467,7 @@ pd.merge(left, right, on='key1')
 
 # I typically specify suffixes to avoid later confusion.
 
-# In[45]:
+# In[53]:
 
 
 pd.merge(left, right, on='key1', suffixes=('_left', '_right'))
@@ -445,14 +493,14 @@ pd.merge(left, right, on='key1', suffixes=('_left', '_right'))
 # 
 # We use the `left_index` and `right_index` arguments if we want to merge on row indices.
 
-# In[46]:
+# In[54]:
 
 
 left1 = pd.DataFrame({'key': ['a', 'b', 'a', 'a', 'b', 'c'], 'value': range(6)})
 right1 = pd.DataFrame({'group_val': [3.5, 7]}, index=['a', 'b'])
 
 
-# In[47]:
+# In[55]:
 
 
 pd.merge(left1, right1, left_on='key', right_index=True, how='outer')
@@ -460,7 +508,7 @@ pd.merge(left1, right1, left_on='key', right_index=True, how='outer')
 
 # The index arguments work for hierarchical indices (multi indices), too.
 
-# In[48]:
+# In[56]:
 
 
 lefth = pd.DataFrame({'key1': ['Ohio', 'Ohio', 'Ohio', 'Nevada', 'Nevada'],
@@ -472,19 +520,19 @@ righth = pd.DataFrame(np.arange(12).reshape((6, 2)),
                       columns=['event1', 'event2'])
 
 
-# In[49]:
+# In[57]:
 
 
 pd.merge(lefth, righth, left_on=['key1', 'key2'], right_index=True)
 
 
-# In[50]:
+# In[58]:
 
 
 pd.merge(lefth, righth, left_on=['key1', 'key2'], right_index=True, how='outer')
 
 
-# In[51]:
+# In[59]:
 
 
 left2 = pd.DataFrame([[1., 2.], [3., 4.], [5., 6.]],
@@ -497,7 +545,7 @@ right2 = pd.DataFrame([[7., 8.], [9., 10.], [11., 12.], [13, 14]],
 
 # If we merge on both indices, we keep the index.
 
-# In[52]:
+# In[60]:
 
 
 pd.merge(left2, right2, how='outer', left_index=True, right_index=True)
@@ -507,7 +555,19 @@ pd.merge(left2, right2, how='outer', left_index=True, right_index=True)
 # 
 # So if we have matching indices on left and right, we can use `.join()` for a more compact notation than `pd.merge()`.
 
-# In[53]:
+# In[61]:
+
+
+left2
+
+
+# In[62]:
+
+
+right2
+
+
+# In[63]:
 
 
 left2.join(right2, how='outer')
@@ -517,7 +577,7 @@ left2.join(right2, how='outer')
 # Because `.join()` joins on indices by default, it requires few arguments.
 # Therefore, we can pass a list of data frames to `.join()`.
 
-# In[54]:
+# In[64]:
 
 
 another = pd.DataFrame(
@@ -527,13 +587,19 @@ another = pd.DataFrame(
 )
 
 
-# In[55]:
+# In[65]:
+
+
+another
+
+
+# In[66]:
 
 
 left2.join([right2, another])
 
 
-# In[56]:
+# In[67]:
 
 
 left2.join([right2, another], how='outer')
@@ -553,7 +619,7 @@ left2.join([right2, another], how='outer')
 # 
 # The first is handy if we have to read and combine a directory of .csv files.
 
-# In[57]:
+# In[68]:
 
 
 s1 = pd.Series([0, 1], index=['a', 'b'])
@@ -561,92 +627,98 @@ s2 = pd.Series([2, 3, 4], index=['c', 'd', 'e'])
 s3 = pd.Series([5, 6], index=['f', 'g'])
 
 
-# In[58]:
+# In[69]:
 
 
 s1
 
 
-# In[59]:
+# In[70]:
 
 
 s2
 
 
-# In[60]:
+# In[71]:
 
 
 s3
 
 
-# In[61]:
+# In[72]:
 
 
 pd.concat([s1, s2, s3])
 
 
-# In[62]:
+# In[73]:
 
 
 pd.concat([s1, s2, s3], axis=1)
 
 
-# In[63]:
+# In[74]:
 
 
 s4 = pd.concat([s1, s3])
 
 
-# In[64]:
+# In[75]:
 
 
 pd.concat([s1, s4], axis=1)
 
 
-# In[65]:
+# In[76]:
 
 
 pd.concat([s1, s4], axis=1, join='inner')
 
 
-# In[66]:
+# In[77]:
 
 
 result = pd.concat([s1, s1, s3], keys=['one', 'two', 'three'])
 
 
-# In[67]:
+# In[78]:
+
+
+result
+
+
+# In[79]:
 
 
 result.unstack()
 
 
-# In[68]:
+# In[80]:
 
 
 pd.concat([s1, s2, s3], axis=1, keys=['one', 'two', 'three'])
 
 
-# In[69]:
+# In[81]:
 
 
 df1 = pd.DataFrame(np.arange(6).reshape(3, 2), index=['a', 'b', 'c'], columns=['one', 'two'])
 df2 = pd.DataFrame(5 + np.arange(4).reshape(2, 2), index=['a', 'c'], columns=['three', 'four'])
 
 
-# In[70]:
+# In[82]:
 
 
 pd.concat([df1, df2], axis=1, keys=['level1', 'level2'])
 
 
-# In[71]:
+# In[83]:
 
 
 pd.concat({'level1': df1, 'level2': df2}, axis=1)
 
 
-# In[72]:
+# In[84]:
 
 
 pd.concat([df1, df2], axis=1, keys=['level1', 'level2'], names=['upper', 'lower'])
@@ -665,7 +737,7 @@ pd.concat([df1, df2], axis=1, keys=['level1', 'level2'], names=['upper', 'lower'
 # > - stack: This "rotates" or pivots from the columns in the data to the rows
 # > - unstack: This pivots from the rows into the columns
 
-# In[73]:
+# In[85]:
 
 
 data = pd.DataFrame(np.arange(6).reshape((2, 3)),
@@ -674,43 +746,43 @@ data = pd.DataFrame(np.arange(6).reshape((2, 3)),
                     name='number'))
 
 
-# In[74]:
+# In[86]:
 
 
 data
 
 
-# In[75]:
+# In[87]:
 
 
 result = data.stack()
 
 
-# In[76]:
+# In[88]:
 
 
 result
 
 
-# In[77]:
+# In[89]:
 
 
 result.unstack()
 
 
-# In[78]:
+# In[90]:
 
 
 result.unstack(0)
 
 
-# In[79]:
+# In[91]:
 
 
 result.unstack('state')
 
 
-# In[80]:
+# In[92]:
 
 
 s1 = pd.Series([0, 1, 2, 3], index=['a', 'b', 'c', 'd'])
@@ -718,13 +790,13 @@ s2 = pd.Series([4, 5, 6], index=['c', 'd', 'e'])
 data2 = pd.concat([s1, s2], keys=['one', 'two'])
 
 
-# In[81]:
+# In[93]:
 
 
 data2
 
 
-# In[82]:
+# In[94]:
 
 
 data2.unstack()
@@ -732,7 +804,7 @@ data2.unstack()
 
 # Un-stacking may introduce missing values.
 
-# In[83]:
+# In[95]:
 
 
 data2.unstack()
@@ -740,7 +812,7 @@ data2.unstack()
 
 # By default, stacking drops missing values, so these two operations are invertable.
 
-# In[84]:
+# In[96]:
 
 
 data2.unstack().stack()
@@ -748,13 +820,13 @@ data2.unstack().stack()
 
 # However, we can keep missing values with `dropna=False`.
 
-# In[85]:
+# In[97]:
 
 
 data2.unstack().stack(dropna=False)
 
 
-# In[86]:
+# In[98]:
 
 
 df = pd.DataFrame({
@@ -767,13 +839,13 @@ df = pd.DataFrame({
 
 # Note that, when we un-stack, the un-stacked level becomes the innermost level in the resulting index.
 
-# In[87]:
+# In[99]:
 
 
 df.unstack('state')
 
 
-# In[88]:
+# In[100]:
 
 
 df.unstack('state').stack('side')
@@ -789,7 +861,7 @@ df.unstack('state').stack('side')
 # Above, we un-stacked the inner index level to columns.
 # Instead, un-stack the outer index level to columns.
 
-# In[89]:
+# In[101]:
 
 
 np.random.seed(42)
@@ -802,25 +874,25 @@ data = pd.Series(
 )
 
 
-# In[90]:
+# In[102]:
 
 
 data.unstack(level=0)
 
 
-# In[91]:
+# In[103]:
 
 
 data.swaplevel().unstack()
 
 
-# In[92]:
+# In[104]:
 
 
 data.unstack().unstack().unstack()
 
 
-# In[93]:
+# In[105]:
 
 
 data.unstack().T
@@ -828,7 +900,7 @@ data.unstack().T
 
 # ***Practice:***
 # Download data from Yahoo Finance for AAPL, META, and MSFT to a data frame named `stocks`.
-# Then add daily returns for each stock as the percent change in the adjusted closing price, and call it `Returns`.
+# Then add daily returns for each stock as the percent change in the adjusted closing price, and call it `Return`.
 # Finally, wrangle `stocks` as follows and assign to a new data frame `stocks_long`.
 # *Hint:* You may want to use `pd.MultiIndex()` to add multiple return columns at once:
 # 
@@ -837,13 +909,13 @@ data.unstack().T
 #     1. Row should have a multi-index on tickers and dates, in that order, with the names Ticker and Date
 # 1. Sort `stocks_long` so that data are in chronological order within alphabetical blocks by ticker
 
-# In[94]:
+# In[106]:
 
 
 stocks = yf.download(tickers='AAPL META MSFT', session=session)
 
 
-# In[95]:
+# In[107]:
 
 
 returns = stocks['Adj Close'].pct_change()
@@ -851,38 +923,254 @@ returns = stocks['Adj Close'].pct_change()
 
 # Copy-and-paste works, but does not scale well.
 
-# In[96]:
+# In[108]:
 
 
-# stocks[('Returns', 'AAPL')] = returns['AAPL']
-# stocks[('Returns', 'META')] = returns['META']
-# stocks[('Returns', 'MSFT')] = returns['MSFT']
+# stocks[('Return', 'AAPL')] = returns['AAPL']
+# stocks[('Return', 'META')] = returns['META']
+# stocks[('Return', 'MSFT')] = returns['MSFT']
 
 
 # A better solution is to use `pd.multiIndex.from_product()` to create a `Returns` column for every ticker.
 # Getting column names from the `Adj Close` group makes sure that we do not assign returns to the wrong tickers.
 
-# In[97]:
+# In[109]:
 
 
-stocks[pd.MultiIndex.from_product([['Returns'], stocks['Adj Close'].columns])] = returns
+pd.MultiIndex.from_product([['Return'], stocks['Adj Close'].columns])
 
 
-# In[98]:
+# In[110]:
 
 
-stocks
+stocks[pd.MultiIndex.from_product([['Return'], stocks['Adj Close'].columns])] = returns
+
+
+# Now that we know this works, let us write a function to save future us time!
+# ***After-Class Update:***
+# I changed the column name from `Returns` to `Return` (i.e., plural to singular) to be more consistent with the other column names (i.e., `Open`, `High`, etc.).
+
+# In[111]:
+
+
+def download(**kwargs):
+    _stocks = yf.download(**kwargs)
+    _returns = _stocks['Adj Close'].pct_change()
+    _multi_index = pd.MultiIndex.from_product([['Return'], _stocks['Adj Close'].columns])
+    _stocks[_multi_index] = _returns
+    _stocks.columns.names = ['Variable', 'Ticker']
+    
+    return _stocks
+
+
+# In[112]:
+
+
+stocks_2 = download(tickers='AAPL META MSFT', session=session)
+
+
+# ***After-Class Update:***
+# In class I failed to get `np.allclose(stocks, stocks_2)` to return `True`.
+# My error was that, for these data, I had to change `atol` (absolute tolerance between cells in `a` and `b`) to $10^{-5}$.
+# Usually setting `equal_nan=True` is sufficient to compare to data frames, but, in these data, relaxing `atol` is necessary.
+
+# In[113]:
+
+
+np.allclose(stocks, stocks_2, atol=1e-5, equal_nan=True)
+
+
+# We can use the following to convert wide `stocks` to long `stocks_long`.
+# I use `stocks_2` here because our `download()` function assigns column names.
+
+# In[114]:
+
+
+stocks_long = stocks_2.stack().swaplevel().sort_index()
+
+
+# In[115]:
+
+
+stocks_long.head()
 
 
 # ***Practice:***
 # Remove the ticker-date index from the `stocks_long` data frame and add it as columns.
 # Name this new data frame `stocks_long_2`.
 
+# In[116]:
+
+
+stocks_long_2 = stocks_long.reset_index()
+
+
+# In[117]:
+
+
+stocks_long_2.head()
+
+
 # ***Practice:***
 # Add back the ticker-date index from the `stocks_long` data frame.
 # Name this new data frame `stocks_long_3`.
 # Use `np.allclose()` to compare `stocks_long` and `stocks_long_3`.
 
+# In[118]:
+
+
+stocks_long_3 = stocks_long_2.set_index(keys=['Ticker', 'Date'])
+
+
+# Note that here we do not need to relax `atol` to return `True` from `np.allclose()`.
+
+# In[119]:
+
+
+np.allclose(stocks_long, stocks_long_3, equal_nan=True)
+
+
 # ***Practice:***
 # Merge the Fama-French daily factor data to the `stocks` and `stocks_long` data frames from above.
 # The Fama-French daily factor data are simple returns as percents, so divide by 100 to create decimal returns.
+
+# ***Here is the long solution.***
+
+# In[120]:
+
+
+pdr.famafrench.get_available_datasets()[:5]
+
+
+# In[121]:
+
+
+ff = pdr.get_data_famafrench('F-F_Research_Data_Factors_daily', start='1900', session=session)[0]
+
+
+# In[122]:
+
+
+ff /= 100 # ff /= 100 is an alias for ff = ff / 100
+
+
+# In[123]:
+
+
+stocks_long.head()
+
+
+# In[124]:
+
+
+ff.head()
+
+
+# In[125]:
+
+
+stocks_long_4 = stocks_long.join(ff)
+
+
+# ***After-Class Update:***
+# In class this slide failed because I omitted the trailing `, :` in the `.loc[]` method.
+
+# In[126]:
+
+
+stocks_long_4.loc[(slice(None), '2020-03-25'), :]
+
+
+# ***Here is the wide solution, which requires a multi-index on the columns.***
+
+# In[127]:
+
+
+multi_index = pd.MultiIndex.from_product([['Factor'], ff.columns])
+ff_with_multi_index = ff.copy()
+ff_with_multi_index.columns = multi_index
+
+
+# In[128]:
+
+
+ff_with_multi_index.head()
+
+
+# In[129]:
+
+
+stocks_4 = stocks.join(ff_with_multi_index)
+
+
+# In[130]:
+
+
+stocks_4.head()
+
+
+# ***After-Class Update:***
+# Let us add these Fama-French factors to our downloads function!
+# We will overwrite the original `download()` function.
+# However, we will eventually move this function to our own package of helper functions.
+# Two notes:
+# 
+# 1. Our `download()` function fails when we pass only one ticker, which we will fix later.
+# 2. We need to `.join()` the Fama-French factors, so we will also `.join()` the stock returns to standardize and simplify our code.
+
+# In[131]:
+
+
+def download(add_ff=True, **kwargs):
+    # download data, calculate returns, add multi-index
+    _stocks = yf.download(**kwargs)
+    _returns = _stocks['Adj Close'].pct_change()
+    _returns.columns = pd.MultiIndex.from_product([['Return'], _returns.columns])
+    
+    # convert Fama-French factors to decimal returns and add multi-index
+    if add_ff:
+        _ff = pdr.get_data_famafrench('F-F_Research_Data_Factors_daily', session=session, start='1900')[0]
+        _ff /= 100
+        _ff.columns = pd.MultiIndex.from_product([['Factor'], _ff.columns])
+        _returns = _returns.join(_ff)
+    
+    return _stocks.join(_returns)
+
+
+# In[132]:
+
+
+stocks_5 = download(tickers='AAPL META MSFT', session=session)
+
+
+# In[133]:
+
+
+np.allclose(stocks_4, stocks_5, atol=1e-5, equal_nan=True)
+
+
+# ## A few project questions and answers
+
+# In[134]:
+
+
+wiki = pd.read_html('https://en.wikipedia.org/wiki/S%26P_500')
+
+
+# In[135]:
+
+
+type(wiki)
+
+
+# In[136]:
+
+
+wiki[1]['Year'].to_list()[:5]
+
+
+# In[137]:
+
+
+wiki[1].sample(3, axis=1).head()
+

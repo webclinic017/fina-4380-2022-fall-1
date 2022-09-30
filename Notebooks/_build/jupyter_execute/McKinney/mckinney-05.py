@@ -1158,6 +1158,8 @@ returns.mean().mul(252)
 returns.std().mul(np.sqrt(252))
 
 
+# ***The best explanation I have found on why stock return volatility (the standard deviation of stocks returns) grows with the square root of time is at the bottom of page 7 of [chapter 8 of Ivo Welch's free corporate finance textbook](https://book.ivo-welch.info/read/source5.mba/08-invchoice.pdf).***
+
 # ---
 
 # ***SIDEBAR, THAT IS A FEW WEEKS EARLY***

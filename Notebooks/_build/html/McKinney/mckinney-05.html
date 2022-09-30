@@ -4244,7 +4244,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.97 µs ± 230 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.2 µs ± 172 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -4256,7 +4256,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30.6 µs ± 3.83 µs per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25.4 µs ± 197 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -4607,10 +4607,10 @@ Therefore, the percent change in adjusted closes considers both price changs (i.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AAPL   0.2779
-GOOG   0.2493
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AAPL   0.2763
+GOOG   0.2507
 IBM    0.1028
-MSFT   0.2836
+MSFT   0.2837
 dtype: float64
 </pre></div>
 </div>
@@ -4626,13 +4626,14 @@ dtype: float64
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AAPL   0.4492
 GOOG   0.3055
-IBM    0.2526
+IBM    0.2525
 MSFT   0.3382
 dtype: float64
 </pre></div>
 </div>
 </div>
 </div>
+<p><em><strong>The best explanation I have found on why stock return volatility (the standard deviation of stocks returns) grows with the square root of time is at the bottom of page 7 of <a class="reference external" href="https://book.ivo-welch.info/read/source5.mba/08-invchoice.pdf">chapter 8 of Ivo Welch’s free corporate finance textbook</a>.</strong></em></p>
 <hr class="docutils" />
 <p><em><strong>SIDEBAR, THAT IS A FEW WEEKS EARLY</strong></em>
 We find similar means is we convert our daily returns to annual returns, then use calculate the means of annual returns.
@@ -4710,7 +4711,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4448
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4449
 </pre></div>
 </div>
 </div>
@@ -4751,29 +4752,29 @@ dtype: float64
     <tr>
       <th>AAPL</th>
       <td>1.0000</td>
-      <td>0.5137</td>
+      <td>0.5131</td>
       <td>0.3687</td>
       <td>0.4266</td>
     </tr>
     <tr>
       <th>GOOG</th>
-      <td>0.5137</td>
+      <td>0.5131</td>
       <td>1.0000</td>
-      <td>0.4052</td>
-      <td>0.5543</td>
+      <td>0.4053</td>
+      <td>0.5544</td>
     </tr>
     <tr>
       <th>IBM</th>
       <td>0.3687</td>
-      <td>0.4052</td>
+      <td>0.4053</td>
       <td>1.0000</td>
-      <td>0.4448</td>
+      <td>0.4449</td>
     </tr>
     <tr>
       <th>MSFT</th>
       <td>0.4266</td>
-      <td>0.5543</td>
-      <td>0.4448</td>
+      <td>0.5544</td>
+      <td>0.4449</td>
       <td>1.0000</td>
     </tr>
   </tbody>
@@ -4787,7 +4788,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4448
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4449
 </pre></div>
 </div>
 </div>
@@ -4804,7 +4805,7 @@ When possible, use a pre-built function or method to avoid silent failures!</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4821
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4822
 </pre></div>
 </div>
 </div>
@@ -4819,7 +4820,7 @@ There is nothing special about <code class="docutils literal notranslate"><span 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4448
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4449
 </pre></div>
 </div>
 </div>
@@ -4834,7 +4835,7 @@ However, this is unnecessarily complex since we have the <code class="docutils l
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4448
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4449
 </pre></div>
 </div>
 </div>
@@ -4851,7 +4852,7 @@ However, this is unnecessarily complex since we have the <code class="docutils l
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4448
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4449
 </pre></div>
 </div>
 </div>
@@ -5184,29 +5185,29 @@ Calculate the correlation matrix for these four stocks using data from 2016 thro
     <tr>
       <th>AAPL</th>
       <td>1.0000</td>
-      <td>0.6621</td>
-      <td>0.4139</td>
-      <td>0.7261</td>
+      <td>0.6595</td>
+      <td>0.4136</td>
+      <td>0.7250</td>
     </tr>
     <tr>
       <th>GOOG</th>
-      <td>0.6621</td>
+      <td>0.6595</td>
       <td>1.0000</td>
-      <td>0.4301</td>
+      <td>0.4302</td>
       <td>0.7766</td>
     </tr>
     <tr>
       <th>IBM</th>
-      <td>0.4139</td>
-      <td>0.4301</td>
+      <td>0.4136</td>
+      <td>0.4302</td>
       <td>1.0000</td>
-      <td>0.4678</td>
+      <td>0.4680</td>
     </tr>
     <tr>
       <th>MSFT</th>
-      <td>0.7261</td>
+      <td>0.7250</td>
       <td>0.7766</td>
-      <td>0.4678</td>
+      <td>0.4680</td>
       <td>1.0000</td>
     </tr>
   </tbody>
@@ -5299,20 +5300,6 @@ We can use the cumulative product method <code class="docutils literal notransla
       <td>...</td>
     </tr>
     <tr>
-      <th>2022-09-21</th>
-      <td>1.1338</td>
-      <td>0.4960</td>
-      <td>0.1178</td>
-      <td>0.5542</td>
-    </tr>
-    <tr>
-      <th>2022-09-22</th>
-      <td>1.1202</td>
-      <td>0.5044</td>
-      <td>0.1212</td>
-      <td>0.5674</td>
-    </tr>
-    <tr>
       <th>2022-09-23</th>
       <td>1.0881</td>
       <td>0.4834</td>
@@ -5333,9 +5320,23 @@ We can use the cumulative product method <code class="docutils literal notransla
       <td>0.0892</td>
       <td>0.5377</td>
     </tr>
+    <tr>
+      <th>2022-09-28</th>
+      <td>1.0800</td>
+      <td>0.5069</td>
+      <td>0.0984</td>
+      <td>0.5680</td>
+    </tr>
+    <tr>
+      <th>2022-09-29</th>
+      <td>0.9778</td>
+      <td>0.5069</td>
+      <td>0.0883</td>
+      <td>0.5448</td>
+    </tr>
   </tbody>
 </table>
-<p>690 rows × 4 columns</p>
+<p>692 rows × 4 columns</p>
 </div></div></div>
 </div>
 <p><em><strong>Practice:</strong></em>
@@ -5350,7 +5351,7 @@ Use the <code class="docutils literal notranslate"><span class="pre">.plot()</sp
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/mckinney-05_255_0.png" src="../_images/mckinney-05_255_0.png" />
+<img alt="../_images/mckinney-05_256_0.png" src="../_images/mckinney-05_256_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -5364,7 +5365,7 @@ Use the <code class="docutils literal notranslate"><span class="pre">.plot()</sp
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/mckinney-05_256_0.png" src="../_images/mckinney-05_256_0.png" />
+<img alt="../_images/mckinney-05_257_0.png" src="../_images/mckinney-05_257_0.png" />
 </div>
 </div>
 </section>
