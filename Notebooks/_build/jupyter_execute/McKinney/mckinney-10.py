@@ -73,15 +73,21 @@ df = pd.DataFrame({'key1' : ['a', 'a', 'b', 'b', 'a'],
                    'data2' : np.random.randn(5)})
 
 
+# In[5]:
+
+
+df
+
+
 # Here is one way to calculate the means of `data1` by (grouops formed on) `key1`.
 
-# In[5]:
+# In[6]:
 
 
 df.loc[df['key1'] == 'a', 'data1'].mean()
 
 
-# In[6]:
+# In[7]:
 
 
 df.loc[df['key1'] == 'b', 'data1'].mean()
@@ -94,19 +100,19 @@ df.loc[df['key1'] == 'b', 'data1'].mean()
 # 
 # Note that without the `.mean()` method, pandas only sets up the grouped object, which can accept the `.mean()` method.
 
-# In[7]:
+# In[8]:
 
 
 grouped = df['data1'].groupby(df['key1'])
 
 
-# In[8]:
+# In[9]:
 
 
 grouped
 
 
-# In[9]:
+# In[10]:
 
 
 grouped.mean()
@@ -114,15 +120,29 @@ grouped.mean()
 
 # We can can chain the `.groupby()` and `.mean()` methods.
 
-# In[10]:
+# In[11]:
 
 
 df['data1'].groupby(df['key1']).mean()
 
 
+# ---
+# ***What does `np.random.randn(5)` do?***
+# The funtion `np.random.randn()` creates 5 standard normal random variables (mean of 0 and standard deviation of 1).
+
+# In[12]:
+
+
+np.random.seed(42)
+randos = np.random.randn(1_000_000)
+print(f'Mean of {randos.mean():0.4f}, standard deviation of {randos.std():0.4f}')
+
+
+# ---
+
 # If we prefer our result as a dataframe instead of a series, we can wrap `data1` with two sets of square brackets.
 
-# In[11]:
+# In[13]:
 
 
 df[['data1']].groupby(df['key1']).mean()
@@ -131,7 +151,7 @@ df[['data1']].groupby(df['key1']).mean()
 # We can group by more than one variable.
 # We get a hierarchical row index (or row multi-index) when we group by more than one variable.
 
-# In[12]:
+# In[14]:
 
 
 means = df['data1'].groupby([df['key1'], df['key2']]).mean()
@@ -141,7 +161,7 @@ means
 # We can use the `.unstack()` method if we want to use both rows and columns to organize data.
 # Note that, the `.unstack()` method un-stacks the last dimension (i.e., `level = -1`) by default so that `key2` values become columns.
 
-# In[13]:
+# In[15]:
 
 
 means.unstack()
@@ -150,13 +170,13 @@ means.unstack()
 # The grouping variables can also be columns in the data frame passed to the `.groupby()` method.
 # I prefer this approach because we will typically have all data in one data frame.
 
-# In[14]:
+# In[16]:
 
 
 df.groupby('key1').mean()
 
 
-# In[15]:
+# In[17]:
 
 
 df.groupby(['key1', 'key2']).mean()
@@ -172,7 +192,7 @@ df.groupby(['key1', 'key2']).mean()
 # Each tuples contains the value(s) of the grouping variable(s) and associated chunk of the dataframe.
 # McKinney provides two loops to show how to iterate over groups.
 
-# In[16]:
+# In[18]:
 
 
 for name, group in df.groupby('key1'):
@@ -180,7 +200,7 @@ for name, group in df.groupby('key1'):
     print(group)
 
 
-# In[17]:
+# In[19]:
 
 
 for (k1, k2), group in df.groupby(['key1', 'key2']):
@@ -214,7 +234,7 @@ for (k1, k2), group in df.groupby(['key1', 'key2']):
 # It makes code "sweeter" for humans to type or read by making it more concise or clear.
 # The implication is that syntactic sugar makes code faster to type/read but does make code faster to execute.
 
-# In[18]:
+# In[20]:
 
 
 df.groupby(['key1', 'key2'])[['data2']].mean()
@@ -226,7 +246,7 @@ df.groupby(['key1', 'key2'])[['data2']].mean()
 # Below, we group with the `len` function, which calculates the length of the first names in the row index.
 # We could instead add a helper column to `people`, but it is easier to pass a function to `.groupby()`.
 
-# In[19]:
+# In[21]:
 
 
 np.random.seed(42)
@@ -235,9 +255,10 @@ people = pd.DataFrame(
     columns=['a', 'b', 'c', 'd', 'e'], 
     index=['Joe', 'Steve', 'Wes', 'Jim', 'Travis']
 )
+people
 
 
-# In[20]:
+# In[22]:
 
 
 people.groupby(len).sum()
@@ -245,18 +266,25 @@ people.groupby(len).sum()
 
 # We can mix functions, lists, etc. that we pass to `.groupby()`.
 
-# In[21]:
+# In[23]:
 
 
 key_list = ['one', 'one', 'one', 'two', 'two']
 people.groupby([len, key_list]).min()
 
 
-# In[22]:
+# In[24]:
 
 
 d = {'Joe': 'a', 'Jim': 'b'}
 people.groupby([len, d]).min()
+
+
+# In[25]:
+
+
+d_2 = {'Joe': 'Cool', 'Jim': 'Nerd', 'Travis': 'Cool'}
+people.groupby([len, d_2]).min()
 
 
 # ### Grouping by Index Levels
@@ -264,7 +292,7 @@ people.groupby([len, d]).min()
 # We can also group by index levels.
 # We can specify index levels by either level number or name.
 
-# In[23]:
+# In[26]:
 
 
 columns = pd.MultiIndex.from_arrays([['US', 'US', 'US', 'JP', 'JP'],
@@ -273,19 +301,19 @@ columns = pd.MultiIndex.from_arrays([['US', 'US', 'US', 'JP', 'JP'],
 hier_df = pd.DataFrame(np.random.randn(4, 5), columns=columns)
 
 
-# In[24]:
+# In[27]:
 
 
 hier_df.groupby(level='cty', axis=1).count()
 
 
-# In[25]:
+# In[28]:
 
 
 hier_df.groupby(level='cty', axis='columns').count()
 
 
-# In[26]:
+# In[29]:
 
 
 hier_df.groupby(level='tenor', axis=1).count()
@@ -307,7 +335,7 @@ hier_df.groupby(level='tenor', axis=1).count()
 # These optimized methods are fast and efficient, but pandas does not limit us to these methods.
 # First, any series method is available.
 
-# In[27]:
+# In[30]:
 
 
 df.groupby('key1')['data1'].quantile(0.9)
@@ -316,14 +344,14 @@ df.groupby('key1')['data1'].quantile(0.9)
 # Second, we can write our own functions and pass them to the `.agg()` method.
 # These functions should accept an array and returns a single value.
 
-# In[28]:
+# In[31]:
 
 
 def peak_to_peak(arr):
     return arr.max() - arr.min()
 
 
-# In[29]:
+# In[32]:
 
 
 df.groupby('key1')['data1'].agg(peak_to_peak)
@@ -331,7 +359,7 @@ df.groupby('key1')['data1'].agg(peak_to_peak)
 
 # Some other methods work, too, even if they are do not aggregate an array to a single value.
 
-# In[30]:
+# In[33]:
 
 
 df.groupby('key1')['data1'].describe()
@@ -355,20 +383,20 @@ df.groupby('key1')['data1'].describe()
 # 2. Call the applied function on each chunk of the original dataframe
 # 3. Recombine the output of the applied function
 
-# In[31]:
+# In[34]:
 
 
 def top(x, col, n=1):
     return x.sort_values(col).head(n)
 
 
-# In[32]:
+# In[35]:
 
 
 df.groupby('key1').apply(top, col='data1', n=2)
 
 
-# In[33]:
+# In[36]:
 
 
 df.groupby('key1').apply(top, col='data2', n=2)
@@ -381,7 +409,7 @@ df.groupby('key1').apply(top, col='data2', n=2)
 # These also provide row and column totals via "margins".
 # It is worthwhile to read-through the `.pivot_table()` docstring several times.
 
-# In[34]:
+# In[37]:
 
 
 ind = (
@@ -393,7 +421,7 @@ ind = (
 
 # The default aggregation function for `.pivot_table()` is `mean`.
 
-# In[35]:
+# In[38]:
 
 
 ind.loc['2015':].pivot_table(index='Index')
@@ -405,7 +433,7 @@ ind.loc['2015':].pivot_table(index='Index')
 #     and 
 #     `aggfunc` to select specific aggregation functions.
 
-# In[36]:
+# In[39]:
 
 
 (
@@ -423,7 +451,10 @@ ind.loc['2015':].pivot_table(index='Index')
 
 # ## Practice
 
-# In[37]:
+# ***Practice:***
+# Calculate the means of columns `data1` and `data2` by `key1` and `key2`, and arrange the results so that values of `key1` are in the rows and values of `key2` are in the columns.
+
+# In[40]:
 
 
 np.random.seed(42)
@@ -433,14 +464,58 @@ df = pd.DataFrame({'key1' : ['a', 'a', 'b', 'b', 'a'],
                    'data2' : np.random.randn(5)})
 
 
-# ***Practice:***
-# Calculate the means of columns `data1` and `data2` by `key1` and `key2`, and arrange the results so that values of `key1` are in the rows and values of `key2` are in the columns.
+# In[41]:
+
+
+# [['data1', 'data2']] is optional because those are the only remaining columns
+practice_1 = df.groupby(['key1', 'key2'])[['data1', 'data2']].mean().unstack()
+practice_1
+
 
 # ***Practice:***
 # Replicate the previous practice exercise with `pd.pivot_table()` and test equality with `np.allclose()`.
 # We will learn more about `pd.pivot_table()` at the end of this notebook, but we can give it a try now.
 
-# In[38]:
+# In[42]:
+
+
+practice_2 = pd.pivot_table(
+    data=df,
+    values=['data1', 'data2'],
+    index='key1',
+    columns='key2',
+    aggfunc='mean' # I often specify a function, even if it is the default, because I do not trust myself
+)
+practice_2
+
+
+# In[43]:
+
+
+np.allclose(practice_1, practice_2)
+
+
+# Onec you are comfortable with `pd.pivot_table()`, you could do the following:
+
+# In[44]:
+
+
+df.pivot_table(index='key1', columns='key2')
+
+
+# We can specify a list of aggregation functions.
+
+# In[45]:
+
+
+df.pivot_table(index='key1', columns='key2', aggfunc=['mean', 'median', 'min', 'max'])
+
+
+# ***Practice:***
+# Calculate the sum of columns `a` through `e` by groups formed on the last letter in each name.
+# *Hint:* use an anonymous (lambda) function.
+
+# In[46]:
 
 
 np.random.seed(42)
@@ -449,19 +524,28 @@ people = pd.DataFrame(
     columns=['a', 'b', 'c', 'd', 'e'], 
     index=['Joe', 'Steve', 'Wes', 'Jim', 'Travis']
 )
+people
 
 
-# ***Practice:***
-# Calculate the sum of columns `a` through `e` by groups formed on the last letter in each name.
-# *Hint:* use an anonymous (lambda) function.
+# In[47]:
+
+
+people.groupby(lambda x: x[-1]).sum()
+
 
 # ***Practice:***
 # Use the `.to_clipboard()` method to check your answer to the previous practice exercise.
 
+# In[48]:
+
+
+# people.to_clipboard() # only works on a local installation
+
+
 # We need data for the following two practice exercises.
 # We have to jump through some hoops with `pd.MultiIndex.from_product()` if we want to take full advantage of pandas multi indexes.
 
-# In[39]:
+# In[49]:
 
 
 faang = yf.download(tickers='META AAPL AMZN NFLX GOOG', session=session)

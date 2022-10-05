@@ -205,6 +205,11 @@ const thebe_selector_output = ".output, .cell_output"
    Herron - Downloading Data
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Herron/herron-do-market-prices-respond.html">
+   Herron - Do market prices respond to new information?
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -650,6 +655,77 @@ mockup of a simple group aggregation.</p>
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>key1</th>
+      <th>key2</th>
+      <th>data1</th>
+      <th>data2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>a</td>
+      <td>one</td>
+      <td>0.4967</td>
+      <td>-0.2341</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>a</td>
+      <td>two</td>
+      <td>-0.1383</td>
+      <td>1.5792</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>b</td>
+      <td>one</td>
+      <td>0.6477</td>
+      <td>0.7674</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>b</td>
+      <td>two</td>
+      <td>1.5230</td>
+      <td>-0.4695</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>a</td>
+      <td>one</td>
+      <td>-0.2342</td>
+      <td>0.5426</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
 <p>Here is one way to calculate the means of <code class="docutils literal notranslate"><span class="pre">data1</span></code> by (grouops formed on) <code class="docutils literal notranslate"><span class="pre">key1</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -695,7 +771,7 @@ mockup of a simple group aggregation.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.SeriesGroupBy object at 0x7f8fad7e3ee0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.SeriesGroupBy object at 0x7fcb2d3412a0&gt;
 </pre></div>
 </div>
 </div>
@@ -731,6 +807,24 @@ Name: data1, dtype: float64
 </div>
 </div>
 </div>
+<hr class="docutils" />
+<p><em><strong>What does <code class="docutils literal notranslate"><span class="pre">np.random.randn(5)</span></code> do?</strong></em>
+The funtion <code class="docutils literal notranslate"><span class="pre">np.random.randn()</span></code> creates 5 standard normal random variables (mean of 0 and standard deviation of 1).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">randos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1_000_000</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Mean of </span><span class="si">{</span><span class="n">randos</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s1">0.4f</span><span class="si">}</span><span class="s1">, standard deviation of </span><span class="si">{</span><span class="n">randos</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="si">:</span><span class="s1">0.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean of -0.0016, standard deviation of 1.0002
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
 <p>If we prefer our result as a dataframe instead of a series, we can wrap <code class="docutils literal notranslate"><span class="pre">data1</span></code> with two sets of square brackets.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1112,9 +1206,80 @@ We could instead add a helper column to <code class="docutils literal notranslat
     <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">],</span> 
     <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Joe&#39;</span><span class="p">,</span> <span class="s1">&#39;Steve&#39;</span><span class="p">,</span> <span class="s1">&#39;Wes&#39;</span><span class="p">,</span> <span class="s1">&#39;Jim&#39;</span><span class="p">,</span> <span class="s1">&#39;Travis&#39;</span><span class="p">]</span>
 <span class="p">)</span>
+<span class="n">people</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+      <th>d</th>
+      <th>e</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Joe</th>
+      <td>0.4967</td>
+      <td>-0.1383</td>
+      <td>0.6477</td>
+      <td>1.5230</td>
+      <td>-0.2342</td>
+    </tr>
+    <tr>
+      <th>Steve</th>
+      <td>-0.2341</td>
+      <td>1.5792</td>
+      <td>0.7674</td>
+      <td>-0.4695</td>
+      <td>0.5426</td>
+    </tr>
+    <tr>
+      <th>Wes</th>
+      <td>-0.4634</td>
+      <td>-0.4657</td>
+      <td>0.2420</td>
+      <td>-1.9133</td>
+      <td>-1.7249</td>
+    </tr>
+    <tr>
+      <th>Jim</th>
+      <td>-0.5623</td>
+      <td>-1.0128</td>
+      <td>0.3142</td>
+      <td>-0.9080</td>
+      <td>-1.4123</td>
+    </tr>
+    <tr>
+      <th>Travis</th>
+      <td>1.4656</td>
+      <td>-0.2258</td>
+      <td>0.0675</td>
+      <td>-1.4247</td>
+      <td>-0.5444</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1303,6 +1468,71 @@ We could instead add a helper column to <code class="docutils literal notranslat
       <td>0.3142</td>
       <td>-0.9080</td>
       <td>-1.4123</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d_2</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Joe&#39;</span><span class="p">:</span> <span class="s1">&#39;Cool&#39;</span><span class="p">,</span> <span class="s1">&#39;Jim&#39;</span><span class="p">:</span> <span class="s1">&#39;Nerd&#39;</span><span class="p">,</span> <span class="s1">&#39;Travis&#39;</span><span class="p">:</span> <span class="s1">&#39;Cool&#39;</span><span class="p">}</span>
+<span class="n">people</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="nb">len</span><span class="p">,</span> <span class="n">d_2</span><span class="p">])</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+      <th>d</th>
+      <th>e</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">3</th>
+      <th>Cool</th>
+      <td>0.4967</td>
+      <td>-0.1383</td>
+      <td>0.6477</td>
+      <td>1.5230</td>
+      <td>-0.2342</td>
+    </tr>
+    <tr>
+      <th>Nerd</th>
+      <td>-0.5623</td>
+      <td>-1.0128</td>
+      <td>0.3142</td>
+      <td>-0.9080</td>
+      <td>-1.4123</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <th>Cool</th>
+      <td>1.4656</td>
+      <td>-0.2258</td>
+      <td>0.0675</td>
+      <td>-1.4247</td>
+      <td>-0.5444</td>
     </tr>
   </tbody>
 </table>
@@ -1885,57 +2115,57 @@ It is worthwhile to read-through the <code class="docutils literal notranslate">
   <tbody>
     <tr>
       <th>^DJI</th>
-      <td>25078.5669</td>
-      <td>25078.5669</td>
-      <td>25214.4635</td>
-      <td>24929.0610</td>
-      <td>25077.6709</td>
-      <td>285052079.0554</td>
+      <td>25089.8568</td>
+      <td>25089.8568</td>
+      <td>25226.0261</td>
+      <td>24939.7444</td>
+      <td>25088.4898</td>
+      <td>285378412.6984</td>
     </tr>
     <tr>
       <th>^FTSE</th>
-      <td>6954.3493</td>
-      <td>6954.3493</td>
-      <td>6996.4370</td>
-      <td>6911.4444</td>
-      <td>6954.1668</td>
-      <td>805978554.1453</td>
+      <td>6954.4016</td>
+      <td>6954.4016</td>
+      <td>6996.4837</td>
+      <td>6911.3021</td>
+      <td>6954.1850</td>
+      <td>806674695.2041</td>
     </tr>
     <tr>
       <th>^GSPC</th>
-      <td>2952.5377</td>
-      <td>2952.5377</td>
-      <td>2968.2938</td>
-      <td>2934.7241</td>
-      <td>2952.4149</td>
-      <td>3845923259.7536</td>
+      <td>2954.4075</td>
+      <td>2954.4075</td>
+      <td>2970.2109</td>
+      <td>2936.5125</td>
+      <td>2954.2309</td>
+      <td>3848860107.5269</td>
     </tr>
     <tr>
       <th>^HSI</th>
-      <td>25395.6013</td>
-      <td>25395.6013</td>
-      <td>25557.7146</td>
-      <td>25224.8118</td>
-      <td>25412.1796</td>
-      <td>1949554567.9601</td>
+      <td>25378.8424</td>
+      <td>25378.8424</td>
+      <td>25541.0531</td>
+      <td>25207.9378</td>
+      <td>25395.4081</td>
+      <td>1950161500.8373</td>
     </tr>
     <tr>
       <th>^IXIC</th>
-      <td>8464.3421</td>
-      <td>8464.3421</td>
-      <td>8520.7651</td>
-      <td>8399.9484</td>
-      <td>8464.1032</td>
-      <td>2949785133.4702</td>
+      <td>8470.5044</td>
+      <td>8470.5044</td>
+      <td>8527.0864</td>
+      <td>8405.8849</td>
+      <td>8470.1467</td>
+      <td>2954083000.5120</td>
     </tr>
     <tr>
       <th>^N225</th>
-      <td>22223.1723</td>
-      <td>22223.1723</td>
-      <td>22342.7403</td>
-      <td>22095.8404</td>
-      <td>22225.6181</td>
-      <td>96313492.0635</td>
+      <td>22234.5559</td>
+      <td>22234.5559</td>
+      <td>22354.0616</td>
+      <td>22106.8351</td>
+      <td>22236.7190</td>
+      <td>96297308.7071</td>
     </tr>
   </tbody>
 </table>
@@ -2127,11 +2357,11 @@ and
     </tr>
     <tr>
       <th>2022-12-31</th>
-      <td>29134.9902</td>
-      <td>6959.5000</td>
-      <td>3647.2900</td>
-      <td>17250.8809</td>
-      <td>10646.0996</td>
+      <td>28725.5098</td>
+      <td>6881.6001</td>
+      <td>3585.6201</td>
+      <td>17079.5098</td>
+      <td>10575.6201</td>
       <td>24717.5293</td>
       <td>36799.6484</td>
       <td>7672.3999</td>
@@ -2147,6 +2377,8 @@ and
 </section>
 <section id="practice">
 <h2>Practice<a class="headerlink" href="#practice" title="Permalink to this headline">#</a></h2>
+<p><em><strong>Practice:</strong></em>
+Calculate the means of columns <code class="docutils literal notranslate"><span class="pre">data1</span></code> and <code class="docutils literal notranslate"><span class="pre">data2</span></code> by <code class="docutils literal notranslate"><span class="pre">key1</span></code> and <code class="docutils literal notranslate"><span class="pre">key2</span></code>, and arrange the results so that values of <code class="docutils literal notranslate"><span class="pre">key1</span></code> are in the rows and values of <code class="docutils literal notranslate"><span class="pre">key2</span></code> are in the columns.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
@@ -2158,11 +2390,360 @@ and
 </div>
 </div>
 </div>
-<p><em><strong>Practice:</strong></em>
-Calculate the means of columns <code class="docutils literal notranslate"><span class="pre">data1</span></code> and <code class="docutils literal notranslate"><span class="pre">data2</span></code> by <code class="docutils literal notranslate"><span class="pre">key1</span></code> and <code class="docutils literal notranslate"><span class="pre">key2</span></code>, and arrange the results so that values of <code class="docutils literal notranslate"><span class="pre">key1</span></code> are in the rows and values of <code class="docutils literal notranslate"><span class="pre">key2</span></code> are in the columns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># [[&#39;data1&#39;, &#39;data2&#39;]] is optional because those are the only remaining columns</span>
+<span class="n">practice_1</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;key1&#39;</span><span class="p">,</span> <span class="s1">&#39;key2&#39;</span><span class="p">])[[</span><span class="s1">&#39;data1&#39;</span><span class="p">,</span> <span class="s1">&#39;data2&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+<span class="n">practice_1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="2" halign="left">data1</th>
+      <th colspan="2" halign="left">data2</th>
+    </tr>
+    <tr>
+      <th>key2</th>
+      <th>one</th>
+      <th>two</th>
+      <th>one</th>
+      <th>two</th>
+    </tr>
+    <tr>
+      <th>key1</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0.1313</td>
+      <td>-0.1383</td>
+      <td>0.1542</td>
+      <td>1.5792</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>0.6477</td>
+      <td>1.5230</td>
+      <td>0.7674</td>
+      <td>-0.4695</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
 <p><em><strong>Practice:</strong></em>
 Replicate the previous practice exercise with <code class="docutils literal notranslate"><span class="pre">pd.pivot_table()</span></code> and test equality with <code class="docutils literal notranslate"><span class="pre">np.allclose()</span></code>.
 We will learn more about <code class="docutils literal notranslate"><span class="pre">pd.pivot_table()</span></code> at the end of this notebook, but we can give it a try now.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">practice_2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+    <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;data1&#39;</span><span class="p">,</span> <span class="s1">&#39;data2&#39;</span><span class="p">],</span>
+    <span class="n">index</span><span class="o">=</span><span class="s1">&#39;key1&#39;</span><span class="p">,</span>
+    <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;key2&#39;</span><span class="p">,</span>
+    <span class="n">aggfunc</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span> <span class="c1"># I often specify a function, even if it is the default, because I do not trust myself</span>
+<span class="p">)</span>
+<span class="n">practice_2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="2" halign="left">data1</th>
+      <th colspan="2" halign="left">data2</th>
+    </tr>
+    <tr>
+      <th>key2</th>
+      <th>one</th>
+      <th>two</th>
+      <th>one</th>
+      <th>two</th>
+    </tr>
+    <tr>
+      <th>key1</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0.1313</td>
+      <td>-0.1383</td>
+      <td>0.1542</td>
+      <td>1.5792</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>0.6477</td>
+      <td>1.5230</td>
+      <td>0.7674</td>
+      <td>-0.4695</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">practice_1</span><span class="p">,</span> <span class="n">practice_2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>Onec you are comfortable with <code class="docutils literal notranslate"><span class="pre">pd.pivot_table()</span></code>, you could do the following:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;key1&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;key2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="2" halign="left">data1</th>
+      <th colspan="2" halign="left">data2</th>
+    </tr>
+    <tr>
+      <th>key2</th>
+      <th>one</th>
+      <th>two</th>
+      <th>one</th>
+      <th>two</th>
+    </tr>
+    <tr>
+      <th>key1</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0.1313</td>
+      <td>-0.1383</td>
+      <td>0.1542</td>
+      <td>1.5792</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>0.6477</td>
+      <td>1.5230</td>
+      <td>0.7674</td>
+      <td>-0.4695</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We can specify a list of aggregation functions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;key1&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;key2&#39;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;median&#39;</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="4" halign="left">mean</th>
+      <th colspan="4" halign="left">median</th>
+      <th colspan="4" halign="left">min</th>
+      <th colspan="4" halign="left">max</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th colspan="2" halign="left">data1</th>
+      <th colspan="2" halign="left">data2</th>
+      <th colspan="2" halign="left">data1</th>
+      <th colspan="2" halign="left">data2</th>
+      <th colspan="2" halign="left">data1</th>
+      <th colspan="2" halign="left">data2</th>
+      <th colspan="2" halign="left">data1</th>
+      <th colspan="2" halign="left">data2</th>
+    </tr>
+    <tr>
+      <th>key2</th>
+      <th>one</th>
+      <th>two</th>
+      <th>one</th>
+      <th>two</th>
+      <th>one</th>
+      <th>two</th>
+      <th>one</th>
+      <th>two</th>
+      <th>one</th>
+      <th>two</th>
+      <th>one</th>
+      <th>two</th>
+      <th>one</th>
+      <th>two</th>
+      <th>one</th>
+      <th>two</th>
+    </tr>
+    <tr>
+      <th>key1</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0.1313</td>
+      <td>-0.1383</td>
+      <td>0.1542</td>
+      <td>1.5792</td>
+      <td>0.1313</td>
+      <td>-0.1383</td>
+      <td>0.1542</td>
+      <td>1.5792</td>
+      <td>-0.2342</td>
+      <td>-0.1383</td>
+      <td>-0.2341</td>
+      <td>1.5792</td>
+      <td>0.4967</td>
+      <td>-0.1383</td>
+      <td>0.5426</td>
+      <td>1.5792</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>0.6477</td>
+      <td>1.5230</td>
+      <td>0.7674</td>
+      <td>-0.4695</td>
+      <td>0.6477</td>
+      <td>1.5230</td>
+      <td>0.7674</td>
+      <td>-0.4695</td>
+      <td>0.6477</td>
+      <td>1.5230</td>
+      <td>0.7674</td>
+      <td>-0.4695</td>
+      <td>0.6477</td>
+      <td>1.5230</td>
+      <td>0.7674</td>
+      <td>-0.4695</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><em><strong>Practice:</strong></em>
+Calculate the sum of columns <code class="docutils literal notranslate"><span class="pre">a</span></code> through <code class="docutils literal notranslate"><span class="pre">e</span></code> by groups formed on the last letter in each name.
+<em>Hint:</em> use an anonymous (lambda) function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
@@ -2171,15 +2752,151 @@ We will learn more about <code class="docutils literal notranslate"><span class=
     <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">],</span> 
     <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Joe&#39;</span><span class="p">,</span> <span class="s1">&#39;Steve&#39;</span><span class="p">,</span> <span class="s1">&#39;Wes&#39;</span><span class="p">,</span> <span class="s1">&#39;Jim&#39;</span><span class="p">,</span> <span class="s1">&#39;Travis&#39;</span><span class="p">]</span>
 <span class="p">)</span>
+<span class="n">people</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+      <th>d</th>
+      <th>e</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Joe</th>
+      <td>0.4967</td>
+      <td>-0.1383</td>
+      <td>0.6477</td>
+      <td>1.5230</td>
+      <td>-0.2342</td>
+    </tr>
+    <tr>
+      <th>Steve</th>
+      <td>-0.2341</td>
+      <td>1.5792</td>
+      <td>0.7674</td>
+      <td>-0.4695</td>
+      <td>0.5426</td>
+    </tr>
+    <tr>
+      <th>Wes</th>
+      <td>-0.4634</td>
+      <td>-0.4657</td>
+      <td>0.2420</td>
+      <td>-1.9133</td>
+      <td>-1.7249</td>
+    </tr>
+    <tr>
+      <th>Jim</th>
+      <td>-0.5623</td>
+      <td>-1.0128</td>
+      <td>0.3142</td>
+      <td>-0.9080</td>
+      <td>-1.4123</td>
+    </tr>
+    <tr>
+      <th>Travis</th>
+      <td>1.4656</td>
+      <td>-0.2258</td>
+      <td>0.0675</td>
+      <td>-1.4247</td>
+      <td>-0.5444</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">people</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+      <th>d</th>
+      <th>e</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>e</th>
+      <td>0.2626</td>
+      <td>1.4409</td>
+      <td>1.4151</td>
+      <td>1.0536</td>
+      <td>0.3084</td>
+    </tr>
+    <tr>
+      <th>m</th>
+      <td>-0.5623</td>
+      <td>-1.0128</td>
+      <td>0.3142</td>
+      <td>-0.9080</td>
+      <td>-1.4123</td>
+    </tr>
+    <tr>
+      <th>s</th>
+      <td>1.0022</td>
+      <td>-0.6915</td>
+      <td>0.3095</td>
+      <td>-3.3380</td>
+      <td>-2.2693</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><em><strong>Practice:</strong></em>
+Use the <code class="docutils literal notranslate"><span class="pre">.to_clipboard()</span></code> method to check your answer to the previous practice exercise.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># people.to_clipboard() # only works on a local installation</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p><em><strong>Practice:</strong></em>
-Calculate the sum of columns <code class="docutils literal notranslate"><span class="pre">a</span></code> through <code class="docutils literal notranslate"><span class="pre">e</span></code> by groups formed on the last letter in each name.
-<em>Hint:</em> use an anonymous (lambda) function.</p>
-<p><em><strong>Practice:</strong></em>
-Use the <code class="docutils literal notranslate"><span class="pre">.to_clipboard()</span></code> method to check your answer to the previous practice exercise.</p>
 <p>We need data for the following two practice exercises.
 We have to jump through some hoops with <code class="docutils literal notranslate"><span class="pre">pd.MultiIndex.from_product()</span></code> if we want to take full advantage of pandas multi indexes.</p>
 <div class="cell docutils container">
