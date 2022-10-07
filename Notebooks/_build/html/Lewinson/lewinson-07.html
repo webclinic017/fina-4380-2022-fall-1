@@ -205,6 +205,11 @@ const thebe_selector_output = ".output, .cell_output"
    Herron - Downloading Data
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Herron/herron-do-market-prices-respond.html">
+   Herron - Do market prices respond to new information?
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -799,7 +804,7 @@ dtype: float64
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    0
 1    4
-dtype: int64
+dtype: int32
 </pre></div>
 </div>
 </div>
@@ -994,7 +999,7 @@ Instead, we will base our helper functions on weights and returns only.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     fun: 0.1766472998168987
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     fun: 0.1766471021779557
      jac: array([0.1767, 0.1766, 0.1768, 0.1774])
  message: &#39;Optimization terminated successfully&#39;
     nfev: 40
@@ -1042,9 +1047,7 @@ Instead, we will base our helper functions on weights and returns only.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Minimum Variance Portfolio
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==========================
+==========================
 
 Performance
 -----------

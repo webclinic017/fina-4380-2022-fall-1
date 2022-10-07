@@ -772,31 +772,31 @@ ff = pdr.get_data_famafrench('F-F_Research_Data_Factors_daily', start='1900', se
 excess_returns = returns.sub(ff['RF'], axis=0).dropna()
 
 
-# In[80]:
+# In[ ]:
 
 
 cov_term = excess_returns.rolling(252).cov(excess_returns['SPY'])
 
 
-# In[81]:
+# In[ ]:
 
 
 var_term = excess_returns['SPY'].rolling(252).var()
 
 
-# In[82]:
+# In[ ]:
 
 
 betas = cov_term.div(var_term, axis=0)
 
 
-# In[83]:
+# In[ ]:
 
 
 betas.columns.name = 'Ticker'
 
 
-# In[84]:
+# In[ ]:
 
 
 betas.drop(columns='SPY').plot()
@@ -813,7 +813,7 @@ plt.show()
 # McKinney provides an abstract example here, but we will discuss a simpler example that calculates rolling volatility.
 # Also, calculating rolling volatility with the `.apply()` method provides us a chance to benchmark it against the optimized version.
 
-# In[85]:
+# In[ ]:
 
 
 returns['AAPL'].rolling(252).apply(np.std).mul(np.sqrt(252) * 100).plot() # annualize and convert to percent
@@ -824,13 +824,13 @@ plt.show()
 
 # Do not be afraid to use `.apply()`, but realize that `.apply()` is typically 1000-times slower than the pre-built method.
 
-# In[86]:
+# In[ ]:
 
 
 get_ipython().run_line_magic('timeit', "returns['AAPL'].rolling(252).apply(np.std)")
 
 
-# In[87]:
+# In[ ]:
 
 
 get_ipython().run_line_magic('timeit', "returns['AAPL'].rolling(252).std()")

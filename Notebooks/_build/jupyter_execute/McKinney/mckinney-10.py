@@ -173,7 +173,7 @@ means.unstack()
 # In[16]:
 
 
-df.groupby('key1').mean()
+df.groupby('key1')[['data1', 'data2']].mean()
 
 
 # In[17]:
@@ -372,6 +372,36 @@ df.groupby('key1')['data1'].describe()
 # 1. We can pass multiple functions to operate on all of the columns
 # 2. We can pass specific functions to operate on specific columns
 
+# Here is an example with multiple functions:
+
+# In[34]:
+
+
+df.groupby('key1')['data1'].agg(['mean', 'median', 'min', 'max'])
+
+
+# In[35]:
+
+
+df.groupby('key1')[['data1', 'data2']].agg(['mean', 'median', 'min', 'max'])
+
+
+# What if I wanted to calculate the mean of `data1` and the median of `data2` by `key1`?
+
+# In[36]:
+
+
+df.groupby('key1').agg({'data1': 'mean', 'data2': 'median'})
+
+
+# What if I wanted to calculate the mean *and standard deviation* of `data1` and the median of `data2` by `key1`?
+
+# In[37]:
+
+
+df.groupby('key1').agg({'data1': ['mean', 'std'], 'data2': 'median'})
+
+
 # ## Apply: General split-apply-combine
 # 
 # The `.agg()` method aggrates an array to a single value.
@@ -383,20 +413,20 @@ df.groupby('key1')['data1'].describe()
 # 2. Call the applied function on each chunk of the original dataframe
 # 3. Recombine the output of the applied function
 
-# In[34]:
+# In[38]:
 
 
 def top(x, col, n=1):
     return x.sort_values(col).head(n)
 
 
-# In[35]:
+# In[39]:
 
 
 df.groupby('key1').apply(top, col='data1', n=2)
 
 
-# In[36]:
+# In[40]:
 
 
 df.groupby('key1').apply(top, col='data2', n=2)
@@ -409,7 +439,7 @@ df.groupby('key1').apply(top, col='data2', n=2)
 # These also provide row and column totals via "margins".
 # It is worthwhile to read-through the `.pivot_table()` docstring several times.
 
-# In[37]:
+# In[41]:
 
 
 ind = (
@@ -421,7 +451,7 @@ ind = (
 
 # The default aggregation function for `.pivot_table()` is `mean`.
 
-# In[38]:
+# In[42]:
 
 
 ind.loc['2015':].pivot_table(index='Index')
@@ -433,7 +463,7 @@ ind.loc['2015':].pivot_table(index='Index')
 #     and 
 #     `aggfunc` to select specific aggregation functions.
 
-# In[39]:
+# In[43]:
 
 
 (
@@ -454,7 +484,7 @@ ind.loc['2015':].pivot_table(index='Index')
 # ***Practice:***
 # Calculate the means of columns `data1` and `data2` by `key1` and `key2`, and arrange the results so that values of `key1` are in the rows and values of `key2` are in the columns.
 
-# In[40]:
+# In[44]:
 
 
 np.random.seed(42)
@@ -464,7 +494,7 @@ df = pd.DataFrame({'key1' : ['a', 'a', 'b', 'b', 'a'],
                    'data2' : np.random.randn(5)})
 
 
-# In[41]:
+# In[45]:
 
 
 # [['data1', 'data2']] is optional because those are the only remaining columns
@@ -476,7 +506,7 @@ practice_1
 # Replicate the previous practice exercise with `pd.pivot_table()` and test equality with `np.allclose()`.
 # We will learn more about `pd.pivot_table()` at the end of this notebook, but we can give it a try now.
 
-# In[42]:
+# In[46]:
 
 
 practice_2 = pd.pivot_table(
@@ -489,15 +519,15 @@ practice_2 = pd.pivot_table(
 practice_2
 
 
-# In[43]:
+# In[47]:
 
 
 np.allclose(practice_1, practice_2)
 
 
-# Onec you are comfortable with `pd.pivot_table()`, you could do the following:
+# Once you are comfortable with `pd.pivot_table()`, you could do the following:
 
-# In[44]:
+# In[48]:
 
 
 df.pivot_table(index='key1', columns='key2')
@@ -505,7 +535,7 @@ df.pivot_table(index='key1', columns='key2')
 
 # We can specify a list of aggregation functions.
 
-# In[45]:
+# In[49]:
 
 
 df.pivot_table(index='key1', columns='key2', aggfunc=['mean', 'median', 'min', 'max'])
@@ -515,7 +545,7 @@ df.pivot_table(index='key1', columns='key2', aggfunc=['mean', 'median', 'min', '
 # Calculate the sum of columns `a` through `e` by groups formed on the last letter in each name.
 # *Hint:* use an anonymous (lambda) function.
 
-# In[46]:
+# In[50]:
 
 
 np.random.seed(42)
@@ -527,7 +557,7 @@ people = pd.DataFrame(
 people
 
 
-# In[47]:
+# In[51]:
 
 
 people.groupby(lambda x: x[-1]).sum()
@@ -536,7 +566,7 @@ people.groupby(lambda x: x[-1]).sum()
 # ***Practice:***
 # Use the `.to_clipboard()` method to check your answer to the previous practice exercise.
 
-# In[48]:
+# In[52]:
 
 
 # people.to_clipboard() # only works on a local installation
@@ -545,7 +575,7 @@ people.groupby(lambda x: x[-1]).sum()
 # We need data for the following two practice exercises.
 # We have to jump through some hoops with `pd.MultiIndex.from_product()` if we want to take full advantage of pandas multi indexes.
 
-# In[49]:
+# In[53]:
 
 
 faang = yf.download(tickers='META AAPL AMZN NFLX GOOG', session=session)
@@ -556,9 +586,54 @@ faang[pd.MultiIndex.from_product([['Return'], faang['Adj Close'].columns])] = fa
 # ***Practice:***
 # For the FAANG stocks, calulate the mean and standard deviation of returns by ticker.
 
+# In[54]:
+
+
+faang.stack().groupby(level='Ticker').agg({'Return': ['mean', 'std']})
+
+
 # ***Practice:***
 # For the FAANG stocks, calulate the mean and standard deviation of returns and the maximum of closing prices by ticker.
 # To do this, pass a dictionary where the keys are the column names and the values are lists of functions.
+
+# In[55]:
+
+
+faang.stack().groupby(level='Ticker').agg({'Return': ['mean', 'std'], 'Close': 'max'})
+
+
+# What if we wanted these aggreations by ticker-month?
+# (We will learn a slightly easier approach in chapter 11 of McKinney.)
+
+# In[56]:
+
+
+(
+    faang # our original data with column multi-index for Variable and Ticker
+    .stack() # moves Ticker from column inner level to row inner level, so data are Date-Ticker pairs
+    .reset_index(level='Ticker') # removes Ticker from index, so index is Date only
+    .groupby([
+        'Ticker', # group by Ticker
+        pd.Grouper(freq='M') # then, group by the month of each Date
+    ])
+    # .mean() # aggregates the mean of each column
+    .agg({'Return': ['mean', 'std'], 'Close': 'max'}) # aggregates with column-specific functions
+)
+
+
+# We can check our work the old-fashioned way:
+
+# In[57]:
+
+
+faang.stack().loc[('1980-12', 'AAPL')].mean()
+
+
+# In[58]:
+
+
+faang.stack().loc[('2022-10', 'NFLX')].mean()
+
 
 # ***Practice:***
 # 
