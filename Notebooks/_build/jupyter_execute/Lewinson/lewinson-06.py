@@ -28,7 +28,7 @@ import pandas as pd
 # In[2]:
 
 
-plt.rcParams['figure.dpi'] = 150
+get_ipython().run_line_magic('config', "InlineBackend.figure_format = 'retina'")
 get_ipython().run_line_magic('precision', '4')
 pd.options.display.float_format = '{:.4f}'.format
 
@@ -36,10 +36,10 @@ pd.options.display.float_format = '{:.4f}'.format
 # In[3]:
 
 
-import yfinance as yf
-import pandas_datareader as pdr
 import requests_cache
 session = requests_cache.CachedSession(expire_after='1D')
+import yfinance as yf
+import pandas_datareader as pdr
 
 
 # > Monte Carlo simulations are a class of computational algorithms that use repeated random sampling to solve any problems that have a probabilistic interpretation. In finance, one of the reasons they gained popularity is that they can be used to accurately estimate integrals. The main idea of Monte Carlo simulations is to produce a multitude of sample paths—possible scenarios/outcomes, often over a given period of time. The horizon is then split into a specified number of time steps and the process of doing so is called discretization. Its goal is to approximate continuous time, since the pricing of financial instruments happens in continuous time.

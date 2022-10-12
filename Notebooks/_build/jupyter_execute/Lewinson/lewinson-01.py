@@ -27,7 +27,7 @@ import pandas as pd
 # In[2]:
 
 
-plt.rcParams['figure.dpi'] = 150
+get_ipython().run_line_magic('config', "InlineBackend.figure_format = 'retina'")
 get_ipython().run_line_magic('precision', '4')
 pd.options.display.float_format = '{:.4f}'.format
 
@@ -35,10 +35,10 @@ pd.options.display.float_format = '{:.4f}'.format
 # In[3]:
 
 
-import scipy.stats as scs
-import yfinance as yf
 import requests_cache
 session = requests_cache.CachedSession(expire_after='1D')
+import yfinance as yf
+import pandas_datareader as pdr
 
 
 # ## Investigating stylized facts of asset returns
@@ -145,7 +145,7 @@ plt.show()
 # To reduce noise, we can plot the monthly means and standard deviations of daily returns.
 # We will learn more about the `.resample()` method in chapter 11 of McKinney.
 
-# In[11]:
+# In[ ]:
 
 
 spy_m = (
@@ -162,7 +162,7 @@ spy_m = (
 # In the top panel, we see that there are alternating periods of low magnitude and high magnitude mean daily returns.
 # In the bottom panel, we see that there are alternating periods of low and high volatility.
 
-# In[12]:
+# In[ ]:
 
 
 axes = spy_m.plot(subplots=True, legend=False)
@@ -184,7 +184,7 @@ plt.show()
 # We can show this with an autocorrelation plot of daily stock returns.
 # The height of each line indicates the correlation coefficient ($\rho$) between returns on day 0 and lag $t$ (i.e., day $0 - t$).
 
-# In[13]:
+# In[ ]:
 
 
 N = 10
@@ -208,7 +208,7 @@ plt.show()
 # 
 # Because volatility clusters in time, squared stock returns (and the absolute values of stock returns) are autocorrelated.
 
-# In[14]:
+# In[ ]:
 
 
 N = 60
@@ -231,7 +231,7 @@ plt.show()
 # We typically want to report *annualized* mean and volatility of returns (i.e., multiply the mean and volatility of daily returns by 252 and $\sqrt{252}$).
 # However, we will plot daily values here  because some annualized values would be very large when we estimate means and volatilities using only one month of data.
 
-# In[15]:
+# In[ ]:
 
 
 spy_m = (
@@ -246,7 +246,7 @@ spy_m = (
 )
 
 
-# In[16]:
+# In[ ]:
 
 
 spy_m.plot(x='mean_lag1', y='std', kind='scatter', alpha=0.5)

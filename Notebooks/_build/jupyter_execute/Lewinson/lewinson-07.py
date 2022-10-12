@@ -28,7 +28,7 @@ import pandas as pd
 # In[2]:
 
 
-plt.rcParams['figure.dpi'] = 150
+get_ipython().run_line_magic('config', "InlineBackend.figure_format = 'retina'")
 get_ipython().run_line_magic('precision', '4')
 pd.options.display.float_format = '{:.4f}'.format
 
@@ -36,10 +36,10 @@ pd.options.display.float_format = '{:.4f}'.format
 # In[3]:
 
 
-import yfinance as yf
-import pandas_datareader as pdr
 import requests_cache
 session = requests_cache.CachedSession(expire_after='1D')
+import yfinance as yf
+import pandas_datareader as pdr
 
 
 # ## Evaluating the performance of a basic 1/n portfolio

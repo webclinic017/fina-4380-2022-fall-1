@@ -733,6 +733,24 @@ analyze server log data, too.</p>
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2011-01-02    0.4967
+2011-01-05   -0.1383
+2011-01-07    0.6477
+2011-01-08    1.5230
+2011-01-10   -0.2342
+2011-01-12   -0.2341
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
 <p>Note that pandas converts the <code class="docutils literal notranslate"><span class="pre">datetime</span></code> objects to a pandas <code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code> object and a single index value is a <code class="docutils literal notranslate"><span class="pre">Timestamp</span></code> object.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -761,6 +779,21 @@ analyze server log data, too.</p>
 </div>
 </div>
 <p>Recall that arithmetic operations between pandas objects automatically align on indexes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2011-01-02    0.4967
+2011-01-07    0.6477
+2011-01-10   -0.2342
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span> <span class="o">+</span> <span class="n">ts</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span>
@@ -874,11 +907,42 @@ dtype: float64
 </div>
 </div>
 </div>
+<p>But do not use U.K.-style dates.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ts[&#39;10/1/2011&#39;] # D/M/YYYY</span>
+</pre></div>
+</div>
+</div>
+</div>
 <p>Here is a longer time series for longer slices.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 <span class="n">longer_ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;1/1/2000&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">1000</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">longer_ts</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2000-01-01    0.4967
+2000-01-02   -0.1383
+2000-01-03    0.6477
+2000-01-04    1.5230
+2000-01-05   -0.2342
+               ...  
+2002-09-22   -0.2811
+2002-09-23    1.7977
+2002-09-24    0.6408
+2002-09-25   -0.5712
+2002-09-26    0.5726
+Freq: D, Length: 1000, dtype: float64
 </pre></div>
 </div>
 </div>
@@ -954,7 +1018,7 @@ Freq: D, Length: 365, dtype: float64
 <p>If we sort our data chronologically, we can also slice with a range of date strings.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span><span class="p">[</span><span class="s1">&#39;1/6/2011&#39;</span><span class="p">:</span><span class="s1">&#39;1/11/2011&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span><span class="p">[</span><span class="s1">&#39;1/6/2011&#39;</span><span class="p">:</span><span class="s1">&#39;1/10/2011&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -978,12 +1042,35 @@ The following code works as though our data were sorted, but raises a warning th
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts2</span><span class="p">[</span><span class="s1">&#39;1/6/2011&#39;</span><span class="p">:</span><span class="s1">&#39;1/11/2011&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts2</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_20823/1099700163.py:1: FutureWarning: Value based partial slicing on non-monotonic DatetimeIndexes with non-existing keys is deprecated and will raise a KeyError in a future Version.
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2011-01-10   -0.2342
+2011-01-12   -0.2341
+2011-01-05   -0.1383
+2011-01-02    0.4967
+2011-01-07    0.6477
+2011-01-08    1.5230
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following behavior is “deprecated”, meaning it will eventually go away and we should not rely up on it.
+<em><strong>You may not receive the following warning on DataCamp Workspace, which updates pandas slowly to ensure stability.</strong></em>
+You can check your pandas version by executing the following in a code cell: <code class="docutils literal notranslate"><span class="pre">pd.__version__</span></code> (there are two underscores on each side of version).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># C:\Users\r.herron\AppData\Local\Temp\ipykernel_9468\1099700163.py:1: FutureWarning: Value based partial slicing on non-monotonic DatetimeIndexes with non-existing keys is deprecated and will raise a KeyError in a future Version.</span>
+<span class="c1">#   ts2[&#39;1/6/2011&#39;:&#39;1/11/2011&#39;]</span>
+<span class="n">ts2</span><span class="p">[</span><span class="s1">&#39;1/6/2011&#39;</span><span class="p">:</span><span class="s1">&#39;1/11/2011&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_41876/3715350022.py:3: FutureWarning: Value based partial slicing on non-monotonic DatetimeIndexes with non-existing keys is deprecated and will raise a KeyError in a future Version.
   ts2[&#39;1/6/2011&#39;:&#39;1/11/2011&#39;]
 </pre></div>
 </div>
@@ -1181,6 +1268,34 @@ If we pass a start and end date, <code class="docutils literal notranslate"><spa
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">index</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DatetimeIndex([&#39;2012-04-01&#39;, &#39;2012-04-02&#39;, &#39;2012-04-03&#39;, &#39;2012-04-04&#39;,
+               &#39;2012-04-05&#39;, &#39;2012-04-06&#39;, &#39;2012-04-07&#39;, &#39;2012-04-08&#39;,
+               &#39;2012-04-09&#39;, &#39;2012-04-10&#39;, &#39;2012-04-11&#39;, &#39;2012-04-12&#39;,
+               &#39;2012-04-13&#39;, &#39;2012-04-14&#39;, &#39;2012-04-15&#39;, &#39;2012-04-16&#39;,
+               &#39;2012-04-17&#39;, &#39;2012-04-18&#39;, &#39;2012-04-19&#39;, &#39;2012-04-20&#39;,
+               &#39;2012-04-21&#39;, &#39;2012-04-22&#39;, &#39;2012-04-23&#39;, &#39;2012-04-24&#39;,
+               &#39;2012-04-25&#39;, &#39;2012-04-26&#39;, &#39;2012-04-27&#39;, &#39;2012-04-28&#39;,
+               &#39;2012-04-29&#39;, &#39;2012-04-30&#39;, &#39;2012-05-01&#39;, &#39;2012-05-02&#39;,
+               &#39;2012-05-03&#39;, &#39;2012-05-04&#39;, &#39;2012-05-05&#39;, &#39;2012-05-06&#39;,
+               &#39;2012-05-07&#39;, &#39;2012-05-08&#39;, &#39;2012-05-09&#39;, &#39;2012-05-10&#39;,
+               &#39;2012-05-11&#39;, &#39;2012-05-12&#39;, &#39;2012-05-13&#39;, &#39;2012-05-14&#39;,
+               &#39;2012-05-15&#39;, &#39;2012-05-16&#39;, &#39;2012-05-17&#39;, &#39;2012-05-18&#39;,
+               &#39;2012-05-19&#39;, &#39;2012-05-20&#39;, &#39;2012-05-21&#39;, &#39;2012-05-22&#39;,
+               &#39;2012-05-23&#39;, &#39;2012-05-24&#39;, &#39;2012-05-25&#39;, &#39;2012-05-26&#39;,
+               &#39;2012-05-27&#39;, &#39;2012-05-28&#39;, &#39;2012-05-29&#39;, &#39;2012-05-30&#39;,
+               &#39;2012-05-31&#39;, &#39;2012-06-01&#39;],
+              dtype=&#39;datetime64[ns]&#39;, freq=&#39;D&#39;)
+</pre></div>
+</div>
+</div>
+</div>
 <p>If we specify only a start or end date, we must specify the number of periods.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1263,6 +1378,42 @@ Here we use <code class="docutils literal notranslate"><span class="pre">freq</s
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2000-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2000-12-01&#39;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;5B&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DatetimeIndex([&#39;2000-01-03&#39;, &#39;2000-01-10&#39;, &#39;2000-01-17&#39;, &#39;2000-01-24&#39;,
+               &#39;2000-01-31&#39;, &#39;2000-02-07&#39;, &#39;2000-02-14&#39;, &#39;2000-02-21&#39;,
+               &#39;2000-02-28&#39;, &#39;2000-03-06&#39;, &#39;2000-03-13&#39;, &#39;2000-03-20&#39;,
+               &#39;2000-03-27&#39;, &#39;2000-04-03&#39;, &#39;2000-04-10&#39;, &#39;2000-04-17&#39;,
+               &#39;2000-04-24&#39;, &#39;2000-05-01&#39;, &#39;2000-05-08&#39;, &#39;2000-05-15&#39;,
+               &#39;2000-05-22&#39;, &#39;2000-05-29&#39;, &#39;2000-06-05&#39;, &#39;2000-06-12&#39;,
+               &#39;2000-06-19&#39;, &#39;2000-06-26&#39;, &#39;2000-07-03&#39;, &#39;2000-07-10&#39;,
+               &#39;2000-07-17&#39;, &#39;2000-07-24&#39;, &#39;2000-07-31&#39;, &#39;2000-08-07&#39;,
+               &#39;2000-08-14&#39;, &#39;2000-08-21&#39;, &#39;2000-08-28&#39;, &#39;2000-09-04&#39;,
+               &#39;2000-09-11&#39;, &#39;2000-09-18&#39;, &#39;2000-09-25&#39;, &#39;2000-10-02&#39;,
+               &#39;2000-10-09&#39;, &#39;2000-10-16&#39;, &#39;2000-10-23&#39;, &#39;2000-10-30&#39;,
+               &#39;2000-11-06&#39;, &#39;2000-11-13&#39;, &#39;2000-11-20&#39;, &#39;2000-11-27&#39;],
+              dtype=&#39;datetime64[ns]&#39;, freq=&#39;5B&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2000-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2000-12-01&#39;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;Q&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DatetimeIndex([&#39;2000-03-31&#39;, &#39;2000-06-30&#39;, &#39;2000-09-30&#39;], dtype=&#39;datetime64[ns]&#39;, freq=&#39;Q-DEC&#39;)
+</pre></div>
+</div>
+</div>
+</div>
 <p><em><strong>Table 11-4</strong></em> summarizes the time series frequencies, which are linked to in the <code class="docutils literal notranslate"><span class="pre">pd.date_range()</span></code> docstring.
 <em><strong>Table 11-4</strong></em> is too long to replicate, but is only one click away in the <code class="docutils literal notranslate"><span class="pre">pd.date_range()</span></code> docstring.
 <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html#dateoffset-objects">Here</a> is a direct link.</p>
@@ -1319,6 +1470,22 @@ Shifting is moving data backward (or forward) through time.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 <span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;1/1/2000&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;M&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2000-01-31    0.4967
+2000-02-29   -0.1383
+2000-03-31    0.6477
+2000-04-30    1.5230
+Freq: M, dtype: float64
 </pre></div>
 </div>
 </div>
@@ -1430,54 +1597,6 @@ Freq: M, dtype: float64
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span> <span class="o">/</span> <span class="n">ts</span><span class="o">.</span><span class="n">shift</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2000-01-31       NaN
-2000-02-29   -1.2784
-2000-03-31   -5.6844
-2000-04-30    1.3515
-Freq: M, dtype: float64
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">shift</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2000-01-31       NaN
-2000-02-29   -1.2784
-2000-03-31   -5.6844
-2000-04-30    1.3515
-Freq: M, dtype: float64
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span>
-    <span class="n">a</span><span class="o">=</span><span class="n">ts</span><span class="o">.</span><span class="n">pct_change</span><span class="p">(),</span>
-    <span class="n">b</span><span class="o">=</span><span class="n">ts</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">shift</span><span class="p">()),</span>
-    <span class="n">equal_nan</span><span class="o">=</span><span class="kc">True</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
-</pre></div>
-</div>
-</div>
-</div>
 <p>Two observations on the percent change calculations above:</p>
 <ol class="simple">
 <li><p>The first percent change is NaN (missing) because there is no previous value to change from</p></li>
@@ -1488,6 +1607,22 @@ As a result, timestamps are unchanged and values shift down (positive <code clas
 However, we can also pass the <code class="docutils literal notranslate"><span class="pre">freq</span></code> argument to respect the timestamps.
 With the <code class="docutils literal notranslate"><span class="pre">freq</span></code> argument, timestamps shift by a multiple (specified by the <code class="docutils literal notranslate"><span class="pre">periods</span></code> argument) of datetime intervals (specified by the <code class="docutils literal notranslate"><span class="pre">freq</span></code> argument).
 Note that the examples below generate new datetime indexes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2000-01-31    0.4967
+2000-02-29   -0.1383
+2000-03-31    0.6477
+2000-04-30    1.5230
+Freq: M, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;M&#39;</span><span class="p">)</span>
@@ -2031,7 +2166,7 @@ The next example calculates and plots the 252-trading day moving average of AAPL
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/mckinney-11_116_0.png" src="../_images/mckinney-11_116_0.png" />
+<img alt="../_images/mckinney-11_125_0.png" src="../_images/mckinney-11_125_0.png" />
 </div>
 </div>
 <p>Two observations:</p>
@@ -2063,7 +2198,7 @@ The most common example is the rolling correlation between two returns series.</
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/mckinney-11_120_0.png" src="../_images/mckinney-11_120_0.png" />
+<img alt="../_images/mckinney-11_129_0.png" src="../_images/mckinney-11_129_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2076,7 +2211,7 @@ The most common example is the rolling correlation between two returns series.</
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/mckinney-11_121_0.png" src="../_images/mckinney-11_121_0.png" />
+<img alt="../_images/mckinney-11_130_0.png" src="../_images/mckinney-11_130_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2131,7 +2266,7 @@ The most common example is the rolling correlation between two returns series.</
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/mckinney-11_128_0.png" src="../_images/mckinney-11_128_0.png" />
+<img alt="../_images/mckinney-11_137_0.png" src="../_images/mckinney-11_137_0.png" />
 </div>
 </div>
 </section>
@@ -2151,7 +2286,7 @@ Also, calculating rolling volatility with the <code class="docutils literal notr
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/mckinney-11_130_0.png" src="../_images/mckinney-11_130_0.png" />
+<img alt="../_images/mckinney-11_139_0.png" src="../_images/mckinney-11_139_0.png" />
 </div>
 </div>
 <p>Do not be afraid to use <code class="docutils literal notranslate"><span class="pre">.apply()</span></code>, but realize that <code class="docutils literal notranslate"><span class="pre">.apply()</span></code> is typically 1000-times slower than the pre-built method.</p>
@@ -2162,7 +2297,7 @@ Also, calculating rolling volatility with the <code class="docutils literal notr
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>850 ms ± 11.7 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>895 ms ± 106 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -2174,7 +2309,7 @@ Also, calculating rolling volatility with the <code class="docutils literal notr
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>238 µs ± 5.03 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>227 µs ± 11.6 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -2187,9 +2322,180 @@ Also, calculating rolling volatility with the <code class="docutils literal notr
 Keep only the first observation for each date in <code class="docutils literal notranslate"><span class="pre">dup_ts</span></code> from above.
 Keep only the largest observation for each date in <code class="docutils literal notranslate"><span class="pre">dup_ts</span></code>.
 Also try the <code class="docutils literal notranslate"><span class="pre">.drop_duplicates()</span></code> method</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dup_ts</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2000-01-01    0
+2000-01-02    3
+2000-01-03    4
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dup_ts</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DatetimeIndex([&#39;2000-01-01&#39;, &#39;2000-01-02&#39;, &#39;2000-01-03&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
 <p><em><strong>Practice:</strong></em>
 Download daily data market data for TSLA and add daily returns as column named <code class="docutils literal notranslate"><span class="pre">Return</span></code>.
 The add the 1 trading lag of <code class="docutils literal notranslate"><span class="pre">Return</span></code> as a column named <code class="docutils literal notranslate"><span class="pre">Return_lag1</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tsla</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">tickers</span><span class="o">=</span><span class="s1">&#39;TSLA&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">assign</span><span class="p">(</span>
+        <span class="n">Return</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">(),</span>
+        <span class="n">Return_lag1</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Return&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">()</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tsla</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2020&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Return_lag1&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Return&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="c1"># I add `cmap=None` to eliminate a warning</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Tesla (TSLA) Daily Returns in 2020&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Return on Day $t$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Return on Day $t-1$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/richard/.local/lib/python3.10/site-packages/pandas/plotting/_matplotlib/core.py:1114: UserWarning: No data for colormapping provided via &#39;c&#39;. Parameters &#39;cmap&#39; will be ignored
+  scatter = ax.scatter(
+</pre></div>
+</div>
+<img alt="../_images/mckinney-11_152_1.png" src="../_images/mckinney-11_152_1.png" />
+</div>
+</div>
 <p><em><strong>Practice:</strong></em>
 Calculate 5-minute returns for GME from 1-minute data.</p>
 <p><em>Hints:</em></p>
