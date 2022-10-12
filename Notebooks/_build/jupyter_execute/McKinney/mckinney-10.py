@@ -20,15 +20,15 @@
 # In[1]:
 
 
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 
 
 # In[2]:
 
 
-plt.rcParams['figure.dpi'] = 150
+get_ipython().run_line_magic('config', "InlineBackend.figure_format = 'retina'")
 get_ipython().run_line_magic('precision', '4')
 pd.options.display.float_format = '{:.4f}'.format
 
@@ -643,6 +643,43 @@ faang.stack().loc[('2022-10', 'NFLX')].mean()
 # 4. Multiply by $\sqrt{252}$ to annualize these volatilities of daily returns
 # 5. Plot these annualized volatilities
 
+# In[59]:
+
+
+ret_1 = yf.download(tickers='SPY GOOG', session=session)['Adj Close'].pct_change()
+ret_1.columns.name = 'Ticker'
+
+
+# In[60]:
+
+
+vol_1 = ret_1.groupby(pd.Grouper(freq='M')).std()
+
+
+# In[61]:
+
+
+vol_1.dropna().mul(100 * np.sqrt(252)).plot()
+plt.ylabel('Annualized Volatility (%)')
+plt.title('Annualized Volatility from Daily Returns')
+plt.show()
+
+
+# In a few days, we will learn how to more easily perform this aggregation with the `.resample()` method.
+# Still, `pd.Grouper()` is a great to tool to know because you may want to aggregate along several dimensions, which is not possible with the `.resample()` method.
+
+# In[62]:
+
+
+vol_2 = ret_1.resample('M').std() 
+
+
+# In[63]:
+
+
+np.allclose(vol_1, vol_2, equal_nan=True)
+
+
 # ***Practice:***
 # 
 # 1. Download the daily factor data from Ken French's website
@@ -659,3 +696,46 @@ faang.stack().loc[('2022-10', 'NFLX')].mean()
 # 1. Viet Nam War: 1959 to 1975
 # 1. Gulf War: 1990 to 1991
 # 1. War in Afghanistan: 2001 to 2021
+
+# In[64]:
+
+
+pdr.famafrench.get_available_datasets()[:5]
+
+
+# In[65]:
+
+
+ff = pdr.get_data_famafrench('F-F_Research_Data_Factors_daily', start='1900-01-01', session=session)[0] / 100
+
+
+# In[66]:
+
+
+ff['Mkt'] = ff['Mkt-RF'] + ff['RF']
+
+
+# In[67]:
+
+
+vol_3 = ff['Mkt'].groupby(pd.Grouper(freq='M')).std()
+
+
+# In[68]:
+
+
+vol_3.dropna().mul(100 * np.sqrt(252)).plot()
+plt.axvspan('1941-12', '1945-09', alpha=0.25)
+plt.annotate('WWII', ('1941-12', 90))
+plt.axvspan('1950', '1953', alpha=0.25)
+plt.annotate('Korean', ('1950', 80))
+plt.axvspan('1959', '1975', alpha=0.25)
+plt.annotate('Vietnam', ('1959', 90))
+plt.axvspan('1990', '1991', alpha=0.25)
+plt.annotate('Gulf I', ('1990', 80))
+plt.axvspan('2001', '2021', alpha=0.25)
+plt.annotate('Afghanistan', ('2001', 90))
+plt.ylabel('Annualized Market Volatility (%)')
+plt.title('Annualized Market Volatility from Daily Returns')
+plt.show()
+

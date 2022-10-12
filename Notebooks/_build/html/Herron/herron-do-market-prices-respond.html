@@ -584,12 +584,6 @@ We can organize this formula as \)</span><span class="math notranslate nohighlig
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\r.herron\AppData\Local\Temp\ipykernel_18908\771075788.py:1: FutureWarning: Indexing a timezone-aware DatetimeIndex with a timezone-naive datetime is deprecated and will raise KeyError in a future version. Use a timezone-aware object instead.
-  price_unaffected = twtr_all.loc[dates[&#39;Purchases Announced&#39;] - pd.offsets.BDay(20), &#39;Price&#39;]
-</pre></div>
-</div>
-</div>
 </div>
 <p>We will use the formula above to estimate the implied probability of deal completion.</p>
 <div class="cell docutils container">
@@ -607,23 +601,11 @@ We step back one business day with <code class="docutils literal notranslate"><s
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\r.herron\AppData\Local\Temp\ipykernel_18908\2515562944.py:1: FutureWarning: Indexing a timezone-aware DatetimeIndex with a timezone-naive datetime is deprecated and will raise KeyError in a future version. Use a timezone-aware object instead.
-  twtr_all.loc[:dates[&#39;Bid Announced&#39;] - pd.offsets.BDay(1), &#39;Probability&#39;] = np.nan
-</pre></div>
-</div>
-</div>
 </div>
 <p>To avoid excessive <code class="docutils literal notranslate"><span class="pre">.loc[]</span></code> statements, we will slice <code class="docutils literal notranslate"><span class="pre">twtr_all</span></code> to the relevant date range and columns in <code class="docutils literal notranslate"><span class="pre">twtr</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">twtr</span> <span class="o">=</span> <span class="n">twtr_all</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dates</span><span class="p">[</span><span class="s1">&#39;First Purchase&#39;</span><span class="p">]:,</span>  <span class="p">[</span><span class="s1">&#39;Price&#39;</span><span class="p">,</span> <span class="s1">&#39;Probability&#39;</span><span class="p">]]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\r.herron\AppData\Local\Temp\ipykernel_18908\1441240805.py:1: FutureWarning: Indexing a timezone-aware DatetimeIndex with a timezone-naive datetime is deprecated and will raise KeyError in a future version. Use a timezone-aware object instead.
-  twtr = twtr_all.loc[dates[&#39;First Purchase&#39;]:,  [&#39;Price&#39;, &#39;Probability&#39;]]
 </pre></div>
 </div>
 </div>
@@ -678,11 +660,7 @@ If we want to precisely place annotations, we need to either manually place them
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\r.herron\AppData\Local\Temp\ipykernel_18908\2864927360.py:4: FutureWarning: Indexing a timezone-aware DatetimeIndex with a timezone-naive datetime is deprecated and will raise KeyError in a future version. Use a timezone-aware object instead.
-  price = twtr.loc[date, &#39;Price&#39;]
-</pre></div>
-</div>
-<img alt="../_images/herron-do-market-prices-respond_24_1.png" src="../_images/herron-do-market-prices-respond_24_1.png" />
+<img alt="../_images/herron-do-market-prices-respond_24_0.png" src="../_images/herron-do-market-prices-respond_24_0.png" />
 </div>
 </div>
 <p>The above plot is a good start!

@@ -597,16 +597,16 @@ For example, we could use a pivot table to calculate mean daily stock returns by
 <p><em><strong>Note:</strong></em> Indented block quotes are from McKinney, and section numbers differ from McKinney because we will not discuss every topic.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">150</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
 <span class="o">%</span><span class="k">precision</span> 4
 <span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>
 </pre></div>
@@ -771,7 +771,7 @@ mockup of a simple group aggregation.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.SeriesGroupBy object at 0x000001768AA4AAD0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.SeriesGroupBy object at 0x7f8f66008e80&gt;
 </pre></div>
 </div>
 </div>
@@ -2368,57 +2368,57 @@ It is worthwhile to read-through the <code class="docutils literal notranslate">
   <tbody>
     <tr>
       <th>^DJI</th>
-      <td>25097.0550</td>
-      <td>25097.0550</td>
-      <td>25233.5881</td>
-      <td>24946.9373</td>
-      <td>25096.0073</td>
-      <td>285372897.0511</td>
+      <td>25101.3432</td>
+      <td>25101.3432</td>
+      <td>25237.9942</td>
+      <td>24951.1205</td>
+      <td>25100.2526</td>
+      <td>285484050.0511</td>
     </tr>
     <tr>
       <th>^FTSE</th>
-      <td>6954.4422</td>
-      <td>6954.4422</td>
-      <td>6996.5394</td>
-      <td>6911.3525</td>
-      <td>6954.2572</td>
-      <td>806802621.2538</td>
+      <td>6954.4094</td>
+      <td>6954.4094</td>
+      <td>6996.5218</td>
+      <td>6911.3324</td>
+      <td>6954.2785</td>
+      <td>807274505.2953</td>
     </tr>
     <tr>
       <th>^GSPC</th>
-      <td>2955.5763</td>
-      <td>2955.5763</td>
-      <td>2971.4383</td>
-      <td>2937.6746</td>
-      <td>2955.4422</td>
-      <td>3848309799.5910</td>
+      <td>2956.2444</td>
+      <td>2956.2444</td>
+      <td>2972.1278</td>
+      <td>2938.3290</td>
+      <td>2956.1227</td>
+      <td>3850057242.0838</td>
     </tr>
     <tr>
       <th>^HSI</th>
-      <td>25370.9984</td>
-      <td>25370.9984</td>
-      <td>25533.1826</td>
-      <td>25200.2326</td>
-      <td>25387.6513</td>
-      <td>1949867801.2546</td>
+      <td>25357.7610</td>
+      <td>25357.7610</td>
+      <td>25520.1852</td>
+      <td>25187.0815</td>
+      <td>25374.7283</td>
+      <td>1949267156.8894</td>
     </tr>
     <tr>
       <th>^IXIC</th>
-      <td>8474.2984</td>
-      <td>8474.2984</td>
-      <td>8531.0493</td>
-      <td>8409.6442</td>
-      <td>8474.0416</td>
-      <td>2955450737.7301</td>
+      <td>8476.3727</td>
+      <td>8476.3727</td>
+      <td>8533.2029</td>
+      <td>8411.6777</td>
+      <td>8476.1848</td>
+      <td>2957712946.8846</td>
     </tr>
     <tr>
       <th>^N225</th>
-      <td>22239.8054</td>
-      <td>22239.8054</td>
-      <td>22359.2750</td>
-      <td>22112.0251</td>
-      <td>22241.8009</td>
-      <td>96271006.8529</td>
+      <td>22244.1858</td>
+      <td>22244.1858</td>
+      <td>22363.7705</td>
+      <td>22116.4795</td>
+      <td>22246.3437</td>
+      <td>96246287.5197</td>
     </tr>
   </tbody>
 </table>
@@ -2504,7 +2504,7 @@ and
   </thead>
   <tbody>
     <tr>
-      <th>2015-12-31 00:00:00+00:00</th>
+      <th>2015-12-31</th>
       <td>15666.4404</td>
       <td>5874.1001</td>
       <td>1867.6100</td>
@@ -2519,7 +2519,7 @@ and
       <td>20868.0293</td>
     </tr>
     <tr>
-      <th>2016-12-31 00:00:00+00:00</th>
+      <th>2016-12-31</th>
       <td>15660.1797</td>
       <td>5537.0000</td>
       <td>1829.0800</td>
@@ -2534,7 +2534,7 @@ and
       <td>19494.5293</td>
     </tr>
     <tr>
-      <th>2017-12-31 00:00:00+00:00</th>
+      <th>2017-12-31</th>
       <td>19732.4004</td>
       <td>7099.2002</td>
       <td>2257.8301</td>
@@ -2549,7 +2549,7 @@ and
       <td>22939.1797</td>
     </tr>
     <tr>
-      <th>2018-12-31 00:00:00+00:00</th>
+      <th>2018-12-31</th>
       <td>21792.1992</td>
       <td>6584.7002</td>
       <td>2351.1001</td>
@@ -2564,7 +2564,7 @@ and
       <td>24270.6191</td>
     </tr>
     <tr>
-      <th>2019-12-31 00:00:00+00:00</th>
+      <th>2019-12-31</th>
       <td>22686.2207</td>
       <td>6692.7002</td>
       <td>2447.8899</td>
@@ -2579,7 +2579,7 @@ and
       <td>24066.1191</td>
     </tr>
     <tr>
-      <th>2020-12-31 00:00:00+00:00</th>
+      <th>2020-12-31</th>
       <td>18591.9297</td>
       <td>4993.8999</td>
       <td>2237.3999</td>
@@ -2594,7 +2594,7 @@ and
       <td>27568.1504</td>
     </tr>
     <tr>
-      <th>2021-12-31 00:00:00+00:00</th>
+      <th>2021-12-31</th>
       <td>29982.6191</td>
       <td>6407.5000</td>
       <td>3700.6499</td>
@@ -2609,12 +2609,12 @@ and
       <td>30670.0996</td>
     </tr>
     <tr>
-      <th>2022-12-31 00:00:00+00:00</th>
+      <th>2022-12-31</th>
       <td>28725.5098</td>
       <td>6881.6001</td>
       <td>3585.6201</td>
-      <td>17079.5098</td>
-      <td>10575.6201</td>
+      <td>16701.0293</td>
+      <td>10426.1904</td>
       <td>24717.5293</td>
       <td>36799.6484</td>
       <td>7672.3999</td>
@@ -3401,31 +3401,31 @@ To do this, pass a dictionary where the keys are the column names and the values
   <tbody>
     <tr>
       <th rowspan="5" valign="top">AAPL</th>
-      <th>1980-12-31 00:00:00-05:00</th>
+      <th>1980-12-31</th>
       <td>0.0155</td>
       <td>0.0499</td>
       <td>0.1607</td>
     </tr>
     <tr>
-      <th>1981-01-31 00:00:00-05:00</th>
+      <th>1981-01-31</th>
       <td>-0.0085</td>
       <td>0.0305</td>
       <td>0.1540</td>
     </tr>
     <tr>
-      <th>1981-02-28 00:00:00-05:00</th>
+      <th>1981-02-28</th>
       <td>-0.0027</td>
       <td>0.0381</td>
       <td>0.1283</td>
     </tr>
     <tr>
-      <th>1981-03-31 00:00:00-05:00</th>
+      <th>1981-03-31</th>
       <td>-0.0030</td>
       <td>0.0333</td>
       <td>0.1194</td>
     </tr>
     <tr>
-      <th>1981-04-30 00:00:00-04:00</th>
+      <th>1981-04-30</th>
       <td>0.0076</td>
       <td>0.0347</td>
       <td>0.1306</td>
@@ -3439,33 +3439,33 @@ To do this, pass a dictionary where the keys are the column names and the values
     </tr>
     <tr>
       <th rowspan="5" valign="top">NFLX</th>
-      <th>2022-06-30 00:00:00-04:00</th>
+      <th>2022-06-30</th>
       <td>-0.0050</td>
       <td>0.0399</td>
       <td>205.0900</td>
     </tr>
     <tr>
-      <th>2022-07-31 00:00:00-04:00</th>
+      <th>2022-07-31</th>
       <td>0.0132</td>
       <td>0.0352</td>
       <td>226.7500</td>
     </tr>
     <tr>
-      <th>2022-08-31 00:00:00-04:00</th>
+      <th>2022-08-31</th>
       <td>0.0001</td>
       <td>0.0265</td>
       <td>249.3000</td>
     </tr>
     <tr>
-      <th>2022-09-30 00:00:00-04:00</th>
+      <th>2022-09-30</th>
       <td>0.0031</td>
       <td>0.0371</td>
       <td>245.2000</td>
     </tr>
     <tr>
-      <th>2022-10-31 00:00:00-04:00</th>
-      <td>-0.0087</td>
-      <td>0.0330</td>
+      <th>2022-10-31</th>
+      <td>-0.0127</td>
+      <td>0.0384</td>
       <td>240.7400</td>
     </tr>
   </tbody>
@@ -3502,13 +3502,13 @@ dtype: float64
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variable
-Adj Close       236.2820
-Close           236.2820
-High            242.1020
-Low             230.4340
-Open            238.7800
-Volume      9979143.2000
-Return           -0.0087
+Adj Close        232.2214
+Close            232.2214
+High             239.2586
+Low              227.0857
+Open             235.0843
+Volume      11091128.5714
+Return            -0.0127
 dtype: float64
 </pre></div>
 </div>
@@ -3522,6 +3522,66 @@ dtype: float64
 <li><p>Multiply by <span class="math notranslate nohighlight">\(\sqrt{252}\)</span> to annualize these volatilities of daily returns</p></li>
 <li><p>Plot these annualized volatilities</p></li>
 </ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ret_1</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">tickers</span><span class="o">=</span><span class="s1">&#39;SPY GOOG&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
+<span class="n">ret_1</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Ticker&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[                       0%                       ]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  2 of 2 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vol_1</span> <span class="o">=</span> <span class="n">ret_1</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Grouper</span><span class="p">(</span><span class="n">freq</span><span class="o">=</span><span class="s1">&#39;M&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vol_1</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">252</span><span class="p">))</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Annualized Volatility (%)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Annualized Volatility from Daily Returns&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/mckinney-10_102_0.png" src="../_images/mckinney-10_102_0.png" />
+</div>
+</div>
+<p>In a few days, we will learn how to more easily perform this aggregation with the <code class="docutils literal notranslate"><span class="pre">.resample()</span></code> method.
+Still, <code class="docutils literal notranslate"><span class="pre">pd.Grouper()</span></code> is a great to tool to know because you may want to aggregate along several dimensions, which is not possible with the <code class="docutils literal notranslate"><span class="pre">.resample()</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vol_2</span> <span class="o">=</span> <span class="n">ret_1</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">vol_1</span><span class="p">,</span> <span class="n">vol_2</span><span class="p">,</span> <span class="n">equal_nan</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
 <p><em><strong>Practice:</strong></em></p>
 <ol class="simple">
 <li><p>Download the daily factor data from Ken French’s website</p></li>
@@ -3539,6 +3599,66 @@ Consider the following dates:</p>
 <li><p>Gulf War: 1990 to 1991</p></li>
 <li><p>War in Afghanistan: 2001 to 2021</p></li>
 </ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pdr</span><span class="o">.</span><span class="n">famafrench</span><span class="o">.</span><span class="n">get_available_datasets</span><span class="p">()[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;F-F_Research_Data_Factors&#39;,
+ &#39;F-F_Research_Data_Factors_weekly&#39;,
+ &#39;F-F_Research_Data_Factors_daily&#39;,
+ &#39;F-F_Research_Data_5_Factors_2x3&#39;,
+ &#39;F-F_Research_Data_5_Factors_2x3_daily&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ff</span> <span class="o">=</span> <span class="n">pdr</span><span class="o">.</span><span class="n">get_data_famafrench</span><span class="p">(</span><span class="s1">&#39;F-F_Research_Data_Factors_daily&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="s1">&#39;1900-01-01&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ff</span><span class="p">[</span><span class="s1">&#39;Mkt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ff</span><span class="p">[</span><span class="s1">&#39;Mkt-RF&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">ff</span><span class="p">[</span><span class="s1">&#39;RF&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vol_3</span> <span class="o">=</span> <span class="n">ff</span><span class="p">[</span><span class="s1">&#39;Mkt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Grouper</span><span class="p">(</span><span class="n">freq</span><span class="o">=</span><span class="s1">&#39;M&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vol_3</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">252</span><span class="p">))</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="s1">&#39;1941-12&#39;</span><span class="p">,</span> <span class="s1">&#39;1945-09&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;WWII&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;1941-12&#39;</span><span class="p">,</span> <span class="mi">90</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="s1">&#39;1950&#39;</span><span class="p">,</span> <span class="s1">&#39;1953&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;Korean&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;1950&#39;</span><span class="p">,</span> <span class="mi">80</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="s1">&#39;1959&#39;</span><span class="p">,</span> <span class="s1">&#39;1975&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;Vietnam&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;1959&#39;</span><span class="p">,</span> <span class="mi">90</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="s1">&#39;1990&#39;</span><span class="p">,</span> <span class="s1">&#39;1991&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;Gulf I&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;1990&#39;</span><span class="p">,</span> <span class="mi">80</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="s1">&#39;2001&#39;</span><span class="p">,</span> <span class="s1">&#39;2021&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;Afghanistan&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;2001&#39;</span><span class="p">,</span> <span class="mi">90</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Annualized Market Volatility (%)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Annualized Market Volatility from Daily Returns&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/mckinney-10_111_0.png" src="../_images/mckinney-10_111_0.png" />
+</div>
+</div>
 </section>
 </section>
 

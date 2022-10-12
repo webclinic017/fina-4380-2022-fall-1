@@ -20,15 +20,15 @@
 # In[1]:
 
 
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 
 
 # In[2]:
 
 
-plt.rcParams['figure.dpi'] = 150
+get_ipython().run_line_magic('config', "InlineBackend.figure_format = 'retina'")
 get_ipython().run_line_magic('precision', '4')
 pd.options.display.float_format = '{:.4f}'.format
 
@@ -36,10 +36,10 @@ pd.options.display.float_format = '{:.4f}'.format
 # In[3]:
 
 
-import yfinance as yf
-import pandas_datareader as pdr
 import requests_cache
 session = requests_cache.CachedSession(expire_after='1D')
+import yfinance as yf
+import pandas_datareader as pdr
 
 
 # McKinney provides an excellent introduction to the concept of time series and panel data:
@@ -304,8 +304,6 @@ grouped.last()
 grouped.count()
 
 
-# ---
-
 # ## Date Ranges, Frequencies, and Shifting
 # 
 # > Generic time series in pandas are assumed to be irregular; that is, they have no fixed frequency. For many applications this is sufficient. However, it’s often desirable to work relative to a fixed frequency, such as daily, monthly, or every 15 minutes, even if that means introducing missing values into a time series. Fortunately pandas has a full suite of standard time series frequencies and tools for resampling, inferring frequencies, and generating fixed-frequency date ranges.
@@ -493,44 +491,11 @@ ts.shift(3, freq='D')
 ts.shift(1, freq='90T')
 
 
-# ---
-
-# In[53]:
-
-
-tsla = yf.download(tickers='TSLA', session=session)
-
-
-# In[54]:
-
-
-tsla['Return'] = tsla['Adj Close'].pct_change()
-
-
-# In[55]:
-
-
-tsla['Return_lag1'] = tsla['Return'].shift(1)
-
-
-# Be careful shifting with `freq=` because it may shift into days/months/etc without data.
-# Here `freq='B'` shifts by business days, but still fails because Monday 7/5/2010 is a business day, but markets were closed for the 4th of July.
-# The problem is worse if we shift all days with `freq='D'`.
-# See below.
-
-# In[56]:
-
-
-tsla.join(tsla[['Return']].shift(1, freq='B'), rsuffix='_lag1_alt')
-
-
-# ---
-
 # ### Shifting dates with offsets
 # 
 # We can also shift timestamps to the beginning or end of a period or interval.
 
-# In[57]:
+# In[53]:
 
 
 from pandas.tseries.offsets import Day, MonthEnd
@@ -538,19 +503,19 @@ now = datetime(2011, 11, 17)
 now + 3 * Day()
 
 
-# In[58]:
+# In[54]:
 
 
 now + MonthEnd(0) # 0 is for move to the end of the month, but never leave the month
 
 
-# In[59]:
+# In[55]:
 
 
 now + MonthEnd(1) # 1 is for move to the end of the month, if already at end, move to the next end
 
 
-# In[60]:
+# In[56]:
 
 
 now + MonthEnd(2)
@@ -560,25 +525,25 @@ now + MonthEnd(2)
 # ***But, be careful!***
 # The default argument is 1, but we typically want 0.
 
-# In[61]:
+# In[57]:
 
 
 datetime(2021, 10, 30) + MonthEnd(0)
 
 
-# In[62]:
+# In[58]:
 
 
 datetime(2021, 10, 30) + MonthEnd(1)
 
 
-# In[63]:
+# In[59]:
 
 
 datetime(2021, 10, 31) + MonthEnd(0)
 
 
-# In[64]:
+# In[60]:
 
 
 datetime(2021, 10, 31) + MonthEnd(1)
@@ -611,7 +576,7 @@ datetime(2021, 10, 31) + MonthEnd(1)
 # > - Which side of each interval is closed
 # > - How to label each aggregated bin, either with the start of the interval or the end
 
-# In[65]:
+# In[61]:
 
 
 rng = pd.date_range('2000-01-01', periods=12, freq='T')
@@ -621,7 +586,7 @@ ts = pd.Series(np.arange(12), index=rng)
 # We can aggregate the one-minute frequency data above to a five-minute frequency.
 # Resampling requires and aggregation method, and here McKinney chooses the `.sum()` method.
 
-# In[66]:
+# In[62]:
 
 
 ts.resample('5min').sum()
@@ -637,7 +602,7 @@ ts.resample('5min').sum()
 
 # In finance, we prefer `closed='right'` and `label='right'`.
 
-# In[67]:
+# In[63]:
 
 
 ts.resample('5min', closed='right', label='right').sum() 
@@ -656,7 +621,7 @@ ts.resample('5min', closed='right', label='right').sum()
 # To downsample (i.e., resample from higher frequency to lower frequency), we have to choose an aggregation method (e.g., `.mean()`, `.sum()`, `.first()`, or `.last()`).
 # To upsample (i.e., resample from lower frequency to higher frequency), we do not have to choose an aggregation method.
 
-# In[68]:
+# In[64]:
 
 
 np.random.seed(42)
@@ -667,7 +632,7 @@ frame = pd.DataFrame(np.random.randn(2, 4),
 
 # We can use the `.asfreq()` method to convert to the new frequency "as is".
 
-# In[69]:
+# In[65]:
 
 
 df_daily = frame.resample('D').asfreq()
@@ -675,19 +640,19 @@ df_daily = frame.resample('D').asfreq()
 
 # We do not *have* to choose an aggregation method, but we may want to choose a method to fill in the missing values.
 
-# In[70]:
+# In[66]:
 
 
 frame.resample('D').ffill()
 
 
-# In[71]:
+# In[67]:
 
 
 frame.resample('D').ffill(limit=2)
 
 
-# In[72]:
+# In[68]:
 
 
 frame.resample('W-THU').ffill()
@@ -698,7 +663,7 @@ frame.resample('W-THU').ffill()
 # ***Moving window (or rolling window) functions are one of the neatest features of pandas, and we will frequently use moving window functions.***
 # We will use data similar, but not identical, to the book data.
 
-# In[73]:
+# In[69]:
 
 
 df = yf.download(tickers=['AAPL', 'MSFT', 'SPY'], session=session)
@@ -708,7 +673,7 @@ df = yf.download(tickers=['AAPL', 'MSFT', 'SPY'], session=session)
 # The `.rolling()` method accepts a window-width and requires an aggregation method.
 # The next example calculates and plots the 252-trading day moving average of AAPL's price alongside the daily price.
 
-# In[74]:
+# In[70]:
 
 
 aapl = df.loc['2012':, ('Adj Close', 'AAPL')]
@@ -736,13 +701,13 @@ plt.show()
 # Binary moving window functions accept two inputs.
 # The most common example is the rolling correlation between two returns series.
 
-# In[75]:
+# In[71]:
 
 
 returns = df['Adj Close'].pct_change()
 
 
-# In[76]:
+# In[72]:
 
 
 returns['AAPL'].rolling(126, min_periods=100).corr(returns['SPY']).plot()
@@ -751,7 +716,7 @@ plt.title('Rolling Correlation between AAPL and SPY\n (126-Day Window w/ 100-Day
 plt.show()
 
 
-# In[77]:
+# In[73]:
 
 
 returns[['AAPL', 'MSFT']].rolling(126, min_periods=100).corr(returns['SPY']).plot()
@@ -760,43 +725,43 @@ plt.title('Rolling Correlation with SPY\n (126-Day Window w/ 100-Day Minimum)')
 plt.show()
 
 
-# In[78]:
+# In[74]:
 
 
 ff = pdr.get_data_famafrench('F-F_Research_Data_Factors_daily', start='1900', session=session)[0] / 100
 
 
-# In[79]:
+# In[75]:
 
 
 excess_returns = returns.sub(ff['RF'], axis=0).dropna()
 
 
-# In[ ]:
+# In[76]:
 
 
 cov_term = excess_returns.rolling(252).cov(excess_returns['SPY'])
 
 
-# In[ ]:
+# In[77]:
 
 
 var_term = excess_returns['SPY'].rolling(252).var()
 
 
-# In[ ]:
+# In[78]:
 
 
 betas = cov_term.div(var_term, axis=0)
 
 
-# In[ ]:
+# In[79]:
 
 
 betas.columns.name = 'Ticker'
 
 
-# In[ ]:
+# In[80]:
 
 
 betas.drop(columns='SPY').plot()
@@ -813,7 +778,7 @@ plt.show()
 # McKinney provides an abstract example here, but we will discuss a simpler example that calculates rolling volatility.
 # Also, calculating rolling volatility with the `.apply()` method provides us a chance to benchmark it against the optimized version.
 
-# In[ ]:
+# In[81]:
 
 
 returns['AAPL'].rolling(252).apply(np.std).mul(np.sqrt(252) * 100).plot() # annualize and convert to percent
@@ -824,13 +789,13 @@ plt.show()
 
 # Do not be afraid to use `.apply()`, but realize that `.apply()` is typically 1000-times slower than the pre-built method.
 
-# In[ ]:
+# In[82]:
 
 
 get_ipython().run_line_magic('timeit', "returns['AAPL'].rolling(252).apply(np.std)")
 
 
-# In[ ]:
+# In[83]:
 
 
 get_ipython().run_line_magic('timeit', "returns['AAPL'].rolling(252).std()")

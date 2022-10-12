@@ -719,7 +719,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 4,  7, -5,  3], dtype=int64)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 4,  7, -5,  3])
 </pre></div>
 </div>
 </div>
@@ -2581,7 +2581,7 @@ dtype: float64
 Colorado     5
 Utah         9
 New York    13
-Name: two, dtype: int32
+Name: two, dtype: int64
 </pre></div>
 </div>
 </div>
@@ -2653,7 +2653,7 @@ Name: two, dtype: int32
 Colorado     6
 Utah        10
 New York    14
-Name: three, dtype: int32
+Name: three, dtype: int64
 </pre></div>
 </div>
 </div>
@@ -2893,7 +2893,7 @@ Name: three, dtype: int32
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>two      5
 three    6
-Name: Colorado, dtype: int32
+Name: Colorado, dtype: int64
 </pre></div>
 </div>
 </div>
@@ -2908,7 +2908,7 @@ Name: Colorado, dtype: int32
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>four    11
 one      8
 two      9
-Name: Utah, dtype: int32
+Name: Utah, dtype: int64
 </pre></div>
 </div>
 </div>
@@ -2924,7 +2924,7 @@ Name: Utah, dtype: int32
 two       9
 three    10
 four     11
-Name: Utah, dtype: int32
+Name: Utah, dtype: int64
 </pre></div>
 </div>
 </div>
@@ -2987,7 +2987,7 @@ Name: Utah, dtype: int32
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ohio        0
 Colorado    5
 Utah        9
-Name: two, dtype: int32
+Name: two, dtype: int64
 </pre></div>
 </div>
 </div>
@@ -4249,7 +4249,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23 µs ± 205 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.53 µs ± 475 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -4261,7 +4261,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48.1 µs ± 467 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25.5 µs ± 431 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -4575,11 +4575,15 @@ If we are running Python on DataCamp, we only need to run the <code class="docut
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[                       0%                       ]
-[                       0%                       ]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************50%                       ]  2 of 4 completed
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************75%***********            ]  3 of 4 completed
-[*********************100%***********************]  4 of 4 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  4 of 4 completed
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -4608,10 +4612,10 @@ Therefore, the percent change in adjusted closes considers both price changs (i.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AAPL   0.2757
-GOOG   0.2496
-IBM    0.1023
-MSFT   0.2831
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AAPL   0.2756
+GOOG   0.2488
+IBM    0.1022
+MSFT   0.2821
 dtype: float64
 </pre></div>
 </div>
@@ -4626,7 +4630,7 @@ dtype: float64
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AAPL   0.4492
-GOOG   0.3057
+GOOG   0.3056
 IBM    0.2526
 MSFT   0.3383
 dtype: float64
@@ -4754,27 +4758,27 @@ dtype: float64
       <th>AAPL</th>
       <td>1.0000</td>
       <td>0.5146</td>
-      <td>0.3691</td>
-      <td>0.4271</td>
+      <td>0.3690</td>
+      <td>0.4270</td>
     </tr>
     <tr>
       <th>GOOG</th>
       <td>0.5146</td>
       <td>1.0000</td>
       <td>0.4066</td>
-      <td>0.5556</td>
+      <td>0.5555</td>
     </tr>
     <tr>
       <th>IBM</th>
-      <td>0.3691</td>
+      <td>0.3690</td>
       <td>0.4066</td>
       <td>1.0000</td>
       <td>0.4455</td>
     </tr>
     <tr>
       <th>MSFT</th>
-      <td>0.4271</td>
-      <td>0.5556</td>
+      <td>0.4270</td>
+      <td>0.5555</td>
       <td>0.4455</td>
       <td>1.0000</td>
     </tr>
@@ -4806,7 +4810,7 @@ When possible, use a pre-built function or method to avoid silent failures!</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4830
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4829
 </pre></div>
 </div>
 </div>
@@ -5186,29 +5190,29 @@ Calculate the correlation matrix for these four stocks using data from 2016 thro
     <tr>
       <th>AAPL</th>
       <td>1.0000</td>
-      <td>0.6634</td>
-      <td>0.4176</td>
-      <td>0.7270</td>
+      <td>0.6633</td>
+      <td>0.4171</td>
+      <td>0.7265</td>
     </tr>
     <tr>
       <th>GOOG</th>
-      <td>0.6634</td>
+      <td>0.6633</td>
       <td>1.0000</td>
-      <td>0.4339</td>
-      <td>0.7780</td>
+      <td>0.4337</td>
+      <td>0.7779</td>
     </tr>
     <tr>
       <th>IBM</th>
-      <td>0.4176</td>
-      <td>0.4339</td>
+      <td>0.4171</td>
+      <td>0.4337</td>
       <td>1.0000</td>
-      <td>0.4727</td>
+      <td>0.4722</td>
     </tr>
     <tr>
       <th>MSFT</th>
-      <td>0.7270</td>
-      <td>0.7780</td>
-      <td>0.4727</td>
+      <td>0.7265</td>
+      <td>0.7779</td>
+      <td>0.4722</td>
       <td>1.0000</td>
     </tr>
   </tbody>
@@ -5259,35 +5263,35 @@ We can use the cumulative product method <code class="docutils literal notransla
   </thead>
   <tbody>
     <tr>
-      <th>2020-01-02 00:00:00-05:00</th>
+      <th>2020-01-02</th>
       <td>0.0228</td>
       <td>0.0227</td>
       <td>0.0103</td>
       <td>0.0185</td>
     </tr>
     <tr>
-      <th>2020-01-03 00:00:00-05:00</th>
+      <th>2020-01-03</th>
       <td>0.0129</td>
       <td>0.0177</td>
       <td>0.0022</td>
       <td>0.0058</td>
     </tr>
     <tr>
-      <th>2020-01-06 00:00:00-05:00</th>
+      <th>2020-01-06</th>
       <td>0.0209</td>
       <td>0.0428</td>
       <td>0.0004</td>
       <td>0.0084</td>
     </tr>
     <tr>
-      <th>2020-01-07 00:00:00-05:00</th>
+      <th>2020-01-07</th>
       <td>0.0161</td>
       <td>0.0421</td>
       <td>0.0011</td>
       <td>-0.0008</td>
     </tr>
     <tr>
-      <th>2020-01-08 00:00:00-05:00</th>
+      <th>2020-01-08</th>
       <td>0.0325</td>
       <td>0.0503</td>
       <td>0.0095</td>
@@ -5301,43 +5305,43 @@ We can use the cumulative product method <code class="docutils literal notransla
       <td>...</td>
     </tr>
     <tr>
-      <th>2022-10-03 00:00:00-04:00</th>
-      <td>0.9774</td>
-      <td>0.4854</td>
-      <td>0.0872</td>
-      <td>0.5658</td>
-    </tr>
-    <tr>
-      <th>2022-10-04 00:00:00-04:00</th>
-      <td>1.0280</td>
-      <td>0.5319</td>
-      <td>0.1229</td>
-      <td>0.6188</td>
-    </tr>
-    <tr>
-      <th>2022-10-05 00:00:00-04:00</th>
+      <th>2022-10-05</th>
       <td>1.0322</td>
       <td>0.5291</td>
       <td>0.1250</td>
       <td>0.6209</td>
     </tr>
     <tr>
-      <th>2022-10-06 00:00:00-04:00</th>
+      <th>2022-10-06</th>
       <td>1.0187</td>
       <td>0.5294</td>
       <td>0.0936</td>
       <td>0.6052</td>
     </tr>
     <tr>
-      <th>2022-10-07 00:00:00-04:00</th>
-      <td>0.9370</td>
-      <td>0.4847</td>
-      <td>0.0571</td>
-      <td>0.5171</td>
+      <th>2022-10-07</th>
+      <td>0.9446</td>
+      <td>0.4894</td>
+      <td>0.0631</td>
+      <td>0.5236</td>
+    </tr>
+    <tr>
+      <th>2022-10-10</th>
+      <td>0.9492</td>
+      <td>0.4766</td>
+      <td>0.0535</td>
+      <td>0.4911</td>
+    </tr>
+    <tr>
+      <th>2022-10-11</th>
+      <td>0.9292</td>
+      <td>0.4667</td>
+      <td>0.0540</td>
+      <td>0.4661</td>
     </tr>
   </tbody>
 </table>
-<p>698 rows × 4 columns</p>
+<p>700 rows × 4 columns</p>
 </div></div></div>
 </div>
 <p><em><strong>Practice:</strong></em>
