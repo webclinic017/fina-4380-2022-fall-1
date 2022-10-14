@@ -59,7 +59,10 @@ tickers = wiki[2]['Ticker'].replace(to_replace='\.', value='-', regex=True).to_l
 # russ = yf.download(tickers=tickers, session=session)
 # russ.columns.names = ['Variable', 'Ticker']
 # russ.to_pickle('../../Data/russ.pkl')
-russ = pd.read_pickle('../../Data/russ.pkl')
+
+# I saved russ.pkl in my "Data" folder
+# You can save it to the same folder as your notebook and remove "../../Data/"
+russ = pd.read_pickle('../../Data/russ.pkl') 
 
 
 # ## Yahoo! Finance data have a survivorship bias!
@@ -89,10 +92,74 @@ russ = pd.read_pickle('../../Data/russ.pkl')
 # ## Calculate stock returns
 # 
 # We will evaluate momentum investing with 1-month holding periods of equal-weighted portfolios formed on trailing 12-month returns.
+# We will save the 1-month holding period returns to data frame `ret_1m` and the 12-month holding period returns to data frame `ret_12m`.
+
+# In[4]:
+
+
+ret_1m = russ['Adj Close'].resample('M').last().pct_change()
+
+
+# In[5]:
+
+
+ret_12m = russ['Adj Close'].resample('M').last().pct_change(12)
+
+
+# We should always check our work, here for Exxon-Mobil (XOM).
+
+# In[6]:
+
+
+assert np.allclose(
+    a=ret_1m.loc['2021', 'XOM'].add(1).prod() - 1,
+    b=ret_12m.loc['2021-12', 'XOM'].values[0]
+)
+
 
 # ## Assign stocks to portfolios
 # 
-# We will assign stocks to 1 of 10 portfolios based on their trailing 12-month returns.
+# We will use `pd.qcut()` to assign stocks to 10 portfolios based on their trailing 12-month returns.
+# We will save these portfolio assignments to data frame `port_12m`.
+
+# In[7]:
+
+
+port_12m = ret_12m.dropna(how='all').apply(pd.qcut, q=10, labels=False, axis=1)
+
+
+# We should check our output, here with the last row of data.
+
+# In[8]:
+
+
+assert np.allclose(
+    a=port_12m.iloc[-1],
+    b=pd.qcut(x=ret_12m.iloc[-1], q=10, labels=False),
+    equal_nan=True
+)
+
+
+# ***Start here on Wednesday!***
+# Are the following results real?
+# What is wrong with how we matched stock returns and portfolio assignments (without looking ahead)?
+
+# In[9]:
+
+
+(
+    pd.concat([ret_1m, port_12m], axis=1, keys=['Return', 'Portfolio'])
+    .stack()
+    .loc['2010':'2020']
+    .groupby('Portfolio')
+    .mean()
+    .plot(kind='bar')
+)
+plt.ylabel('Mean Monthly Return')
+plt.title('Returns to Momentum Investing (Russell Index Constituents, 2010-2020)')
+plt.show()
+
+
 # We will skip 1 month between assigning stocks to portfolios and buying the stocks to avoid market-microstructure stock issues (i.e., noise in returns due to how stocks trade).
 # Our dates are end-of-month, so we need a two-month gap between the ranking month and the holding month.
 

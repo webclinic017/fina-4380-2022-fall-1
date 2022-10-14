@@ -244,14 +244,10 @@ ts2
 
 
 # The following behavior is "deprecated", meaning it will eventually go away and we should not rely up on it.
-# ***You may not receive the following warning on DataCamp Workspace, which updates pandas slowly to ensure stability.***
-# You can check your pandas version by executing the following in a code cell: `pd.__version__` (there are two underscores on each side of version).
 
 # In[26]:
 
 
-# C:\Users\r.herron\AppData\Local\Temp\ipykernel_9468\1099700163.py:1: FutureWarning: Value based partial slicing on non-monotonic DatetimeIndexes with non-existing keys is deprecated and will raise a KeyError in a future Version.
-#   ts2['1/6/2011':'1/11/2011']
 ts2['1/6/2011':'1/11/2011']
 
 
@@ -629,10 +625,16 @@ rng = pd.date_range('2000-01-01', periods=12, freq='T')
 ts = pd.Series(np.arange(12), index=rng)
 
 
+# In[69]:
+
+
+ts
+
+
 # We can aggregate the one-minute frequency data above to a five-minute frequency.
 # Resampling requires and aggregation method, and here McKinney chooses the `.sum()` method.
 
-# In[69]:
+# In[70]:
 
 
 ts.resample('5min').sum()
@@ -648,10 +650,18 @@ ts.resample('5min').sum()
 
 # In finance, we prefer `closed='right'` and `label='right'`.
 
-# In[70]:
+# In[71]:
 
 
 ts.resample('5min', closed='right', label='right').sum() 
+
+
+# Mixed combinations of `closed` and `label` are possible but confusing.
+
+# In[72]:
+
+
+ts.resample('5min', closed='right', label='left').sum() 
 
 
 # These defaults for minute-frequency data may seem odd, but any choice is arbitrary.
@@ -667,7 +677,7 @@ ts.resample('5min', closed='right', label='right').sum()
 # To downsample (i.e., resample from higher frequency to lower frequency), we have to choose an aggregation method (e.g., `.mean()`, `.sum()`, `.first()`, or `.last()`).
 # To upsample (i.e., resample from lower frequency to higher frequency), we do not have to choose an aggregation method.
 
-# In[71]:
+# In[73]:
 
 
 np.random.seed(42)
@@ -676,29 +686,41 @@ frame = pd.DataFrame(np.random.randn(2, 4),
                      columns=['Colorado', 'Texas', 'New York', 'Ohio'])
 
 
+# In[74]:
+
+
+frame
+
+
 # We can use the `.asfreq()` method to convert to the new frequency "as is".
 
-# In[72]:
+# In[75]:
 
 
 df_daily = frame.resample('D').asfreq()
 
 
-# We do not *have* to choose an aggregation method, but we may want to choose a method to fill in the missing values.
+# In[76]:
 
-# In[73]:
+
+df_daily
+
+
+# We do not *have* to choose an aggregation (disaggregation?) method, but we may want to choose a method to fill in the missing values.
+
+# In[77]:
 
 
 frame.resample('D').ffill()
 
 
-# In[74]:
+# In[78]:
 
 
 frame.resample('D').ffill(limit=2)
 
 
-# In[75]:
+# In[79]:
 
 
 frame.resample('W-THU').ffill()
@@ -709,7 +731,7 @@ frame.resample('W-THU').ffill()
 # ***Moving window (or rolling window) functions are one of the neatest features of pandas, and we will frequently use moving window functions.***
 # We will use data similar, but not identical, to the book data.
 
-# In[76]:
+# In[80]:
 
 
 df = yf.download(tickers=['AAPL', 'MSFT', 'SPY'], session=session)
@@ -719,7 +741,7 @@ df = yf.download(tickers=['AAPL', 'MSFT', 'SPY'], session=session)
 # The `.rolling()` method accepts a window-width and requires an aggregation method.
 # The next example calculates and plots the 252-trading day moving average of AAPL's price alongside the daily price.
 
-# In[77]:
+# In[81]:
 
 
 aapl = df.loc['2012':, ('Adj Close', 'AAPL')]
@@ -731,6 +753,25 @@ plt.legend()
 plt.ylabel('AAPL Adjusted Close ($)')
 plt.title('Comparison of Rolling and Resampling Means')
 plt.show()
+
+
+# In[82]:
+
+
+aapl_2 = df.loc['2012', ('Adj Close', 'AAPL')].to_frame('Adj Close')
+
+
+# In[83]:
+
+
+aapl_2['N_5'] = aapl_2['Adj Close'].rolling(5).mean()
+aapl_2['DO_7D'] = aapl_2['Adj Close'].rolling('7D').mean()
+
+
+# In[84]:
+
+
+aapl_2.to_clipboard()
 
 
 # Two observations:
@@ -747,13 +788,13 @@ plt.show()
 # Binary moving window functions accept two inputs.
 # The most common example is the rolling correlation between two returns series.
 
-# In[78]:
+# In[85]:
 
 
 returns = df['Adj Close'].pct_change()
 
 
-# In[79]:
+# In[86]:
 
 
 returns['AAPL'].rolling(126, min_periods=100).corr(returns['SPY']).plot()
@@ -762,7 +803,7 @@ plt.title('Rolling Correlation between AAPL and SPY\n (126-Day Window w/ 100-Day
 plt.show()
 
 
-# In[80]:
+# In[87]:
 
 
 returns[['AAPL', 'MSFT']].rolling(126, min_periods=100).corr(returns['SPY']).plot()
@@ -771,43 +812,43 @@ plt.title('Rolling Correlation with SPY\n (126-Day Window w/ 100-Day Minimum)')
 plt.show()
 
 
-# In[81]:
+# In[88]:
 
 
 ff = pdr.get_data_famafrench('F-F_Research_Data_Factors_daily', start='1900', session=session)[0] / 100
 
 
-# In[82]:
+# In[89]:
 
 
 excess_returns = returns.sub(ff['RF'], axis=0).dropna()
 
 
-# In[83]:
+# In[90]:
 
 
 cov_term = excess_returns.rolling(252).cov(excess_returns['SPY'])
 
 
-# In[84]:
+# In[91]:
 
 
 var_term = excess_returns['SPY'].rolling(252).var()
 
 
-# In[85]:
+# In[92]:
 
 
 betas = cov_term.div(var_term, axis=0)
 
 
-# In[86]:
+# In[93]:
 
 
 betas.columns.name = 'Ticker'
 
 
-# In[87]:
+# In[94]:
 
 
 betas.drop(columns='SPY').plot()
@@ -824,7 +865,7 @@ plt.show()
 # McKinney provides an abstract example here, but we will discuss a simpler example that calculates rolling volatility.
 # Also, calculating rolling volatility with the `.apply()` method provides us a chance to benchmark it against the optimized version.
 
-# In[88]:
+# In[95]:
 
 
 returns['AAPL'].rolling(252).apply(np.std).mul(np.sqrt(252) * 100).plot() # annualize and convert to percent
@@ -835,13 +876,13 @@ plt.show()
 
 # Do not be afraid to use `.apply()`, but realize that `.apply()` is typically 1000-times slower than the pre-built method.
 
-# In[89]:
+# In[96]:
 
 
 get_ipython().run_line_magic('timeit', "returns['AAPL'].rolling(252).apply(np.std)")
 
 
-# In[90]:
+# In[97]:
 
 
 get_ipython().run_line_magic('timeit', "returns['AAPL'].rolling(252).std()")
@@ -854,31 +895,31 @@ get_ipython().run_line_magic('timeit', "returns['AAPL'].rolling(252).std()")
 # Keep only the largest observation for each date in `dup_ts`.
 # Also try the `.drop_duplicates()` method
 
-# In[91]:
+# In[98]:
 
 
 dup_ts.groupby(level=0).max()
 
 
-# In[92]:
+# In[99]:
 
 
 dup_ts.index.drop_duplicates()
 
 
-# In[93]:
+# In[100]:
 
 
 df = pd.DataFrame({'a': [1, 1, 2, 2], 'b': [1, 2, 3, 4]})
 
 
-# In[94]:
+# In[101]:
 
 
 df
 
 
-# In[95]:
+# In[102]:
 
 
 df.drop_duplicates(subset='a', keep='first')
@@ -888,7 +929,7 @@ df.drop_duplicates(subset='a', keep='first')
 # Download daily data market data for TSLA and add daily returns as column named `Return`.
 # The add the 1 trading lag of `Return` as a column named `Return_lag1`.
 
-# In[96]:
+# In[103]:
 
 
 tsla = (
@@ -900,14 +941,10 @@ tsla = (
 )
 
 
-# In[97]:
+# In[104]:
 
 
-tsla.loc['2020'].plot(x='Return_lag1', y='Return', kind='scatter', alpha=0.25, cmap=None) # I add `cmap=None` to eliminate a warning
-plt.title('Tesla (TSLA) Daily Returns in 2020')
-plt.ylabel('Return on Day $t$')
-plt.xlabel('Return on Day $t-1$')
-plt.show()
+tsla.loc['2020'].plot(x='Return_lag1', y='Return', kind='scatter', alpha=0.25)
 
 
 # ***Practice:***

@@ -602,7 +602,10 @@ We can easily find their tickers on <span class="xref myst">Wikipedia</span> and
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># russ = yf.download(tickers=tickers, session=session)</span>
 <span class="c1"># russ.columns.names = [&#39;Variable&#39;, &#39;Ticker&#39;]</span>
 <span class="c1"># russ.to_pickle(&#39;../../Data/russ.pkl&#39;)</span>
-<span class="n">russ</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;../../Data/russ.pkl&#39;</span><span class="p">)</span>
+
+<span class="c1"># I saved russ.pkl in my &quot;Data&quot; folder</span>
+<span class="c1"># You can save it to the same folder as your notebook and remove &quot;../../Data/&quot;</span>
+<span class="n">russ</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;../../Data/russ.pkl&#39;</span><span class="p">)</span> 
 </pre></div>
 </div>
 </div>
@@ -630,12 +633,81 @@ If time permits, we will investigate momentum investing with survivorship-bias-f
 </section>
 <section id="calculate-stock-returns">
 <h2>Calculate stock returns<a class="headerlink" href="#calculate-stock-returns" title="Permalink to this headline">#</a></h2>
-<p>We will evaluate momentum investing with 1-month holding periods of equal-weighted portfolios formed on trailing 12-month returns.</p>
+<p>We will evaluate momentum investing with 1-month holding periods of equal-weighted portfolios formed on trailing 12-month returns.
+We will save the 1-month holding period returns to data frame <code class="docutils literal notranslate"><span class="pre">ret_1m</span></code> and the 12-month holding period returns to data frame <code class="docutils literal notranslate"><span class="pre">ret_12m</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ret_1m</span> <span class="o">=</span> <span class="n">russ</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ret_12m</span> <span class="o">=</span> <span class="n">russ</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()</span><span class="o">.</span><span class="n">pct_change</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We should always check our work, here for Exxon-Mobil (XOM).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span>
+    <span class="n">a</span><span class="o">=</span><span class="n">ret_1m</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2021&#39;</span><span class="p">,</span> <span class="s1">&#39;XOM&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">prod</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">b</span><span class="o">=</span><span class="n">ret_12m</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2021-12&#39;</span><span class="p">,</span> <span class="s1">&#39;XOM&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="assign-stocks-to-portfolios">
 <h2>Assign stocks to portfolios<a class="headerlink" href="#assign-stocks-to-portfolios" title="Permalink to this headline">#</a></h2>
-<p>We will assign stocks to 1 of 10 portfolios based on their trailing 12-month returns.
-We will skip 1 month between assigning stocks to portfolios and buying the stocks to avoid market-microstructure stock issues (i.e., noise in returns due to how stocks trade).
+<p>We will use <code class="docutils literal notranslate"><span class="pre">pd.qcut()</span></code> to assign stocks to 10 portfolios based on their trailing 12-month returns.
+We will save these portfolio assignments to data frame <code class="docutils literal notranslate"><span class="pre">port_12m</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">port_12m</span> <span class="o">=</span> <span class="n">ret_12m</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">qcut</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We should check our output, here with the last row of data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span>
+    <span class="n">a</span><span class="o">=</span><span class="n">port_12m</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+    <span class="n">b</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">qcut</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">ret_12m</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">q</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+    <span class="n">equal_nan</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><em><strong>Start here on Wednesday!</strong></em>
+Are the following results real?
+What is wrong with how we matched stock returns and portfolio assignments (without looking ahead)?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">ret_1m</span><span class="p">,</span> <span class="n">port_12m</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Return&#39;</span><span class="p">,</span> <span class="s1">&#39;Portfolio&#39;</span><span class="p">])</span>
+    <span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2010&#39;</span><span class="p">:</span><span class="s1">&#39;2020&#39;</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Portfolio&#39;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Mean Monthly Return&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Returns to Momentum Investing (Russell Index Constituents, 2010-2020)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/herron-momentum_17_0.png" src="../_images/herron-momentum_17_0.png" />
+</div>
+</div>
+<p>We will skip 1 month between assigning stocks to portfolios and buying the stocks to avoid market-microstructure stock issues (i.e., noise in returns due to how stocks trade).
 Our dates are end-of-month, so we need a two-month gap between the ranking month and the holding month.</p>
 </section>
 <section id="calculate-portfolio-returns">

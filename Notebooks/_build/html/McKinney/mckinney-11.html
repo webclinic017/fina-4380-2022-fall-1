@@ -210,6 +210,11 @@ const thebe_selector_output = ".output, .cell_output"
    Herron - Do market prices respond to new information?
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Herron/herron-momentum.html">
+   Herron - Does momentum investing work?
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -1058,19 +1063,15 @@ dtype: float64
 </div>
 </div>
 </div>
-<p>The following behavior is “deprecated”, meaning it will eventually go away and we should not rely up on it.
-<em><strong>You may not receive the following warning on DataCamp Workspace, which updates pandas slowly to ensure stability.</strong></em>
-You can check your pandas version by executing the following in a code cell: <code class="docutils literal notranslate"><span class="pre">pd.__version__</span></code> (there are two underscores on each side of version).</p>
+<p>The following behavior is “deprecated”, meaning it will eventually go away and we should not rely up on it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># C:\Users\r.herron\AppData\Local\Temp\ipykernel_9468\1099700163.py:1: FutureWarning: Value based partial slicing on non-monotonic DatetimeIndexes with non-existing keys is deprecated and will raise a KeyError in a future Version.</span>
-<span class="c1">#   ts2[&#39;1/6/2011&#39;:&#39;1/11/2011&#39;]</span>
-<span class="n">ts2</span><span class="p">[</span><span class="s1">&#39;1/6/2011&#39;</span><span class="p">:</span><span class="s1">&#39;1/11/2011&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts2</span><span class="p">[</span><span class="s1">&#39;1/6/2011&#39;</span><span class="p">:</span><span class="s1">&#39;1/11/2011&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_41876/3715350022.py:3: FutureWarning: Value based partial slicing on non-monotonic DatetimeIndexes with non-existing keys is deprecated and will raise a KeyError in a future Version.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_90348/1099700163.py:1: FutureWarning: Value based partial slicing on non-monotonic DatetimeIndexes with non-existing keys is deprecated and will raise a KeyError in a future Version.
   ts2[&#39;1/6/2011&#39;:&#39;1/11/2011&#39;]
 </pre></div>
 </div>
@@ -1815,6 +1816,30 @@ There are a couple things to think about when using resample to downsample data:
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2000-01-01 00:00:00     0
+2000-01-01 00:01:00     1
+2000-01-01 00:02:00     2
+2000-01-01 00:03:00     3
+2000-01-01 00:04:00     4
+2000-01-01 00:05:00     5
+2000-01-01 00:06:00     6
+2000-01-01 00:07:00     7
+2000-01-01 00:08:00     8
+2000-01-01 00:09:00     9
+2000-01-01 00:10:00    10
+2000-01-01 00:11:00    11
+Freq: T, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
 <p>We can aggregate the one-minute frequency data above to a five-minute frequency.
 Resampling requires and aggregation method, and here McKinney chooses the <code class="docutils literal notranslate"><span class="pre">.sum()</span></code> method.</p>
 <div class="cell docutils container">
@@ -1856,6 +1881,23 @@ Freq: 5T, dtype: int64
 </div>
 </div>
 </div>
+<p>Mixed combinations of <code class="docutils literal notranslate"><span class="pre">closed</span></code> and <code class="docutils literal notranslate"><span class="pre">label</span></code> are possible but confusing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;5min&#39;</span><span class="p">,</span> <span class="n">closed</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1999-12-31 23:55:00     0
+2000-01-01 00:00:00    15
+2000-01-01 00:05:00    40
+2000-01-01 00:10:00    11
+Freq: 5T, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
 <p>These defaults for minute-frequency data may seem odd, but any choice is arbitrary.
 I suggest you do the following when you use the <code class="docutils literal notranslate"><span class="pre">.resample()</span></code> method:</p>
 <ol class="simple">
@@ -1878,6 +1920,56 @@ To upsample (i.e., resample from lower frequency to higher frequency), we do not
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">frame</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Colorado</th>
+      <th>Texas</th>
+      <th>New York</th>
+      <th>Ohio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2000-01-05</th>
+      <td>0.4967</td>
+      <td>-0.1383</td>
+      <td>0.6477</td>
+      <td>1.5230</td>
+    </tr>
+    <tr>
+      <th>2000-01-12</th>
+      <td>-0.2342</td>
+      <td>-0.2341</td>
+      <td>1.5792</td>
+      <td>0.7674</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
 <p>We can use the <code class="docutils literal notranslate"><span class="pre">.asfreq()</span></code> method to convert to the new frequency “as is”.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1886,7 +1978,99 @@ To upsample (i.e., resample from lower frequency to higher frequency), we do not
 </div>
 </div>
 </div>
-<p>We do not <em>have</em> to choose an aggregation method, but we may want to choose a method to fill in the missing values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_daily</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Colorado</th>
+      <th>Texas</th>
+      <th>New York</th>
+      <th>Ohio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2000-01-05</th>
+      <td>0.4967</td>
+      <td>-0.1383</td>
+      <td>0.6477</td>
+      <td>1.5230</td>
+    </tr>
+    <tr>
+      <th>2000-01-06</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2000-01-07</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2000-01-08</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2000-01-09</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2000-01-10</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2000-01-11</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2000-01-12</th>
+      <td>-0.2342</td>
+      <td>-0.2341</td>
+      <td>1.5792</td>
+      <td>0.7674</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We do not <em>have</em> to choose an aggregation (disaggregation?) method, but we may want to choose a method to fill in the missing values.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">frame</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span>
@@ -2166,7 +2350,29 @@ The next example calculates and plots the 252-trading day moving average of AAPL
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/mckinney-11_125_0.png" src="../_images/mckinney-11_125_0.png" />
+<img alt="../_images/mckinney-11_130_0.png" src="../_images/mckinney-11_130_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aapl_2</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2012&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">,</span> <span class="s1">&#39;AAPL&#39;</span><span class="p">)]</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aapl_2</span><span class="p">[</span><span class="s1">&#39;N_5&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">aapl_2</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">aapl_2</span><span class="p">[</span><span class="s1">&#39;DO_7D&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">aapl_2</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="s1">&#39;7D&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aapl_2</span><span class="o">.</span><span class="n">to_clipboard</span><span class="p">()</span>
+</pre></div>
+</div>
 </div>
 </div>
 <p>Two observations:</p>
@@ -2198,7 +2404,7 @@ The most common example is the rolling correlation between two returns series.</
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/mckinney-11_129_0.png" src="../_images/mckinney-11_129_0.png" />
+<img alt="../_images/mckinney-11_137_0.png" src="../_images/mckinney-11_137_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2211,7 +2417,7 @@ The most common example is the rolling correlation between two returns series.</
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/mckinney-11_130_0.png" src="../_images/mckinney-11_130_0.png" />
+<img alt="../_images/mckinney-11_138_0.png" src="../_images/mckinney-11_138_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2266,7 +2472,7 @@ The most common example is the rolling correlation between two returns series.</
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/mckinney-11_137_0.png" src="../_images/mckinney-11_137_0.png" />
+<img alt="../_images/mckinney-11_145_0.png" src="../_images/mckinney-11_145_0.png" />
 </div>
 </div>
 </section>
@@ -2286,7 +2492,7 @@ Also, calculating rolling volatility with the <code class="docutils literal notr
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/mckinney-11_139_0.png" src="../_images/mckinney-11_139_0.png" />
+<img alt="../_images/mckinney-11_147_0.png" src="../_images/mckinney-11_147_0.png" />
 </div>
 </div>
 <p>Do not be afraid to use <code class="docutils literal notranslate"><span class="pre">.apply()</span></code>, but realize that <code class="docutils literal notranslate"><span class="pre">.apply()</span></code> is typically 1000-times slower than the pre-built method.</p>
@@ -2297,7 +2503,7 @@ Also, calculating rolling volatility with the <code class="docutils literal notr
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>895 ms ± 106 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>793 ms ± 17.4 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -2309,7 +2515,7 @@ Also, calculating rolling volatility with the <code class="docutils literal notr
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>227 µs ± 11.6 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>216 µs ± 370 ns per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -2480,11 +2686,7 @@ The add the 1 trading lag of <code class="docutils literal notranslate"><span cl
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tsla</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2020&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Return_lag1&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Return&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="c1"># I add `cmap=None` to eliminate a warning</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Tesla (TSLA) Daily Returns in 2020&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Return on Day $t$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Return on Day $t-1$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tsla</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2020&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Return_lag1&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Return&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2493,7 +2695,10 @@ The add the 1 trading lag of <code class="docutils literal notranslate"><span cl
   scatter = ax.scatter(
 </pre></div>
 </div>
-<img alt="../_images/mckinney-11_152_1.png" src="../_images/mckinney-11_152_1.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: xlabel=&#39;Return_lag1&#39;, ylabel=&#39;Return&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/mckinney-11_160_2.png" src="../_images/mckinney-11_160_2.png" />
 </div>
 </div>
 <p><em><strong>Practice:</strong></em>
