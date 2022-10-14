@@ -581,13 +581,13 @@ standard deviation of 23.8%. This rate of return is statistically and economical
 insignificant. Momentum investing also had the unpleasant aspect of sudden nasty
 risk. It lost 83 cents for every dollar invested in 2009</p>
 </div></blockquote>
-<p>As a sidenote, I recommend this textbook as your first stop to learn about (almost) any finance topic.
+<p>As a side note, I recommend this textbook as your first stop to learn about (almost) any finance topic.
 Welch connects theory and practice better than other textbooks and provides his textbook for free!</p>
 </section>
 <section id="download-data-from-yahoo-finance">
 <h2>Download data from Yahoo! Finance<a class="headerlink" href="#download-data-from-yahoo-finance" title="Permalink to this headline">#</a></h2>
 <p>We need a large number of stocks to test momentum investing!
-We will use the Russell 1000 Index consituents, which is about 93% of U.S. public equity by market capitalization.
+We will use the Russell 1000 Index constituents, about 93% of U.S. public equity by market capitalization.
 We can easily find their tickers on <span class="xref myst">Wikipedia</span> and easily download their data from Yahoo! Finance.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -611,11 +611,11 @@ We can easily find their tickers on <span class="xref myst">Wikipedia</span> and
 <section id="yahoo-finance-data-have-a-survivorship-bias">
 <h2>Yahoo! Finance data have a survivorship bias!<a class="headerlink" href="#yahoo-finance-data-have-a-survivorship-bias" title="Permalink to this headline">#</a></h2>
 <p>Yahoo! Finance only provides data for listed (active) public companies.
-When a public companies delist, Yahoo! Finance removes their data from the website and API interfaces.
-Companies delist for a variety of reasons, including failures, poor performance, buyouts, and acquisitions.
-Failures and poor performance are generally associated with large negative returns prior to delisting.
-Buyouts and acquisitions are generally associated with large positive returns prior to delisting.
-Regardless of the reason for delisting, delisted company data are are not available from Yahoo! Finance.
+When public companies delist, Yahoo! Finance removes their data from the website and API interfaces.
+Companies delist for various reasons, including failures, poor performance, buyouts, and acquisitions.
+Failures and poor performance are generally associated with large negative returns before delisting.
+Buyouts and acquisitions are generally associated with large positive returns before delisting.
+Regardless of the reason for delisting, delisted company data are unavailable from Yahoo! Finance.
 The lack of delisted company data in data frame <code class="docutils literal notranslate"><span class="pre">russ</span></code> means that our analysis will have a <a class="reference external" href="https://en.wikipedia.org/wiki/Survivorship_bias">survivorship bias</a>:</p>
 <blockquote>
 <div><p>Survivorship bias, survival bias or immortal time bias is the logical error of concentrating on the people or things that made it past some selection process and overlooking those that did not, typically because of their lack of visibility. This can lead to incorrect conclusions regarding that which (or those who) didn’t make it.</p>
@@ -624,8 +624,8 @@ The lack of delisted company data in data frame <code class="docutils literal no
 </div></blockquote>
 <p>Here is my favorite survivorship bias joke:</p>
 <p><img alt="XKCD 1827" src="https://imgs.xkcd.com/comics/survivorship_bias.png" /></p>
-<p>We should always been on the lookout for survivorship bias, and we should treat our analysis here as “for training only”.
-Still, our findings below will be generally consistent with the academic research on momentum investing.
+<p>We should always be on the lookout for survivorship bias treat our analysis here as “for training only”.
+Still, our findings below will generally be consistent with the academic research on momentum investing.
 If time permits, we will investigate momentum investing with survivorship-bias-free data from the <a class="reference external" href="https://www.crsp.org/">Center for Research in Security Prices (CRSP)</a>.</p>
 </section>
 <section id="calculate-stock-returns">
@@ -636,15 +636,15 @@ If time permits, we will investigate momentum investing with survivorship-bias-f
 <h2>Assign stocks to portfolios<a class="headerlink" href="#assign-stocks-to-portfolios" title="Permalink to this headline">#</a></h2>
 <p>We will assign stocks to 1 of 10 portfolios based on their trailing 12-month returns.
 We will skip 1 month between assigning stocks to portfolios and buying the stocks to avoid market-microstructure stock issues (i.e., noise in returns due to how stocks trade).
-Our dates are end-of-month dates, so we need a two-month gap between the ranking month and the holding month.</p>
+Our dates are end-of-month, so we need a two-month gap between the ranking month and the holding month.</p>
 </section>
 <section id="calculate-portfolio-returns">
 <h2>Calculate portfolio returns<a class="headerlink" href="#calculate-portfolio-returns" title="Permalink to this headline">#</a></h2>
-<p>We will equally weight the stocks in each portfolio because equal-weighting does not require any information and is easily done with the <code class="docutils literal notranslate"><span class="pre">.mean()</span></code> method.
-Relative to value-weighting (also known as market-capitilization-weight), equal-equal overweights small stocks (i.e., stocks with low market capitalizations).
+<p>We will equally weight the stocks in each portfolio because equal-weighting does not require any information and is easy with the <code class="docutils literal notranslate"><span class="pre">.mean()</span></code> method.
+Relative to value-weighting (also known as market-capitalization-weight), equal-equal overweights small stocks (i.e., stocks with low market capitalizations).
 Again, if time permits, we will investigate momentum investing with value-weighting.
-In general, anomaly findings are larger with equal-weighted portfolios than with value-weighted portfolios becuase large stocks (i.e., stocks with high market capitalizations) are more heavily traded by more sophisticated investors.
-Both of these tend to weaken anomalies.</p>
+In general, anomaly findings are larger with equal-weighted portfolios than with value-weighted portfolios because more sophisticated investors more heavily trade large stocks (i.e., stocks with high market capitalizations).
+Both of these channels tend to weaken anomalies.</p>
 </section>
 <section id="evaluate-average-performance">
 <h2>Evaluate average performance<a class="headerlink" href="#evaluate-average-performance" title="Permalink to this headline">#</a></h2>
