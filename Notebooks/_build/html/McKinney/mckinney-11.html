@@ -1071,7 +1071,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_90348/1099700163.py:1: FutureWarning: Value based partial slicing on non-monotonic DatetimeIndexes with non-existing keys is deprecated and will raise a KeyError in a future Version.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_861180/1099700163.py:1: FutureWarning: Value based partial slicing on non-monotonic DatetimeIndexes with non-existing keys is deprecated and will raise a KeyError in a future Version.
   ts2[&#39;1/6/2011&#39;:&#39;1/11/2011&#39;]
 </pre></div>
 </div>
@@ -2321,7 +2321,7 @@ We will use data similar, but not identical, to the book data.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[                       0%                       ]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************67%*******                ]  2 of 3 completed
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[                       0%                       ]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  3 of 3 completed
@@ -2368,13 +2368,6 @@ The next example calculates and plots the 252-trading day moving average of AAPL
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aapl_2</span><span class="o">.</span><span class="n">to_clipboard</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
 <p>Two observations:</p>
 <ol class="simple">
 <li><p>If we pass the window-width as an integer, the window-width is based on the number of observations and ignores time stamps</p></li>
@@ -2404,7 +2397,7 @@ The most common example is the rolling correlation between two returns series.</
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/mckinney-11_137_0.png" src="../_images/mckinney-11_137_0.png" />
+<img alt="../_images/mckinney-11_136_0.png" src="../_images/mckinney-11_136_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2417,62 +2410,7 @@ The most common example is the rolling correlation between two returns series.</
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/mckinney-11_138_0.png" src="../_images/mckinney-11_138_0.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ff</span> <span class="o">=</span> <span class="n">pdr</span><span class="o">.</span><span class="n">get_data_famafrench</span><span class="p">(</span><span class="s1">&#39;F-F_Research_Data_Factors_daily&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="s1">&#39;1900&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">excess_returns</span> <span class="o">=</span> <span class="n">returns</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">ff</span><span class="p">[</span><span class="s1">&#39;RF&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cov_term</span> <span class="o">=</span> <span class="n">excess_returns</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">252</span><span class="p">)</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">excess_returns</span><span class="p">[</span><span class="s1">&#39;SPY&#39;</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">var_term</span> <span class="o">=</span> <span class="n">excess_returns</span><span class="p">[</span><span class="s1">&#39;SPY&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">252</span><span class="p">)</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">betas</span> <span class="o">=</span> <span class="n">cov_term</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">var_term</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">betas</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Ticker&#39;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">betas</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;SPY&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;CAPM Beta&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;252-Trading Day Rolling CAPM Betas&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/mckinney-11_145_0.png" src="../_images/mckinney-11_145_0.png" />
+<img alt="../_images/mckinney-11_137_0.png" src="../_images/mckinney-11_137_0.png" />
 </div>
 </div>
 </section>
@@ -2492,7 +2430,7 @@ Also, calculating rolling volatility with the <code class="docutils literal notr
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/mckinney-11_147_0.png" src="../_images/mckinney-11_147_0.png" />
+<img alt="../_images/mckinney-11_139_0.png" src="../_images/mckinney-11_139_0.png" />
 </div>
 </div>
 <p>Do not be afraid to use <code class="docutils literal notranslate"><span class="pre">.apply()</span></code>, but realize that <code class="docutils literal notranslate"><span class="pre">.apply()</span></code> is typically 1000-times slower than the pre-built method.</p>
@@ -2503,7 +2441,7 @@ Also, calculating rolling volatility with the <code class="docutils literal notr
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>793 ms ± 17.4 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>869 ms ± 18 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -2515,7 +2453,7 @@ Also, calculating rolling volatility with the <code class="docutils literal notr
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>216 µs ± 370 ns per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>249 µs ± 10.7 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -2666,10 +2604,10 @@ The add the 1 trading lag of <code class="docutils literal notranslate"><span cl
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tsla</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">tickers</span><span class="o">=</span><span class="s1">&#39;TSLA&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
-    <span class="o">.</span><span class="n">assign</span><span class="p">(</span>
-        <span class="n">Return</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">(),</span>
-        <span class="n">Return_lag1</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Return&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">()</span>
+    <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">tickers</span><span class="o">=</span><span class="s1">&#39;TSLA&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span> <span class="c1"># download daily data for Telsa</span>
+    <span class="o">.</span><span class="n">assign</span><span class="p">(</span> <span class="c1"># add 1+ variables in a chain</span>
+        <span class="n">Return</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">(),</span> <span class="c1"># add daily returns</span>
+        <span class="n">Return_lag1</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Return&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">()</span> <span class="c1"># add the one-day lag of daily returns</span>
     <span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
@@ -2687,6 +2625,10 @@ The add the 1 trading lag of <code class="docutils literal notranslate"><span cl
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tsla</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2020&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Return_lag1&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Return&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Return on Day $t$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Return on Day $t-1$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Tesla (TSLA) Daily Returns Versus Their One-Day Lags for 2020&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -2695,10 +2637,7 @@ The add the 1 trading lag of <code class="docutils literal notranslate"><span cl
   scatter = ax.scatter(
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: xlabel=&#39;Return_lag1&#39;, ylabel=&#39;Return&#39;&gt;
-</pre></div>
-</div>
-<img alt="../_images/mckinney-11_160_2.png" src="../_images/mckinney-11_160_2.png" />
+<img alt="../_images/mckinney-11_152_1.png" src="../_images/mckinney-11_152_1.png" />
 </div>
 </div>
 <p><em><strong>Practice:</strong></em>
@@ -2708,12 +2647,167 @@ Calculate 5-minute returns for GME from 1-minute data.</p>
 <li><p>Recall that returns are the percent change of the adjust close column</p></li>
 <li><p>Use the <code class="docutils literal notranslate"><span class="pre">label</span></code> and <code class="docutils literal notranslate"><span class="pre">closed</span></code> arguments so that returns are the over the <em>previous</em> five minutes</p></li>
 </ol>
+<p>With <code class="docutils literal notranslate"><span class="pre">interval='1m'</span></code> we can download 1-minute data from Yahoo! Finance, but we need to limit ourselves to the past 7 days of data with <code class="docutils literal notranslate"><span class="pre">period='7d'</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gme</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">tickers</span><span class="o">=</span><span class="s1">&#39;GME&#39;</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="s1">&#39;1m&#39;</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="s1">&#39;7d&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can use the <code class="docutils literal notranslate"><span class="pre">.resample()</span></code> method with <code class="docutils literal notranslate"><span class="pre">rule='5T'</span></code> (yfinance and pandas use different abbreviations for minutes) to calculate five-minute returns by combining the <code class="docutils literal notranslate"><span class="pre">.last()</span></code> and <code class="docutils literal notranslate"><span class="pre">.pct_change()</span></code> methods.
+We need to make two changes to get the behavior we get by default with daily and monthly data:</p>
+<ol class="simple">
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">closed='right'</span></code> and <code class="docutils literal notranslate"><span class="pre">label='right'</span></code> so that intervals include the right edge instead of the left edge and timestamped with the right edge instead of the left edge</p></li>
+<li><p>Drop the overnight returns using the <code class="docutils literal notranslate"><span class="pre">.between_time()</span></code> method</p></li>
+</ol>
+<p>We can wrap this chain with <code class="docutils literal notranslate"><span class="pre">()</span></code> so wo can insert white space, making this long chain more readable.
+It might be helpful to comment and un-comment lines with <code class="docutils literal notranslate"><span class="pre">#</span></code> (the short cut is CTRL-/) to better understand what each method does.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">gme</span>
+    <span class="p">[[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]]</span>
+    <span class="o">.</span><span class="n">between_time</span><span class="p">(</span><span class="n">start_time</span><span class="o">=</span><span class="s1">&#39;0930&#39;</span><span class="p">,</span> <span class="n">end_time</span><span class="o">=</span><span class="s1">&#39;1600&#39;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;5T&#39;</span><span class="p">,</span> <span class="n">closed</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">last</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Adj Close</th>
+    </tr>
+    <tr>
+      <th>Datetime</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2022-10-11 09:30:00-04:00</th>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2022-10-11 09:35:00-04:00</th>
+      <td>0.0037</td>
+    </tr>
+    <tr>
+      <th>2022-10-11 09:40:00-04:00</th>
+      <td>-0.0065</td>
+    </tr>
+    <tr>
+      <th>2022-10-11 09:45:00-04:00</th>
+      <td>-0.0096</td>
+    </tr>
+    <tr>
+      <th>2022-10-11 09:50:00-04:00</th>
+      <td>-0.0071</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2022-10-19 15:40:00-04:00</th>
+      <td>0.0024</td>
+    </tr>
+    <tr>
+      <th>2022-10-19 15:45:00-04:00</th>
+      <td>-0.0037</td>
+    </tr>
+    <tr>
+      <th>2022-10-19 15:50:00-04:00</th>
+      <td>-0.0047</td>
+    </tr>
+    <tr>
+      <th>2022-10-19 15:55:00-04:00</th>
+      <td>0.0063</td>
+    </tr>
+    <tr>
+      <th>2022-10-19 16:00:00-04:00</th>
+      <td>-0.0016</td>
+    </tr>
+  </tbody>
+</table>
+<p>2383 rows × 1 columns</p>
+</div></div></div>
+</div>
 <p><em><strong>Practice:</strong></em>
 Calculate rolling capital asset pricing model (CAPM) betas for these stocks.
 The CAPM says the risk premium on a stock depends on the risk-free rate, beta, and the risk premium on the market:
 $<span class="math notranslate nohighlight">\(E(R_{stock}) = R_f + \beta_{stock} \times (E(R_{market}) - R_f).\)</span><span class="math notranslate nohighlight">\(
 We can calculate CAPM betas as:
 \)</span><span class="math notranslate nohighlight">\(\beta_{stock} = \frac{Cov(R_{stock} - R_f, R_{market} - R_f)}{Var(R_{market} - R_f)}.\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ff</span> <span class="o">=</span> <span class="n">pdr</span><span class="o">.</span><span class="n">get_data_famafrench</span><span class="p">(</span><span class="s1">&#39;F-F_Research_Data_Factors_daily&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="s1">&#39;1900&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><em><strong>In class today I fumbled over the time zones that <code class="docutils literal notranslate"><span class="pre">yf.download()</span></code> on Windows adds to data.
+We should not see time zones on macOS or Linux (DataCamp Workspace is Linux-based), but we can remove the time zones with <code class="docutils literal notranslate"><span class="pre">tz.localize(None)</span></code>, as follows:</strong></em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">returns</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">returns</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We should use <em>excess</em> returns (i.e., returns relative to the risk-free rate or <span class="math notranslate nohighlight">\(R_{stock} - R_f\)</span>) to estimate betas.
+We can easily calculate <em>excess</em> returns for all columns with the <code class="docutils literal notranslate"><span class="pre">.sub()</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">excess_returns</span> <span class="o">=</span> <span class="n">returns</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">ff</span><span class="p">[</span><span class="s1">&#39;RF&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can calculate the numerator and denominator separately, then divide.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cov_term</span> <span class="o">=</span> <span class="n">excess_returns</span><span class="p">[[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">,</span> <span class="s1">&#39;MSFT&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">252</span><span class="p">)</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">excess_returns</span><span class="p">[</span><span class="s1">&#39;SPY&#39;</span><span class="p">])</span>
+<span class="n">var_term</span> <span class="o">=</span> <span class="n">excess_returns</span><span class="p">[</span><span class="s1">&#39;SPY&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">252</span><span class="p">)</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
+<span class="n">cov_term</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">var_term</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Rolling CAPM Beta&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Rolling CAPM Betas</span><span class="se">\n</span><span class="s1"> Based on 252 Trading Days of  Daily Data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/mckinney-11_165_0.png" src="../_images/mckinney-11_165_0.png" />
+</div>
+</div>
+<p><em><strong>For Friday:</strong></em> try to use the <code class="docutils literal notranslate"><span class="pre">.apply()</span></code> method to collapse the beta calculation above into one-line of code.</p>
 <p><em><strong>Practice:</strong></em>
 The Sharpe Ratio is often used to evaluate fund managers.
 The Sharpe Ratio is $<span class="math notranslate nohighlight">\(SR_i = \frac{\overline{R_i - R_f}}{\sigma},\)</span><span class="math notranslate nohighlight">\( where \)</span>\overline{R_i-R_f}<span class="math notranslate nohighlight">\( is mean fund return relative to the risk-free rate over some period and \)</span>\sigma<span class="math notranslate nohighlight">\( is the standard deviation of \)</span>R_i-R_f$ over the same period.

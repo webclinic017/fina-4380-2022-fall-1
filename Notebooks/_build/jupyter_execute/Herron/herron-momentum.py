@@ -53,6 +53,14 @@ wiki = pd.read_html('https://en.wikipedia.org/wiki/Russell_1000_Index')
 tickers = wiki[2]['Ticker'].replace(to_replace='\.', value='-', regex=True).to_list()
 
 
+# ***If `yf.download()` does not download data for all 1,012 tickers, we might have exceeded Yahoo! Finance's application programming interface (API) limits (e.g., requested too much data in too short a time).***
+# If this happens, either:
+# 
+# 1. Wait a few minutes and try again
+# 1. Download the `russ.pkl` file from Canvas, from Files in the left sidebar on Canvas
+# 
+# If you download `russ.pkl` from Canvas, it might be easiest for you to put it in the same folder as this notebook, and remove `../../Data/` from `pd.read_pickle()` below. 
+
 # In[3]:
 
 
@@ -107,6 +115,7 @@ ret_12m = russ['Adj Close'].resample('M').last().pct_change(12)
 
 
 # We should always check our work, here for Exxon-Mobil (XOM).
+# An `assert` statement returns an error if what follows is not true, making it easy to add simple checks to our code.
 
 # In[6]:
 
@@ -120,9 +129,17 @@ assert np.allclose(
 # ## Assign stocks to portfolios
 # 
 # We will use `pd.qcut()` to assign stocks to 10 portfolios based on their trailing 12-month returns.
-# We will save these portfolio assignments to data frame `port_12m`.
+# Here is a simple example that adds the values from 0 to 24 to 10 portfolios.
 
 # In[7]:
+
+
+pd.qcut(np.arange(25), q=10, labels=False)
+
+
+# We will save these portfolio assignments to data frame `port_12m`.
+
+# In[8]:
 
 
 port_12m = ret_12m.dropna(how='all').apply(pd.qcut, q=10, labels=False, axis=1)
@@ -130,7 +147,7 @@ port_12m = ret_12m.dropna(how='all').apply(pd.qcut, q=10, labels=False, axis=1)
 
 # We should check our output, here with the last row of data.
 
-# In[8]:
+# In[9]:
 
 
 assert np.allclose(
@@ -140,28 +157,31 @@ assert np.allclose(
 )
 
 
-# ***Start here on Wednesday!***
-# Are the following results real?
-# What is wrong with how we matched stock returns and portfolio assignments (without looking ahead)?
+# We use `pd.concat(axis=1)` to match the one-month return for each stock to its portfolio assignment.
+# We must `.shift(2)` the portfolio assignment data frame.
+# 
+# 1. The first shift makes sure that we do not use contemporaneous returns to assign stocks to portfolios (i.e., otherwise the portfolio ranking and portfolio returns would overlap).
+# 1. The second shift avoids mechanical correlations between returns one month and the next (i.e., bid-ask bounce and market microstructure noise).
 
-# In[9]:
+# We can get a very quick version of how momentum portfolios perform by calculating the mean return for the stocks in each portfolio across a period of time.
+# We can calculate the mean return for the stocks in each portfolio with `.groupby()` and `.mean()`, then visualize with `.plot(kind='bar')`.
+
+# In[10]:
 
 
 (
-    pd.concat([ret_1m, port_12m], axis=1, keys=['Return', 'Portfolio'])
-    .stack()
-    .loc['2010':'2020']
-    .groupby('Portfolio')
-    .mean()
-    .plot(kind='bar')
+    pd.concat(objs=[ret_1m, port_12m.shift(2)], axis=1, keys=['Return', 'Portfolio']) # match returns to portfolios
+    .stack() # convert to long, with rows for ticker-date pairs, and columns for portfolios and monthly returns
+    .loc['2010':'2020'] # slice to a recent time period to minimize the survivorship bias
+    .groupby('Portfolio') # group stocks into portfolio
+    .mean() # calculate mean returns for each portfolio
+    .mul(100) # convert to percent for readability
+    .plot(kind='bar') # plot mean returns for each portfolio
 )
-plt.ylabel('Mean Monthly Return')
-plt.title('Returns to Momentum Investing (Russell Index Constituents, 2010-2020)')
+plt.ylabel('Mean Monthly Return for Stocks in Portfolio (%)')
+plt.title('Returns to Momentum Investing\n Russell Index Constituents, 2010-2020')
 plt.show()
 
-
-# We will skip 1 month between assigning stocks to portfolios and buying the stocks to avoid market-microstructure stock issues (i.e., noise in returns due to how stocks trade).
-# Our dates are end-of-month, so we need a two-month gap between the ranking month and the holding month.
 
 # ## Calculate portfolio returns
 # 
@@ -171,6 +191,61 @@ plt.show()
 # In general, anomaly findings are larger with equal-weighted portfolios than with value-weighted portfolios because more sophisticated investors more heavily trade large stocks (i.e., stocks with high market capitalizations). 
 # Both of these channels tend to weaken anomalies.
 
+# In[11]:
+
+
+df = (
+    pd.concat(objs=[ret_1m, port_12m.shift(2)], axis=1, keys=['Return', 'Portfolio']) # match returns to portfolios
+    .stack() # convert to long, with rows for ticker-date pairs, and columns for portfolios and monthly returns
+    .groupby(['Date', 'Portfolio']) # group stocks into portfolios each month
+    .mean() # calculate mean equal-weighted for each portfolio each month
+    .unstack() # convert to wide, with rows for dates and columns for each portfolio return each month
+)
+
+
+# In[12]:
+
+
+df
+
+
 # ## Evaluate average performance
 
+# We put portfolios into columns above, so we can calculate the mean return for each portfolio with `.mean()` and plot with `.plot(kind='bar')`.
+# Note that this plot is a little different than our first plot because we formed portfolios first here, which gives more weight to portfolio-months with fewer stocks.
+
+# In[13]:
+
+
+(
+    df
+    ['Return']
+    .mean()
+    .mul(100)
+    .plot(kind='bar')
+)
+plt.ylabel('Mean Monthly Return for EW Portfolio (%)')
+plt.title('Returns to Momentum Investing\n Russell Index Constituents, 2010-2020')
+plt.show()
+
+
+# The difference between the high and low portfolios seems small, at 0.5% or 50 basis points.
+# However, this difference is large and compounds quickly.
+# We will plot cumulative returns in the next section.
+
 # ## Evaluate cumulative performance
+
+# In[14]:
+
+
+(
+    df
+    .loc['2010':, 'Return'] # slice to a recent time period to minimize the survivorship bias
+    .add(1).cumprod().sub(1) # calculate cumulative returns
+    .mul(100) # convert to percent for readability
+    .plot() # plot time series of each cumulative return
+)
+plt.ylabel('Cumulative Return for EW Portfolio (%)')
+plt.title('Returns to Momentum Investing\n Russell Index Constituents, 2010-2020')
+plt.show()
+

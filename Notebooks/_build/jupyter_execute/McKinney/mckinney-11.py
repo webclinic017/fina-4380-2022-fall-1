@@ -768,12 +768,6 @@ aapl_2['N_5'] = aapl_2['Adj Close'].rolling(5).mean()
 aapl_2['DO_7D'] = aapl_2['Adj Close'].rolling('7D').mean()
 
 
-# In[84]:
-
-
-aapl_2.to_clipboard()
-
-
 # Two observations:
 # 
 # 1. If we pass the window-width as an integer, the window-width is based on the number of observations and ignores time stamps
@@ -788,13 +782,13 @@ aapl_2.to_clipboard()
 # Binary moving window functions accept two inputs.
 # The most common example is the rolling correlation between two returns series.
 
-# In[85]:
+# In[84]:
 
 
 returns = df['Adj Close'].pct_change()
 
 
-# In[86]:
+# In[85]:
 
 
 returns['AAPL'].rolling(126, min_periods=100).corr(returns['SPY']).plot()
@@ -803,57 +797,12 @@ plt.title('Rolling Correlation between AAPL and SPY\n (126-Day Window w/ 100-Day
 plt.show()
 
 
-# In[87]:
+# In[86]:
 
 
 returns[['AAPL', 'MSFT']].rolling(126, min_periods=100).corr(returns['SPY']).plot()
 plt.ylabel('Correlation with SPY')
 plt.title('Rolling Correlation with SPY\n (126-Day Window w/ 100-Day Minimum)')
-plt.show()
-
-
-# In[88]:
-
-
-ff = pdr.get_data_famafrench('F-F_Research_Data_Factors_daily', start='1900', session=session)[0] / 100
-
-
-# In[89]:
-
-
-excess_returns = returns.sub(ff['RF'], axis=0).dropna()
-
-
-# In[90]:
-
-
-cov_term = excess_returns.rolling(252).cov(excess_returns['SPY'])
-
-
-# In[91]:
-
-
-var_term = excess_returns['SPY'].rolling(252).var()
-
-
-# In[92]:
-
-
-betas = cov_term.div(var_term, axis=0)
-
-
-# In[93]:
-
-
-betas.columns.name = 'Ticker'
-
-
-# In[94]:
-
-
-betas.drop(columns='SPY').plot()
-plt.ylabel('CAPM Beta')
-plt.title('252-Trading Day Rolling CAPM Betas')
 plt.show()
 
 
@@ -865,7 +814,7 @@ plt.show()
 # McKinney provides an abstract example here, but we will discuss a simpler example that calculates rolling volatility.
 # Also, calculating rolling volatility with the `.apply()` method provides us a chance to benchmark it against the optimized version.
 
-# In[95]:
+# In[87]:
 
 
 returns['AAPL'].rolling(252).apply(np.std).mul(np.sqrt(252) * 100).plot() # annualize and convert to percent
@@ -876,13 +825,13 @@ plt.show()
 
 # Do not be afraid to use `.apply()`, but realize that `.apply()` is typically 1000-times slower than the pre-built method.
 
-# In[96]:
+# In[88]:
 
 
 get_ipython().run_line_magic('timeit', "returns['AAPL'].rolling(252).apply(np.std)")
 
 
-# In[97]:
+# In[89]:
 
 
 get_ipython().run_line_magic('timeit', "returns['AAPL'].rolling(252).std()")
@@ -895,31 +844,31 @@ get_ipython().run_line_magic('timeit', "returns['AAPL'].rolling(252).std()")
 # Keep only the largest observation for each date in `dup_ts`.
 # Also try the `.drop_duplicates()` method
 
-# In[98]:
+# In[90]:
 
 
 dup_ts.groupby(level=0).max()
 
 
-# In[99]:
+# In[91]:
 
 
 dup_ts.index.drop_duplicates()
 
 
-# In[100]:
+# In[92]:
 
 
 df = pd.DataFrame({'a': [1, 1, 2, 2], 'b': [1, 2, 3, 4]})
 
 
-# In[101]:
+# In[93]:
 
 
 df
 
 
-# In[102]:
+# In[94]:
 
 
 df.drop_duplicates(subset='a', keep='first')
@@ -929,22 +878,26 @@ df.drop_duplicates(subset='a', keep='first')
 # Download daily data market data for TSLA and add daily returns as column named `Return`.
 # The add the 1 trading lag of `Return` as a column named `Return_lag1`.
 
-# In[103]:
+# In[95]:
 
 
 tsla = (
-    yf.download(tickers='TSLA', session=session)
-    .assign(
-        Return=lambda x: x['Adj Close'].pct_change(),
-        Return_lag1=lambda x: x['Return'].shift()
+    yf.download(tickers='TSLA', session=session) # download daily data for Telsa
+    .assign( # add 1+ variables in a chain
+        Return=lambda x: x['Adj Close'].pct_change(), # add daily returns
+        Return_lag1=lambda x: x['Return'].shift() # add the one-day lag of daily returns
     )
 )
 
 
-# In[104]:
+# In[96]:
 
 
 tsla.loc['2020'].plot(x='Return_lag1', y='Return', kind='scatter', alpha=0.25)
+plt.ylabel('Return on Day $t$')
+plt.xlabel('Return on Day $t-1$')
+plt.title('Tesla (TSLA) Daily Returns Versus Their One-Day Lags for 2020')
+plt.show()
 
 
 # ***Practice:***
@@ -955,12 +908,81 @@ tsla.loc['2020'].plot(x='Return_lag1', y='Return', kind='scatter', alpha=0.25)
 # 1. Recall that returns are the percent change of the adjust close column
 # 2. Use the `label` and `closed` arguments so that returns are the over the _previous_ five minutes
 
+# With `interval='1m'` we can download 1-minute data from Yahoo! Finance, but we need to limit ourselves to the past 7 days of data with `period='7d'`.
+
+# In[97]:
+
+
+gme = yf.download(tickers='GME', interval='1m', period='7d', session=session)
+
+
+# We can use the `.resample()` method with `rule='5T'` (yfinance and pandas use different abbreviations for minutes) to calculate five-minute returns by combining the `.last()` and `.pct_change()` methods.
+# We need to make two changes to get the behavior we get by default with daily and monthly data:
+# 
+# 1. Set `closed='right'` and `label='right'` so that intervals include the right edge instead of the left edge and timestamped with the right edge instead of the left edge
+# 1. Drop the overnight returns using the `.between_time()` method
+# 
+# We can wrap this chain with `()` so wo can insert white space, making this long chain more readable.
+# It might be helpful to comment and un-comment lines with `#` (the short cut is CTRL-/) to better understand what each method does.
+
+# In[98]:
+
+
+(
+    gme
+    [['Adj Close']]
+    .between_time(start_time='0930', end_time='1600')
+    .resample('5T', closed='right', label='right')
+    .last()
+    .pct_change()
+)
+
+
 # ***Practice:***
 # Calculate rolling capital asset pricing model (CAPM) betas for these stocks.
 # The CAPM says the risk premium on a stock depends on the risk-free rate, beta, and the risk premium on the market:
 # $$E(R_{stock}) = R_f + \beta_{stock} \times (E(R_{market}) - R_f).$$
 # We can calculate CAPM betas as:
 # $$\beta_{stock} = \frac{Cov(R_{stock} - R_f, R_{market} - R_f)}{Var(R_{market} - R_f)}.$$
+
+# In[99]:
+
+
+ff = pdr.get_data_famafrench('F-F_Research_Data_Factors_daily', start='1900', session=session)[0] / 100
+
+
+# ***In class today I fumbled over the time zones that `yf.download()` on Windows adds to data.
+# We should not see time zones on macOS or Linux (DataCamp Workspace is Linux-based), but we can remove the time zones with `tz.localize(None)`, as follows:***
+
+# In[100]:
+
+
+returns.index = returns.index.tz_localize(None)
+
+
+# We should use *excess* returns (i.e., returns relative to the risk-free rate or $R_{stock} - R_f$) to estimate betas.
+# We can easily calculate *excess* returns for all columns with the `.sub()` method.
+
+# In[101]:
+
+
+excess_returns = returns.sub(ff['RF'], axis=0).dropna()
+
+
+# We can calculate the numerator and denominator separately, then divide.
+
+# In[102]:
+
+
+cov_term = excess_returns[['AAPL', 'MSFT']].rolling(252).cov(excess_returns['SPY'])
+var_term = excess_returns['SPY'].rolling(252).var()
+cov_term.div(var_term, axis=0).plot()
+plt.ylabel('Rolling CAPM Beta')
+plt.title('Rolling CAPM Betas\n Based on 252 Trading Days of  Daily Data')
+plt.show()
+
+
+# ***For Friday:*** try to use the `.apply()` method to collapse the beta calculation above into one-line of code.
 
 # ***Practice:***
 # The Sharpe Ratio is often used to evaluate fund managers.
