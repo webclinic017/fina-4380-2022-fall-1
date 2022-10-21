@@ -1071,7 +1071,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_861180/1099700163.py:1: FutureWarning: Value based partial slicing on non-monotonic DatetimeIndexes with non-existing keys is deprecated and will raise a KeyError in a future Version.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\r.herron\AppData\Local\Temp\ipykernel_9460\1099700163.py:1: FutureWarning: Value based partial slicing on non-monotonic DatetimeIndexes with non-existing keys is deprecated and will raise a KeyError in a future Version.
   ts2[&#39;1/6/2011&#39;:&#39;1/11/2011&#39;]
 </pre></div>
 </div>
@@ -1147,7 +1147,7 @@ The toy data in series <code class="docutils literal notranslate"><span class="p
 2000-01-02    2
 2000-01-02    3
 2000-01-03    4
-dtype: int64
+dtype: int32
 </pre></div>
 </div>
 </div>
@@ -1187,7 +1187,7 @@ dtype: int64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2000-01-02    1
 2000-01-02    2
 2000-01-02    3
-dtype: int64
+dtype: int32
 </pre></div>
 </div>
 </div>
@@ -1227,7 +1227,7 @@ dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2000-01-01    0
 2000-01-02    3
 2000-01-03    4
-dtype: int64
+dtype: int32
 </pre></div>
 </div>
 </div>
@@ -1835,7 +1835,7 @@ There are a couple things to think about when using resample to downsample data:
 2000-01-01 00:09:00     9
 2000-01-01 00:10:00    10
 2000-01-01 00:11:00    11
-Freq: T, dtype: int64
+Freq: T, dtype: int32
 </pre></div>
 </div>
 </div>
@@ -1852,7 +1852,7 @@ Resampling requires and aggregation method, and here McKinney chooses the <code 
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2000-01-01 00:00:00    10
 2000-01-01 00:05:00    35
 2000-01-01 00:10:00    21
-Freq: 5T, dtype: int64
+Freq: 5T, dtype: int32
 </pre></div>
 </div>
 </div>
@@ -1876,7 +1876,7 @@ We can use the <code class="docutils literal notranslate"><span class="pre">clos
 2000-01-01 00:05:00    15
 2000-01-01 00:10:00    40
 2000-01-01 00:15:00    11
-Freq: 5T, dtype: int64
+Freq: 5T, dtype: int32
 </pre></div>
 </div>
 </div>
@@ -1893,7 +1893,7 @@ Freq: 5T, dtype: int64
 2000-01-01 00:00:00    15
 2000-01-01 00:05:00    40
 2000-01-01 00:10:00    11
-Freq: 5T, dtype: int64
+Freq: 5T, dtype: int32
 </pre></div>
 </div>
 </div>
@@ -2321,13 +2321,19 @@ We will use data similar, but not identical, to the book data.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[                       0%                       ]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[                       0%                       ]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  3 of 3 completed
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************67%*******                ]  2 of 3 completed
+[*********************100%***********************]  3 of 3 completed
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><em><strong>We must remove the timezone if (1) we are on Windows and (2) want to merge the Fama-French data.</strong></em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2350,7 +2356,7 @@ The next example calculates and plots the 252-trading day moving average of AAPL
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/mckinney-11_130_0.png" src="../_images/mckinney-11_130_0.png" />
+<img alt="../_images/mckinney-11_132_0.png" src="../_images/mckinney-11_132_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2397,7 +2403,7 @@ The most common example is the rolling correlation between two returns series.</
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/mckinney-11_136_0.png" src="../_images/mckinney-11_136_0.png" />
+<img alt="../_images/mckinney-11_138_0.png" src="../_images/mckinney-11_138_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2410,7 +2416,7 @@ The most common example is the rolling correlation between two returns series.</
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/mckinney-11_137_0.png" src="../_images/mckinney-11_137_0.png" />
+<img alt="../_images/mckinney-11_139_0.png" src="../_images/mckinney-11_139_0.png" />
 </div>
 </div>
 </section>
@@ -2430,7 +2436,7 @@ Also, calculating rolling volatility with the <code class="docutils literal notr
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/mckinney-11_139_0.png" src="../_images/mckinney-11_139_0.png" />
+<img alt="../_images/mckinney-11_141_0.png" src="../_images/mckinney-11_141_0.png" />
 </div>
 </div>
 <p>Do not be afraid to use <code class="docutils literal notranslate"><span class="pre">.apply()</span></code>, but realize that <code class="docutils literal notranslate"><span class="pre">.apply()</span></code> is typically 1000-times slower than the pre-built method.</p>
@@ -2441,7 +2447,7 @@ Also, calculating rolling volatility with the <code class="docutils literal notr
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>869 ms ± 18 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.38 s ± 17.2 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -2453,7 +2459,7 @@ Also, calculating rolling volatility with the <code class="docutils literal notr
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>249 µs ± 10.7 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>387 µs ± 20.9 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -2476,7 +2482,7 @@ Also try the <code class="docutils literal notranslate"><span class="pre">.drop_
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2000-01-01    0
 2000-01-02    3
 2000-01-03    4
-dtype: int64
+dtype: int32
 </pre></div>
 </div>
 </div>
@@ -2633,11 +2639,7 @@ The add the 1 trading lag of <code class="docutils literal notranslate"><span cl
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/richard/.local/lib/python3.10/site-packages/pandas/plotting/_matplotlib/core.py:1114: UserWarning: No data for colormapping provided via &#39;c&#39;. Parameters &#39;cmap&#39; will be ignored
-  scatter = ax.scatter(
-</pre></div>
-</div>
-<img alt="../_images/mckinney-11_152_1.png" src="../_images/mckinney-11_152_1.png" />
+<img alt="../_images/mckinney-11_154_0.png" src="../_images/mckinney-11_154_0.png" />
 </div>
 </div>
 <p><em><strong>Practice:</strong></em>
@@ -2712,48 +2714,48 @@ It might be helpful to comment and un-comment lines with <code class="docutils l
   </thead>
   <tbody>
     <tr>
-      <th>2022-10-11 09:30:00-04:00</th>
+      <th>2022-10-13 09:30:00-04:00</th>
       <td>NaN</td>
     </tr>
     <tr>
-      <th>2022-10-11 09:35:00-04:00</th>
-      <td>0.0037</td>
+      <th>2022-10-13 09:35:00-04:00</th>
+      <td>-0.0069</td>
     </tr>
     <tr>
-      <th>2022-10-11 09:40:00-04:00</th>
-      <td>-0.0065</td>
+      <th>2022-10-13 09:40:00-04:00</th>
+      <td>-0.0170</td>
     </tr>
     <tr>
-      <th>2022-10-11 09:45:00-04:00</th>
-      <td>-0.0096</td>
+      <th>2022-10-13 09:45:00-04:00</th>
+      <td>0.0031</td>
     </tr>
     <tr>
-      <th>2022-10-11 09:50:00-04:00</th>
-      <td>-0.0071</td>
+      <th>2022-10-13 09:50:00-04:00</th>
+      <td>0.0215</td>
     </tr>
     <tr>
       <th>...</th>
       <td>...</td>
     </tr>
     <tr>
-      <th>2022-10-19 15:40:00-04:00</th>
-      <td>0.0024</td>
+      <th>2022-10-21 15:40:00-04:00</th>
+      <td>0.0004</td>
     </tr>
     <tr>
-      <th>2022-10-19 15:45:00-04:00</th>
-      <td>-0.0037</td>
+      <th>2022-10-21 15:45:00-04:00</th>
+      <td>0.0008</td>
     </tr>
     <tr>
-      <th>2022-10-19 15:50:00-04:00</th>
-      <td>-0.0047</td>
+      <th>2022-10-21 15:50:00-04:00</th>
+      <td>0.0040</td>
     </tr>
     <tr>
-      <th>2022-10-19 15:55:00-04:00</th>
-      <td>0.0063</td>
+      <th>2022-10-21 15:55:00-04:00</th>
+      <td>-0.0024</td>
     </tr>
     <tr>
-      <th>2022-10-19 16:00:00-04:00</th>
-      <td>-0.0016</td>
+      <th>2022-10-21 16:00:00-04:00</th>
+      <td>0.0032</td>
     </tr>
   </tbody>
 </table>
@@ -2773,15 +2775,6 @@ We can calculate CAPM betas as:
 </div>
 </div>
 </div>
-<p><em><strong>In class today I fumbled over the time zones that <code class="docutils literal notranslate"><span class="pre">yf.download()</span></code> on Windows adds to data.
-We should not see time zones on macOS or Linux (DataCamp Workspace is Linux-based), but we can remove the time zones with <code class="docutils literal notranslate"><span class="pre">tz.localize(None)</span></code>, as follows:</strong></em></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">returns</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">returns</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
 <p>We should use <em>excess</em> returns (i.e., returns relative to the risk-free rate or <span class="math notranslate nohighlight">\(R_{stock} - R_f\)</span>) to estimate betas.
 We can easily calculate <em>excess</em> returns for all columns with the <code class="docutils literal notranslate"><span class="pre">.sub()</span></code> method.</p>
 <div class="cell docutils container">
@@ -2794,7 +2787,7 @@ We can easily calculate <em>excess</em> returns for all columns with the <code c
 <p>We can calculate the numerator and denominator separately, then divide.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cov_term</span> <span class="o">=</span> <span class="n">excess_returns</span><span class="p">[[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">,</span> <span class="s1">&#39;MSFT&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">252</span><span class="p">)</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">excess_returns</span><span class="p">[</span><span class="s1">&#39;SPY&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cov_term</span> <span class="o">=</span> <span class="n">excess_returns</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">252</span><span class="p">)</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">excess_returns</span><span class="p">[</span><span class="s1">&#39;SPY&#39;</span><span class="p">])</span>
 <span class="n">var_term</span> <span class="o">=</span> <span class="n">excess_returns</span><span class="p">[</span><span class="s1">&#39;SPY&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">252</span><span class="p">)</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
 <span class="n">cov_term</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">var_term</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Rolling CAPM Beta&#39;</span><span class="p">)</span>
@@ -2808,12 +2801,85 @@ We can easily calculate <em>excess</em> returns for all columns with the <code c
 </div>
 </div>
 <p><em><strong>For Friday:</strong></em> try to use the <code class="docutils literal notranslate"><span class="pre">.apply()</span></code> method to collapse the beta calculation above into one-line of code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">beta</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mkt</span><span class="o">=</span><span class="n">excess_returns</span><span class="p">[</span><span class="s1">&#39;SPY&#39;</span><span class="p">]):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">mkt</span><span class="p">)</span> <span class="o">/</span> <span class="n">mkt</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">excess_returns</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">252</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">beta</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Rolling CAPM Beta&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Rolling CAPM Betas</span><span class="se">\n</span><span class="s1"> Based on 252 Trading Days of  Daily Data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/mckinney-11_168_0.png" src="../_images/mckinney-11_168_0.png" />
+</div>
+</div>
 <p><em><strong>Practice:</strong></em>
 The Sharpe Ratio is often used to evaluate fund managers.
 The Sharpe Ratio is $<span class="math notranslate nohighlight">\(SR_i = \frac{\overline{R_i - R_f}}{\sigma},\)</span><span class="math notranslate nohighlight">\( where \)</span>\overline{R_i-R_f}<span class="math notranslate nohighlight">\( is mean fund return relative to the risk-free rate over some period and \)</span>\sigma<span class="math notranslate nohighlight">\( is the standard deviation of \)</span>R_i-R_f$ over the same period.
 While the Sharpe Ratio is typically used for funds, we can apply it to a single stock to test our knowledge of the <code class="docutils literal notranslate"><span class="pre">.rolling()</span></code> method.
 Calculate and plot the one-year rolling Sharpe Ratio for GME using all available daily data.
 Download GME data from Yahoo! Finance and risk-free rate data from Ken French.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sharpe_ratio</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">rf</span><span class="o">=</span><span class="n">ff</span><span class="p">[</span><span class="s1">&#39;RF&#39;</span><span class="p">]):</span>
+    <span class="n">x_rf</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">rf</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">252</span><span class="p">)</span> <span class="o">*</span> <span class="n">x_rf</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">/</span> <span class="n">x_rf</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">returns</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">252</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">sharpe_ratio</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Rolling Sharpe Ratio&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Rolling Sharpe Ratios</span><span class="se">\n</span><span class="s1"> Based on 252 Trading Days of  Daily Data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/mckinney-11_171_0.png" src="../_images/mckinney-11_171_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gme</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;GME&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">gme</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tz</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">gme</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">gme</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gme</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">252</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">sharpe_ratio</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Rolling Sharpe Ratio&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;GameStop (GME) Rolling Sharpe Ratios</span><span class="se">\n</span><span class="s1"> Based on 252 Trading Days of  Daily Data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/mckinney-11_173_0.png" src="../_images/mckinney-11_173_0.png" />
+</div>
+</div>
 </section>
 </section>
 

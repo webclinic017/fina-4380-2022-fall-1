@@ -54,6 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Herron - Does momentum investing work?" href="herron-momentum.html" />
     <link rel="prev" title="Herron - Downloading Data" href="herron-downloading-data.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -207,6 +208,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Herron - Do market prices respond to new information?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="herron-momentum.html">
+   Herron - Does momentum investing work?
   </a>
  </li>
 </ul>
@@ -548,7 +554,7 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">twtr_all</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">tickers</span><span class="o">=</span><span class="s1">&#39;TWTR&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">twtr_all</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">tickers</span><span class="o">=</span><span class="s1">&#39;TWTR&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">,</span> <span class="n">ignore_tz</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -585,6 +591,12 @@ We can organize this formula as \)</span><span class="math notranslate nohighlig
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\r.herron\AppData\Local\Temp\ipykernel_1496\771075788.py:1: FutureWarning: Indexing a timezone-aware DatetimeIndex with a timezone-naive datetime is deprecated and will raise KeyError in a future version. Use a timezone-aware object instead.
+  price_unaffected = twtr_all.loc[dates[&#39;Purchases Announced&#39;] - pd.offsets.BDay(20), &#39;Price&#39;]
+</pre></div>
+</div>
+</div>
 </div>
 <p>We will use the formula above to estimate the implied probability of deal completion.</p>
 <div class="cell docutils container">
@@ -602,11 +614,23 @@ We step back one business day with <code class="docutils literal notranslate"><s
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\r.herron\AppData\Local\Temp\ipykernel_1496\2515562944.py:1: FutureWarning: Indexing a timezone-aware DatetimeIndex with a timezone-naive datetime is deprecated and will raise KeyError in a future version. Use a timezone-aware object instead.
+  twtr_all.loc[:dates[&#39;Bid Announced&#39;] - pd.offsets.BDay(1), &#39;Probability&#39;] = np.nan
+</pre></div>
+</div>
+</div>
 </div>
 <p>To avoid excessive <code class="docutils literal notranslate"><span class="pre">.loc[]</span></code> statements, we will slice <code class="docutils literal notranslate"><span class="pre">twtr_all</span></code> to the relevant date range and columns in <code class="docutils literal notranslate"><span class="pre">twtr</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">twtr</span> <span class="o">=</span> <span class="n">twtr_all</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dates</span><span class="p">[</span><span class="s1">&#39;First Purchase&#39;</span><span class="p">]:,</span>  <span class="p">[</span><span class="s1">&#39;Price&#39;</span><span class="p">,</span> <span class="s1">&#39;Probability&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\r.herron\AppData\Local\Temp\ipykernel_1496\1441240805.py:1: FutureWarning: Indexing a timezone-aware DatetimeIndex with a timezone-naive datetime is deprecated and will raise KeyError in a future version. Use a timezone-aware object instead.
+  twtr = twtr_all.loc[dates[&#39;First Purchase&#39;]:,  [&#39;Price&#39;, &#39;Probability&#39;]]
 </pre></div>
 </div>
 </div>
@@ -661,7 +685,11 @@ If we want to precisely place annotations, we need to either manually place them
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/herron-do-market-prices-respond_24_0.png" src="../_images/herron-do-market-prices-respond_24_0.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\r.herron\AppData\Local\Temp\ipykernel_1496\2864927360.py:4: FutureWarning: Indexing a timezone-aware DatetimeIndex with a timezone-naive datetime is deprecated and will raise KeyError in a future version. Use a timezone-aware object instead.
+  price = twtr.loc[date, &#39;Price&#39;]
+</pre></div>
+</div>
+<img alt="../_images/herron-do-market-prices-respond_24_1.png" src="../_images/herron-do-market-prices-respond_24_1.png" />
 </div>
 </div>
 <p>The above plot is a good start!
@@ -702,6 +730,13 @@ If you wanted a specific look, you would need to really dig into the docstrings 
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">Herron - Downloading Data</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="herron-momentum.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Herron - Does momentum investing work?</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>

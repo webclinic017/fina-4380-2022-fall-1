@@ -210,6 +210,11 @@ const thebe_selector_output = ".output, .cell_output"
    Herron - Do market prices respond to new information?
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Herron/herron-momentum.html">
+   Herron - Does momentum investing work?
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -4921,7 +4926,7 @@ Ohio      one       0
 Colorado  one       3
           two       4
           three     5
-dtype: int64
+dtype: int32
 </pre></div>
 </div>
 </div>
@@ -5865,7 +5870,7 @@ I use <code class="docutils literal notranslate"><span class="pre">stocks_2</spa
   <tbody>
     <tr>
       <th rowspan="5" valign="top">AAPL</th>
-      <th>1980-12-12</th>
+      <th>1980-12-12 00:00:00-05:00</th>
       <td>0.1000</td>
       <td>0.1283</td>
       <td>0.1289</td>
@@ -5875,7 +5880,7 @@ I use <code class="docutils literal notranslate"><span class="pre">stocks_2</spa
       <td>NaN</td>
     </tr>
     <tr>
-      <th>1980-12-15</th>
+      <th>1980-12-15 00:00:00-05:00</th>
       <td>0.0948</td>
       <td>0.1217</td>
       <td>0.1222</td>
@@ -5885,7 +5890,7 @@ I use <code class="docutils literal notranslate"><span class="pre">stocks_2</spa
       <td>-0.0522</td>
     </tr>
     <tr>
-      <th>1980-12-16</th>
+      <th>1980-12-16 00:00:00-05:00</th>
       <td>0.0879</td>
       <td>0.1127</td>
       <td>0.1133</td>
@@ -5895,7 +5900,7 @@ I use <code class="docutils literal notranslate"><span class="pre">stocks_2</spa
       <td>-0.0734</td>
     </tr>
     <tr>
-      <th>1980-12-17</th>
+      <th>1980-12-17 00:00:00-05:00</th>
       <td>0.0900</td>
       <td>0.1155</td>
       <td>0.1161</td>
@@ -5905,7 +5910,7 @@ I use <code class="docutils literal notranslate"><span class="pre">stocks_2</spa
       <td>0.0248</td>
     </tr>
     <tr>
-      <th>1980-12-18</th>
+      <th>1980-12-18 00:00:00-05:00</th>
       <td>0.0926</td>
       <td>0.1189</td>
       <td>0.1194</td>
@@ -5968,7 +5973,7 @@ Name this new data frame <code class="docutils literal notranslate"><span class=
     <tr>
       <th>0</th>
       <td>AAPL</td>
-      <td>1980-12-12</td>
+      <td>1980-12-12 00:00:00-05:00</td>
       <td>0.1000</td>
       <td>0.1283</td>
       <td>0.1289</td>
@@ -5980,7 +5985,7 @@ Name this new data frame <code class="docutils literal notranslate"><span class=
     <tr>
       <th>1</th>
       <td>AAPL</td>
-      <td>1980-12-15</td>
+      <td>1980-12-15 00:00:00-05:00</td>
       <td>0.0948</td>
       <td>0.1217</td>
       <td>0.1222</td>
@@ -5992,7 +5997,7 @@ Name this new data frame <code class="docutils literal notranslate"><span class=
     <tr>
       <th>2</th>
       <td>AAPL</td>
-      <td>1980-12-16</td>
+      <td>1980-12-16 00:00:00-05:00</td>
       <td>0.0879</td>
       <td>0.1127</td>
       <td>0.1133</td>
@@ -6004,7 +6009,7 @@ Name this new data frame <code class="docutils literal notranslate"><span class=
     <tr>
       <th>3</th>
       <td>AAPL</td>
-      <td>1980-12-17</td>
+      <td>1980-12-17 00:00:00-05:00</td>
       <td>0.0900</td>
       <td>0.1155</td>
       <td>0.1161</td>
@@ -6016,7 +6021,7 @@ Name this new data frame <code class="docutils literal notranslate"><span class=
     <tr>
       <th>4</th>
       <td>AAPL</td>
-      <td>1980-12-18</td>
+      <td>1980-12-18 00:00:00-05:00</td>
       <td>0.0926</td>
       <td>0.1189</td>
       <td>0.1194</td>
@@ -6136,7 +6141,7 @@ The Fama-French daily factor data are simple returns as percents, so divide by 1
   <tbody>
     <tr>
       <th rowspan="5" valign="top">AAPL</th>
-      <th>1980-12-12</th>
+      <th>1980-12-12 00:00:00-05:00</th>
       <td>0.1000</td>
       <td>0.1283</td>
       <td>0.1289</td>
@@ -6146,7 +6151,7 @@ The Fama-French daily factor data are simple returns as percents, so divide by 1
       <td>NaN</td>
     </tr>
     <tr>
-      <th>1980-12-15</th>
+      <th>1980-12-15 00:00:00-05:00</th>
       <td>0.0948</td>
       <td>0.1217</td>
       <td>0.1222</td>
@@ -6156,7 +6161,7 @@ The Fama-French daily factor data are simple returns as percents, so divide by 1
       <td>-0.0522</td>
     </tr>
     <tr>
-      <th>1980-12-16</th>
+      <th>1980-12-16 00:00:00-05:00</th>
       <td>0.0879</td>
       <td>0.1127</td>
       <td>0.1133</td>
@@ -6166,7 +6171,7 @@ The Fama-French daily factor data are simple returns as percents, so divide by 1
       <td>-0.0734</td>
     </tr>
     <tr>
-      <th>1980-12-17</th>
+      <th>1980-12-17 00:00:00-05:00</th>
       <td>0.0900</td>
       <td>0.1155</td>
       <td>0.1161</td>
@@ -6176,7 +6181,7 @@ The Fama-French daily factor data are simple returns as percents, so divide by 1
       <td>0.0248</td>
     </tr>
     <tr>
-      <th>1980-12-18</th>
+      <th>1980-12-18 00:00:00-05:00</th>
       <td>0.0926</td>
       <td>0.1189</td>
       <td>0.1194</td>
@@ -6273,6 +6278,170 @@ The Fama-French daily factor data are simple returns as percents, so divide by 1
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">125</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">stocks_long_4</span> <span class="o">=</span> <span class="n">stocks_long</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ff</span><span class="p">)</span>
+
+<span class="nn">File ~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\frame.py:9969,</span> in <span class="ni">DataFrame.join</span><span class="nt">(self, other, on, how, lsuffix, rsuffix, sort, validate)</span>
+<span class="g g-Whitespace">   </span><span class="mi">9806</span> <span class="k">def</span> <span class="nf">join</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">9807</span>     <span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">9808</span>     <span class="n">other</span><span class="p">:</span> <span class="n">DataFrame</span> <span class="o">|</span> <span class="n">Series</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="n">DataFrame</span> <span class="o">|</span> <span class="n">Series</span><span class="p">],</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">9814</span>     <span class="n">validate</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">9815</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">9816</span>     <span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">9817</span><span class="sd">     Join columns of another DataFrame.</span>
+<span class="g g-Whitespace">   </span><span class="mi">9818</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">   </span><span class="mi">9967</span><span class="sd">     5  K1  A5   B1</span>
+<span class="g g-Whitespace">   </span><span class="mi">9968</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">9969</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_join_compat</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">9970</span>         <span class="n">other</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">9971</span>         <span class="n">on</span><span class="o">=</span><span class="n">on</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">9972</span>         <span class="n">how</span><span class="o">=</span><span class="n">how</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">9973</span>         <span class="n">lsuffix</span><span class="o">=</span><span class="n">lsuffix</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">9974</span>         <span class="n">rsuffix</span><span class="o">=</span><span class="n">rsuffix</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">9975</span>         <span class="n">sort</span><span class="o">=</span><span class="n">sort</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">9976</span>         <span class="n">validate</span><span class="o">=</span><span class="n">validate</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">9977</span>     <span class="p">)</span>
+
+<span class="nn">File ~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\frame.py:10008,</span> in <span class="ni">DataFrame._join_compat</span><span class="nt">(self, other, on, how, lsuffix, rsuffix, sort, validate)</span>
+<span class="g g-Whitespace">   </span><span class="mi">9998</span>     <span class="k">if</span> <span class="n">how</span> <span class="o">==</span> <span class="s2">&quot;cross&quot;</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">9999</span>         <span class="k">return</span> <span class="n">merge</span><span class="p">(</span>
+<span class="g g-Whitespace">  </span><span class="mi">10000</span>             <span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">  </span><span class="mi">10001</span>             <span class="n">other</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">  </span><span class="mi">10006</span>             <span class="n">validate</span><span class="o">=</span><span class="n">validate</span><span class="p">,</span>
+<span class="g g-Whitespace">  </span><span class="mi">10007</span>         <span class="p">)</span>
+<span class="ne">&gt; </span><span class="mi">10008</span>     <span class="k">return</span> <span class="n">merge</span><span class="p">(</span>
+<span class="g g-Whitespace">  </span><span class="mi">10009</span>         <span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">  </span><span class="mi">10010</span>         <span class="n">other</span><span class="p">,</span>
+<span class="g g-Whitespace">  </span><span class="mi">10011</span>         <span class="n">left_on</span><span class="o">=</span><span class="n">on</span><span class="p">,</span>
+<span class="g g-Whitespace">  </span><span class="mi">10012</span>         <span class="n">how</span><span class="o">=</span><span class="n">how</span><span class="p">,</span>
+<span class="g g-Whitespace">  </span><span class="mi">10013</span>         <span class="n">left_index</span><span class="o">=</span><span class="n">on</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">,</span>
+<span class="g g-Whitespace">  </span><span class="mi">10014</span>         <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="g g-Whitespace">  </span><span class="mi">10015</span>         <span class="n">suffixes</span><span class="o">=</span><span class="p">(</span><span class="n">lsuffix</span><span class="p">,</span> <span class="n">rsuffix</span><span class="p">),</span>
+<span class="g g-Whitespace">  </span><span class="mi">10016</span>         <span class="n">sort</span><span class="o">=</span><span class="n">sort</span><span class="p">,</span>
+<span class="g g-Whitespace">  </span><span class="mi">10017</span>         <span class="n">validate</span><span class="o">=</span><span class="n">validate</span><span class="p">,</span>
+<span class="g g-Whitespace">  </span><span class="mi">10018</span>     <span class="p">)</span>
+<span class="g g-Whitespace">  </span><span class="mi">10019</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">  </span><span class="mi">10020</span>     <span class="k">if</span> <span class="n">on</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">File ~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\reshape\merge.py:125,</span> in <span class="ni">merge</span><span class="nt">(left, right, how, on, left_on, right_on, left_index, right_index, sort, suffixes, copy, indicator, validate)</span>
+<span class="g g-Whitespace">     </span><span class="mi">94</span> <span class="nd">@Substitution</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">left : DataFrame or named Series&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">95</span> <span class="nd">@Appender</span><span class="p">(</span><span class="n">_merge_doc</span><span class="p">,</span> <span class="n">indents</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">96</span> <span class="k">def</span> <span class="nf">merge</span><span class="p">(</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">109</span>     <span class="n">validate</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">110</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">111</span>     <span class="n">op</span> <span class="o">=</span> <span class="n">_MergeOperation</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">112</span>         <span class="n">left</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">113</span>         <span class="n">right</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">123</span>         <span class="n">validate</span><span class="o">=</span><span class="n">validate</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">124</span>     <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">125</span>     <span class="k">return</span> <span class="n">op</span><span class="o">.</span><span class="n">get_result</span><span class="p">(</span><span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">)</span>
+
+<span class="nn">File ~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\reshape\merge.py:776,</span> in <span class="ni">_MergeOperation.get_result</span><span class="nt">(self, copy)</span>
+<span class="g g-Whitespace">    </span><span class="mi">773</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">indicator</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">774</span>     <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_indicator_pre_merge</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">776</span> <span class="n">join_index</span><span class="p">,</span> <span class="n">left_indexer</span><span class="p">,</span> <span class="n">right_indexer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_join_info</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">778</span> <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reindex_and_concat</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">779</span>     <span class="n">join_index</span><span class="p">,</span> <span class="n">left_indexer</span><span class="p">,</span> <span class="n">right_indexer</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span>
+<span class="g g-Whitespace">    </span><span class="mi">780</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">781</span> <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">__finalize__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_merge_type</span><span class="p">)</span>
+
+<span class="nn">File ~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\reshape\merge.py:1015,</span> in <span class="ni">_MergeOperation._get_join_info</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1012</span> <span class="n">right_ax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">axis</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1014</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_index</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_index</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">how</span> <span class="o">!=</span> <span class="s2">&quot;asof&quot;</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1015</span>     <span class="n">join_index</span><span class="p">,</span> <span class="n">left_indexer</span><span class="p">,</span> <span class="n">right_indexer</span> <span class="o">=</span> <span class="n">left_ax</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1016</span>         <span class="n">right_ax</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">how</span><span class="p">,</span> <span class="n">return_indexers</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sort</span>
+<span class="g g-Whitespace">   </span><span class="mi">1017</span>     <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1019</span> <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_index</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">how</span> <span class="o">==</span> <span class="s2">&quot;left&quot;</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1020</span>     <span class="n">join_index</span><span class="p">,</span> <span class="n">left_indexer</span><span class="p">,</span> <span class="n">right_indexer</span> <span class="o">=</span> <span class="n">_left_join_on_index</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1021</span>         <span class="n">left_ax</span><span class="p">,</span> <span class="n">right_ax</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_join_keys</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sort</span>
+<span class="g g-Whitespace">   </span><span class="mi">1022</span>     <span class="p">)</span>
+
+<span class="nn">File ~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\util\_decorators.py:317,</span> in <span class="ni">deprecate_nonkeyword_arguments.&lt;locals&gt;.decorate.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">311</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">num_allow_args</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">312</span>     <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">313</span>         <span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">arguments</span><span class="o">=</span><span class="n">arguments</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">314</span>         <span class="ne">FutureWarning</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">315</span>         <span class="n">stacklevel</span><span class="o">=</span><span class="n">find_stack_level</span><span class="p">(</span><span class="n">inspect</span><span class="o">.</span><span class="n">currentframe</span><span class="p">()),</span>
+<span class="g g-Whitespace">    </span><span class="mi">316</span>     <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">317</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\indexes\base.py:230,</span> in <span class="ni">_maybe_return_indexers.&lt;locals&gt;.join</span><span class="nt">(self, other, how, level, return_indexers, sort)</span>
+<span class="g g-Whitespace">    </span><span class="mi">221</span> <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">meth</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">222</span> <span class="k">def</span> <span class="nf">join</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">223</span>     <span class="bp">self</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">228</span>     <span class="n">sort</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">229</span> <span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">230</span>     <span class="n">join_index</span><span class="p">,</span> <span class="n">lidx</span><span class="p">,</span> <span class="n">ridx</span> <span class="o">=</span> <span class="n">meth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="n">how</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="n">sort</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">231</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">return_indexers</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">232</span>         <span class="k">return</span> <span class="n">join_index</span>
+
+<span class="nn">File ~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\indexes\base.py:4655,</span> in <span class="ni">Index.join</span><span class="nt">(self, other, how, level, return_indexers, sort)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4653</span>         <span class="k">pass</span>
+<span class="g g-Whitespace">   </span><span class="mi">4654</span>     <span class="k">else</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">4655</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_join_multi</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="n">how</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4657</span> <span class="c1"># join on the level</span>
+<span class="g g-Whitespace">   </span><span class="mi">4658</span> <span class="k">if</span> <span class="n">level</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_is_multi</span> <span class="ow">or</span> <span class="n">other</span><span class="o">.</span><span class="n">_is_multi</span><span class="p">):</span>
+
+<span class="nn">File ~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\indexes\base.py:4837,</span> in <span class="ni">Index._join_multi</span><span class="nt">(self, other, how)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4834</span>     <span class="n">how</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;right&quot;</span><span class="p">:</span> <span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="s2">&quot;left&quot;</span><span class="p">:</span> <span class="s2">&quot;right&quot;</span><span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">how</span><span class="p">,</span> <span class="n">how</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4836</span> <span class="n">level</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">jl</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">4837</span> <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_join_level</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="n">how</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4839</span> <span class="k">if</span> <span class="n">flip_order</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">4840</span>     <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="nn">File ~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\indexes\base.py:4940,</span> in <span class="ni">Index._join_level</span><span class="nt">(self, other, level, how, keep_order)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4935</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">right</span><span class="o">.</span><span class="n">is_unique</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">4936</span>     <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">4937</span>         <span class="s2">&quot;Index._join_level on non-unique index is not implemented&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">4938</span>     <span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">4940</span> <span class="n">new_level</span><span class="p">,</span> <span class="n">left_lev_indexer</span><span class="p">,</span> <span class="n">right_lev_indexer</span> <span class="o">=</span> <span class="n">old_level</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">4941</span>     <span class="n">right</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="n">how</span><span class="p">,</span> <span class="n">return_indexers</span><span class="o">=</span><span class="kc">True</span>
+<span class="g g-Whitespace">   </span><span class="mi">4942</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4944</span> <span class="k">if</span> <span class="n">left_lev_indexer</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">4945</span>     <span class="k">if</span> <span class="n">keep_order</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">left</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+
+<span class="nn">File ~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\util\_decorators.py:317,</span> in <span class="ni">deprecate_nonkeyword_arguments.&lt;locals&gt;.decorate.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">311</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">num_allow_args</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">312</span>     <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">313</span>         <span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">arguments</span><span class="o">=</span><span class="n">arguments</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">314</span>         <span class="ne">FutureWarning</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">315</span>         <span class="n">stacklevel</span><span class="o">=</span><span class="n">find_stack_level</span><span class="p">(</span><span class="n">inspect</span><span class="o">.</span><span class="n">currentframe</span><span class="p">()),</span>
+<span class="g g-Whitespace">    </span><span class="mi">316</span>     <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">317</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\indexes\base.py:230,</span> in <span class="ni">_maybe_return_indexers.&lt;locals&gt;.join</span><span class="nt">(self, other, how, level, return_indexers, sort)</span>
+<span class="g g-Whitespace">    </span><span class="mi">221</span> <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">meth</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">222</span> <span class="k">def</span> <span class="nf">join</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">223</span>     <span class="bp">self</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">228</span>     <span class="n">sort</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">229</span> <span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">230</span>     <span class="n">join_index</span><span class="p">,</span> <span class="n">lidx</span><span class="p">,</span> <span class="n">ridx</span> <span class="o">=</span> <span class="n">meth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="n">how</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="n">sort</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">231</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">return_indexers</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">232</span>         <span class="k">return</span> <span class="n">join_index</span>
+
+<span class="nn">File ~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\indexes\base.py:4634,</span> in <span class="ni">Index.join</span><span class="nt">(self, other, how, level, return_indexers, sort)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4631</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ABCDatetimeIndex</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">ABCDatetimeIndex</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">4632</span>     <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tz</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="o">^</span> <span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">tz</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">4633</span>         <span class="c1"># Raise instead of casting to object below.</span>
+<span class="ne">-&gt; </span><span class="mi">4634</span>         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Cannot join tz-naive with tz-aware DatetimeIndex&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4636</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_multi</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">other</span><span class="o">.</span><span class="n">_is_multi</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">4637</span>     <span class="c1"># We have specific handling for MultiIndex below</span>
+<span class="g g-Whitespace">   </span><span class="mi">4638</span>     <span class="n">pself</span><span class="p">,</span> <span class="n">pother</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maybe_promote</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+<span class="ne">TypeError</span>: Cannot join tz-naive with tz-aware DatetimeIndex
+</pre></div>
+</div>
+</div>
 </div>
 <p><em><strong>After-Class Update:</strong></em>
 In class this slide failed because I omitted the trailing <code class="docutils literal notranslate"><span class="pre">,</span> <span class="pre">:</span></code> in the <code class="docutils literal notranslate"><span class="pre">.loc[]</span></code> method.</p>
@@ -6342,8 +6511,8 @@ In class this slide failed because I omitted the trailing <code class="docutils 
       <td>303602000.0000</td>
       <td>-0.0055</td>
       <td>0.0118</td>
-      <td>-0.0072</td>
-      <td>0.0189</td>
+      <td>-0.0073</td>
+      <td>0.0193</td>
       <td>0.0001</td>
     </tr>
     <tr>
@@ -6357,8 +6526,8 @@ In class this slide failed because I omitted the trailing <code class="docutils 
       <td>35184300.0000</td>
       <td>-0.0296</td>
       <td>0.0118</td>
-      <td>-0.0072</td>
-      <td>0.0189</td>
+      <td>-0.0073</td>
+      <td>0.0193</td>
       <td>0.0001</td>
     </tr>
     <tr>
@@ -6372,8 +6541,8 @@ In class this slide failed because I omitted the trailing <code class="docutils 
       <td>75638200.0000</td>
       <td>-0.0096</td>
       <td>0.0118</td>
-      <td>-0.0072</td>
-      <td>0.0189</td>
+      <td>-0.0073</td>
+      <td>0.0193</td>
       <td>0.0001</td>
     </tr>
   </tbody>
@@ -6440,36 +6609,36 @@ In class this slide failed because I omitted the trailing <code class="docutils 
     <tr>
       <th>1926-07-01</th>
       <td>0.0010</td>
-      <td>-0.0023</td>
-      <td>-0.0028</td>
+      <td>-0.0025</td>
+      <td>-0.0027</td>
       <td>0.0001</td>
     </tr>
     <tr>
       <th>1926-07-02</th>
       <td>0.0045</td>
-      <td>-0.0034</td>
-      <td>-0.0003</td>
+      <td>-0.0033</td>
+      <td>-0.0006</td>
       <td>0.0001</td>
     </tr>
     <tr>
       <th>1926-07-06</th>
       <td>0.0017</td>
-      <td>0.0029</td>
-      <td>-0.0038</td>
+      <td>0.0030</td>
+      <td>-0.0039</td>
       <td>0.0001</td>
     </tr>
     <tr>
       <th>1926-07-07</th>
       <td>0.0009</td>
-      <td>-0.0059</td>
-      <td>0.0000</td>
+      <td>-0.0058</td>
+      <td>0.0002</td>
       <td>0.0001</td>
     </tr>
     <tr>
       <th>1926-07-08</th>
       <td>0.0021</td>
       <td>-0.0038</td>
-      <td>0.0018</td>
+      <td>0.0019</td>
       <td>0.0001</td>
     </tr>
   </tbody>
@@ -6732,16 +6901,7 @@ Two notes:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[                       0%                       ]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************67%*******                ]  2 of 3 completed
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  3 of 3 completed
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>

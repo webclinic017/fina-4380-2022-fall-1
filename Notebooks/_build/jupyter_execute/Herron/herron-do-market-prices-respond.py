@@ -54,7 +54,7 @@ price_bid = 54.20
 # In[6]:
 
 
-twtr_all = yf.download(tickers='TWTR', session=session)
+twtr_all = yf.download(tickers='TWTR', session=session, ignore_tz=False)
 
 
 # ## Implied Probability of Deal Completion

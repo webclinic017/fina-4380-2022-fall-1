@@ -210,6 +210,11 @@ const thebe_selector_output = ".output, .cell_output"
    Herron - Do market prices respond to new information?
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Herron/herron-momentum.html">
+   Herron - Does momentum investing work?
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -685,6 +690,13 @@ We will:</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spy</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">spy</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spy</span><span class="p">[</span><span class="s1">&#39;Return&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">spy</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -709,9 +721,65 @@ However, log returns can approach positive and negative infinity.
 Note that <code class="docutils literal notranslate"><span class="pre">np.log1p(X)</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">np.log(1</span> <span class="pre">+</span> <span class="pre">X)</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spy</span><span class="p">[</span><span class="s1">&#39;log Return&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">spy</span><span class="p">[</span><span class="s1">&#39;Return&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spy</span><span class="p">[</span><span class="s1">&#39;log Return&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">spy</span><span class="p">[</span><span class="s1">&#39;Return&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">)</span> <span class="c1"># .pipe() lets us apply a function without wrapping</span>
 </pre></div>
 </div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spy</span><span class="p">[[</span><span class="s1">&#39;Return&#39;</span><span class="p">,</span> <span class="s1">&#39;log Return&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Return</th>
+      <th>log Return</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Return</th>
+      <td>1.0000</td>
+      <td>0.9998</td>
+    </tr>
+    <tr>
+      <th>log Return</th>
+      <td>0.9998</td>
+      <td>1.0000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spy</span><span class="p">[[</span><span class="s1">&#39;Return&#39;</span><span class="p">,</span> <span class="s1">&#39;log Return&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Return&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;log Return&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Comparison of Log and Simple Returns&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/lewinson-01_14_0.png" src="../_images/lewinson-01_14_0.png" />
 </div>
 </div>
 <section id="summary-statistics">
@@ -756,18 +824,18 @@ However, we can use the <code class="docutils literal notranslate"><span class="
   <tbody>
     <tr>
       <th>Return</th>
-      <td>7479.0000</td>
+      <td>7487.0000</td>
       <td>0.0004</td>
       <td>0.0119</td>
       <td>-0.1094</td>
-      <td>-0.0044</td>
+      <td>-0.0045</td>
       <td>0.0007</td>
       <td>0.0059</td>
       <td>0.1452</td>
     </tr>
     <tr>
       <th>log Return</th>
-      <td>7479.0000</td>
+      <td>7487.0000</td>
       <td>0.0004</td>
       <td>0.0119</td>
       <td>-0.1159</td>
@@ -788,8 +856,8 @@ However, we can use the <code class="docutils literal notranslate"><span class="
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Skewness:        -0.31
-Excess Kurtosis: 11.10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Skewness:        -0.30
+Excess Kurtosis: 11.06
 </pre></div>
 </div>
 </div>
@@ -802,6 +870,13 @@ However, the <code class="docutils literal notranslate"><span class="pre">.kurt(
 <h4>Histograms and density plots<a class="headerlink" href="#histograms-and-density-plots" title="Permalink to this headline">#</a></h4>
 <p>Histograms provide another way to see the skewness and kurtosis of daily stock returns.
 We can overlay a normal distribution with the same mean and standard deviation to highlight negative skewness and excess kurtosis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">scs</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spy</span><span class="p">[</span><span class="s1">&#39;log Return&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;hist&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Observed&#39;</span><span class="p">)</span>
@@ -818,23 +893,32 @@ We can overlay a normal distribution with the same mean and standard deviation t
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">Input In [10],</span> in <span class="ni">&lt;cell line: 3&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">spy</span><span class="p">[</span><span class="s1">&#39;log Return&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;hist&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Observed&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">spy</span><span class="p">[</span><span class="s1">&#39;log Return&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">spy</span><span class="p">[</span><span class="s1">&#39;log Return&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">100</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">ys</span> <span class="o">=</span> <span class="n">scs</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xs</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">spy</span><span class="p">[</span><span class="s1">&#39;log Return&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">scale</span><span class="o">=</span><span class="n">spy</span><span class="p">[</span><span class="s1">&#39;log Return&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Normal&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distribution of SPY Daily Log Returns&#39;</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;scs&#39; is not defined
-</pre></div>
-</div>
-<img alt="../_images/lewinson-01_17_1.png" src="../_images/lewinson-01_17_1.png" />
+<img alt="../_images/lewinson-01_21_0.png" src="../_images/lewinson-01_21_0.png" />
 </div>
 </div>
 <p>If we zoom in, we can see that returns in the left tail (large magnitude negative returns) are much more likely than if they were normally distributed.
 Now is an excellent opportunity to write that automates the plot above plus accepts x and y limits.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spy</span><span class="p">[</span><span class="s1">&#39;log Return&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;hist&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Observed&#39;</span><span class="p">)</span>
+<span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">spy</span><span class="p">[</span><span class="s1">&#39;log Return&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">spy</span><span class="p">[</span><span class="s1">&#39;log Return&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">ys</span> <span class="o">=</span> <span class="n">scs</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xs</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">spy</span><span class="p">[</span><span class="s1">&#39;log Return&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">scale</span><span class="o">=</span><span class="n">spy</span><span class="p">[</span><span class="s1">&#39;log Return&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Normal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distribution of SPY Daily Log Returns&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;SPY Daily Log Returns&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Density&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.12</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.07</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">])</span>
+<span class="c1"># plt.semilogy()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/lewinson-01_23_0.png" src="../_images/lewinson-01_23_0.png" />
+</div>
+</div>
 </section>
 </section>
 <section id="stock-return-volatility-clusters-in-time">
@@ -847,10 +931,10 @@ We will learn more about the <code class="docutils literal notranslate"><span cl
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spy_m</span> <span class="o">=</span> <span class="p">(</span>
     <span class="n">spy</span>
-    <span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;period&#39;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;period&#39;</span><span class="p">)</span> <span class="c1"># kind=&#39;period&#39; gives dates in year-months instead of year-month-days</span>
     <span class="p">[</span><span class="s1">&#39;Return&#39;</span><span class="p">]</span>
     <span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">])</span>
-    <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;count &gt;= 15&#39;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;count &gt;= 15&#39;</span><span class="p">)</span> <span class="c1"># drops incomplete months at start and end of data frame</span>
     <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">])</span>
     <span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 <span class="p">)</span>
@@ -872,6 +956,9 @@ In the bottom panel, we see that there are alternating periods of low and high v
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/lewinson-01_27_0.png" src="../_images/lewinson-01_27_0.png" />
 </div>
 </div>
 </section>
@@ -898,6 +985,9 @@ The height of each line indicates the correlation coefficient (<span class="math
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/lewinson-01_29_0.png" src="../_images/lewinson-01_29_0.png" />
+</div>
 </div>
 <p>The plot above suggests weak, negative autocorrelation (<span class="math notranslate nohighlight">\(\rho \approx -0.09\)</span>) for the 1-day lag.
 However, this is due to bid-ask bounce.
@@ -921,6 +1011,9 @@ If we repeat the autocorrelation plot above monthly data, the negative autocorre
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/lewinson-01_32_0.png" src="../_images/lewinson-01_32_0.png" />
 </div>
 </div>
 </section>
@@ -960,6 +1053,9 @@ However, we will plot daily values here  because some annualized values would be
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/lewinson-01_35_0.png" src="../_images/lewinson-01_35_0.png" />
 </div>
 </div>
 </section>

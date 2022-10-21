@@ -737,11 +737,19 @@ frame.resample('W-THU').ffill()
 df = yf.download(tickers=['AAPL', 'MSFT', 'SPY'], session=session)
 
 
+# ***We must remove the timezone if (1) we are on Windows and (2) want to merge the Fama-French data.***
+
+# In[81]:
+
+
+df.index = df.index.tz_localize(None)
+
+
 # The `.rolling()` method is similar to the `.groupby()` and `.resample()` methods.
 # The `.rolling()` method accepts a window-width and requires an aggregation method.
 # The next example calculates and plots the 252-trading day moving average of AAPL's price alongside the daily price.
 
-# In[81]:
+# In[82]:
 
 
 aapl = df.loc['2012':, ('Adj Close', 'AAPL')]
@@ -755,13 +763,13 @@ plt.title('Comparison of Rolling and Resampling Means')
 plt.show()
 
 
-# In[82]:
+# In[83]:
 
 
 aapl_2 = df.loc['2012', ('Adj Close', 'AAPL')].to_frame('Adj Close')
 
 
-# In[83]:
+# In[84]:
 
 
 aapl_2['N_5'] = aapl_2['Adj Close'].rolling(5).mean()
@@ -782,13 +790,13 @@ aapl_2['DO_7D'] = aapl_2['Adj Close'].rolling('7D').mean()
 # Binary moving window functions accept two inputs.
 # The most common example is the rolling correlation between two returns series.
 
-# In[84]:
+# In[85]:
 
 
 returns = df['Adj Close'].pct_change()
 
 
-# In[85]:
+# In[86]:
 
 
 returns['AAPL'].rolling(126, min_periods=100).corr(returns['SPY']).plot()
@@ -797,7 +805,7 @@ plt.title('Rolling Correlation between AAPL and SPY\n (126-Day Window w/ 100-Day
 plt.show()
 
 
-# In[86]:
+# In[87]:
 
 
 returns[['AAPL', 'MSFT']].rolling(126, min_periods=100).corr(returns['SPY']).plot()
@@ -814,7 +822,7 @@ plt.show()
 # McKinney provides an abstract example here, but we will discuss a simpler example that calculates rolling volatility.
 # Also, calculating rolling volatility with the `.apply()` method provides us a chance to benchmark it against the optimized version.
 
-# In[87]:
+# In[88]:
 
 
 returns['AAPL'].rolling(252).apply(np.std).mul(np.sqrt(252) * 100).plot() # annualize and convert to percent
@@ -825,13 +833,13 @@ plt.show()
 
 # Do not be afraid to use `.apply()`, but realize that `.apply()` is typically 1000-times slower than the pre-built method.
 
-# In[88]:
+# In[89]:
 
 
 get_ipython().run_line_magic('timeit', "returns['AAPL'].rolling(252).apply(np.std)")
 
 
-# In[89]:
+# In[90]:
 
 
 get_ipython().run_line_magic('timeit', "returns['AAPL'].rolling(252).std()")
@@ -844,31 +852,31 @@ get_ipython().run_line_magic('timeit', "returns['AAPL'].rolling(252).std()")
 # Keep only the largest observation for each date in `dup_ts`.
 # Also try the `.drop_duplicates()` method
 
-# In[90]:
+# In[91]:
 
 
 dup_ts.groupby(level=0).max()
 
 
-# In[91]:
+# In[92]:
 
 
 dup_ts.index.drop_duplicates()
 
 
-# In[92]:
+# In[93]:
 
 
 df = pd.DataFrame({'a': [1, 1, 2, 2], 'b': [1, 2, 3, 4]})
 
 
-# In[93]:
+# In[94]:
 
 
 df
 
 
-# In[94]:
+# In[95]:
 
 
 df.drop_duplicates(subset='a', keep='first')
@@ -878,7 +886,7 @@ df.drop_duplicates(subset='a', keep='first')
 # Download daily data market data for TSLA and add daily returns as column named `Return`.
 # The add the 1 trading lag of `Return` as a column named `Return_lag1`.
 
-# In[95]:
+# In[96]:
 
 
 tsla = (
@@ -890,7 +898,7 @@ tsla = (
 )
 
 
-# In[96]:
+# In[97]:
 
 
 tsla.loc['2020'].plot(x='Return_lag1', y='Return', kind='scatter', alpha=0.25)
@@ -910,7 +918,7 @@ plt.show()
 
 # With `interval='1m'` we can download 1-minute data from Yahoo! Finance, but we need to limit ourselves to the past 7 days of data with `period='7d'`.
 
-# In[97]:
+# In[98]:
 
 
 gme = yf.download(tickers='GME', interval='1m', period='7d', session=session)
@@ -925,7 +933,7 @@ gme = yf.download(tickers='GME', interval='1m', period='7d', session=session)
 # We can wrap this chain with `()` so wo can insert white space, making this long chain more readable.
 # It might be helpful to comment and un-comment lines with `#` (the short cut is CTRL-/) to better understand what each method does.
 
-# In[98]:
+# In[99]:
 
 
 (
@@ -945,19 +953,10 @@ gme = yf.download(tickers='GME', interval='1m', period='7d', session=session)
 # We can calculate CAPM betas as:
 # $$\beta_{stock} = \frac{Cov(R_{stock} - R_f, R_{market} - R_f)}{Var(R_{market} - R_f)}.$$
 
-# In[99]:
-
-
-ff = pdr.get_data_famafrench('F-F_Research_Data_Factors_daily', start='1900', session=session)[0] / 100
-
-
-# ***In class today I fumbled over the time zones that `yf.download()` on Windows adds to data.
-# We should not see time zones on macOS or Linux (DataCamp Workspace is Linux-based), but we can remove the time zones with `tz.localize(None)`, as follows:***
-
 # In[100]:
 
 
-returns.index = returns.index.tz_localize(None)
+ff = pdr.get_data_famafrench('F-F_Research_Data_Factors_daily', start='1900', session=session)[0] / 100
 
 
 # We should use *excess* returns (i.e., returns relative to the risk-free rate or $R_{stock} - R_f$) to estimate betas.
@@ -974,7 +973,7 @@ excess_returns = returns.sub(ff['RF'], axis=0).dropna()
 # In[102]:
 
 
-cov_term = excess_returns[['AAPL', 'MSFT']].rolling(252).cov(excess_returns['SPY'])
+cov_term = excess_returns.rolling(252).cov(excess_returns['SPY'])
 var_term = excess_returns['SPY'].rolling(252).var()
 cov_term.div(var_term, axis=0).plot()
 plt.ylabel('Rolling CAPM Beta')
@@ -984,9 +983,59 @@ plt.show()
 
 # ***For Friday:*** try to use the `.apply()` method to collapse the beta calculation above into one-line of code.
 
+# In[103]:
+
+
+def beta(x, mkt=excess_returns['SPY']):
+    return x.cov(mkt) / mkt.loc[x.index].var()
+
+
+# In[104]:
+
+
+excess_returns.rolling(252).apply(beta).plot()
+plt.ylabel('Rolling CAPM Beta')
+plt.title('Rolling CAPM Betas\n Based on 252 Trading Days of  Daily Data')
+plt.show()
+
+
 # ***Practice:***
 # The Sharpe Ratio is often used to evaluate fund managers.
 # The Sharpe Ratio is $$SR_i = \frac{\overline{R_i - R_f}}{\sigma},$$ where $\overline{R_i-R_f}$ is mean fund return relative to the risk-free rate over some period and $\sigma$ is the standard deviation of $R_i-R_f$ over the same period.
 # While the Sharpe Ratio is typically used for funds, we can apply it to a single stock to test our knowledge of the `.rolling()` method.
 # Calculate and plot the one-year rolling Sharpe Ratio for GME using all available daily data.
 # Download GME data from Yahoo! Finance and risk-free rate data from Ken French.
+
+# In[105]:
+
+
+def sharpe_ratio(x, rf=ff['RF']):
+    x_rf = x - rf
+    return np.sqrt(252) * x_rf.mean() / x_rf.std()
+
+
+# In[106]:
+
+
+returns.rolling(252).apply(sharpe_ratio).plot()
+plt.ylabel('Rolling Sharpe Ratio')
+plt.title('Rolling Sharpe Ratios\n Based on 252 Trading Days of  Daily Data')
+plt.show()
+
+
+# In[107]:
+
+
+gme = yf.download('GME', session=session)['Adj Close'].pct_change()
+if gme.index.tz is not None:
+    gme.index = gme.index.tz_localize(None)
+
+
+# In[108]:
+
+
+gme.rolling(252).apply(sharpe_ratio).plot()
+plt.ylabel('Rolling Sharpe Ratio')
+plt.title('GameStop (GME) Rolling Sharpe Ratios\n Based on 252 Trading Days of  Daily Data')
+plt.show()
+

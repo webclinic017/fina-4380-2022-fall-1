@@ -210,6 +210,11 @@ const thebe_selector_output = ".output, .cell_output"
    Herron - Do market prices respond to new information?
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Herron/herron-momentum.html">
+   Herron - Does momentum investing work?
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -719,7 +724,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 4,  7, -5,  3])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 4,  7, -5,  3], dtype=int64)
 </pre></div>
 </div>
 </div>
@@ -2581,7 +2586,7 @@ dtype: float64
 Colorado     5
 Utah         9
 New York    13
-Name: two, dtype: int64
+Name: two, dtype: int32
 </pre></div>
 </div>
 </div>
@@ -2653,7 +2658,7 @@ Name: two, dtype: int64
 Colorado     6
 Utah        10
 New York    14
-Name: three, dtype: int64
+Name: three, dtype: int32
 </pre></div>
 </div>
 </div>
@@ -2893,7 +2898,7 @@ Name: three, dtype: int64
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>two      5
 three    6
-Name: Colorado, dtype: int64
+Name: Colorado, dtype: int32
 </pre></div>
 </div>
 </div>
@@ -2908,7 +2913,7 @@ Name: Colorado, dtype: int64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>four    11
 one      8
 two      9
-Name: Utah, dtype: int64
+Name: Utah, dtype: int32
 </pre></div>
 </div>
 </div>
@@ -2924,7 +2929,7 @@ Name: Utah, dtype: int64
 two       9
 three    10
 four     11
-Name: Utah, dtype: int64
+Name: Utah, dtype: int32
 </pre></div>
 </div>
 </div>
@@ -2987,7 +2992,7 @@ Name: Utah, dtype: int64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ohio        0
 Colorado    5
 Utah        9
-Name: two, dtype: int64
+Name: two, dtype: int32
 </pre></div>
 </div>
 </div>
@@ -4249,7 +4254,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.52 µs ± 405 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23.7 µs ± 804 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -4261,7 +4266,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34.6 µs ± 487 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>53 µs ± 4.81 µs per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -4575,9 +4580,7 @@ If we are running Python on DataCamp, we only need to run the <code class="docut
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[                       0%                       ]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************50%                       ]  2 of 4 completed
+[                       0%                       ]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************75%***********            ]  3 of 4 completed
@@ -4586,7 +4589,9 @@ If we are running Python on DataCamp, we only need to run the <code class="docut
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  4 of 4 completed
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2 Failed downloads:
+- AAPL: No data found for this date range, symbol may be delisted
+- IBM: No data found for this date range, symbol may be delisted
 </pre></div>
 </div>
 </div>
@@ -4612,10 +4617,10 @@ Therefore, the percent change in adjusted closes considers both price changs (i.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AAPL   0.2756
-GOOG   0.2488
-IBM    0.1022
-MSFT   0.2821
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AAPL      NaN
+GOOG   0.1241
+IBM       NaN
+MSFT   0.6007
 dtype: float64
 </pre></div>
 </div>
@@ -4629,10 +4634,10 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AAPL   0.4492
-GOOG   0.3056
-IBM    0.2526
-MSFT   0.3383
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AAPL      NaN
+GOOG   0.2153
+IBM       NaN
+MSFT   2.1143
 dtype: float64
 </pre></div>
 </div>
@@ -4650,11 +4655,95 @@ We will learn more about <code class="docutils literal notranslate"><span class=
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AAPL   0.3603
-GOOG   0.2439
-IBM    0.0748
-MSFT   0.2057
-dtype: float64
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="nn">File ~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\indexes\base.py:3800,</span> in <span class="ni">Index.get_loc</span><span class="nt">(self, key, method, tolerance)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3799</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">3800</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">casted_key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3801</span> <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+
+<span class="nn">File ~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\_libs\index.pyx:138,</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
+
+<span class="nn">File ~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\_libs\index.pyx:165,</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
+
+<span class="nn">File pandas\_libs\hashtable_class_helper.pxi:5745,</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
+
+<span class="nn">File pandas\_libs\hashtable_class_helper.pxi:5753,</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
+
+<span class="ne">KeyError</span>: &#39;2005&#39;
+
+<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">151</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">returns</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2005&#39;</span><span class="p">:</span><span class="s1">&#39;2021&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="mi">252</span><span class="p">)</span>
+
+<span class="nn">File ~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\indexing.py:1074,</span> in <span class="ni">_LocationIndexer.__getitem__</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1071</span> <span class="n">axis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">axis</span> <span class="ow">or</span> <span class="mi">0</span>
+<span class="g g-Whitespace">   </span><span class="mi">1073</span> <span class="n">maybe_callable</span> <span class="o">=</span> <span class="n">com</span><span class="o">.</span><span class="n">apply_if_callable</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1074</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getitem_axis</span><span class="p">(</span><span class="n">maybe_callable</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span>
+
+<span class="nn">File ~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\indexing.py:1291,</span> in <span class="ni">_LocIndexer._getitem_axis</span><span class="nt">(self, key, axis)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1289</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1290</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_validate_key</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1291</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_slice_axis</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1292</span> <span class="k">elif</span> <span class="n">com</span><span class="o">.</span><span class="n">is_bool_indexer</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1293</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getbool_axis</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span>
+
+<span class="nn">File ~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\indexing.py:1325,</span> in <span class="ni">_LocIndexer._get_slice_axis</span><span class="nt">(self, slice_obj, axis)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1322</span>     <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1324</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">_get_axis</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1325</span> <span class="n">indexer</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">slice_indexer</span><span class="p">(</span><span class="n">slice_obj</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="n">slice_obj</span><span class="o">.</span><span class="n">stop</span><span class="p">,</span> <span class="n">slice_obj</span><span class="o">.</span><span class="n">step</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1327</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">indexer</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1328</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">_slice</span><span class="p">(</span><span class="n">indexer</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span>
+
+<span class="nn">File ~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\indexes\base.py:6597,</span> in <span class="ni">Index.slice_indexer</span><span class="nt">(self, start, end, step, kind)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6554</span> <span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">6555</span><span class="sd"> Compute the slice indexer for input labels and step.</span>
+<span class="g g-Whitespace">   </span><span class="mi">6556</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6593</span><span class="sd"> slice(1, 3, None)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6594</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">6595</span> <span class="bp">self</span><span class="o">.</span><span class="n">_deprecated_arg</span><span class="p">(</span><span class="n">kind</span><span class="p">,</span> <span class="s2">&quot;kind&quot;</span><span class="p">,</span> <span class="s2">&quot;slice_indexer&quot;</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">6597</span> <span class="n">start_slice</span><span class="p">,</span> <span class="n">end_slice</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">slice_locs</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6599</span> <span class="c1"># return a slice</span>
+<span class="g g-Whitespace">   </span><span class="mi">6600</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">is_scalar</span><span class="p">(</span><span class="n">start_slice</span><span class="p">):</span>
+
+<span class="nn">File ~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\indexes\base.py:6805,</span> in <span class="ni">Index.slice_locs</span><span class="nt">(self, start, end, step, kind)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6803</span> <span class="n">start_slice</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">6804</span> <span class="k">if</span> <span class="n">start</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">6805</span>     <span class="n">start_slice</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_slice_bound</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="s2">&quot;left&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6806</span> <span class="k">if</span> <span class="n">start_slice</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">6807</span>     <span class="n">start_slice</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="nn">File ~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\indexes\base.py:6724,</span> in <span class="ni">Index.get_slice_bound</span><span class="nt">(self, label, side, kind)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6721</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_searchsorted_monotonic</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">side</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6722</span>     <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">6723</span>         <span class="c1"># raise the original KeyError</span>
+<span class="ne">-&gt; </span><span class="mi">6724</span>         <span class="k">raise</span> <span class="n">err</span>
+<span class="g g-Whitespace">   </span><span class="mi">6726</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">slc</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">6727</span>     <span class="c1"># get_loc may return a boolean array, which</span>
+<span class="g g-Whitespace">   </span><span class="mi">6728</span>     <span class="c1"># is OK as long as they are representable by a slice.</span>
+<span class="g g-Whitespace">   </span><span class="mi">6729</span>     <span class="k">assert</span> <span class="n">is_bool_dtype</span><span class="p">(</span><span class="n">slc</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
+<span class="nn">File ~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\indexes\base.py:6718,</span> in <span class="ni">Index.get_slice_bound</span><span class="nt">(self, label, side, kind)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6716</span> <span class="c1"># we need to look up the label</span>
+<span class="g g-Whitespace">   </span><span class="mi">6717</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">6718</span>     <span class="n">slc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6719</span> <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">6720</span>     <span class="k">try</span><span class="p">:</span>
+
+<span class="nn">File ~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\indexes\base.py:3802,</span> in <span class="ni">Index.get_loc</span><span class="nt">(self, key, method, tolerance)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3800</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">casted_key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3801</span> <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">3802</span>     <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">err</span>
+<span class="g g-Whitespace">   </span><span class="mi">3803</span> <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3804</span>     <span class="c1"># If we have a listlike key, _check_indexing_error will raise</span>
+<span class="g g-Whitespace">   </span><span class="mi">3805</span>     <span class="c1">#  InvalidIndexError. Otherwise we fall through and re-raise</span>
+<span class="g g-Whitespace">   </span><span class="mi">3806</span>     <span class="c1">#  the TypeError.</span>
+<span class="g g-Whitespace">   </span><span class="mi">3807</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_check_indexing_error</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+<span class="ne">KeyError</span>: &#39;2005&#39;
 </pre></div>
 </div>
 </div>
@@ -4716,7 +4805,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4455
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4448
 </pre></div>
 </div>
 </div>
@@ -4757,29 +4846,29 @@ dtype: float64
     <tr>
       <th>AAPL</th>
       <td>1.0000</td>
-      <td>0.5146</td>
-      <td>0.3690</td>
-      <td>0.4270</td>
+      <td>0.5133</td>
+      <td>0.3686</td>
+      <td>0.4265</td>
     </tr>
     <tr>
       <th>GOOG</th>
-      <td>0.5146</td>
+      <td>0.5133</td>
       <td>1.0000</td>
-      <td>0.4066</td>
-      <td>0.5555</td>
+      <td>0.4053</td>
+      <td>0.5544</td>
     </tr>
     <tr>
       <th>IBM</th>
-      <td>0.3690</td>
-      <td>0.4066</td>
+      <td>0.3686</td>
+      <td>0.4053</td>
       <td>1.0000</td>
-      <td>0.4455</td>
+      <td>0.4448</td>
     </tr>
     <tr>
       <th>MSFT</th>
-      <td>0.4270</td>
-      <td>0.5555</td>
-      <td>0.4455</td>
+      <td>0.4265</td>
+      <td>0.5544</td>
+      <td>0.4448</td>
       <td>1.0000</td>
     </tr>
   </tbody>
@@ -4793,7 +4882,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4455
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4448
 </pre></div>
 </div>
 </div>
@@ -4810,7 +4899,7 @@ When possible, use a pre-built function or method to avoid silent failures!</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4829
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4822
 </pre></div>
 </div>
 </div>
@@ -4825,7 +4914,7 @@ There is nothing special about <code class="docutils literal notranslate"><span 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4455
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4448
 </pre></div>
 </div>
 </div>
@@ -4840,7 +4929,7 @@ However, this is unnecessarily complex since we have the <code class="docutils l
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4455
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4448
 </pre></div>
 </div>
 </div>
@@ -4857,7 +4946,7 @@ However, this is unnecessarily complex since we have the <code class="docutils l
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4455
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4448
 </pre></div>
 </div>
 </div>
@@ -5065,19 +5154,7 @@ Calculate the correlation matrix for these four stocks using data from 2010 thro
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[                       0%                       ]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************50%                       ]  2 of 4 completed
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************75%***********            ]  3 of 4 completed
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  4 of 4 completed
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -5190,29 +5267,29 @@ Calculate the correlation matrix for these four stocks using data from 2016 thro
     <tr>
       <th>AAPL</th>
       <td>1.0000</td>
-      <td>0.6633</td>
-      <td>0.4171</td>
-      <td>0.7265</td>
+      <td>0.6606</td>
+      <td>0.4134</td>
+      <td>0.7251</td>
     </tr>
     <tr>
       <th>GOOG</th>
-      <td>0.6633</td>
+      <td>0.6606</td>
       <td>1.0000</td>
-      <td>0.4337</td>
-      <td>0.7779</td>
+      <td>0.4302</td>
+      <td>0.7767</td>
     </tr>
     <tr>
       <th>IBM</th>
-      <td>0.4171</td>
-      <td>0.4337</td>
+      <td>0.4134</td>
+      <td>0.4302</td>
       <td>1.0000</td>
-      <td>0.4722</td>
+      <td>0.4679</td>
     </tr>
     <tr>
       <th>MSFT</th>
-      <td>0.7265</td>
-      <td>0.7779</td>
-      <td>0.4722</td>
+      <td>0.7251</td>
+      <td>0.7767</td>
+      <td>0.4679</td>
       <td>1.0000</td>
     </tr>
   </tbody>
@@ -5305,43 +5382,43 @@ We can use the cumulative product method <code class="docutils literal notransla
       <td>...</td>
     </tr>
     <tr>
-      <th>2022-10-05</th>
-      <td>1.0322</td>
-      <td>0.5291</td>
-      <td>0.1250</td>
-      <td>0.6209</td>
+      <th>2022-09-22</th>
+      <td>1.1202</td>
+      <td>0.5044</td>
+      <td>0.1212</td>
+      <td>0.5674</td>
     </tr>
     <tr>
-      <th>2022-10-06</th>
-      <td>1.0187</td>
-      <td>0.5294</td>
-      <td>0.0936</td>
-      <td>0.6052</td>
+      <th>2022-09-23</th>
+      <td>1.0881</td>
+      <td>0.4834</td>
+      <td>0.0979</td>
+      <td>0.5475</td>
     </tr>
     <tr>
-      <th>2022-10-07</th>
-      <td>0.9446</td>
-      <td>0.4894</td>
-      <td>0.0631</td>
-      <td>0.5236</td>
+      <th>2022-09-26</th>
+      <td>1.0929</td>
+      <td>0.4781</td>
+      <td>0.0917</td>
+      <td>0.5444</td>
     </tr>
     <tr>
-      <th>2022-10-10</th>
-      <td>0.9492</td>
-      <td>0.4766</td>
-      <td>0.0535</td>
-      <td>0.4911</td>
+      <th>2022-09-27</th>
+      <td>1.1066</td>
+      <td>0.4673</td>
+      <td>0.0892</td>
+      <td>0.5377</td>
     </tr>
     <tr>
-      <th>2022-10-11</th>
-      <td>0.9292</td>
-      <td>0.4667</td>
-      <td>0.0540</td>
-      <td>0.4661</td>
+      <th>2022-09-28</th>
+      <td>1.0687</td>
+      <td>0.5053</td>
+      <td>0.0978</td>
+      <td>0.5649</td>
     </tr>
   </tbody>
 </table>
-<p>700 rows × 4 columns</p>
+<p>691 rows × 4 columns</p>
 </div></div></div>
 </div>
 <p><em><strong>Practice:</strong></em>
