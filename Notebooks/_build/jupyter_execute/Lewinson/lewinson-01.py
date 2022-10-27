@@ -292,7 +292,7 @@ spy_m = (
 # In[21]:
 
 
-spy_m.plot(x='mean_lag1', y='std', kind='scatter', alpha=0.5)
+spy_m.plot(x='mean_lag1', y='std', kind='scatter', alpha=0.5, c=None)
 plt.xlabel('One-Month Lag of Mean Daily Returns (%)')
 plt.ylabel('Volatility of Daily Returns (%)')
 plt.suptitle(
@@ -319,9 +319,98 @@ plt.show()
 # ***Practice:***
 # Repeat the autocorrelation plot above with *monthly* returns instead of *daily* returns.
 
+# In[22]:
+
+
+option_a = spy['Return'].add(1).resample('M').prod().sub(1)
+
+
+# In[23]:
+
+
+option_b = spy['Adj Close'].resample('M').last().pct_change()
+
+
+# In[24]:
+
+
+option_a
+
+
+# In[25]:
+
+
+option_b
+
+
+# In[26]:
+
+
+np.allclose(option_a.iloc[1:], option_b.iloc[1:], equal_nan=True)
+
+
+# In[27]:
+
+
+N = 10
+spy_lags = pd.concat(objs=[
+    spy['Adj Close'].resample('M').last().pct_change().shift(t) 
+    for t in range(N + 1)
+], axis=1)
+corrs = spy_lags.corr().iloc[0]
+serrs = np.sqrt((1 - corrs**2) / (spy_lags.count() - 2))
+
+plt.bar(height=corrs, x=range(N + 1), yerr=2*serrs)
+plt.title('Autocorrelation of SPY Monthly Returns')
+plt.xlabel('Daily Lags')
+plt.ylabel('Autocorrelation Coefficient')
+plt.show()
+
+
 # ***Practice:*** 
 # Plot monthly returns versus their one-month lag.
 # That is, plot $Return_{t=0}$ against $Return_{t=-1}$.
 
+# In[28]:
+
+
+monthly_return = spy['Adj Close'].resample('M').last().pct_change()
+
+
+# In[29]:
+
+
+monthly_return
+
+
+# In[30]:
+
+
+plt.scatter(
+    x=monthly_return.shift(1),
+    y=monthly_return,
+    alpha=0.25
+)
+plt.xlabel('Returns in Month $t-1$')
+plt.xlabel('Returns in Month $t$')
+plt.title('Monthly Return on SPY')
+plt.show()
+
+
 # ***Practice:***
 # Repeat the autocorrelation plot with the *absolute value* of daily returns instead of *squared* daily returns.
+
+# In[31]:
+
+
+N = 60
+spy_lags = pd.concat(objs=[spy['Return'].shift(t) for t in range(N + 1)], axis=1)
+corrs = (spy_lags.abs()).corr().iloc[0]
+serrs = np.sqrt((1 - corrs**2) / (spy_lags.count() - 2))
+
+plt.bar(height=corrs, x=range(N + 1), yerr=2*serrs)
+plt.title('Autocorrelation of the Absolute Value of SPY Daily Returns')
+plt.xlabel('Daily Lags')
+plt.ylabel('Autocorrelation Coefficient')
+plt.show()
+
