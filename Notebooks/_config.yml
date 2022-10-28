@@ -6,6 +6,9 @@ latex:
   latex_documents:
     targetname: book.tex
 
+execute:
+  exclude_patterns: ['*do-market-prices-respond*']
+
 html:
   use_repository_button: true
   use_issues_button: true

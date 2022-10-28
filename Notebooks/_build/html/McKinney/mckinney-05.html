@@ -4254,7 +4254,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.77 µs ± 1.82 µs per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.53 µs ± 221 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -4266,7 +4266,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>33 µs ± 93.6 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25.9 µs ± 537 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -4617,10 +4617,10 @@ Therefore, the percent change in adjusted closes considers both price changs (i.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AAPL   0.2771
-GOOG   0.2467
-IBM    0.1045
-MSFT   0.2826
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AAPL   0.2763
+GOOG   0.2454
+IBM    0.1044
+MSFT   0.2820
 dtype: float64
 </pre></div>
 </div>
@@ -4762,28 +4762,28 @@ dtype: float64
     <tr>
       <th>AAPL</th>
       <td>1.0000</td>
-      <td>0.5149</td>
+      <td>0.5151</td>
       <td>0.3691</td>
-      <td>0.4274</td>
+      <td>0.4275</td>
     </tr>
     <tr>
       <th>GOOG</th>
-      <td>0.5149</td>
+      <td>0.5151</td>
       <td>1.0000</td>
-      <td>0.4044</td>
-      <td>0.5585</td>
+      <td>0.4043</td>
+      <td>0.5587</td>
     </tr>
     <tr>
       <th>IBM</th>
       <td>0.3691</td>
-      <td>0.4044</td>
+      <td>0.4043</td>
       <td>1.0000</td>
       <td>0.4450</td>
     </tr>
     <tr>
       <th>MSFT</th>
-      <td>0.4274</td>
-      <td>0.5585</td>
+      <td>0.4275</td>
+      <td>0.5587</td>
       <td>0.4450</td>
       <td>1.0000</td>
     </tr>
@@ -5195,29 +5195,29 @@ Calculate the correlation matrix for these four stocks using data from 2016 thro
     <tr>
       <th>AAPL</th>
       <td>1.0000</td>
-      <td>0.6619</td>
-      <td>0.4175</td>
-      <td>0.7266</td>
+      <td>0.6624</td>
+      <td>0.4173</td>
+      <td>0.7269</td>
     </tr>
     <tr>
       <th>GOOG</th>
-      <td>0.6619</td>
+      <td>0.6624</td>
       <td>1.0000</td>
-      <td>0.4270</td>
-      <td>0.7816</td>
+      <td>0.4269</td>
+      <td>0.7818</td>
     </tr>
     <tr>
       <th>IBM</th>
-      <td>0.4175</td>
-      <td>0.4270</td>
+      <td>0.4173</td>
+      <td>0.4269</td>
       <td>1.0000</td>
-      <td>0.4681</td>
+      <td>0.4680</td>
     </tr>
     <tr>
       <th>MSFT</th>
-      <td>0.7266</td>
-      <td>0.7816</td>
-      <td>0.4681</td>
+      <td>0.7269</td>
+      <td>0.7818</td>
+      <td>0.4680</td>
       <td>1.0000</td>
     </tr>
   </tbody>
@@ -5310,13 +5310,6 @@ We can use the cumulative product method <code class="docutils literal notransla
       <td>...</td>
     </tr>
     <tr>
-      <th>2022-10-20</th>
-      <td>0.9904</td>
-      <td>0.5038</td>
-      <td>0.1479</td>
-      <td>0.5360</td>
-    </tr>
-    <tr>
       <th>2022-10-21</th>
       <td>1.0443</td>
       <td>0.5180</td>
@@ -5344,9 +5337,16 @@ We can use the cumulative product method <code class="docutils literal notransla
       <td>0.2080</td>
       <td>0.5046</td>
     </tr>
+    <tr>
+      <th>2022-10-27</th>
+      <td>1.0100</td>
+      <td>0.3852</td>
+      <td>0.2058</td>
+      <td>0.4748</td>
+    </tr>
   </tbody>
 </table>
-<p>711 rows × 4 columns</p>
+<p>712 rows × 4 columns</p>
 </div></div></div>
 </div>
 <p><em><strong>Practice:</strong></em>

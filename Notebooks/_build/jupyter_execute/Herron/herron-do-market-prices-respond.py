@@ -42,6 +42,7 @@ dates = {
     # 'Funding Secured': pd.to_datetime('2022-04-20'),
     'Bid "on Hold"': pd.to_datetime('2022-05-13'),
     'Bid Revived': pd.to_datetime('2022-10-04'),
+    'Deal Complete': pd.to_datetime('2022-10-27'),
 }
 
 
@@ -132,12 +133,18 @@ plt.show()
 # In[13]:
 
 
+list(dates.keys())[-2:]
+
+
+# In[14]:
+
+
 twtr['Price'].plot()
 
 for label, date in dates.items():
     price = twtr.loc[date, 'Price']
-    date_offset = pd.offsets.BDay(0 if label != 'Bid Revived' else -30)
-    price_offset = 2 if label != 'Bid Revived' else -2.5
+    date_offset = pd.offsets.BDay(0) # pd.offsets.BDay(0 if label != 'Bid Revived' else -30)
+    price_offset = 2 # 2 if label not in list(dates.keys())[-2:] else -2.5
     plt.annotate(
         text=label,
         fontsize=8,
