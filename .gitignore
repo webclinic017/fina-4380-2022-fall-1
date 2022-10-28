@@ -1,22 +1,22 @@
+*.csv
+*.ods
+*.odt
+*.pickle
+*.pkl
+*.sqlite
+*.zip
+*checkpoint*
+*solution*
+*submissions*
+/.ipynb_checkpoints
+/.virtual_documents
 /Canvas
 /Data
-/Disability Resource Center
 /DataCamp
+/Disability Resource Center
 /Grades
-/Notebooks/Scratch
-/Notebooks/.ipynb_checkpoints
 /Office\ Hours
-/Projects
 /Quizzes
 /Roster
-/Scripts
 /Syllabus
 /Teammates
-/Zoom
-/.virtual_documents
-.~*.ipynb
-*checkpoint*
-*checkpoint*
-*.pkl
-*.pickle
-*.sqlite

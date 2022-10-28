@@ -23,3 +23,8 @@ parts:
       - file: Herron/herron-downloading-data
       - file: Herron/herron-do-market-prices-respond
       - file: Herron/herron-momentum
+  - caption: Projects
+    chapters:
+      - file: Projects/project-1/project-1-template
+      - file: Projects/project-2/project-2-template
+      - file: Projects/project-2/project-2-tips
